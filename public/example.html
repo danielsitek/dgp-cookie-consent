@@ -1,0 +1,29 @@
+<script type="text/javascript" src="/dist/cookies.js"></script>
+
+<script>
+  window.addEventListener('consent-updated', () => {
+    if (window.CookieConsent.necessary) {
+      dataLayer.pusth({
+        event: 'cookieconsent_necessary',
+      });
+    }
+
+    if (window.CookieConsent.preferences) {
+      dataLayer.pusth({
+        event: 'cookieconsent_preferences',
+      });
+    }
+
+    if (window.CookieConsent.statistics) {
+      dataLayer.pusth({
+        event: 'cookieconsent_statistics',
+      });
+    }
+
+    if (window.CookieConsent.marketing) {
+      dataLayer.pusth({
+        event: 'cookieconsent_marketing',
+      });
+    }
+  });
+</script>
