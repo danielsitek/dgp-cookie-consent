@@ -1,7 +1,9 @@
-// import merge from 'deepmerge';
-// import { createBasicConfig } from '@open-wc/building-rollup';
 import typescript from '@rollup/plugin-typescript';
+import resolve from '@rollup/plugin-node-resolve';
 import serve from 'rollup-plugin-serve'
+// import scss from 'rollup-plugin-scss'
+// import postcss from 'postcss'
+// import autoprefixer from 'autoprefixer'
 // import { babel } from '@rollup/plugin-babel';
 
 const packageJson = require('./package.json');
@@ -16,10 +18,15 @@ export default {
     }
   ],
   plugins: [
-    // babel({ babelHelpers: 'bundled' }),
+    resolve(),
     typescript(),
     serve({
       contentBase: ['./'],
     }),
+    // scss({
+    //   output: false,
+    //   include: [],
+    //   processor: () => postcss([autoprefixer()]),
+    // }),
   ],
 };
