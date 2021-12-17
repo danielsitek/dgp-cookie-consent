@@ -15,7 +15,7 @@ let defaultConsent = {
   preferences: false,
   statistics: false,
   marketing: false,
-  updated: getDateString(),
+  updated: '',
 };
 
 function encodeConsentData(data: ConsentOptions): string {

@@ -73,25 +73,25 @@
         <pre class="code-block"><code>&lt;script&gt;
   window.addEventListener('consent-updated', () =&gt; {
     if (window.CookieConsent.necessary) {
-      dataLayer.pusth({
+      dataLayer.push({
         event: 'cookieconsent_necessary',
       });
     }
 
     if (window.CookieConsent.preferences) {
-      dataLayer.pusth({
+      dataLayer.push({
         event: 'cookieconsent_preferences',
       });
     }
 
     if (window.CookieConsent.statistics) {
-      dataLayer.pusth({
+      dataLayer.push({
         event: 'cookieconsent_statistics',
       });
     }
 
     if (window.CookieConsent.marketing) {
-      dataLayer.pusth({
+      dataLayer.push({
         event: 'cookieconsent_marketing',
       });
     }

@@ -3,27 +3,38 @@
 <script>
   window.addEventListener('consent-updated', () => {
     if (window.CookieConsent.necessary) {
-      dataLayer.pusth({
-        event: 'cookieconsent_necessary',
+      dataLayer.push({
+        'event': 'cookieconsent_necessary',
       });
     }
 
     if (window.CookieConsent.preferences) {
-      dataLayer.pusth({
-        event: 'cookieconsent_preferences',
+      dataLayer.push({
+        'event': 'cookieconsent_preferences',
       });
     }
 
     if (window.CookieConsent.statistics) {
-      dataLayer.pusth({
-        event: 'cookieconsent_statistics',
+      dataLayer.push({
+        'event': 'cookieconsent_statistics',
       });
     }
 
     if (window.CookieConsent.marketing) {
-      dataLayer.pusth({
-        event: 'cookieconsent_marketing',
+      dataLayer.push({
+        'event': 'cookieconsent_marketing',
       });
     }
+  });
+</script>
+
+<script>
+  window.addEventListener('consent-updated', () => {
+    dataLayer.push({
+      'cookieconsent_necessary': window.CookieConsent.necessary,
+      'cookieconsent_preferences': window.CookieConsent.preferences,
+      'cookieconsent_statistics': window.CookieConsent.statistics,
+      'cookieconsent_marketing': window.CookieConsent.marketing,
+    });
   });
 </script>
