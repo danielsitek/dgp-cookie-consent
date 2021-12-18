@@ -1,7 +1,8 @@
 import { ConsentService } from './services/consent-service';
 import './components/consent-dialog/consent-dialog';
+import { CookieConsentTranslations } from './services/translation-service';
 
-const initUI = () => {
+const cookieConsentModal = () => {
   const ui = document.createElement('consent-dialog');
   document.body.appendChild(ui);
 }
@@ -14,13 +15,19 @@ const windowCookieConsent = (): WindowCookieConsent => {
 
   const consent = new ConsentService();
 
-  initUI();
+  // if (!consent.updated.length) {
+    cookieConsentModal();
+  // }
 
   return consent;
 }
 
 declare global {
-  interface Window { CookieConsent: WindowCookieConsent; }
+  interface Window {
+    CookieConsent: WindowCookieConsent;
+    CookieConsentTranslations: CookieConsentTranslations;
+    CookieConsentTheme: any;
+  }
 }
 
 window.CookieConsent = windowCookieConsent();

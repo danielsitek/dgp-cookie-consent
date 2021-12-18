@@ -40,7 +40,7 @@ export function getConsent(): ConsentOptions {
     cookieData = decodeConsentData(cookieDataString);
   }
 
-  console.log('Get consent data:', cookieData);
+  // console.log('Get consent data:', cookieData);
 
   return cookieData;
 }
@@ -54,7 +54,7 @@ export function updateConsent(data: ConsentOptions, cb?: (consent: ConsentOption
 
   const cookie = setCookie(COOKIE_NAME, encodeConsentData(consentData), COOKIE_EXPIRATION);
 
-  console.log('Updating consent data:', consentData, cookie);
+  // console.log('Updating consent data:', consentData, cookie);
 
   const consent = getConsent();
 

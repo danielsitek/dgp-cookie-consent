@@ -22,7 +22,7 @@ export function getCookieByName(name: string): string|undefined {
   const cookies = getCookies();
 
     if (!Object.keys(cookies).includes(name)) {
-        console.debug(`No cookie "${name}" found`);
+        // console.debug(`No cookie "${name}" found`);
         return undefined;
     }
 

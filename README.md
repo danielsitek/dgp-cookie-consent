@@ -7,6 +7,13 @@ Awesome one-of-a-kind Cookie Consent panel.
 Insert this code on the bottom of the page.
 
 ```html
+<script>
+  window.CookieConsentTheme = {
+    'button-default__bg-color': 'pink',
+  };
+
+  window.CookieConsentTranslations = {};
+</script>
 <script type="text/javascript" src="/dist/cookies.js"></script>
 ```
 
