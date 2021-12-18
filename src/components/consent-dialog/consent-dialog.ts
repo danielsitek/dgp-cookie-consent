@@ -1,7 +1,7 @@
 import { consentButton } from '../consent-button/consent-button';
-import { consentDialogFooter } from '../consent-dialog-footer/consent-dialog-footer';
 import { ConsentTab } from '../consent-tab/consent-tab';
 import { consentTabs } from '../consent-tabs/consent-tabs';
+import { HTMLSwitchButtonElement, switchButton } from '../switch-button/switch-button';
 import { tabContentDefault } from '../tab-content-default/tab-content-default';
 import { tabContentDetails } from '../tab-content-details/tab-content-details';
 import { consentDialogStyles } from './consent-dialog-styles';
@@ -17,6 +17,11 @@ export class ConsentDialog extends HTMLElement {
   private tabButtonAgree: ConsentTab;
   private tabButtonDetails: ConsentTab;
   private tabButtonAbout: ConsentTab;
+
+  private switchButtonNecessary: HTMLSwitchButtonElement;
+  private switchButtonPreferences: HTMLSwitchButtonElement;
+  private switchButtonStatistics: HTMLSwitchButtonElement;
+  private switchButtonMarketing: HTMLSwitchButtonElement;
 
   private shadow: ShadowRoot;
 
@@ -47,6 +52,11 @@ export class ConsentDialog extends HTMLElement {
     }, () => {
       // this.setTabContentAbout();
     });
+
+    this.switchButtonNecessary = this.createSwitchNecessary();
+    this.switchButtonPreferences = this.createSwitchPreferences();
+    this.switchButtonStatistics = this.createSwitchStatistics();
+    this.switchButtonMarketing = this.createSwitchMarketing();
 
     this.main();
   }
@@ -108,7 +118,7 @@ export class ConsentDialog extends HTMLElement {
 
   tabContentAgree() {
     const body = `
-      <p><strong>Sbídáme sušenky, abychom tě našli</strong></p>
+      <p><strong>Sbíráme sušenky, abychom tě našli</strong></p>
 
       <p>Chceš se na internetu dívat na reklamy, které tě pobaví a neštvou? Nebudeme ti nabízet hrnce ani krém na revma. Díky infomracím "cookies", na které nám dáš palec nahoru, ti můžeme naservírovat obsah na míru a vylepšovat naše služby.</p>
     `;
@@ -123,10 +133,37 @@ export class ConsentDialog extends HTMLElement {
   }
 
   tabContentDetails() {
+
+    this.switchButtonPreferences.setChecked(window.CookieConsent.preferences);
+    this.switchButtonStatistics.setChecked(window.CookieConsent.statistics);
+    this.switchButtonMarketing.setChecked(window.CookieConsent.marketing);
+
     const content = tabContentDetails({
       buttonRejectAll: this.createButtonRejectAll(),
       buttonConfirm: this.createButtonConfirm(),
       lastUpdated: 'Prohlášení o cookies bylo naposledy aktualizováno %date.',
+      sections: {
+        necessary: {
+          title: 'Nutné',
+          perex: 'Nutné cookies pomáhají, aby byla webová stránka použitelná tak, že umožní základní funkce jako navigace stránky a přístup k zabezpečeným sekcím webové stránky.',
+          switch: this.switchButtonNecessary,
+        },
+        preferences: {
+          title: 'Preferences',
+          perex: 'Preference cookies enable a website to remember information that changes the way the website behaves or looks, like your preferred language or the region that you are in.',
+          switch: this.switchButtonPreferences,
+        },
+        statistics: {
+          title: 'Statistické',
+          perex: 'Statistic cookies help website owners to understand how visitors interact with websites by collecting and reporting information anonymously.',
+          switch: this.switchButtonStatistics,
+        },
+        marketing: {
+          title: 'Marketing',
+          perex: 'Marketing cookies are used to track visitors across websites. The intention is to display ads that are relevant and engaging for the individual user and thereby more valuable for publishers and third party advertisers.',
+          switch: this.switchButtonMarketing,
+        }
+      }
     });
 
     return content;
@@ -170,6 +207,10 @@ export class ConsentDialog extends HTMLElement {
 
     button.addEventListener('click', () => {
       console.log('Povolit vše');
+
+      window.CookieConsent.preferences = true;
+      window.CookieConsent.statistics = true;
+      window.CookieConsent.marketing = true;
     });
 
     return button;
@@ -183,6 +224,14 @@ export class ConsentDialog extends HTMLElement {
 
     button.addEventListener('click', () => {
       console.log('Odmítnout vše');
+
+      this.switchButtonPreferences.setChecked(false);
+      this.switchButtonStatistics.setChecked(false);
+      this.switchButtonMarketing.setChecked(false);
+
+      window.CookieConsent.preferences = false;
+      window.CookieConsent.statistics = false;
+      window.CookieConsent.marketing = false;
     });
 
     return button;
@@ -195,10 +244,47 @@ export class ConsentDialog extends HTMLElement {
     });
 
     button.addEventListener('click', () => {
-      console.log('Potvrdit');
+      console.log(
+        'Potvrdit',
+        this.switchButtonNecessary.isChecked(),
+        this.switchButtonPreferences.isChecked(),
+        this.switchButtonStatistics.isChecked(),
+        this.switchButtonMarketing.isChecked()
+      );
+
+      window.CookieConsent.preferences = this.switchButtonPreferences.isChecked();
+      window.CookieConsent.statistics = this.switchButtonStatistics.isChecked();
+      window.CookieConsent.marketing = this.switchButtonMarketing.isChecked();
     });
 
     return button;
+  }
+
+  createSwitchNecessary(): HTMLSwitchButtonElement {
+    const el = switchButton({
+      checked: true,
+      disabled: true,
+    });
+
+    return el;
+  }
+
+  createSwitchStatistics(): HTMLSwitchButtonElement {
+    const el = switchButton();
+
+    return el;
+  }
+
+  createSwitchMarketing(): HTMLSwitchButtonElement {
+    const el = switchButton();
+
+    return el;
+  }
+
+  createSwitchPreferences(): HTMLSwitchButtonElement {
+    const el = switchButton();
+
+    return el;
   }
 
   appendCode() {

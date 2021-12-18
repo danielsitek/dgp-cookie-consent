@@ -7,9 +7,7 @@
     "test": "echo \"Error: no test specified\"",
     "build:tsc": "tsc --sourceMap=false --removeComments=true",
     "build": "rollup -c",
-    "watch": "rollup -c -w",
-    "serve": "serve public",
-    "dev": "serve & rollup -c -w",
+    "dev": "rollup -c -w",
     "clean": "rimraf dist"
   },
   "keywords": [

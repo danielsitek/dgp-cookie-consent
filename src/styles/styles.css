@@ -1,5 +1,6 @@
 .consent-dialog-root {
   --spacing-1: 10px;
+  --spacing-05: calc(var(--spacing-1) / 2);
   --spacing-2: calc(var(--spacing-1) * 2);
   --spacing-3: calc(var(--spacing-1) * 3);
   --spacing-4: calc(var(--spacing-1) * 4);
@@ -14,21 +15,21 @@
   border-radius: var(--border-radius, 6px);
   box-shadow: 0 32px 68px rgba(0, 0, 0, .3);
   box-sizing: border-box;
-  color: #393939;
+  color: var(--base-color, #393939);
   font-family: sans-serif;
-  font-size: 15px;
+  font-size: var(--base-font-size, 15px);
   line-height: 1.4;
   letter-spacing: .1px;
-  max-height: calc(100% - 16px);
+  max-height: calc(100% - var(--spacing-2));
   overflow: hidden;
   position: fixed;
   text-align: initial;
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  transition: all .5s ease;
+  transition: .5s linear;
   transition-property: width,max-width,top,bottom,left,opacity;
-  width: calc(100% - 16px);
+  width: calc(100% - var(--spacing-2));
   z-index: 2147483631;
   max-width: 900px;
 }
@@ -68,7 +69,7 @@ p {
   padding: var(--spacing-2) var(--spacing-2);
   color: var(--color-text-light, #757575);
   font-size: 85%;
-  border-top: 1px solid #d0d0d0;
+  border-top: var(--base-line, 1px solid #d0d0d0);
 }
 
 @media (min-width: 600px) {
@@ -83,7 +84,7 @@ p {
   padding: var(--spacing-2);
   margin: 0;
   flex-direction: column-reverse;
-  border-top: 1px solid #d0d0d0;
+  border-top: var(--base-line, 1px solid #d0d0d0);
   justify-content: flex-end;
 }
 
@@ -99,7 +100,7 @@ p {
   font-size: 100%;
   line-height: 1.4;
   margin: 0;
-  padding: var(--spacing-1) var(--spacing-2);
+  padding: var(--spacing-05) var(--spacing-1);
   border-radius: var(--border-radius, 6px);
   border: 0 none;
   background-color: var(--button-default__bg-color, #f4f4f4);
@@ -108,7 +109,6 @@ p {
   align-items: center;
   font-weight: 600;
   justify-content: center;
-  min-width: 200px;
   cursor: pointer;
   user-select: none;
   appearance: button;
@@ -151,12 +151,20 @@ p {
   display: flex;
 }
 
+@media (min-width: 600px) {
+  .consent-button {
+    min-width: 200px;
+    padding: var(--spacing-1) var(--spacing-2);
+  }
+}
+
+
 .consent-tabs {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--spacing-1);
   padding: 0 var(--spacing-2);
-  border-bottom: 1px solid #d0d0d0;
+  border-bottom: var(--base-line, 1px solid #d0d0d0);
 }
 
 @media (min-width: 600px) {
@@ -188,7 +196,7 @@ p {
 
 @media (min-width: 600px) {
   .consent-tab {
-    font-size: 125%;
+    font-size: 120%;
     padding: 0 var(--spacing-2);
     min-height: var(--spacing-7);
   }
@@ -226,4 +234,86 @@ p {
   display: flex;
   flex-direction: column;
   max-height: calc(100vh - 110px);
+}
+
+.consent-section {
+  display: block;
+  padding: var(--spacing-3) 0;
+}
+.consent-section + .consent-section {
+  border-top: var(--base-line, 1px solid #d0d0d0);
+}
+.consent-section__inner {
+  display: grid;
+  grid-template-areas:
+    'header header'
+    'perex switch'
+  ;
+  grid-template-columns: 1fr auto;
+  gap: var(--spacing-2) var(--spacing-3);
+}
+.consent-section__area-header {
+  grid-area: header;
+}
+.consent-section__area-perex {
+  grid-area: perex;
+}
+.consent-section__area-switch {
+  grid-area: switch;
+}
+
+.switch-button {
+  display: grid;
+  position: relative;
+  cursor: pointer;
+  aspect-ratio: 2/1;
+  height: var(--spacing-3);
+}
+.switch-button__input {
+  position: absolute;
+  opacity: 0;
+  z-index: -1000;
+  top: 0;
+  left: 0;
+}
+.switch-button__background {
+  display: block;
+  position: relative;
+  background-color: var(--color-black, #242424);
+  border-radius: 1000px;
+  overflow: hidden;
+  transition: .2s linear;
+  transition-property: transform, background-color;
+}
+.switch-button__point {
+  display: block;
+  content: '';
+  border-radius: 1000px;
+  aspect-ratio: 1/1;
+  height: 100%;
+  padding: 3px;
+  transform: translateX(0);
+  transition: .2s linear;
+  transition-property: transform, background-color;
+}
+.switch-button__point::before {
+  display: block;
+  content: '';
+  border-radius: 1000px;
+  aspect-ratio: 1/1;
+  background-color: var(--color-white, #fff);
+  height: 100%;
+}
+
+.switch-button__input:checked ~ .switch-button__background {
+  background-color: var(--color-primary, #f8c132);
+}
+
+.switch-button__input:checked ~ .switch-button__background .switch-button__point {
+  transform: translateX(100%);
+}
+
+.switch-button__input:disabled ~ .switch-button__background {
+  background-color: var(--color-grey, #d6d6d6);
+  cursor: default;
 }

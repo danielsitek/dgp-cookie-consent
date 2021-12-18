@@ -38,3 +38,117 @@
     });
   });
 </script>
+
+<style>
+.consent-section {
+  display: block;
+  padding: 30px 0;
+}
+.consent-section + .consent-section {
+  border-top: 1px solid #d0d0d0;
+}
+.consent-section__inner {
+  display: grid;
+  grid-template-areas:
+    'header header'
+    'perex switch'
+  ;
+  grid-template-columns: 1fr auto;
+  gap: 20px 30px;
+}
+.consent-section__area-header {
+  grid-area: header;
+}
+.consent-section__area-perex {
+  grid-area: perex;
+}
+.consent-section__area-switch {
+  grid-area: switch;
+}
+</style>
+
+<div class="consent-section">
+  <div class="consent-section__inner">
+    <div class="consent-section__area-header">
+      <strong>Nutné</strong>
+    </div>
+
+    <div class="consent-section__area-perex">
+      Nutné cookies pomáhají, aby byla webová stránka použitelná tak, že umožní základní funkce jako navigace stránky a přístup k zabezpečeným sekcím webové stránky.
+    </div>
+
+    <div class="consent-section__area-switch">
+      switch
+    </div>
+  </div>
+</div>
+
+<style>
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+.switch-button {
+  display: grid;
+  position: relative;
+  cursor: pointer;
+  aspect-ratio: 2/1;
+  height: 30px;
+}
+.switch-button__input {
+  position: absolute;
+  opacity: 0;
+  z-index: -1000;
+  top: 0;
+  left: 0;
+}
+.switch-button__background {
+  display: block;
+  position: relative;
+  background-color: #000;
+  border-radius: 1000px;
+  overflow: hidden;
+  transition: .2s linear;
+  transition-property: transform, background-color;
+}
+.switch-button__point {
+  display: block;
+  content: '';
+  border-radius: 1000px;
+  aspect-ratio: 1/1;
+  height: 100%;
+  padding: 3px;
+  transform: translateX(0);
+  transition: .2s linear;
+  transition-property: transform, background-color;
+}
+.switch-button__point::before {
+  display: block;
+  content: '';
+  border-radius: 1000px;
+  aspect-ratio: 1/1;
+  background-color: #fff;
+  height: 100%;
+}
+
+.switch-button__input:checked ~ .switch-button__background {
+  background-color: #f8c132;
+}
+
+.switch-button__input:checked ~ .switch-button__background .switch-button__point {
+  transform: translateX(100%);
+}
+
+.switch-button__input:disabled ~ .switch-button__background {
+  background-color: #d6d6d6;
+  cursor: default;
+}
+</style>
+
+<label class="switch-button">
+  <input type="checkbox" class="switch-button__input" disabled checked>
+  <div class="switch-button__background">
+    <div class="switch-button__point"></div>
+  </div>
+</label>

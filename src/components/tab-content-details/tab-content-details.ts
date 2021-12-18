@@ -1,12 +1,19 @@
 import { consentDialogFooter } from '../consent-dialog-footer/consent-dialog-footer';
+import { consentSection, ConsentSectionProps } from '../consent-section/consent-section';
 
 interface TabContentDefaultProps {
   lastUpdated?: string;
   buttonRejectAll?: HTMLButtonElement;
   buttonConfirm?: HTMLButtonElement;
+  sections: {
+    necessary: ConsentSectionProps;
+    preferences: ConsentSectionProps;
+    statistics: ConsentSectionProps;
+    marketing: ConsentSectionProps;
+  }
 }
 
-const getUpdatedDate = (): string => {
+const getLocalizedUpdatedDate = (): string => {
   if (!window.CookieConsent.updated.length) {
     return '';
   }
@@ -25,7 +32,17 @@ export const tabContentDetails = (props: TabContentDefaultProps): HTMLDivElement
   content.classList.add('consent-tab-content');
 
   body.classList.add('consent-dialog__body');
-  body.innerHTML = '<p>Body detaily.</p><p>Body detaily.</p><p>Body detaily.</p><p>Body detaily.</p><p>Body detaily.</p><p>Body detaily.</p><p>Body detaily.</p><p>Body detaily.</p><p>Body detaily.</p><p>Body detaily.</p><p>Body detaily.</p><p>Body detaily.</p><p>Body detaily.</p><p>Body detaily.</p><p>Body detaily.</p>';
+
+  const sampleSwitch = document.createElement('div');
+  sampleSwitch.innerHTML = 'switch';
+
+  body.appendChild(consentSection(props.sections.necessary));
+
+  body.appendChild(consentSection(props.sections.statistics));
+
+  body.appendChild(consentSection(props.sections.preferences));
+
+  body.appendChild(consentSection(props.sections.marketing));
 
   const buttons = [];
 
@@ -41,7 +58,7 @@ export const tabContentDetails = (props: TabContentDefaultProps): HTMLDivElement
 
 
   if (props.lastUpdated) {
-    const updatedDate = getUpdatedDate();
+    const updatedDate = getLocalizedUpdatedDate();
 
     if (updatedDate.length) {
       updated.classList.add('consent-dialog__updated');

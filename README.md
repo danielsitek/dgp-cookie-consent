@@ -54,3 +54,14 @@ window.addEventListener('consent-updated', () => {
   });
 });
 ```
+
+## Develop
+
+You just need node >= 12 and run these commands:
+
+```
+npm i
+npm run dev
+```
+
+Then open the localhost url from terminal in browser and navigate to `/public/`.
