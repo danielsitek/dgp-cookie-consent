@@ -3,6 +3,7 @@ import { consentDialogFooter } from '../consent-dialog-footer/consent-dialog-foo
 import { ConsentTab } from '../consent-tab/consent-tab';
 import { consentTabs } from '../consent-tabs/consent-tabs';
 import { tabContentDefault } from '../tab-content-default/tab-content-default';
+import { tabContentDetails } from '../tab-content-details/tab-content-details';
 import { consentDialogStyles } from './consent-dialog-styles';
 
 export class ConsentDialog extends HTMLElement {
@@ -58,6 +59,7 @@ export class ConsentDialog extends HTMLElement {
     const tabButtonAbout = this.tabButtonAbout.render();
 
     this.mainElement.classList.add('consent-dialog');
+    this.mainElement.classList.add('consent-dialog-root');
     this.mainElement.appendChild(consentTabs({
       tabs: [
         tabButtonAgree,
@@ -121,26 +123,11 @@ export class ConsentDialog extends HTMLElement {
   }
 
   tabContentDetails() {
-    const content = document.createElement('div');
-    const body = document.createElement('div');
-    body.classList.add('consent-dialog__body');
-    body.innerHTML = `
-      Detaily
-    `;
-
-    content.appendChild(body);
-    content.appendChild(consentDialogFooter({
-      buttons: [
-        consentButton({
-          label: 'Odmítnout vše',
-          variant: 'default',
-        }),
-        consentButton({
-          label: 'Potvrdit',
-          variant: 'primary',
-        }),
-      ]
-    }));
+    const content = tabContentDetails({
+      buttonRejectAll: this.createButtonRejectAll(),
+      buttonConfirm: this.createButtonConfirm(),
+      lastUpdated: 'Prohlášení o cookies bylo naposledy aktualizováno %date.',
+    });
 
     return content;
   }
@@ -183,6 +170,32 @@ export class ConsentDialog extends HTMLElement {
 
     button.addEventListener('click', () => {
       console.log('Povolit vše');
+    });
+
+    return button;
+  }
+
+  createButtonRejectAll(): HTMLButtonElement {
+    const button = consentButton({
+      label: 'Odmítnout vše',
+      variant: 'default',
+    });
+
+    button.addEventListener('click', () => {
+      console.log('Odmítnout vše');
+    });
+
+    return button;
+  }
+
+  createButtonConfirm(): HTMLButtonElement {
+    const button = consentButton({
+      label: 'Potvrdit',
+      variant: 'primary',
+    });
+
+    button.addEventListener('click', () => {
+      console.log('Potvrdit');
     });
 
     return button;

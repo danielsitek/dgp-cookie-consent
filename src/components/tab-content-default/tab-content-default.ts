@@ -8,24 +8,27 @@ interface TabContentDefaultProps {
 
 export const tabContentDefault = (props: TabContentDefaultProps): HTMLDivElement => {
   const content = document.createElement('div');
-    const body = document.createElement('div');
-    body.classList.add('consent-dialog__body');
-    body.innerHTML = props.body || 'props.body';
+  const body = document.createElement('div');
 
-    const buttons = [];
+  content.classList.add('consent-tab-content');
 
-    if (props.buttonEdit) {
-      buttons.push(props.buttonEdit);
-    }
+  body.classList.add('consent-dialog__body');
+  body.innerHTML = props.body || 'props.body';
 
-    if (props.buttonAllowAll) {
-      buttons.push(props.buttonAllowAll);
-    }
+  const buttons = [];
 
-    content.appendChild(body);
-    content.appendChild(consentDialogFooter({
-      buttons,
-    }));
+  if (props.buttonEdit) {
+    buttons.push(props.buttonEdit);
+  }
 
-    return content;
+  if (props.buttonAllowAll) {
+    buttons.push(props.buttonAllowAll);
+  }
+
+  content.appendChild(body);
+  content.appendChild(consentDialogFooter({
+    buttons,
+  }));
+
+  return content;
 }
