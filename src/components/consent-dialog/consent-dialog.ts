@@ -1,3 +1,4 @@
+import { themeService } from '../../services/theme-service';
 import { translationService } from '../../services/translation-service';
 import { consentButton } from '../consent-button/consent-button';
 import { ConsentTab } from '../consent-tab/consent-tab';
@@ -12,6 +13,7 @@ const i19n = translationService();
 export class ConsentDialog extends HTMLElement {
 
   private componentStyle: HTMLStyleElement;
+  private componentThemeStyle: HTMLStyleElement;
 
   private mainElement: HTMLDivElement;
 
@@ -34,6 +36,7 @@ export class ConsentDialog extends HTMLElement {
     this.shadow = this.attachShadow({ mode: 'closed' });
 
     this.componentStyle = document.createElement('style');
+    this.componentThemeStyle = document.createElement('style');
     this.mainElement = document.createElement('div');
     this.innerElement = document.createElement('div');
 
@@ -66,6 +69,7 @@ export class ConsentDialog extends HTMLElement {
 
   initStyles() {
     this.componentStyle.textContent = consentDialogStyles;
+    this.componentThemeStyle.textContent = themeService().themeTextContent;
 
     const tabButtonAgree = this.tabButtonAgree.render();
     const tabButtonDetails = this.tabButtonDetails.render();
@@ -287,6 +291,7 @@ export class ConsentDialog extends HTMLElement {
 
   appendCode() {
     this.shadow.appendChild(this.componentStyle);
+    this.shadow.appendChild(this.componentThemeStyle);
     this.shadow.appendChild(this.mainElement);
   }
 

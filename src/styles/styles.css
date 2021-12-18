@@ -135,16 +135,18 @@ p {
 }
 
 .consent-button--primary {
-  background-color: var(--button-default__bg-color, #f8c132);
-  color: var(--button-default__color, #242424);
-  text-transform: var(--button-default__text-transform, uppercase);
-  border: var(--button-default__border, 1px solid #f4f4f4);
-  box-shadow: var(--button-default__box-shadow, none);
+  background-color: var(--button-primary__bg-color, #f8c132);
+  color: var(--button-primary__color, #242424);
+  text-transform: var(--button-primary__text-transform, uppercase);
+  border: var(--button-primary__border, 0 none);
+  box-shadow: var(--button-primary__box-shadow, none);
 }
 
 .consent-button--primary:hover {
-  background-color: var(--color-primary-hover, #efaf08);
-  color: var(--color-text, #242424);
+  background-color: var(--button-primary--hover__bg-color, #efaf08);
+  color: var(--button-primary--hover__color, #242424);
+  border: var(--button-primary--hover__border, 0 none);
+  box-shadow: var(--button-primary--hover__box-shadow, none);
 }
 
 .consent-button__inner {
