@@ -2,6 +2,7 @@ import { consentButton } from '../consent-button/consent-button';
 import { consentDialogFooter } from '../consent-dialog-footer/consent-dialog-footer';
 import { ConsentTab } from '../consent-tab/consent-tab';
 import { consentTabs } from '../consent-tabs/consent-tabs';
+import { tabContentDefault } from '../tab-content-default/tab-content-default';
 import { consentDialogStyles } from './consent-dialog-styles';
 
 export class ConsentDialog extends HTMLElement {
@@ -11,6 +12,10 @@ export class ConsentDialog extends HTMLElement {
   private mainElement: HTMLDivElement;
 
   private innerElement: HTMLDivElement;
+
+  private tabButtonAgree: ConsentTab;
+  private tabButtonDetails: ConsentTab;
+  private tabButtonAbout: ConsentTab;
 
   private shadow: ShadowRoot;
 
@@ -23,59 +28,164 @@ export class ConsentDialog extends HTMLElement {
     this.mainElement = document.createElement('div');
     this.innerElement = document.createElement('div');
 
+    this.tabButtonAgree = new ConsentTab({
+      label: 'Souhlas',
+      active: true,
+    }, () => {
+      // this.setTabContentAgree();
+    });
+
+    this.tabButtonDetails = new ConsentTab({
+      label: 'Detaily',
+    }, () => {
+      // this.setTabContentDetails();
+    });
+
+    this.tabButtonAbout = new ConsentTab({
+      label: 'O aplikaci',
+    }, () => {
+      // this.setTabContentAbout();
+    });
+
     this.main();
   }
 
   initStyles() {
     this.componentStyle.textContent = consentDialogStyles;
 
-    const buttonAgree = new ConsentTab({
-      label: 'Souhlas',
-      active: true,
-    }, () => {
-      console.log('Souhlas je aktivní');
-    }).render();
-
-    const buttonDetails = new ConsentTab({
-      label: 'Detaily',
-    }, () => {
-      console.log('Detaily je aktivní');
-    }).render();
-
-    const buttonAbout = new ConsentTab({
-      label: 'O aplikaci',
-    }, () => {
-      console.log('O aplikaci je aktivní');
-    }).render();
+    const tabButtonAgree = this.tabButtonAgree.render();
+    const tabButtonDetails = this.tabButtonDetails.render();
+    const tabButtonAbout = this.tabButtonAbout.render();
 
     this.mainElement.classList.add('consent-dialog');
     this.mainElement.appendChild(consentTabs({
       tabs: [
-        buttonAgree,
-        buttonDetails,
-        buttonAbout,
+        tabButtonAgree,
+        tabButtonDetails,
+        tabButtonAbout,
       ]
     }));
 
     this.mainElement.appendChild(this.innerElement);
 
-    this.mainElement.appendChild(consentDialogFooter({
+    this.innerElement.classList.add('consent-dialog__inner');
+
+    tabButtonAgree.addEventListener('click', () => {
+      this.setTabContentAgree();
+    });
+
+    tabButtonDetails.addEventListener('click', () => {
+      this.setTabContentDetails();
+    });
+
+    tabButtonAbout.addEventListener('click', () => {
+      this.setTabContentAbout();
+    });
+  }
+
+  setTabContentAgree() {
+    console.log('Souhlas je aktivní');
+    this.innerElement.innerHTML = '';
+    this.innerElement.appendChild(this.tabContentAgree());
+    this.tabButtonAgree.active = true;
+  }
+
+  setTabContentDetails() {
+    console.log('Detaily je aktivní');
+    this.innerElement.innerHTML = '';
+    this.innerElement.appendChild(this.tabContentDetails());
+    this.tabButtonDetails.active = true;
+  }
+
+  setTabContentAbout() {
+    console.log('O aplikaci je aktivní');
+    this.innerElement.innerHTML = '';
+    this.innerElement.appendChild(this.tabContentAbout());
+    this.tabButtonAbout.active = true;
+  }
+
+  tabContentAgree() {
+    const body = `
+      <p><strong>Sbídáme sušenky, abychom tě našli</strong></p>
+
+      <p>Chceš se na internetu dívat na reklamy, které tě pobaví a neštvou? Nebudeme ti nabízet hrnce ani krém na revma. Díky infomracím "cookies", na které nám dáš palec nahoru, ti můžeme naservírovat obsah na míru a vylepšovat naše služby.</p>
+    `;
+
+    const content = tabContentDefault({
+      body,
+      buttonEdit: this.createButtonEdit(),
+      buttonAllowAll: this.createButtonAllowAll(),
+    });
+
+    return content;
+  }
+
+  tabContentDetails() {
+    const content = document.createElement('div');
+    const body = document.createElement('div');
+    body.classList.add('consent-dialog__body');
+    body.innerHTML = `
+      Detaily
+    `;
+
+    content.appendChild(body);
+    content.appendChild(consentDialogFooter({
       buttons: [
         consentButton({
-          label: 'Upravit',
+          label: 'Odmítnout vše',
           variant: 'default',
         }),
         consentButton({
-          label: 'Povolit vše',
+          label: 'Potvrdit',
           variant: 'primary',
         }),
       ]
     }));
 
-    this.innerElement.classList.add('consent-dialog__inner');
-    this.innerElement.innerHTML = `
-      <p>We use cookies to personalise content and ads, to provide social media features and to analyse our traffic. We also share information about your use of our site with our social media, advertising and analytics partners who may combine it with other information that you’ve provided to them or that they’ve collected from your use of their services.</p>
+    return content;
+  }
+
+  tabContentAbout(): HTMLElement {
+    const body = `
+      <p>Cookies jsou malé textové soubory, které mobou být používány webovými stránkami, aby učinily uživatelský zážitek více efektivní.</p>
+      <p>Zákon uvádí, že můžeme uklákadt cookies na vašem zařízení, pokud jsou nezbytně nutné pro provoz této stránky. Pro všechny ostatní typy cookies potřebujeme vaše povolení.</p>
+      <p>Tato stránka používá různé typy cookies. Některé cookies jsou umístěny službami třetích stran, které se objevují na našich stránkách.</p>
+      <p>Kdykoliv můžete změnit nebo zrušit svůj souhlas prostřednictvím vyjádření o souborech cookies na našich webových stránkách.</p>
     `;
+
+    const content = tabContentDefault({
+      body,
+      buttonEdit: this.createButtonEdit(),
+      buttonAllowAll: this.createButtonAllowAll(),
+    });
+
+    return content;
+  }
+
+  createButtonEdit(): HTMLButtonElement {
+    const button = consentButton({
+      label: 'Upravit',
+      variant: 'default',
+    });
+
+    button.addEventListener('click', () => {
+      this.setTabContentDetails();
+    });
+
+    return button;
+  }
+
+  createButtonAllowAll(): HTMLButtonElement {
+    const button = consentButton({
+      label: 'Povolit vše',
+      variant: 'primary',
+    });
+
+    button.addEventListener('click', () => {
+      console.log('Povolit vše');
+    });
+
+    return button;
   }
 
   appendCode() {
@@ -86,6 +196,7 @@ export class ConsentDialog extends HTMLElement {
   main() {
     this.initStyles();
     this.appendCode();
+    this.setTabContentAgree();
   }
 }
 
