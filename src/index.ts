@@ -15,9 +15,9 @@ const windowCookieConsent = (): WindowCookieConsent => {
 
   const consent = new ConsentService();
 
-  // if (!consent.updated.length) {
+  if (!consent.updated.length) {
     cookieConsentModal();
-  // }
+  }
 
   return consent;
 }
@@ -27,7 +27,12 @@ declare global {
     CookieConsent: WindowCookieConsent;
     CookieConsentTranslations: CookieConsentTranslations;
     CookieConsentTheme: any;
+    CookieConsentModalOpen: () => void;
   }
 }
 
 window.CookieConsent = windowCookieConsent();
+
+window.CookieConsentModalOpen = () => {
+  cookieConsentModal();
+}

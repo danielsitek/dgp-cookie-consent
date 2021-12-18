@@ -205,6 +205,8 @@ export class ConsentDialog extends HTMLElement {
       window.CookieConsent.preferences = true;
       window.CookieConsent.statistics = true;
       window.CookieConsent.marketing = true;
+
+      this.closeModal();
     });
 
     return button;
@@ -223,9 +225,9 @@ export class ConsentDialog extends HTMLElement {
       this.switchButtonStatistics.setChecked(false);
       this.switchButtonMarketing.setChecked(false);
 
-      window.CookieConsent.preferences = false;
-      window.CookieConsent.statistics = false;
-      window.CookieConsent.marketing = false;
+      // window.CookieConsent.preferences = false;
+      // window.CookieConsent.statistics = false;
+      // window.CookieConsent.marketing = false;
     });
 
     return button;
@@ -249,6 +251,8 @@ export class ConsentDialog extends HTMLElement {
       window.CookieConsent.preferences = this.switchButtonPreferences.isChecked();
       window.CookieConsent.statistics = this.switchButtonStatistics.isChecked();
       window.CookieConsent.marketing = this.switchButtonMarketing.isChecked();
+
+      this.closeModal();
     });
 
     return button;
@@ -284,6 +288,13 @@ export class ConsentDialog extends HTMLElement {
   appendCode() {
     this.shadow.appendChild(this.componentStyle);
     this.shadow.appendChild(this.mainElement);
+  }
+
+  closeModal() {
+    setTimeout(() => {
+      const consentModal = document.querySelector('consent-dialog');
+      consentModal?.remove();
+    }, 500);
   }
 
   main() {
