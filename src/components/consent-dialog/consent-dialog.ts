@@ -1,3 +1,4 @@
+import { INLINE_STYLES_MAIN } from '../../config';
 import { themeService } from '../../services/theme-service';
 import { translationService } from '../../services/translation-service';
 import { consentButton } from '../consent-button/consent-button';
@@ -6,7 +7,6 @@ import { consentTabs } from '../consent-tabs/consent-tabs';
 import { HTMLSwitchButtonElement, switchButton } from '../switch-button/switch-button';
 import { tabContentDefault } from '../tab-content-default/tab-content-default';
 import { tabContentDetails } from '../tab-content-details/tab-content-details';
-import { consentDialogStyles } from './consent-dialog-styles';
 
 const i19n = translationService();
 
@@ -68,7 +68,7 @@ export class ConsentDialog extends HTMLElement {
   }
 
   initStyles() {
-    this.componentStyle.textContent = consentDialogStyles;
+    this.componentStyle.textContent = INLINE_STYLES_MAIN;
     this.componentThemeStyle.textContent = themeService().themeTextContent;
 
     const tabButtonAgree = this.tabButtonAgree.render();

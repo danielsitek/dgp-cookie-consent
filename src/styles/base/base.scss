@@ -1,0 +1,13 @@
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+p {
+  margin-top: var(--spacing-3);
+  margin-bottom: var(--spacing-3);
+}
