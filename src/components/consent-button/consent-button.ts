@@ -1,9 +1,9 @@
 interface ComponentProps {
-  modifier?: string
+  modifier?: string;
 }
 
 interface ConsentButtonProps extends ComponentProps {
-  label: string,
+  label: string;
   variant?: 'default' | 'primary';
 }
 
@@ -27,4 +27,4 @@ export const consentButton = (props: ConsentButtonProps) => {
   }
 
   return element;
-}
+};

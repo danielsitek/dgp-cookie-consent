@@ -8,12 +8,17 @@
 
   &__inner {
     display: grid;
-    grid-template-areas:
-      'header header'
-      'perex switch'
-    ;
     grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'header switch'
+      'perex perex';
     gap: var(--spacing-2) var(--spacing-3);
+
+    @media (min-width: 600px) {
+      grid-template-areas:
+        'header header'
+        'perex switch';
+    }
   }
 
   &__area-header {

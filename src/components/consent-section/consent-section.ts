@@ -1,4 +1,3 @@
-
 export interface ConsentSectionProps {
   title: string;
   perex: string;
@@ -30,4 +29,4 @@ export const consentSection = (props: ConsentSectionProps): HTMLDivElement => {
   content.appendChild(inner);
 
   return content;
-}
+};

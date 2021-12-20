@@ -26,9 +26,11 @@ export const tabContentDefault = (props: TabContentDefaultProps): HTMLDivElement
   }
 
   content.appendChild(body);
-  content.appendChild(consentDialogFooter({
-    buttons,
-  }));
+  content.appendChild(
+    consentDialogFooter({
+      buttons,
+    }),
+  );
 
   return content;
-}
+};

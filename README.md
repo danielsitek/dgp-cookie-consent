@@ -68,6 +68,7 @@ You can use your own translation for every text in ZOOT Cookie Consent.
 
 ```js
 window.CookieConsentTranslations = {
+  locale: 'cs-CZ',
   tabAgree: {
     title: 'Souhlas',
     body: `
@@ -102,7 +103,7 @@ window.CookieConsentTranslations = {
     marketing: {
       title: 'Marketingové',
       perex: 'Marketing cookies are used to track visitors across websites. The intention is to display ads that are relevant and engaging for the individual user and thereby more valuable for publishers and third party advertisers.',
-    }
+    },
   },
   buttonEdit: {
     label: 'Upravit',
@@ -116,7 +117,7 @@ window.CookieConsentTranslations = {
   buttonConfirm: {
     label: 'Potvrdit',
   },
-  lastUpdated: 'Prohlášení o cookies bylo naposledy aktualizováno %date.'
+  lastUpdated: 'Prohlášení o cookies bylo naposledy aktualizováno %date.',
 };
 ```
 
@@ -172,3 +173,10 @@ npm run dev
 ```
 
 Then open the localhost url from terminal in browser and navigate to `/public/`.
+
+## Production build
+
+```
+npm ci
+npm run build:prod
+```

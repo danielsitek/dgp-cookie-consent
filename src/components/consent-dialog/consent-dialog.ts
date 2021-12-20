@@ -8,10 +8,9 @@ import { HTMLSwitchButtonElement, switchButton } from '../switch-button/switch-b
 import { tabContentDefault } from '../tab-content-default/tab-content-default';
 import { tabContentDetails } from '../tab-content-details/tab-content-details';
 
-const i19n = translationService();
+const i18n = translationService();
 
 export class ConsentDialog extends HTMLElement {
-
   private componentStyle: HTMLStyleElement;
   private componentThemeStyle: HTMLStyleElement;
 
@@ -40,24 +39,24 @@ export class ConsentDialog extends HTMLElement {
     this.mainElement = document.createElement('div');
     this.innerElement = document.createElement('div');
 
-    this.tabButtonAgree = new ConsentTab({
-      label: i19n.tabAgree.title,
-      active: true,
-    }, () => {
-      // this.setTabContentAgree();
-    });
+    this.tabButtonAgree = new ConsentTab(
+      {
+        label: i18n.tabAgree.title,
+        active: true,
+      },
+    );
 
-    this.tabButtonDetails = new ConsentTab({
-      label: i19n.tabDetail.title,
-    }, () => {
-      // this.setTabContentDetails();
-    });
+    this.tabButtonDetails = new ConsentTab(
+      {
+        label: i18n.tabDetail.title,
+      },
+    );
 
-    this.tabButtonAbout = new ConsentTab({
-      label: i19n.tabAbout.title,
-    }, () => {
-      // this.setTabContentAbout();
-    });
+    this.tabButtonAbout = new ConsentTab(
+      {
+        label: i18n.tabAbout.title,
+      },
+    );
 
     this.switchButtonNecessary = this.createSwitchNecessary();
     this.switchButtonPreferences = this.createSwitchPreferences();
@@ -77,13 +76,11 @@ export class ConsentDialog extends HTMLElement {
 
     this.mainElement.classList.add('consent-dialog');
     this.mainElement.classList.add('consent-dialog-root');
-    this.mainElement.appendChild(consentTabs({
-      tabs: [
-        tabButtonAgree,
-        tabButtonDetails,
-        tabButtonAbout,
-      ]
-    }));
+    this.mainElement.appendChild(
+      consentTabs({
+        tabs: [tabButtonAgree, tabButtonDetails, tabButtonAbout],
+      }),
+    );
 
     this.mainElement.appendChild(this.innerElement);
 
@@ -124,7 +121,7 @@ export class ConsentDialog extends HTMLElement {
   }
 
   tabContentAgree() {
-    const body = i19n.tabAgree.body;
+    const body = i18n.tabAgree.body;
 
     const content = tabContentDefault({
       body,
@@ -136,7 +133,6 @@ export class ConsentDialog extends HTMLElement {
   }
 
   tabContentDetails() {
-
     this.switchButtonPreferences.setChecked(window.CookieConsent.preferences);
     this.switchButtonStatistics.setChecked(window.CookieConsent.statistics);
     this.switchButtonMarketing.setChecked(window.CookieConsent.marketing);
@@ -144,36 +140,36 @@ export class ConsentDialog extends HTMLElement {
     const content = tabContentDetails({
       buttonRejectAll: this.createButtonRejectAll(),
       buttonConfirm: this.createButtonConfirm(),
-      lastUpdated: i19n.lastUpdated,
+      lastUpdated: i18n.lastUpdated,
       sections: {
         necessary: {
-          title: i19n.tabDetail.necessary.title,
-          perex: i19n.tabDetail.necessary.perex,
+          title: i18n.tabDetail.necessary.title,
+          perex: i18n.tabDetail.necessary.perex,
           switch: this.switchButtonNecessary,
         },
         preferences: {
-          title: i19n.tabDetail.preferences.title,
-          perex: i19n.tabDetail.preferences.perex,
+          title: i18n.tabDetail.preferences.title,
+          perex: i18n.tabDetail.preferences.perex,
           switch: this.switchButtonPreferences,
         },
         statistics: {
-          title: i19n.tabDetail.statistics.title,
-          perex: i19n.tabDetail.statistics.perex,
+          title: i18n.tabDetail.statistics.title,
+          perex: i18n.tabDetail.statistics.perex,
           switch: this.switchButtonStatistics,
         },
         marketing: {
-          title: i19n.tabDetail.marketing.title,
-          perex: i19n.tabDetail.marketing.perex,
+          title: i18n.tabDetail.marketing.title,
+          perex: i18n.tabDetail.marketing.perex,
           switch: this.switchButtonMarketing,
-        }
-      }
+        },
+      },
     });
 
     return content;
   }
 
   tabContentAbout(): HTMLElement {
-    const body = i19n.tabAbout.body;
+    const body = i18n.tabAbout.body;
 
     const content = tabContentDefault({
       body,
@@ -186,7 +182,7 @@ export class ConsentDialog extends HTMLElement {
 
   createButtonEdit(): HTMLButtonElement {
     const button = consentButton({
-      label: i19n.buttonEdit.label,
+      label: i18n.buttonEdit.label,
       variant: 'default',
     });
 
@@ -199,7 +195,7 @@ export class ConsentDialog extends HTMLElement {
 
   createButtonAllowAll(): HTMLButtonElement {
     const button = consentButton({
-      label: i19n.buttonAllowAll.label,
+      label: i18n.buttonAllowAll.label,
       variant: 'primary',
     });
 
@@ -218,7 +214,7 @@ export class ConsentDialog extends HTMLElement {
 
   createButtonRejectAll(): HTMLButtonElement {
     const button = consentButton({
-      label: i19n.buttonRejectAll.label,
+      label: i18n.buttonRejectAll.label,
       variant: 'default',
     });
 
@@ -239,7 +235,7 @@ export class ConsentDialog extends HTMLElement {
 
   createButtonConfirm(): HTMLButtonElement {
     const button = consentButton({
-      label: i19n.buttonConfirm.label,
+      label: i18n.buttonConfirm.label,
       variant: 'primary',
     });
 

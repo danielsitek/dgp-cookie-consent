@@ -7,14 +7,7 @@ const cache: ConsentOptions = {
   statistics: false,
   marketing: false,
   updated: '',
-}
-
-class ConsentOptionsService {
-  private _necessary = true;
-  private _preferences = false;
-  private _statistics = false;
-  private _marketing = false;
-}
+};
 
 export class ConsentService {
   constructor() {
@@ -79,6 +72,6 @@ export class ConsentService {
   private updateConsentData() {
     updateConsent(cache, () => {
       dispatchEventContentUpdated();
-    })
+    });
   }
 }

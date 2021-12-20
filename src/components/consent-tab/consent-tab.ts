@@ -1,5 +1,5 @@
 interface ComponentProps {
-  modifier?: string
+  modifier?: string;
 }
 
 interface ConsentTabProps extends ComponentProps {

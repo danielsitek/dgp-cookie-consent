@@ -1,6 +1,7 @@
 import { CookieConsentTranslations } from '../services/translation-service';
 
 const cs: CookieConsentTranslations = {
+  locale: 'cs-CZ',
   tabAgree: {
     title: 'Souhlas',
     body: `
@@ -35,7 +36,7 @@ const cs: CookieConsentTranslations = {
     marketing: {
       title: 'Marketingové',
       perex: 'Marketing cookies are used to track visitors across websites. The intention is to display ads that are relevant and engaging for the individual user and thereby more valuable for publishers and third party advertisers.',
-    }
+    },
   },
   buttonEdit: {
     label: 'Upravit',
@@ -49,7 +50,7 @@ const cs: CookieConsentTranslations = {
   buttonConfirm: {
     label: 'Potvrdit',
   },
-  lastUpdated: 'Prohlášení o cookies bylo naposledy aktualizováno %date.'
-}
+  lastUpdated: 'Prohlášení o cookies bylo naposledy aktualizováno %date.',
+};
 
 export default cs;

@@ -1,46 +1,48 @@
-
 .switch-button {
   $r: &;
-  display: grid;
   position: relative;
+  display: grid;
+  height: var(--spacing-3);
   cursor: pointer;
   aspect-ratio: 2/1;
-  height: var(--spacing-3);
 
   &__input {
     position: absolute;
-    opacity: 0;
-    z-index: -1000;
     top: 0;
     left: 0;
+    z-index: -1000;
+    opacity: 0;
   }
+
   &__background {
-    display: block;
     position: relative;
-    background-color: var(--color-black, #242424);
+    display: block;
     border-radius: 1000px;
+    background-color: var(--color-black, #242424);
     overflow: hidden;
-    transition: .2s linear;
+    transition: 0.2s linear;
     transition-property: transform, background-color;
   }
+
   &__point {
-    display: block;
     content: '';
-    border-radius: 1000px;
-    aspect-ratio: 1/1;
+    display: block;
     height: 100%;
     padding: 3px;
-    transform: translateX(0);
-    transition: .2s linear;
-    transition-property: transform, background-color;
-  }
-  &__point::before {
-    display: block;
-    content: '';
     border-radius: 1000px;
+    transform: translateX(0);
+    transition: 0.2s linear;
+    transition-property: transform, background-color;
     aspect-ratio: 1/1;
-    background-color: var(--color-white, #fff);
+  }
+
+  &__point::before {
+    content: '';
+    display: block;
     height: 100%;
+    border-radius: 1000px;
+    background-color: var(--color-white, #ffffff);
+    aspect-ratio: 1/1;
   }
 
   &__input:checked ~ &__background {

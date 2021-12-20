@@ -1,3 +1,4 @@
+import { translationService } from '../../services/translation-service';
 import { consentDialogFooter } from '../consent-dialog-footer/consent-dialog-footer';
 import { consentSection, ConsentSectionProps } from '../consent-section/consent-section';
 
@@ -10,8 +11,10 @@ interface TabContentDefaultProps {
     preferences: ConsentSectionProps;
     statistics: ConsentSectionProps;
     marketing: ConsentSectionProps;
-  }
+  };
 }
+
+const i18n = translationService();
 
 const getLocalizedUpdatedDate = (): string => {
   if (!window.CookieConsent.updated.length) {
@@ -19,10 +22,10 @@ const getLocalizedUpdatedDate = (): string => {
   }
 
   const date = new Date(window.CookieConsent.updated);
-  const localDate = new Intl.DateTimeFormat('cs-CZ').format(date);
+  const localDate = new Intl.DateTimeFormat(i18n.locale).format(date);
 
   return localDate;
-}
+};
 
 export const tabContentDetails = (props: TabContentDefaultProps): HTMLDivElement => {
   const content = document.createElement('div');
@@ -56,7 +59,6 @@ export const tabContentDetails = (props: TabContentDefaultProps): HTMLDivElement
 
   content.appendChild(body);
 
-
   if (props.lastUpdated) {
     const updatedDate = getLocalizedUpdatedDate();
 
@@ -67,9 +69,11 @@ export const tabContentDetails = (props: TabContentDefaultProps): HTMLDivElement
     }
   }
 
-  content.appendChild(consentDialogFooter({
-    buttons,
-  }));
+  content.appendChild(
+    consentDialogFooter({
+      buttons,
+    }),
+  );
 
   return content;
-}
+};

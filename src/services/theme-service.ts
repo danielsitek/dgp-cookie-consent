@@ -23,4 +23,4 @@ export const themeService = (): ThemeServiceInterface => {
   return {
     themeTextContent: `.consent-dialog-root { ${stringified.join(' ')} }`,
   };
-}
+};

@@ -10,7 +10,7 @@ export interface ConsentOptions {
   updated: string;
 }
 
-let defaultConsent = {
+const defaultConsent = {
   necessary: true,
   preferences: false,
   statistics: false,
@@ -27,7 +27,6 @@ function decodeConsentData(encodedData: string): ConsentOptions {
 }
 
 export function getConsent(): ConsentOptions {
-
   let cookieData: ConsentOptions = defaultConsent;
 
   if (!getCookieByName(COOKIE_NAME)) {
@@ -40,21 +39,17 @@ export function getConsent(): ConsentOptions {
     cookieData = decodeConsentData(cookieDataString);
   }
 
-  // console.log('Get consent data:', cookieData);
-
   return cookieData;
 }
 
-export function updateConsent(data: ConsentOptions, cb?: (consent: ConsentOptions) => any): ConsentOptions {
+export function updateConsent(data: ConsentOptions, cb?: (consent: ConsentOptions) => void): ConsentOptions {
   const consentData = {
     ...defaultConsent,
     ...data,
     updated: getDateString(),
   };
 
-  const cookie = setCookie(COOKIE_NAME, encodeConsentData(consentData), COOKIE_EXPIRATION);
-
-  // console.log('Updating consent data:', consentData, cookie);
+  setCookie(COOKIE_NAME, encodeConsentData(consentData), COOKIE_EXPIRATION);
 
   const consent = getConsent();
 

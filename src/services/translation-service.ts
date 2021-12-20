@@ -2,7 +2,7 @@ import cs from '../translations/cs';
 
 export interface CookieConsentTranslationsDetailSection {
   title: string;
-  perex: string
+  perex: string;
 }
 
 export interface CookieConsentTranslationsButton {
@@ -29,6 +29,7 @@ export interface CookieConsentTranslationsTabDetail extends CookieConsentTransla
 }
 
 export interface CookieConsentTranslations {
+  locale: 'cs-CZ' | string;
   tabAgree: CookieConsentTranslationsTabAgree;
   tabAbout: CookieConsentTranslationsTabAbout;
   tabDetail: CookieConsentTranslationsTabDetail;
@@ -42,10 +43,10 @@ export interface CookieConsentTranslations {
 const defaultTranslations = cs;
 
 export const translationService = (): CookieConsentTranslations => {
-
   const windowTranslations = window?.CookieConsentTranslations;
 
   return {
+    locale: windowTranslations?.locale || defaultTranslations.locale,
     tabAgree: {
       ...defaultTranslations.tabAgree,
       ...windowTranslations?.tabAgree,
@@ -90,5 +91,5 @@ export const translationService = (): CookieConsentTranslations => {
       ...windowTranslations?.buttonConfirm,
     },
     lastUpdated: windowTranslations?.lastUpdated || defaultTranslations.lastUpdated,
-  }
-}
+  };
+};

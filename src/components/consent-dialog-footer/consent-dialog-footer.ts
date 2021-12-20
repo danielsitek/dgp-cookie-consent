@@ -1,9 +1,9 @@
 interface ComponentProps {
-  modifier?: string
+  modifier?: string;
 }
 
 interface ConsentTabProps extends ComponentProps {
-  buttons: HTMLButtonElement[]
+  buttons: HTMLButtonElement[];
 }
 
 export const consentDialogFooter = (props: ConsentTabProps) => {
@@ -21,4 +21,4 @@ export const consentDialogFooter = (props: ConsentTabProps) => {
   }
 
   return element;
-}
+};

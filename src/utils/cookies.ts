@@ -5,7 +5,7 @@ export interface CookiesObject {
 }
 
 export function getCookies(): CookiesObject {
-  let cookies: CookiesObject = {};
+  const cookies: CookiesObject = {};
 
   document.cookie.split(';').forEach((pair) => {
     const row = pair.trim();
@@ -18,23 +18,19 @@ export function getCookies(): CookiesObject {
   return cookies;
 }
 
-export function getCookieByName(name: string): string|undefined {
+export function getCookieByName(name: string): string | undefined {
   const cookies = getCookies();
 
-    if (!Object.keys(cookies).includes(name)) {
-        // console.debug(`No cookie "${name}" found`);
-        return undefined;
-    }
+  if (!Object.keys(cookies).includes(name)) {
+    // console.debug(`No cookie "${name}" found`);
+    return undefined;
+  }
 
-    return cookies[name];
+  return cookies[name];
 }
 
 export function setCookie(name: string, data: string, days?: number): string {
-  const cookieData = [
-    `${name}=${data}`,
-    'path=/',
-    `domain=${window.location.hostname}`,
-  ];
+  const cookieData = [`${name}=${data}`, 'path=/', `domain=${window.location.hostname}`];
 
   if (days) {
     const utcString = getDateUTCString(days);

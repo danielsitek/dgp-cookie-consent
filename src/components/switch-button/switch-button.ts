@@ -43,4 +43,4 @@ export const switchButton = (props?: SwitchButtonProps): HTMLSwitchButtonElement
   };
 
   return content;
-}
+};
