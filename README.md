@@ -14,7 +14,7 @@ Insert this code on the bottom of the page.
 
   window.CookieConsentTranslations = {};
 </script>
-<script type="text/javascript" src="/dist/cookies.js"></script>
+<script type="text/javascript" src="/dist/cookies.min.js"></script>
 ```
 
 ## How to use with GTM
