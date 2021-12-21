@@ -1,9 +1,9 @@
 const { src, dest } = require('gulp');
 const postcss = require('gulp-postcss');
 const gulpSass = require('gulp-sass')(require('sass'));
-const cssnext = require('postcss-cssnext');
 const cssnano = require('cssnano');
 const rename = require('gulp-rename');
+const autoprefixer = require('autoprefixer');
 
 module.exports = function scss() {
   return src(['*.scss'], {
@@ -15,7 +15,7 @@ module.exports = function scss() {
         sourceMap: false,
       }),
     )
-    .pipe(postcss([cssnext()]))
+    .pipe(postcss([autoprefixer()]))
     .pipe(dest('./dist'))
     .pipe(postcss([cssnano()]))
     .pipe(

@@ -1,6 +1,6 @@
 .consent-section {
   display: block;
-  padding: var(--spacing-3) 0;
+  padding: $spacing-3 0;
 
   & + & {
     border-top: var(--base-line, 1px solid #d0d0d0);
@@ -12,7 +12,7 @@
     grid-template-areas:
       'header switch'
       'perex perex';
-    gap: var(--spacing-2) var(--spacing-3);
+    gap: $spacing-2 $spacing-3;
 
     @media (min-width: 600px) {
       grid-template-areas:

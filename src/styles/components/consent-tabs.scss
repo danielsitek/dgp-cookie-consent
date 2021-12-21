@@ -1,12 +1,12 @@
 .consent-tabs {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-1);
-  padding: 0 var(--spacing-2);
+  gap: $spacing-1;
+  padding: 0 $spacing-2;
   border-bottom: var(--base-line, 1px solid #d0d0d0);
 
   @media (min-width: 600px) {
-    gap: var(--spacing-3);
-    padding: 0 var(--spacing-5);
+    gap: $spacing-3;
+    padding: 0 $spacing-5;
   }
 }

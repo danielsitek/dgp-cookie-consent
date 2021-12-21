@@ -2,7 +2,7 @@
   $r: &;
   position: relative;
   display: grid;
-  height: var(--spacing-3);
+  height: $spacing-3;
   cursor: pointer;
   aspect-ratio: 2/1;
 
@@ -20,7 +20,7 @@
     border-radius: 1000px;
     background-color: var(--color-black, #242424);
     overflow: hidden;
-    transition: 0.2s linear;
+    transition: $base-transition;
     transition-property: transform, background-color;
   }
 
@@ -31,7 +31,7 @@
     padding: 3px;
     border-radius: 1000px;
     transform: translateX(0);
-    transition: 0.2s linear;
+    transition: $base-transition;
     transition-property: transform, background-color;
     aspect-ratio: 1/1;
   }

@@ -4,9 +4,9 @@
   left: 50%;
   z-index: 2147483631;
   display: block;
-  width: calc(100% - var(--spacing-2));
+  width: calc(100% - $spacing-2);
   max-width: 900px;
-  max-height: calc(100% - var(--spacing-2));
+  max-height: calc(100% - $spacing-2);
   border-radius: var(--border-radius, 6px);
   background-color: var(--color-white, #ffffff);
   color: var(--base-color, #393939);
@@ -17,7 +17,7 @@
   text-align: initial;
   overflow: hidden;
   transform: translate(-50%, -50%);
-  transition: 0.5s linear;
+  transition: $base-transition;
   transition-property: width, max-width, top, bottom, left, opacity;
   box-sizing: border-box;
   box-shadow: 0 32px 68px rgb(0 0 0 / 30%);
@@ -28,35 +28,35 @@
 
   &__body {
     display: block;
-    padding: 0 var(--spacing-2);
+    padding: 0 $spacing-2;
     overflow: hidden;
     overflow-y: auto;
     @media (min-width: 600px) {
-      padding: 0 var(--spacing-5);
+      padding: 0 $spacing-5;
     }
   }
 
   &__updated {
     display: block;
-    padding: var(--spacing-2) var(--spacing-2);
+    padding: $spacing-2 $spacing-2;
     border-top: var(--base-line, 1px solid #d0d0d0);
     color: var(--color-text-light, #757575);
     font-size: 85%;
     @media (min-width: 600px) {
-      padding: var(--spacing-2) var(--spacing-5);
+      padding: $spacing-2 $spacing-5;
     }
   }
 
   &__footer {
     display: flex;
-    gap: var(--spacing-1);
+    gap: $spacing-1;
     flex-direction: column-reverse;
     justify-content: flex-end;
     margin: 0;
-    padding: var(--spacing-2);
+    padding: $spacing-2;
     border-top: var(--base-line, 1px solid #d0d0d0);
     @media (min-width: 600px) {
-      gap: var(--spacing-2);
+      gap: $spacing-2;
       flex-direction: row;
     }
   }
