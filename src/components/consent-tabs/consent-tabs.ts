@@ -1,3 +1,5 @@
+import { createDivElement } from '../../utils/elements';
+
 interface ComponentProps {
   modifier?: string;
 }
@@ -7,7 +9,7 @@ interface ConsentTabsProps extends ComponentProps {
 }
 
 export const consentTabs = (props: ConsentTabsProps) => {
-  const element = document.createElement('div');
+  const element = createDivElement();
   element.classList.add('consent-tabs');
 
   props.tabs.forEach((tabElement) => {

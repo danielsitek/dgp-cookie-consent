@@ -3,7 +3,7 @@
   padding: $spacing-3 0;
 
   & + & {
-    border-top: var(--base-line, 1px solid #d0d0d0);
+    border-top: var(--base-line, $base-line);
   }
 
   &__inner {
@@ -22,7 +22,9 @@
   }
 
   &__area-header {
+    display: flex;
     grid-area: header;
+    align-items: center;
   }
 
   &__area-perex {

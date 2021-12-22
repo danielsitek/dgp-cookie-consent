@@ -1,3 +1,5 @@
+import { createElement } from '../../utils/elements';
+
 interface ComponentProps {
   modifier?: string;
 }
@@ -8,7 +10,7 @@ interface ConsentButtonProps extends ComponentProps {
 }
 
 export const consentButton = (props: ConsentButtonProps) => {
-  const element = document.createElement('button');
+  const element = createElement('button') as HTMLButtonElement;
 
   element.innerHTML = `
     <span class="consent-button__inner">${props.label}</span>

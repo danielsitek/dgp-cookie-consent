@@ -1,3 +1,5 @@
+import { createDivElement } from '../../utils/elements';
+
 export interface ConsentSectionProps {
   title: string;
   perex: string;
@@ -5,11 +7,11 @@ export interface ConsentSectionProps {
 }
 
 export const consentSection = (props: ConsentSectionProps): HTMLDivElement => {
-  const content = document.createElement('div');
-  const inner = document.createElement('div');
-  const header = document.createElement('div');
-  const perex = document.createElement('div');
-  const switchContainer = document.createElement('div');
+  const content = createDivElement();
+  const inner = createDivElement();
+  const header = createDivElement();
+  const perex = createDivElement();
+  const switchContainer = createDivElement();
 
   content.classList.add('consent-section');
   inner.classList.add('consent-section__inner');

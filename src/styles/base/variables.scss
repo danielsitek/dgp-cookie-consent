@@ -15,6 +15,58 @@ $spacing-10: ($spacing-1 * 10);
 $spacing-11: ($spacing-1 * 11);
 $spacing-12: ($spacing-1 * 12);
 
+// Colors
+$color-white: #ffffff;
+$color-black: #000000;
+$color-primary: #f8c132;
+
+// to define colors
+$color-grey-1: #242424;
+$color-grey-3: #393939;
+$color-grey-4: #757575;
+$color-grey-5: #d0d0d0;
+$color-grey-2: #d6d6d6;
+
+// Colors Black/White
+$color-bw-100: #000000;
+$color-bw-95: #242424;
+$color-bw-75: #393939;
+$color-bw-50: #757575;
+$color-bw-25: #d0d0d0;
+$color-bw-0: #ffffff;
+
 // Base variables
 $base-transition: 0.2s linear;
 $base-border-radius: 6px;
+$base-font-size: 15px;
+$base-font-family: sans-serif;
+$base-shadow: 0 32px 68px rgb(0 0 0 / 30%);
+$base-line: 1px solid $color-grey-5;
+
+// Button Default
+$button-default-bg: #f4f4f4;
+$button-default-color: #242424;
+$button-default-border: 1px solid $button-default-bg;
+$button-default-text-transform: none;
+$button-default-shadow: none;
+
+// Button Default Hover
+$button-default-hover-bg: #ffffff;
+$button-default-hover-color: #242424;
+$button-default-hover-border: 1px solid #d1d1d1;
+$button-default-hover-text-transform: none;
+$button-default-hover-shadow: 0 0 17px 0 rgb(0 0 0 / 10%);
+
+// Button Default
+$button-primary-bg: #f8c132;
+$button-primary-color: #242424;
+$button-primary-border: 0 none;
+$button-primary-text-transform: uppercase;
+$button-primary-shadow: none;
+
+// Button Default Hover
+$button-primary-hover-bg: #efaf08;
+$button-primary-hover-color: #242424;
+$button-primary-hover-border: 0 none;
+$button-primary-hover-text-transform: none;
+$button-primary-hover-shadow: none;

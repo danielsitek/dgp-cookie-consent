@@ -1,3 +1,4 @@
+import { createDivElement } from '../../utils/elements';
 import { consentDialogFooter } from '../consent-dialog-footer/consent-dialog-footer';
 
 interface TabContentDefaultProps {
@@ -7,8 +8,8 @@ interface TabContentDefaultProps {
 }
 
 export const tabContentDefault = (props: TabContentDefaultProps): HTMLDivElement => {
-  const content = document.createElement('div');
-  const body = document.createElement('div');
+  const content = createDivElement();
+  const body = createDivElement();
 
   content.classList.add('consent-tab-content');
 

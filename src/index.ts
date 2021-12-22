@@ -2,9 +2,10 @@ import { ConsentService } from './services/consent-service';
 import './components/consent-dialog/consent-dialog';
 import { CookieConsentTranslations } from './services/translation-service';
 import { CookieConsentTheme } from './services/theme-service';
+import { createElement } from './utils/elements';
 
 const cookieConsentModal = () => {
-  const ui = document.createElement('consent-dialog');
+  const ui = createElement('consent-dialog');
   document.body.appendChild(ui);
 };
 

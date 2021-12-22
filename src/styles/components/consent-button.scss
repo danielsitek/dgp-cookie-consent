@@ -6,10 +6,7 @@
   min-height: $spacing-6;
   margin: 0;
   padding: $spacing-05 $spacing-1;
-  border: 0 none;
   border-radius: var(--border-radius, $base-border-radius);
-  background-color: var(--button-default__bg-color, #f4f4f4);
-  color: var(--button-default__color, #242424);
   font-weight: 600;
   font-size: 100%;
   line-height: 1.4;
@@ -25,32 +22,32 @@
   }
 
   &--default {
-    border: var(--button-default__border, 1px solid #f4f4f4);
-    background-color: var(--button-default__bg-color, #f4f4f4);
-    color: var(--button-default__color, #242424);
-    text-transform: var(--button-default__text-transform, none);
-    box-shadow: var(--button-default__box-shadow, none);
+    border: var(--button-default__border, $button-default-border);
+    background-color: var(--button-default__bg-color, $button-default-bg);
+    color: var(--button-default__color, $button-default-color);
+    text-transform: var(--button-default__text-transform, $button-default-text-transform);
+    box-shadow: var(--button-default__box-shadow, $button-default-shadow);
 
     &:hover {
-      border: var(--button-default--hover__border, 1px solid #d1d1d1);
-      background-color: var(--button-default--hover__bg-color, #ffffff);
-      color: var(--button-default--hover__color, #242424);
-      box-shadow: var(--button-default--hover__box-shadow, 0 0 17px 0 rgb(0 0 0 / 10%));
+      border: var(--button-default--hover__border, $button-default-hover-border);
+      background-color: var(--button-default--hover__bg-color, $button-default-hover-bg);
+      color: var(--button-default--hover__color, $button-default-hover-color);
+      box-shadow: var(--button-default--hover__box-shadow, $button-default-hover-shadow);
     }
   }
 
   &--primary {
-    border: var(--button-primary__border, 0 none);
-    background-color: var(--button-primary__bg-color, #f8c132);
-    color: var(--button-primary__color, #242424);
-    text-transform: var(--button-primary__text-transform, uppercase);
-    box-shadow: var(--button-primary__box-shadow, none);
+    border: var(--button-primary__border, $button-primary-border);
+    background-color: var(--button-primary__bg-color, $button-primary-bg);
+    color: var(--button-primary__color, $button-primary-color);
+    text-transform: var(--button-primary__text-transform, $button-primary-text-transform);
+    box-shadow: var(--button-primary__box-shadow, $button-primary-shadow);
 
     &:hover {
-      border: var(--button-primary--hover__border, 0 none);
-      background-color: var(--button-primary--hover__bg-color, #efaf08);
-      color: var(--button-primary--hover__color, #242424);
-      box-shadow: var(--button-primary--hover__box-shadow, none);
+      border: var(--button-primary--hover__border, $button-primary-hover-border);
+      background-color: var(--button-primary--hover__bg-color, $button-primary-hover-bg);
+      color: var(--button-primary--hover__color, $button-primary-hover-color);
+      box-shadow: var(--button-primary--hover__box-shadow, $button-primary-hover-shadow);
     }
   }
 

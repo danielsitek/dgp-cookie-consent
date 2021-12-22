@@ -7,11 +7,11 @@
   width: calc(100% - $spacing-2);
   max-width: 900px;
   max-height: calc(100% - $spacing-2);
-  border-radius: var(--border-radius, 6px);
-  background-color: var(--color-white, #ffffff);
-  color: var(--base-color, #393939);
-  font-family: sans-serif;
-  font-size: var(--base-font-size, 15px);
+  border-radius: var(--border-radius, $base-border-radius);
+  background-color: var(--color-white, $color-white);
+  color: var(--base-color, $color-grey-3);
+  font-family: var(--base-font-family, $base-font-family);
+  font-size: var(--base-font-size, $base-font-size);
   line-height: 1.4;
   letter-spacing: 0.1px;
   text-align: initial;
@@ -20,7 +20,7 @@
   transition: $base-transition;
   transition-property: width, max-width, top, bottom, left, opacity;
   box-sizing: border-box;
-  box-shadow: 0 32px 68px rgb(0 0 0 / 30%);
+  box-shadow: $base-shadow;
 
   &__inner {
     display: block;
@@ -39,8 +39,8 @@
   &__updated {
     display: block;
     padding: $spacing-2 $spacing-2;
-    border-top: var(--base-line, 1px solid #d0d0d0);
-    color: var(--color-text-light, #757575);
+    border-top: var(--base-line, $base-line);
+    color: var(--color-text-light, $color-grey-4);
     font-size: 85%;
     @media (min-width: 600px) {
       padding: $spacing-2 $spacing-5;
@@ -54,7 +54,7 @@
     justify-content: flex-end;
     margin: 0;
     padding: $spacing-2;
-    border-top: var(--base-line, 1px solid #d0d0d0);
+    border-top: var(--base-line, $base-line);
     @media (min-width: 600px) {
       gap: $spacing-2;
       flex-direction: row;

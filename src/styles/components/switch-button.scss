@@ -18,7 +18,7 @@
     position: relative;
     display: block;
     border-radius: 1000px;
-    background-color: var(--color-black, #242424);
+    background-color: var(--color-black, $color-grey-1);
     overflow: hidden;
     transition: $base-transition;
     transition-property: transform, background-color;
@@ -41,12 +41,12 @@
     display: block;
     height: 100%;
     border-radius: 1000px;
-    background-color: var(--color-white, #ffffff);
+    background-color: var(--color-white, $color-white);
     aspect-ratio: 1/1;
   }
 
   &__input:checked ~ &__background {
-    background-color: var(--color-primary, #f8c132);
+    background-color: var(--color-primary, $color-primary);
 
     #{$r}__point {
       transform: translateX(100%);
@@ -54,7 +54,7 @@
   }
 
   &__input:disabled ~ &__background {
-    background-color: var(--color-grey, #d6d6d6);
+    background-color: var(--color-grey, $color-grey-2);
     cursor: default;
   }
 }

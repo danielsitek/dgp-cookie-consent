@@ -1,6 +1,7 @@
 import { INLINE_STYLES_MAIN } from '../../config';
 import { themeService } from '../../services/theme-service';
 import { translationService } from '../../services/translation-service';
+import { createElement, createDivElement } from '../../utils/elements';
 import { consentButton } from '../consent-button/consent-button';
 import { ConsentTab } from '../consent-tab/consent-tab';
 import { consentTabs } from '../consent-tabs/consent-tabs';
@@ -34,10 +35,10 @@ export class ConsentDialog extends HTMLElement {
 
     this.shadow = this.attachShadow({ mode: 'closed' });
 
-    this.componentStyle = document.createElement('style');
-    this.componentThemeStyle = document.createElement('style');
-    this.mainElement = document.createElement('div');
-    this.innerElement = document.createElement('div');
+    this.componentStyle = createElement('style') as HTMLStyleElement;
+    this.componentThemeStyle = createElement('style') as HTMLStyleElement;
+    this.mainElement = createDivElement();
+    this.innerElement = createDivElement();
 
     this.tabButtonAgree = new ConsentTab(
       {
@@ -75,7 +76,7 @@ export class ConsentDialog extends HTMLElement {
     const tabButtonAbout = this.tabButtonAbout.render();
 
     this.mainElement.classList.add('consent-dialog');
-    this.mainElement.classList.add('consent-dialog-root');
+    this.mainElement.classList.add('theme');
     this.mainElement.appendChild(
       consentTabs({
         tabs: [tabButtonAgree, tabButtonDetails, tabButtonAbout],

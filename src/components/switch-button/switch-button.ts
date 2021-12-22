@@ -1,3 +1,5 @@
+import { createElement, createDivElement } from '../../utils/elements';
+
 interface SwitchButtonProps {
   checked?: boolean;
   disabled?: boolean;
@@ -9,10 +11,10 @@ export interface HTMLSwitchButtonElement extends HTMLDivElement {
 }
 
 export const switchButton = (props?: SwitchButtonProps): HTMLSwitchButtonElement => {
-  const content: HTMLSwitchButtonElement = document.createElement('div') as HTMLSwitchButtonElement;
-  const labelEl = document.createElement('label');
-  const input = document.createElement('input');
-  const background = document.createElement('div');
+  const content: HTMLSwitchButtonElement = createDivElement() as HTMLSwitchButtonElement;
+  const labelEl = createElement('label') as HTMLLabelElement;
+  const input = createElement('input') as HTMLInputElement;
+  const background = createDivElement();
 
   labelEl.classList.add('switch-button');
 

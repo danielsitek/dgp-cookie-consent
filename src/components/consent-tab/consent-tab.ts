@@ -1,3 +1,5 @@
+import { createElement } from '../../utils/elements';
+
 interface ComponentProps {
   modifier?: string;
 }
@@ -16,7 +18,7 @@ export class ConsentTab {
 
   constructor(props: ConsentTabProps, activeCb?: () => void) {
     this.props = props;
-    this.element = document.createElement('button');
+    this.element = createElement('button') as HTMLButtonElement;
     this.element.classList.add('consent-tab');
     this.activeCallBack = activeCb;
 

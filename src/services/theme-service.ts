@@ -1,4 +1,4 @@
-import { themeZoot } from '../themes/zoot';
+import { themeDefault } from '../themes/default';
 
 export interface CookieConsentTheme {
   [key: string]: string;
@@ -8,7 +8,8 @@ export interface ThemeServiceInterface {
   themeTextContent: string;
 }
 
-const defaultTheme = themeZoot;
+// More themes in src/themes.
+const defaultTheme = themeDefault;
 
 export const themeService = (): ThemeServiceInterface => {
   const composedTheme: CookieConsentTheme = {
@@ -21,6 +22,6 @@ export const themeService = (): ThemeServiceInterface => {
   });
 
   return {
-    themeTextContent: `.consent-dialog-root { ${stringified.join(' ')} }`,
+    themeTextContent: `.theme { ${stringified.join(' ')} }`,
   };
 };

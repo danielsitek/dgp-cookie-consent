@@ -1,4 +1,5 @@
 import { translationService } from '../../services/translation-service';
+import { createDivElement } from '../../utils/elements';
 import { consentDialogFooter } from '../consent-dialog-footer/consent-dialog-footer';
 import { consentSection, ConsentSectionProps } from '../consent-section/consent-section';
 
@@ -22,21 +23,20 @@ const getLocalizedUpdatedDate = (): string => {
   }
 
   const date = new Date(window.CookieConsent.updated);
-  const localDate = new Intl.DateTimeFormat(i18n.locale).format(date);
 
-  return localDate;
+  return new Intl.DateTimeFormat(i18n.locale).format(date);
 };
 
 export const tabContentDetails = (props: TabContentDefaultProps): HTMLDivElement => {
-  const content = document.createElement('div');
-  const body = document.createElement('div');
-  const updated = document.createElement('div');
+  const content = createDivElement();
+  const body = createDivElement();
+  const updated = createDivElement();
 
   content.classList.add('consent-tab-content');
 
   body.classList.add('consent-dialog__body');
 
-  const sampleSwitch = document.createElement('div');
+  const sampleSwitch = createDivElement();
   sampleSwitch.innerHTML = 'switch';
 
   body.appendChild(consentSection(props.sections.necessary));
