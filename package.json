@@ -1,8 +1,11 @@
 {
   "name": "@zoot/cookie-consent",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "ZOOT cookie consent",
   "main": "dist/cookies.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\"",
     "build:tsc": "tsc --sourceMap=false --removeComments=true",
