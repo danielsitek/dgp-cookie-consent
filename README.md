@@ -4,7 +4,7 @@ Awesome one-of-a-kind Cookie Consent panel.
 
 ## How to install
 
-Insert this code on the bottom of the page.
+Insert this code on the bottom of the page, or inject it via GTM.
 
 ```html
 <script>
@@ -14,7 +14,7 @@ Insert this code on the bottom of the page.
 
   window.CookieConsentTranslations = {};
 </script>
-<script type="text/javascript" src="/dist/cookies.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.0.0/dist/cookies.min.js"></script>
 ```
 
 ## How to use with GTM
