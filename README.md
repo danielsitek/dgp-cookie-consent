@@ -1,5 +1,9 @@
 # ZOOT Cookie Consent
 
+![Size](https://img.shields.io/github/size/danielsitek/dgp-cookie-consent/dist/cookies.min.js)
+[![Stable version](https://img.shields.io/github/v/release/danielsitek/dgp-cookie-consent)](https://github.com/danielsitek/dgp-cookie-consent/releases)
+[![CDN](https://img.shields.io/badge/CDN-orange?style=flat&logo=jsdelivr&logoColor=white)](https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.0.0/dist/cookies.min.js)
+
 Awesome one-of-a-kind Cookie Consent panel.
 
 ## How to install
@@ -162,6 +166,8 @@ window.CookieConsentTheme = {
   'button-primary--hover__box-shadow': 'none',
 };
 ```
+
+---
 
 ## Available themes:
 
