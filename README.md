@@ -419,7 +419,7 @@ window.addEventListener('consent-updated', () => {
   **JavaScript Code**:
 
   ```js
-  function () { return CookieConsent.marketing.toString(); };
+  function () { return CookieConsent.marketing.toString(); }
   ```
 
 * **CookieConsent.preferences**
@@ -429,7 +429,7 @@ window.addEventListener('consent-updated', () => {
   **JavaScript Code**:
 
   ```js
-  function () { return CookieConsent.preferences.toString(); };
+  function () { return CookieConsent.preferences.toString(); }
   ```
 
 * **CookieConsent.statistics**
@@ -439,7 +439,7 @@ window.addEventListener('consent-updated', () => {
   **JavaScript Code**:
 
   ```js
-  function () { return CookieConsent.statistics.toString(); };
+  function () { return CookieConsent.statistics.toString(); }
   ```
 
 * CookieConsent Version (optional)
