@@ -429,7 +429,7 @@ window.addEventListener('consent-updated', () => {
   **JavaScript Code**:
 
   ```js
-  function () { return CookieConsent.marketing.toString(); };
+  function () { return CookieConsent.preferences.toString(); };
   ```
 
 * **CookieConsent.statistics**
@@ -439,7 +439,7 @@ window.addEventListener('consent-updated', () => {
   **JavaScript Code**:
 
   ```js
-  function () { return CookieConsent.marketing.toString(); };
+  function () { return CookieConsent.statistics.toString(); };
   ```
 
 * CookieConsent Version (optional)
@@ -533,7 +533,7 @@ window.addEventListener('consent-updated', () => {
 
     (function cookiesInit() {
       var scriptEl = document.createElement('script');
-      scriptEl.src = 'https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@{{CookieConsent Version}}/dist/cookies.min.js';
+      scriptEl.src = 'https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.0.0/dist/cookies.min.js';
       scriptEl.type = 'text/javascript';
       scriptEl.id = 'cookie-consent';
       scriptEl.addEventListener('load', function cookiesInitLoad() {
@@ -546,6 +546,8 @@ window.addEventListener('consent-updated', () => {
     })();
   </script>
   ```
+
+  > **Note**: You can replace version number with previously defined "CookieConsent Version" variable.
 
   **Startup**:
 
