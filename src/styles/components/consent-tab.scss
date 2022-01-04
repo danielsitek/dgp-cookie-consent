@@ -9,6 +9,7 @@
   border: 0 none;
   background-color: transparent;
   color: var(--color-text, $color-grey-1);
+  font-family: inherit;
   font-size: 110%;
   line-height: 1.3;
   transition: $base-transition;
