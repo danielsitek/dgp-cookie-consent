@@ -1,0 +1,34 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12, 13, 14, 16]
+
+    steps:
+    - name: Getting configuration from GitHub
+      uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Run build
+      run: |
+        npm ci
+        npm run build:prod --if-present
+        node -v > dist/node-version.txt
+
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v1
+      with:
+        name: dist-node-${{ matrix.node-version }}
+        path: dist
