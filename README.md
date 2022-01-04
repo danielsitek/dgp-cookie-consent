@@ -2,8 +2,9 @@
 
 ![Size](https://img.shields.io/github/size/danielsitek/dgp-cookie-consent/dist/cookies.min.js)
 [![Stable version](https://img.shields.io/github/v/release/danielsitek/dgp-cookie-consent)](https://github.com/danielsitek/dgp-cookie-consent/releases)
-[![CDN](https://img.shields.io/badge/CDN-orange?style=flat&logo=jsdelivr&logoColor=white)](https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.0.0/dist/cookies.min.js)
+[![CDN](https://img.shields.io/badge/CDN-orange?style=flat&logo=jsdelivr&logoColor=white)](https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.1.0/dist/cookies.min.js)
 [![Maintainability](https://api.codeclimate.com/v1/badges/27b5b5b749d18039f303/maintainability)](https://codeclimate.com/github/danielsitek/dgp-cookie-consent/maintainability)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/65b56152a2a84981b10576ad7081411d)](https://www.codacy.com/gh/danielsitek/dgp-cookie-consent/dashboard)
 
 Awesome one-of-a-kind Cookie Consent panel.
 
@@ -45,7 +46,7 @@ Awesome one-of-a-kind Cookie Consent panel.
 1. Download the latest release or use CDN.
 
     ```
-    https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.0.0/dist/cookies.min.js
+    https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.1.0/dist/cookies.min.js
     ```
 
 1. Insert this code on the bottom of the page, or [inject it via GTM](#gtm-implementation).
