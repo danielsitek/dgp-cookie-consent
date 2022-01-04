@@ -14,7 +14,7 @@ export class ConsentService {
     this.getConsentData();
   }
 
-  get necessary() {
+  get necessary(): boolean {
     this.getConsentData();
     return cache.necessary;
   }
@@ -24,7 +24,7 @@ export class ConsentService {
     this.updateConsentData();
   }
 
-  get preferences() {
+  get preferences(): boolean {
     this.getConsentData();
     return cache.preferences;
   }
@@ -34,7 +34,7 @@ export class ConsentService {
     this.updateConsentData();
   }
 
-  get statistics() {
+  get statistics(): boolean {
     this.getConsentData();
     return cache.statistics;
   }
@@ -44,7 +44,7 @@ export class ConsentService {
     this.updateConsentData();
   }
 
-  get marketing() {
+  get marketing(): boolean {
     this.getConsentData();
     return cache.marketing;
   }
@@ -54,7 +54,7 @@ export class ConsentService {
     this.updateConsentData();
   }
 
-  get updated() {
+  get updated(): string {
     this.getConsentData();
     return cache.updated;
   }

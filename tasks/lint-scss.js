@@ -1,4 +1,4 @@
-const { src, lastRun, dest } = require('gulp');
+const { src, lastRun } = require('gulp');
 const gulpStylelint = require('gulp-stylelint');
 
 module.exports = function lintScss(done) {

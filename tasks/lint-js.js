@@ -1,4 +1,4 @@
-const { src, lastRun, dest } = require('gulp');
+const { src, lastRun } = require('gulp');
 const eslint = require('gulp-eslint');
 
 module.exports = function lintJs(done) {

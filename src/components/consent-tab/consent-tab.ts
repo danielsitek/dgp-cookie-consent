@@ -56,7 +56,7 @@ export class ConsentTab {
     }
   }
 
-  get active() {
+  get active(): boolean {
     return this.element.classList.contains('consent-tab--active');
   }
 
@@ -66,7 +66,7 @@ export class ConsentTab {
     });
   }
 
-  public render() {
+  public render(): HTMLButtonElement {
     return this.element;
   }
 }
