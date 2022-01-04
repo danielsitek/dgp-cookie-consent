@@ -2,9 +2,9 @@
   $r: &;
   position: relative;
   display: grid;
+  width: 2 * $spacing-3;
   height: $spacing-3;
   cursor: pointer;
-  aspect-ratio: 2/1;
 
   &__input {
     position: absolute;
@@ -25,24 +25,23 @@
   }
 
   &__point {
-    content: '';
     display: block;
+    width: 50%;
     height: 100%;
     padding: 3px;
     border-radius: 1000px;
     transform: translateX(0);
     transition: $base-transition;
     transition-property: transform, background-color;
-    aspect-ratio: 1/1;
   }
 
   &__point::before {
     content: '';
     display: block;
+    width: 100%;
     height: 100%;
     border-radius: 1000px;
     background-color: var(--color-white, $color-white);
-    aspect-ratio: 1/1;
   }
 
   &__input:checked ~ &__background {
