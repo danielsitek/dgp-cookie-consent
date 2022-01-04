@@ -9,12 +9,10 @@ interface ConsentButtonProps extends ComponentProps {
   variant?: 'default' | 'primary';
 }
 
-export const consentButton = (props: ConsentButtonProps) => {
+export const consentButton = (props: ConsentButtonProps): HTMLButtonElement => {
   const element = createElement('button') as HTMLButtonElement;
 
-  element.innerHTML = `
-    <span class="consent-button__inner">${props.label}</span>
-  `;
+  element.innerHTML = `<span class="consent-button__inner">${props.label}</span>`;
 
   element.classList.add('consent-button');
 

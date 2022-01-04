@@ -3,16 +3,18 @@ import { createDivElement } from '../../utils/elements';
 import { consentDialogFooter } from '../consent-dialog-footer/consent-dialog-footer';
 import { consentSection, ConsentSectionProps } from '../consent-section/consent-section';
 
+interface TabContentDefaultsectionsProps {
+  necessary: ConsentSectionProps;
+  preferences: ConsentSectionProps;
+  statistics: ConsentSectionProps;
+  marketing: ConsentSectionProps;
+  [key: string]: ConsentSectionProps;
+}
 interface TabContentDefaultProps {
   lastUpdated?: string;
   buttonRejectAll?: HTMLButtonElement;
   buttonConfirm?: HTMLButtonElement;
-  sections: {
-    necessary: ConsentSectionProps;
-    preferences: ConsentSectionProps;
-    statistics: ConsentSectionProps;
-    marketing: ConsentSectionProps;
-  };
+  sections: TabContentDefaultsectionsProps;
 }
 
 const i18n = translationService();
@@ -27,26 +29,18 @@ const getLocalizedUpdatedDate = (): string => {
   return new Intl.DateTimeFormat(i18n.locale).format(date);
 };
 
-export const tabContentDetails = (props: TabContentDefaultProps): HTMLDivElement => {
-  const content = createDivElement();
+const tabContentDetailsBody = (props: TabContentDefaultProps): HTMLDivElement => {
   const body = createDivElement();
-  const updated = createDivElement();
-
-  content.classList.add('consent-tab-content');
-
   body.classList.add('consent-dialog__body');
 
-  const sampleSwitch = createDivElement();
-  sampleSwitch.innerHTML = 'switch';
+  Object.keys(props.sections).forEach((section: string): void => {
+    body.appendChild(consentSection(props.sections[section]));
+  });
 
-  body.appendChild(consentSection(props.sections.necessary));
+  return body;
+};
 
-  body.appendChild(consentSection(props.sections.statistics));
-
-  body.appendChild(consentSection(props.sections.preferences));
-
-  body.appendChild(consentSection(props.sections.marketing));
-
+const tabContentDetailsFooter = (props: TabContentDefaultProps): HTMLDivElement => {
   const buttons = [];
 
   if (props.buttonRejectAll) {
@@ -57,9 +51,20 @@ export const tabContentDetails = (props: TabContentDefaultProps): HTMLDivElement
     buttons.push(props.buttonConfirm);
   }
 
+  return consentDialogFooter({
+    buttons,
+  })
+};
+
+export const tabContentDetails = (props: TabContentDefaultProps): HTMLDivElement => {
+  const content = createDivElement();
+  content.classList.add('consent-tab-content');
+
+  const body = tabContentDetailsBody(props);
   content.appendChild(body);
 
   if (props.lastUpdated) {
+    const updated = createDivElement();
     const updatedDate = getLocalizedUpdatedDate();
 
     if (updatedDate.length) {
@@ -69,11 +74,7 @@ export const tabContentDetails = (props: TabContentDefaultProps): HTMLDivElement
     }
   }
 
-  content.appendChild(
-    consentDialogFooter({
-      buttons,
-    }),
-  );
+  content.appendChild(tabContentDetailsFooter(props));
 
   return content;
 };

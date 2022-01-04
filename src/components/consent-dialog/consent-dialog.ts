@@ -67,7 +67,7 @@ export class ConsentDialog extends HTMLElement {
     this.main();
   }
 
-  initStyles() {
+  initStyles(): void {
     this.componentStyle.textContent = INLINE_STYLES_MAIN;
     this.componentThemeStyle.textContent = themeService().themeTextContent;
 
@@ -100,85 +100,75 @@ export class ConsentDialog extends HTMLElement {
     });
   }
 
-  setTabContentAgree() {
-    // console.log('Souhlas je aktivní');
+  setTabContent(tabContent: HTMLDivElement): void {
     this.innerElement.innerHTML = '';
-    this.innerElement.appendChild(this.tabContentAgree());
+    this.innerElement.appendChild(tabContent);
+  }
+
+  setTabContentAgree(): void {
+    // console.log('Souhlas je aktivní');
+    this.setTabContent(this.tabContentAgree());
     this.tabButtonAgree.active = true;
   }
 
-  setTabContentDetails() {
+  setTabContentDetails(): void {
     // console.log('Detaily je aktivní');
-    this.innerElement.innerHTML = '';
-    this.innerElement.appendChild(this.tabContentDetails());
+    this.setTabContent(this.tabContentDetails());
     this.tabButtonDetails.active = true;
   }
 
-  setTabContentAbout() {
+  setTabContentAbout(): void {
     // console.log('O aplikaci je aktivní');
-    this.innerElement.innerHTML = '';
-    this.innerElement.appendChild(this.tabContentAbout());
+    this.setTabContent(this.tabContentAbout());
     this.tabButtonAbout.active = true;
   }
 
-  tabContentAgree() {
-    const body = i18n.tabAgree.body;
-
-    const content = tabContentDefault({
-      body,
+  tabContentAgree(): HTMLDivElement {
+    return tabContentDefault({
+      body: i18n.tabAgree.body,
       buttonEdit: this.createButtonEdit(),
       buttonAllowAll: this.createButtonAllowAll(),
     });
-
-    return content;
   }
 
-  tabContentDetails() {
+  tabContentDetails(): HTMLDivElement {
     this.switchButtonPreferences.setChecked(window.CookieConsent.preferences);
     this.switchButtonStatistics.setChecked(window.CookieConsent.statistics);
     this.switchButtonMarketing.setChecked(window.CookieConsent.marketing);
 
-    const content = tabContentDetails({
+    return tabContentDetails({
       buttonRejectAll: this.createButtonRejectAll(),
       buttonConfirm: this.createButtonConfirm(),
       lastUpdated: i18n.lastUpdated,
       sections: {
         necessary: {
-          title: i18n.tabDetail.necessary.title,
-          perex: i18n.tabDetail.necessary.perex,
+          ...i18n.tabDetail.necessary,
           switch: this.switchButtonNecessary,
         },
         preferences: {
-          title: i18n.tabDetail.preferences.title,
-          perex: i18n.tabDetail.preferences.perex,
+          ...i18n.tabDetail.preferences,
           switch: this.switchButtonPreferences,
         },
         statistics: {
-          title: i18n.tabDetail.statistics.title,
-          perex: i18n.tabDetail.statistics.perex,
+          ...i18n.tabDetail.statistics,
           switch: this.switchButtonStatistics,
         },
         marketing: {
-          title: i18n.tabDetail.marketing.title,
-          perex: i18n.tabDetail.marketing.perex,
+          ...i18n.tabDetail.marketing,
           switch: this.switchButtonMarketing,
         },
       },
     });
-
-    return content;
   }
 
-  tabContentAbout(): HTMLElement {
+  tabContentAbout(): HTMLDivElement {
     const body = i18n.tabAbout.body;
 
-    const content = tabContentDefault({
+    return tabContentDefault({
       body,
       buttonEdit: this.createButtonEdit(),
       buttonAllowAll: this.createButtonAllowAll(),
     });
-
-    return content;
   }
 
   createButtonEdit(): HTMLButtonElement {
@@ -225,10 +215,6 @@ export class ConsentDialog extends HTMLElement {
       this.switchButtonPreferences.setChecked(false);
       this.switchButtonStatistics.setChecked(false);
       this.switchButtonMarketing.setChecked(false);
-
-      // window.CookieConsent.preferences = false;
-      // window.CookieConsent.statistics = false;
-      // window.CookieConsent.marketing = false;
     });
 
     return button;
@@ -241,14 +227,6 @@ export class ConsentDialog extends HTMLElement {
     });
 
     button.addEventListener('click', () => {
-      // console.log(
-      //   'Potvrdit',
-      //   this.switchButtonNecessary.isChecked(),
-      //   this.switchButtonPreferences.isChecked(),
-      //   this.switchButtonStatistics.isChecked(),
-      //   this.switchButtonMarketing.isChecked()
-      // );
-
       window.CookieConsent.preferences = this.switchButtonPreferences.isChecked();
       window.CookieConsent.statistics = this.switchButtonStatistics.isChecked();
       window.CookieConsent.marketing = this.switchButtonMarketing.isChecked();
@@ -260,46 +238,38 @@ export class ConsentDialog extends HTMLElement {
   }
 
   createSwitchNecessary(): HTMLSwitchButtonElement {
-    const el = switchButton({
+    return switchButton({
       checked: true,
       disabled: true,
     });
-
-    return el;
   }
 
   createSwitchStatistics(): HTMLSwitchButtonElement {
-    const el = switchButton();
-
-    return el;
+    return switchButton();
   }
 
   createSwitchMarketing(): HTMLSwitchButtonElement {
-    const el = switchButton();
-
-    return el;
+    return switchButton();
   }
 
   createSwitchPreferences(): HTMLSwitchButtonElement {
-    const el = switchButton();
-
-    return el;
+    return switchButton();
   }
 
-  appendCode() {
+  appendCode(): void {
     this.shadow.appendChild(this.componentStyle);
     this.shadow.appendChild(this.componentThemeStyle);
     this.shadow.appendChild(this.mainElement);
   }
 
-  closeModal() {
+  closeModal(): void {
     setTimeout(() => {
       const consentModal = document.querySelector('consent-dialog');
       consentModal?.remove();
     }, 500);
   }
 
-  main() {
+  main(): void {
     this.initStyles();
     this.appendCode();
     this.setTabContentAgree();

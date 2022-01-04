@@ -8,7 +8,7 @@ interface ConsentTabProps extends ComponentProps {
   buttons: HTMLButtonElement[];
 }
 
-export const consentDialogFooter = (props: ConsentTabProps) => {
+export const consentDialogFooter = (props: ConsentTabProps): HTMLDivElement => {
   const element = createDivElement();
   element.classList.add('consent-dialog__footer');
 
