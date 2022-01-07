@@ -1,0 +1,45 @@
+$t: 0.3s;
+
+@keyframes animate-in {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+    transform: translate(-50%, -20%);
+  }
+
+  100% {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes animate-out {
+  0% {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  100% {
+    visibility: hidden;
+    opacity: 0;
+    transform: translate(-50%, -20%);
+  }
+}
+
+.animate {
+  &.in {
+    animation-name: animate-in;
+    animation-duration: $t;
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
+  }
+
+  &.out {
+    animation-name: animate-out;
+    animation-duration: $t;
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
+  }
+}

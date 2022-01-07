@@ -8,6 +8,7 @@ const { isDevelopment } = require('./helpers/environment');
 const rename = require('gulp-rename');
 const terser = require('gulp-terser');
 const stripDebug = require('gulp-strip-debug');
+const strip = require('gulp-strip-comments');
 
 const packageJson = require('../package.json');
 
@@ -41,6 +42,7 @@ module.exports = async function rollup() {
     cwd: 'src',
   })
     .pipe(rollupJs(rollupConfig))
+    .pipe(strip())
     .pipe(dest('./dist'))
     .pipe(stripDebug())
     .pipe(terser())

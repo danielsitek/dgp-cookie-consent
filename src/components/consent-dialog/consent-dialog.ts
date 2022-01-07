@@ -1,6 +1,7 @@
-import { INLINE_STYLES_MAIN } from '../../config';
+import { DIALOG_FADE_IN_DURATION, DIALOG_FADE_OUT_DURATION, INLINE_STYLES_MAIN } from '../../config';
 import { themeService } from '../../services/theme-service';
 import { translationService } from '../../services/translation-service';
+import { fadeIn, fadeOut } from '../../utils/animation';
 import { createElement, createDivElement } from '../../utils/elements';
 import { consentButton } from '../consent-button/consent-button';
 import { ConsentTab } from '../consent-tab/consent-tab';
@@ -75,11 +76,13 @@ export class ConsentDialog extends HTMLElement {
     const tabButtonDetails = this.tabButtonDetails.render();
     const tabButtonAbout = this.tabButtonAbout.render();
 
-    this.mainElement.classList.add('consent-dialog');
-    this.mainElement.classList.add('theme');
+    this.mainElement.classList.add(...['consent-dialog', 'theme']);
+    this.mainElement.style.display = 'none';
+
     this.mainElement.appendChild(
       consentTabs({
         tabs: [tabButtonAgree, tabButtonDetails, tabButtonAbout],
+        modifier: 'consent-dialog__header',
       }),
     );
 
@@ -215,6 +218,12 @@ export class ConsentDialog extends HTMLElement {
       this.switchButtonPreferences.setChecked(false);
       this.switchButtonStatistics.setChecked(false);
       this.switchButtonMarketing.setChecked(false);
+
+      window.CookieConsent.preferences = false;
+      window.CookieConsent.statistics = false;
+      window.CookieConsent.marketing = false;
+
+      this.closeModal();
     });
 
     return button;
@@ -263,7 +272,8 @@ export class ConsentDialog extends HTMLElement {
   }
 
   closeModal(): void {
-    setTimeout(() => {
+    setTimeout(async () => {
+      await fadeOut(this.mainElement, DIALOG_FADE_OUT_DURATION);
       const consentModal = document.querySelector('consent-dialog');
       consentModal?.remove();
     }, 500);
@@ -273,6 +283,8 @@ export class ConsentDialog extends HTMLElement {
     this.initStyles();
     this.appendCode();
     this.setTabContentAgree();
+
+    fadeIn(this.mainElement, DIALOG_FADE_IN_DURATION);
   }
 }
 

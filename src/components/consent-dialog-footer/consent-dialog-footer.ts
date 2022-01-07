@@ -17,9 +17,7 @@ export const consentDialogFooter = (props: ConsentTabProps): HTMLDivElement => {
   });
 
   if (props.modifier) {
-    props.modifier.split(' ').forEach((modifier) => {
-      element.classList.add(modifier);
-    });
+    element.classList.add(...props.modifier.split(' '));
   }
 
   return element;
