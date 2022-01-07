@@ -28,9 +28,8 @@ export class ConsentTab {
     `;
 
     if (this.props.modifier) {
-      this.props.modifier.split(' ').forEach((modifier) => {
-        this.element.classList.add(modifier);
-      });
+      const modifiers = this.props.modifier.split(' ');
+      this.element.classList.add(...modifiers);
     }
 
     if (this.props.active) {

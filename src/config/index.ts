@@ -5,3 +5,6 @@ export const EVENT_CONSENT_UPDATED = 'consent-updated';
 export const EVENT_DEBOUNCE = 300;
 
 export const INLINE_STYLES_MAIN = `__INLINE_STYLES__`;
+
+export const DIALOG_FADE_IN_DURATION = 300;
+export const DIALOG_FADE_OUT_DURATION = 300;
