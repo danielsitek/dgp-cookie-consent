@@ -1,3 +1,15 @@
+$switch-disabled-opacity: 0.25;
+$switch-border-radius: 1000px;
+
+%switch-button-transition {
+  transition: $base-transition;
+  transition-property: transform, background-color, opacity;
+}
+
+%switch-border-radius {
+  border-radius: $switch-border-radius;
+}
+
 .switch-button {
   $r: &;
   position: relative;
@@ -15,37 +27,47 @@
   }
 
   &__background {
+    @extend %switch-button-transition;
+    @extend %switch-border-radius;
     position: relative;
     display: block;
-    border-radius: 1000px;
-    background-color: var(--color-black, $color-grey-1);
     overflow: hidden;
-    transition: $base-transition;
-    transition-property: transform, background-color;
+
+    &::before {
+      @extend %switch-button-transition;
+      @extend %switch-border-radius;
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: var(--color-grey, $color-grey-2);
+    }
   }
 
   &__point {
+    @extend %switch-button-transition;
+    @extend %switch-border-radius;
+    position: relative;
     display: block;
     width: 50%;
     height: 100%;
     padding: 3px;
-    border-radius: 1000px;
     transform: translateX(0);
-    transition: $base-transition;
-    transition-property: transform, background-color;
   }
 
   &__point::before {
+    @extend %switch-border-radius;
     content: '';
     display: block;
     width: 100%;
     height: 100%;
-    border-radius: 1000px;
     background-color: var(--color-white, $color-white);
   }
 
   &__input:checked ~ &__background {
-    background-color: var(--color-primary, $color-primary);
+    &::before {
+      background-color: var(--color-primary, $color-primary);
+    }
 
     #{$r}__point {
       transform: translateX(100%);
@@ -53,7 +75,17 @@
   }
 
   &__input:disabled ~ &__background {
-    background-color: var(--color-grey, $color-grey-2);
+    opacity: $switch-disabled-opacity;
     cursor: default;
+
+    &::before {
+      background-color: var(--color-grey, $color-grey-2);
+    }
+  }
+
+  &__input:disabled:checked ~ &__background {
+    &::before {
+      background-color: var(--color-primary, $color-primary);
+    }
   }
 }
