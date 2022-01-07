@@ -38,7 +38,7 @@ const cs: CookieConsentTranslations = {
     },
   },
   buttonEdit: {
-    label: 'Upravit',
+    label: 'Nastavit',
   },
   buttonAllowAll: {
     label: 'Povolit vše',
@@ -47,7 +47,7 @@ const cs: CookieConsentTranslations = {
     label: 'Odmítnout vše',
   },
   buttonConfirm: {
-    label: 'Uložit',
+    label: 'Potvrdit',
   },
   lastUpdated: 'Prohlášení o cookies bylo naposledy aktualizováno %date.',
 };

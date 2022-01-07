@@ -215,6 +215,8 @@ export class ConsentDialog extends HTMLElement {
       this.switchButtonPreferences.setChecked(false);
       this.switchButtonStatistics.setChecked(false);
       this.switchButtonMarketing.setChecked(false);
+
+      this.closeModal();
     });
 
     return button;
