@@ -1,4 +1,4 @@
-import { DIALOG_ELEMENT_NAME, DIALOG_FADE_IN_DURATION, DIALOG_FADE_OUT_DURATION, INLINE_STYLES_MAIN } from '../../config';
+import { DIALOG_ELEMENT_NAME, DIALOG_FADE_IN_DURATION, DIALOG_FADE_OUT_DURATION, EVENT_CLICK, INLINE_STYLES_MAIN } from '../../config';
 import { themeService } from '../../services/theme-service';
 import { translationService } from '../../services/translation-service';
 import { fadeIn, fadeOut } from '../../utils/animation';
@@ -38,8 +38,8 @@ export class ConsentDialog extends HTMLElement {
 
     this.componentStyle = createElement('style') as HTMLStyleElement;
     this.componentThemeStyle = createElement('style') as HTMLStyleElement;
-    this.mainElement = createDivElement();
-    this.innerElement = createDivElement();
+    this.mainElement = createDivElement(['c-d', 't']);
+    this.innerElement = createDivElement(['c-d__i']);
 
     this.tabButtonAgree = new ConsentTab(
       {
@@ -76,7 +76,6 @@ export class ConsentDialog extends HTMLElement {
     const tabButtonDetails = this.tabButtonDetails.render();
     const tabButtonAbout = this.tabButtonAbout.render();
 
-    this.mainElement.classList.add(...['c-d', 't']);
     this.mainElement.style.display = 'none';
 
     this.mainElement.appendChild(
@@ -88,17 +87,15 @@ export class ConsentDialog extends HTMLElement {
 
     this.mainElement.appendChild(this.innerElement);
 
-    this.innerElement.classList.add('c-d__i');
-
-    tabButtonAgree.addEventListener('click', () => {
+    tabButtonAgree.addEventListener(EVENT_CLICK, () => {
       this.setTabContentAgree();
     });
 
-    tabButtonDetails.addEventListener('click', () => {
+    tabButtonDetails.addEventListener(EVENT_CLICK, () => {
       this.setTabContentDetails();
     });
 
-    tabButtonAbout.addEventListener('click', () => {
+    tabButtonAbout.addEventListener(EVENT_CLICK, () => {
       this.setTabContentAbout();
     });
   }
@@ -180,7 +177,7 @@ export class ConsentDialog extends HTMLElement {
       variant: BUTTON_DEFAULT,
     });
 
-    button.addEventListener('click', () => {
+    button.addEventListener(EVENT_CLICK, () => {
       this.setTabContentDetails();
     });
 
@@ -193,7 +190,7 @@ export class ConsentDialog extends HTMLElement {
       variant: BUTTON_PRIMARY,
     });
 
-    button.addEventListener('click', () => {
+    button.addEventListener(EVENT_CLICK, () => {
       // console.log('Povolit vše');
 
       window.CookieConsent.preferences = true;
@@ -212,7 +209,7 @@ export class ConsentDialog extends HTMLElement {
       variant: BUTTON_DEFAULT,
     });
 
-    button.addEventListener('click', () => {
+    button.addEventListener(EVENT_CLICK, () => {
       // console.log('Odmítnout vše');
 
       this.switchButtonPreferences.setChecked(false);
@@ -235,7 +232,7 @@ export class ConsentDialog extends HTMLElement {
       variant: BUTTON_PRIMARY,
     });
 
-    button.addEventListener('click', () => {
+    button.addEventListener(EVENT_CLICK, () => {
       window.CookieConsent.preferences = this.switchButtonPreferences.isChecked();
       window.CookieConsent.statistics = this.switchButtonStatistics.isChecked();
       window.CookieConsent.marketing = this.switchButtonMarketing.isChecked();

@@ -30,8 +30,7 @@ const getLocalizedUpdatedDate = (): string => {
 };
 
 const tabContentDetailsBody = (props: TabContentDefaultProps): HTMLDivElement => {
-  const body = createDivElement();
-  body.classList.add('c-d__b');
+  const body = createDivElement(['c-d__b']);
 
   Object.keys(props.sections).forEach((section: string): void => {
     body.appendChild(consentSection(props.sections[section]));
@@ -56,22 +55,27 @@ const tabContentDetailsFooter = (props: TabContentDefaultProps): HTMLDivElement 
   })
 };
 
+const tabContentDetailsUpdated = (props: TabContentDefaultProps): HTMLDivElement|undefined => {
+  const updated = createDivElement(['c-d__u']);
+  const updatedDate = getLocalizedUpdatedDate();
+
+  if (!updatedDate.length || !props.lastUpdated) {
+    return;
+  }
+
+  updated.innerHTML = props.lastUpdated.replace('%date', updatedDate);
+
+  return updated;
+};
+
 export const tabContentDetails = (props: TabContentDefaultProps): HTMLDivElement => {
-  const content = createDivElement();
-  content.classList.add('c-t-c');
+  const content = createDivElement(['c-t-c']);
+  const updated = tabContentDetailsUpdated(props);
 
-  const body = tabContentDetailsBody(props);
-  content.appendChild(body);
+  content.appendChild(tabContentDetailsBody(props));
 
-  if (props.lastUpdated) {
-    const updated = createDivElement();
-    const updatedDate = getLocalizedUpdatedDate();
-
-    if (updatedDate.length) {
-      updated.classList.add('c-d__u');
-      updated.innerHTML = props.lastUpdated.replace('%date', updatedDate);
-      content.appendChild(updated);
-    }
+  if (updated) {
+    content.appendChild(updated);
   }
 
   content.appendChild(tabContentDetailsFooter(props));

@@ -1,3 +1,4 @@
+import { EVENT_CHANGE } from '../../config';
 import { createElement, createDivElement } from '../../utils/elements';
 
 interface SwitchButtonProps {
@@ -12,23 +13,19 @@ export interface HTMLSwitchButtonElement extends HTMLDivElement {
 
 export const switchButton = (props?: SwitchButtonProps): HTMLSwitchButtonElement => {
   const content: HTMLSwitchButtonElement = createDivElement() as HTMLSwitchButtonElement;
-  const labelEl = createElement('label') as HTMLLabelElement;
-  const input = createElement('input') as HTMLInputElement;
-  const background = createDivElement();
+  const labelEl = createElement('label', ['s-b']) as HTMLLabelElement;
+  const input = createElement('input', ['s-b__i']) as HTMLInputElement;
+  const background = createDivElement(['s-b__b']);
 
-  labelEl.classList.add('s-b');
-
-  input.classList.add('s-b__i');
   input.type = 'checkbox';
   input.checked = !!props?.checked;
   input.disabled = !!props?.disabled;
 
-  background.classList.add('s-b__b');
   background.innerHTML = '<div class="s-b__p"></div>';
 
-  input.addEventListener('change', (event) => {
+  input.addEventListener(EVENT_CHANGE, (event) => {
     event.preventDefault();
-    content.dispatchEvent(new Event('change'));
+    content.dispatchEvent(new Event(EVENT_CHANGE));
   });
 
   labelEl.appendChild(input);

@@ -1,3 +1,4 @@
+import { EVENT_CLICK } from '../../config';
 import { createElement } from '../../utils/elements';
 
 interface ComponentProps {
@@ -18,8 +19,7 @@ export class ConsentTab {
 
   constructor(props: ConsentTabProps, activeCb?: () => void) {
     this.props = props;
-    this.element = createElement('button') as HTMLButtonElement;
-    this.element.classList.add('c-t');
+    this.element = createElement('button', ['c-t']) as HTMLButtonElement;
     this.activeCallBack = activeCb;
 
     this.element.innerHTML = `
@@ -60,7 +60,7 @@ export class ConsentTab {
   }
 
   private initListeners() {
-    this.element.addEventListener('click', () => {
+    this.element.addEventListener(EVENT_CLICK, () => {
       this.active = !this.active;
     });
   }

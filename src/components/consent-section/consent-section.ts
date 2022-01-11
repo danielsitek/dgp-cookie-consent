@@ -7,21 +7,16 @@ export interface ConsentSectionProps {
 }
 
 export const consentSection = (props: ConsentSectionProps): HTMLDivElement => {
-  const content = createDivElement();
-  const inner = createDivElement();
-  const header = createDivElement();
-  const perex = createDivElement();
-  const switchContainer = createDivElement();
+  const content = createDivElement(['c-s']);
+  const inner = createDivElement(['c-s__i']);
+  const header = createDivElement(['c-s__a-h']);
+  const perex = createDivElement(['c-s__a-p']);
+  const switchContainer = createDivElement(['c-s__a-s']);
 
-  content.classList.add('c-s');
-  inner.classList.add('c-s__i');
-  header.classList.add('c-s__a-h');
   header.innerHTML = `<strong>${props.title}</strong>`;
 
-  perex.classList.add('c-s__a-p');
   perex.innerHTML = props.perex;
 
-  switchContainer.classList.add('c-s__a-s');
   switchContainer.appendChild(props.switch);
 
   inner.appendChild(header);
