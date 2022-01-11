@@ -1,4 +1,12 @@
 
-export const createElement = (tagName: string) => document.createElement(tagName);
+export const createElement = (tagName: string, classes?: Array<string|null>) => {
+  const el = document.createElement(tagName);
 
-export const createDivElement = (): HTMLDivElement => createElement('div') as HTMLDivElement;
+  if (classes) {
+    el.classList.add(...classes.filter(i => i) as string[]);
+  }
+
+  return el;
+}
+
+export const createDivElement = (classes?: string[]): HTMLDivElement => createElement('div', classes) as HTMLDivElement;;

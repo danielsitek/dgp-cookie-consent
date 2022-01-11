@@ -4,7 +4,8 @@
   // box-shadow: 0 0 $spacing-4 var(--color-bw-10, $color-bw-10), 0 0 $spacing-3 var(--color-bw-10, $color-bw-10), 0 0 $spacing-2 var(--color-bw-10, $color-bw-10), 0 0 $spacing-1 var(--color-bw-10, $color-bw-10), 0 0 $spacing-05 var(--color-bw-10, $color-bw-10);
 }
 
-.consent-dialog {
+// .consent-dialog
+.c-d {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -28,18 +29,21 @@
   box-sizing: border-box;
   box-shadow: $base-shadow;
 
-  &__header {
+  // .consent-dialog__header
+  &__h {
     @extend %consent-dialog-inner-shadow;
     position: relative;
     z-index: 1;
   }
 
-  &__inner {
+  // .consent-dialog__inner
+  &__i {
     position: relative;
     display: block;
   }
 
-  &__body {
+  // .consent-dialog__body
+  &__b {
     display: block;
     padding: 0 $spacing-2;
     overflow: hidden;
@@ -52,7 +56,8 @@
     }
   }
 
-  &__updated {
+  // .consent-dialog__updated
+  &__u {
     display: block;
     padding: $spacing-2 $spacing-2;
     border-top: var(--base-line, $base-line);
@@ -64,7 +69,8 @@
     }
   }
 
-  &__footer {
+  // .consent-dialog__footer
+  &__f {
     @extend %consent-dialog-inner-shadow;
     position: relative;
     z-index: 1;

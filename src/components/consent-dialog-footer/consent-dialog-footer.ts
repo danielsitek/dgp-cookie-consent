@@ -9,16 +9,22 @@ interface ConsentTabProps extends ComponentProps {
 }
 
 export const consentDialogFooter = (props: ConsentTabProps): HTMLDivElement => {
-  const element = createDivElement();
-  element.classList.add('consent-dialog__footer');
+  let classes = [
+    'c-d__f',
+  ];
+
+  if (props.modifier) {
+    classes = [
+      ...classes,
+      ...props.modifier.split(' '),
+    ];
+  }
+
+  const element = createDivElement(classes);
 
   props.buttons.forEach((buttonElement) => {
     element.appendChild(buttonElement);
   });
-
-  if (props.modifier) {
-    element.classList.add(...props.modifier.split(' '));
-  }
 
   return element;
 };

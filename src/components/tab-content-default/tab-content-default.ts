@@ -8,12 +8,9 @@ interface TabContentDefaultProps {
 }
 
 export const tabContentDefault = (props: TabContentDefaultProps): HTMLDivElement => {
-  const content = createDivElement();
-  const body = createDivElement();
+  const content = createDivElement(['c-t-c']);
+  const body = createDivElement(['c-d__b']);
 
-  content.classList.add('consent-tab-content');
-
-  body.classList.add('consent-dialog__body');
   body.innerHTML = props.body || 'props.body';
 
   const buttons = [];

@@ -6,23 +6,28 @@ interface ComponentProps {
 
 interface ConsentButtonProps extends ComponentProps {
   label: string;
-  variant?: 'default' | 'primary';
+  variant?: 'd' | 'p';
 }
 
+export const BUTTON_DEFAULT = 'd';
+export const BUTTON_PRIMARY = 'p';
+
 export const consentButton = (props: ConsentButtonProps): HTMLButtonElement => {
-  const element = createElement('button') as HTMLButtonElement;
-
-  element.innerHTML = `<span class="consent-button__inner">${props.label}</span>`;
-
-  element.classList.add('consent-button');
-
-  if (props.variant) {
-    element.classList.add(`consent-button--${props.variant}`);
-  }
+  let classes = [
+    'c-b',
+    props.variant ? `c-b--${props.variant}` : null,
+  ];
 
   if (props.modifier) {
-    element.classList.add(...props.modifier.split(' '));
+    classes = [
+      ...classes,
+      ...props.modifier.split(' '),
+    ];
   }
+
+  const element = createElement('button', classes) as HTMLButtonElement;
+
+  element.innerHTML = `<span class="c-b__i">${props.label}</span>`;
 
   return element;
 };

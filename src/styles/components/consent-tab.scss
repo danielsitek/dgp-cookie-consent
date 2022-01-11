@@ -1,4 +1,5 @@
-.consent-tab {
+// .consent-tab
+.c-t {
   position: relative;
   display: flex;
   justify-content: center;
@@ -18,11 +19,13 @@
   user-select: none;
   appearance: button;
 
-  &__inner {
+  // .consent-tab__inner
+  &__i {
     display: block;
   }
 
-  &__line {
+  // .consent-tab__line
+  &__l {
     position: absolute;
     bottom: -1px;
     left: 50%;
@@ -37,11 +40,12 @@
     transition-property: opacity, width;
   }
 
-  &--active {
+  // .consent-tab--active
+  &--a {
     display: flex;
   }
 
-  &--active &__line {
+  &--a &__l {
     width: 100%;
     opacity: 1;
   }

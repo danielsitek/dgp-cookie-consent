@@ -1,4 +1,5 @@
-.consent-button {
+// .consent-button
+.c-b {
   display: flex;
   flex: 0 0 auto;
   justify-content: center;
@@ -18,11 +19,13 @@
   user-select: none;
   appearance: button;
 
-  &__inner {
+  // .consent-button__inner
+  &__i {
     display: flex;
   }
 
-  &--default {
+  // .consent-button--default
+  &--d {
     border: var(--button-default__border, $button-default-border);
     background-color: var(--button-default__bg-color, $button-default-bg);
     color: var(--button-default__color, $button-default-color);
@@ -37,7 +40,8 @@
     }
   }
 
-  &--primary {
+  // .consent-button--primary
+  &--p {
     border: var(--button-primary__border, $button-primary-border);
     background-color: var(--button-primary__bg-color, $button-primary-bg);
     color: var(--button-primary__color, $button-primary-color);
