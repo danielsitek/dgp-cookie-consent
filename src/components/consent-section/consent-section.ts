@@ -13,15 +13,15 @@ export const consentSection = (props: ConsentSectionProps): HTMLDivElement => {
   const perex = createDivElement();
   const switchContainer = createDivElement();
 
-  content.classList.add('consent-section');
-  inner.classList.add('consent-section__inner');
-  header.classList.add('consent-section__area-header');
+  content.classList.add('c-s');
+  inner.classList.add('c-s__i');
+  header.classList.add('c-s__a-h');
   header.innerHTML = `<strong>${props.title}</strong>`;
 
-  perex.classList.add('consent-section__area-perex');
+  perex.classList.add('c-s__a-p');
   perex.innerHTML = props.perex;
 
-  switchContainer.classList.add('consent-section__area-switch');
+  switchContainer.classList.add('c-s__a-s');
   switchContainer.appendChild(props.switch);
 
   inner.appendChild(header);

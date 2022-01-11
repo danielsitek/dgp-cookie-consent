@@ -8,3 +8,5 @@ export const INLINE_STYLES_MAIN = `__INLINE_STYLES__`;
 
 export const DIALOG_FADE_IN_DURATION = 300;
 export const DIALOG_FADE_OUT_DURATION = 300;
+
+export const DIALOG_ELEMENT_NAME = 'consent-dialog';

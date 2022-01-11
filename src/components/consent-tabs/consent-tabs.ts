@@ -10,7 +10,7 @@ interface ConsentTabsProps extends ComponentProps {
 
 export const consentTabs = (props: ConsentTabsProps): HTMLDivElement => {
   const element = createDivElement();
-  element.classList.add('consent-tabs');
+  element.classList.add('c-ts');
 
   props.tabs.forEach((tabElement) => {
     element.appendChild(tabElement);

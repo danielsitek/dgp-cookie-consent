@@ -19,12 +19,12 @@ export class ConsentTab {
   constructor(props: ConsentTabProps, activeCb?: () => void) {
     this.props = props;
     this.element = createElement('button') as HTMLButtonElement;
-    this.element.classList.add('consent-tab');
+    this.element.classList.add('c-t');
     this.activeCallBack = activeCb;
 
     this.element.innerHTML = `
-      <span class="consent-tab__inner">${props.label}</span>
-      <div class="consent-tab__line"></div>
+      <span class="c-t__i">${props.label}</span>
+      <div class="c-t__l"></div>
     `;
 
     if (this.props.modifier) {
@@ -41,13 +41,13 @@ export class ConsentTab {
 
   set active(value: boolean) {
     this.element.parentElement?.querySelectorAll('button').forEach((el) => {
-      el.classList.remove('consent-tab--active');
+      el.classList.remove('c-t--a');
     });
 
     if (value) {
-      this.element.classList.add('consent-tab--active');
+      this.element.classList.add('c-t--a');
     } else {
-      this.element.classList.remove('consent-tab--active');
+      this.element.classList.remove('c-t--a');
     }
 
     if (this.active) {
@@ -56,7 +56,7 @@ export class ConsentTab {
   }
 
   get active(): boolean {
-    return this.element.classList.contains('consent-tab--active');
+    return this.element.classList.contains('c-t--a');
   }
 
   private initListeners() {

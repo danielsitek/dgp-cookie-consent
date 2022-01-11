@@ -3,9 +3,10 @@ import './components/consent-dialog/consent-dialog';
 import { CookieConsentTranslations } from './services/translation-service';
 import { CookieConsentTheme } from './services/theme-service';
 import { createElement } from './utils/elements';
+import { DIALOG_ELEMENT_NAME } from './config';
 
 const cookieConsentModal = () => {
-  const ui = createElement('consent-dialog');
+  const ui = createElement(DIALOG_ELEMENT_NAME);
   document.body.appendChild(ui);
 };
 

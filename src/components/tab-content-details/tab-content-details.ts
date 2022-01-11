@@ -31,7 +31,7 @@ const getLocalizedUpdatedDate = (): string => {
 
 const tabContentDetailsBody = (props: TabContentDefaultProps): HTMLDivElement => {
   const body = createDivElement();
-  body.classList.add('consent-dialog__body');
+  body.classList.add('c-d__b');
 
   Object.keys(props.sections).forEach((section: string): void => {
     body.appendChild(consentSection(props.sections[section]));
@@ -58,7 +58,7 @@ const tabContentDetailsFooter = (props: TabContentDefaultProps): HTMLDivElement 
 
 export const tabContentDetails = (props: TabContentDefaultProps): HTMLDivElement => {
   const content = createDivElement();
-  content.classList.add('consent-tab-content');
+  content.classList.add('c-t-c');
 
   const body = tabContentDetailsBody(props);
   content.appendChild(body);
@@ -68,7 +68,7 @@ export const tabContentDetails = (props: TabContentDefaultProps): HTMLDivElement
     const updatedDate = getLocalizedUpdatedDate();
 
     if (updatedDate.length) {
-      updated.classList.add('consent-dialog__updated');
+      updated.classList.add('c-d__u');
       updated.innerHTML = props.lastUpdated.replace('%date', updatedDate);
       content.appendChild(updated);
     }

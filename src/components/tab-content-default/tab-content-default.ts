@@ -11,9 +11,9 @@ export const tabContentDefault = (props: TabContentDefaultProps): HTMLDivElement
   const content = createDivElement();
   const body = createDivElement();
 
-  content.classList.add('consent-tab-content');
+  content.classList.add('c-t-c');
 
-  body.classList.add('consent-dialog__body');
+  body.classList.add('c-d__b');
   body.innerHTML = props.body || 'props.body';
 
   const buttons = [];

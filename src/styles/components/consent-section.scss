@@ -1,4 +1,5 @@
-.consent-section {
+// .consent-section
+.c-s {
   display: block;
   padding: $spacing-3 0;
 
@@ -6,7 +7,8 @@
     border-top: var(--base-line, $base-line);
   }
 
-  &__inner {
+  // .consent-section__inner
+  &__i {
     display: grid;
     grid-template-columns: 1fr auto;
     grid-template-areas:
@@ -21,17 +23,20 @@
     }
   }
 
-  &__area-header {
+  // .consent-section__area-header
+  &__a-h {
     display: flex;
     grid-area: header;
     align-items: center;
   }
 
-  &__area-perex {
+  // .consent-section__area-perex
+  &__a-p {
     grid-area: perex;
   }
 
-  &__area-switch {
+  // .consent-section__area-switch
+  &__a-s {
     grid-area: switch;
   }
 }

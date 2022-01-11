@@ -22,6 +22,6 @@ export const themeService = (): ThemeServiceInterface => {
   });
 
   return {
-    themeTextContent: `.theme { ${stringified.join(' ')} }`,
+    themeTextContent: `.t { ${stringified.join(' ')} }`,
   };
 };

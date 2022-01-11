@@ -1,9 +1,9 @@
-import { DIALOG_FADE_IN_DURATION, DIALOG_FADE_OUT_DURATION, INLINE_STYLES_MAIN } from '../../config';
+import { DIALOG_ELEMENT_NAME, DIALOG_FADE_IN_DURATION, DIALOG_FADE_OUT_DURATION, INLINE_STYLES_MAIN } from '../../config';
 import { themeService } from '../../services/theme-service';
 import { translationService } from '../../services/translation-service';
 import { fadeIn, fadeOut } from '../../utils/animation';
 import { createElement, createDivElement } from '../../utils/elements';
-import { consentButton } from '../consent-button/consent-button';
+import { consentButton, BUTTON_DEFAULT, BUTTON_PRIMARY } from '../consent-button/consent-button';
 import { ConsentTab } from '../consent-tab/consent-tab';
 import { consentTabs } from '../consent-tabs/consent-tabs';
 import { HTMLSwitchButtonElement, switchButton } from '../switch-button/switch-button';
@@ -76,19 +76,19 @@ export class ConsentDialog extends HTMLElement {
     const tabButtonDetails = this.tabButtonDetails.render();
     const tabButtonAbout = this.tabButtonAbout.render();
 
-    this.mainElement.classList.add(...['consent-dialog', 'theme']);
+    this.mainElement.classList.add(...['c-d', 't']);
     this.mainElement.style.display = 'none';
 
     this.mainElement.appendChild(
       consentTabs({
         tabs: [tabButtonAgree, tabButtonDetails, tabButtonAbout],
-        modifier: 'consent-dialog__header',
+        modifier: 'c-d__h',
       }),
     );
 
     this.mainElement.appendChild(this.innerElement);
 
-    this.innerElement.classList.add('consent-dialog__inner');
+    this.innerElement.classList.add('c-d__i');
 
     tabButtonAgree.addEventListener('click', () => {
       this.setTabContentAgree();
@@ -177,7 +177,7 @@ export class ConsentDialog extends HTMLElement {
   createButtonEdit(): HTMLButtonElement {
     const button = consentButton({
       label: i18n.buttonEdit.label,
-      variant: 'default',
+      variant: BUTTON_DEFAULT,
     });
 
     button.addEventListener('click', () => {
@@ -190,7 +190,7 @@ export class ConsentDialog extends HTMLElement {
   createButtonAllowAll(): HTMLButtonElement {
     const button = consentButton({
       label: i18n.buttonAllowAll.label,
-      variant: 'primary',
+      variant: BUTTON_PRIMARY,
     });
 
     button.addEventListener('click', () => {
@@ -209,7 +209,7 @@ export class ConsentDialog extends HTMLElement {
   createButtonRejectAll(): HTMLButtonElement {
     const button = consentButton({
       label: i18n.buttonRejectAll.label,
-      variant: 'default',
+      variant: BUTTON_DEFAULT,
     });
 
     button.addEventListener('click', () => {
@@ -232,7 +232,7 @@ export class ConsentDialog extends HTMLElement {
   createButtonConfirm(): HTMLButtonElement {
     const button = consentButton({
       label: i18n.buttonConfirm.label,
-      variant: 'primary',
+      variant: BUTTON_PRIMARY,
     });
 
     button.addEventListener('click', () => {
@@ -274,7 +274,7 @@ export class ConsentDialog extends HTMLElement {
   closeModal(): void {
     setTimeout(async () => {
       await fadeOut(this.mainElement, DIALOG_FADE_OUT_DURATION);
-      const consentModal = document.querySelector('consent-dialog');
+      const consentModal = document.querySelector(DIALOG_ELEMENT_NAME);
       consentModal?.remove();
     }, 500);
   }
@@ -288,4 +288,4 @@ export class ConsentDialog extends HTMLElement {
   }
 }
 
-customElements.define('consent-dialog', ConsentDialog);
+customElements.define(DIALOG_ELEMENT_NAME, ConsentDialog);

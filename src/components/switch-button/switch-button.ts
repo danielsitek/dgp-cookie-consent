@@ -16,15 +16,15 @@ export const switchButton = (props?: SwitchButtonProps): HTMLSwitchButtonElement
   const input = createElement('input') as HTMLInputElement;
   const background = createDivElement();
 
-  labelEl.classList.add('switch-button');
+  labelEl.classList.add('s-b');
 
-  input.classList.add('switch-button__input');
+  input.classList.add('s-b__i');
   input.type = 'checkbox';
   input.checked = !!props?.checked;
   input.disabled = !!props?.disabled;
 
-  background.classList.add('switch-button__background');
-  background.innerHTML = '<div class="switch-button__point"></div>';
+  background.classList.add('s-b__b');
+  background.innerHTML = '<div class="s-b__p"></div>';
 
   input.addEventListener('change', (event) => {
     event.preventDefault();

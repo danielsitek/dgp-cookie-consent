@@ -10,7 +10,8 @@ $switch-border-radius: 1000px;
   border-radius: $switch-border-radius;
 }
 
-.switch-button {
+// .switch-button
+.s-b {
   $r: &;
   position: relative;
   display: grid;
@@ -18,7 +19,8 @@ $switch-border-radius: 1000px;
   height: $spacing-3;
   cursor: pointer;
 
-  &__input {
+  // .switch-button__input
+  &__i {
     position: absolute;
     top: 0;
     left: 0;
@@ -26,7 +28,8 @@ $switch-border-radius: 1000px;
     opacity: 0;
   }
 
-  &__background {
+  // .switch-button__background
+  &__b {
     @extend %switch-button-transition;
     @extend %switch-border-radius;
     position: relative;
@@ -44,7 +47,8 @@ $switch-border-radius: 1000px;
     }
   }
 
-  &__point {
+  // .switch-button__point
+  &__p {
     @extend %switch-button-transition;
     @extend %switch-border-radius;
     position: relative;
@@ -55,7 +59,7 @@ $switch-border-radius: 1000px;
     transform: translateX(0);
   }
 
-  &__point::before {
+  &__p::before {
     @extend %switch-border-radius;
     content: '';
     display: block;
@@ -64,17 +68,17 @@ $switch-border-radius: 1000px;
     background-color: var(--color-white, $color-white);
   }
 
-  &__input:checked ~ &__background {
+  &__i:checked ~ &__b {
     &::before {
       background-color: var(--color-primary, $color-primary);
     }
 
-    #{$r}__point {
+    #{$r}__p {
       transform: translateX(100%);
     }
   }
 
-  &__input:disabled ~ &__background {
+  &__i:disabled ~ &__b {
     opacity: $switch-disabled-opacity;
     cursor: default;
 
@@ -83,7 +87,7 @@ $switch-border-radius: 1000px;
     }
   }
 
-  &__input:disabled:checked ~ &__background {
+  &__i:disabled:checked ~ &__b {
     &::before {
       background-color: var(--color-primary, $color-primary);
     }

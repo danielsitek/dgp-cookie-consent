@@ -28,7 +28,8 @@ $t: 0.3s;
   }
 }
 
-.animate {
+// .animate
+.a {
   &.in {
     animation-name: animate-in;
     animation-duration: $t;
