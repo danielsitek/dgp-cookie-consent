@@ -1,6 +1,7 @@
-import { COOKIE_NAME, COOKIE_EXPIRATION } from '../config';
+import { COOKIE_NAME, COOKIE_EXPIRATION, CONSENT_ID_LENGTH } from '../config';
 import { getCookieByName, setCookie } from './cookies';
 import { getDateString } from './datetime';
+import { randomId } from './random-id';
 
 export interface ConsentOptions {
   necessary: boolean;
@@ -8,6 +9,7 @@ export interface ConsentOptions {
   statistics: boolean;
   marketing: boolean;
   updated: string;
+  id: string;
 }
 
 const defaultConsent = {
@@ -16,6 +18,7 @@ const defaultConsent = {
   statistics: false,
   marketing: false,
   updated: '',
+  id: '',
 };
 
 function encodeConsentData(data: ConsentOptions): string {
@@ -46,11 +49,31 @@ export function getConsent(): ConsentOptions {
   return cookieData;
 }
 
+// Backup for adding consent ID to exsisting consents.
+export function createConsentId(): ConsentOptions {
+  const consentData = getConsent();
+
+  if (!consentData.id || !consentData.id.length) {
+    consentData.id = randomId(CONSENT_ID_LENGTH);
+  }
+
+  setCookie(COOKIE_NAME, encodeConsentData(consentData), COOKIE_EXPIRATION);
+
+  return getConsent();
+}
+
 export function updateConsent(data: ConsentOptions, cb?: (consent: ConsentOptions) => void): ConsentOptions {
+  let { id } = getConsent();
+
+  if (!id || !id.length) {
+    id = randomId(CONSENT_ID_LENGTH);
+  }
+
   const consentData = {
     ...defaultConsent,
     ...data,
     updated: getDateString(),
+    id,
   };
 
   setCookie(COOKIE_NAME, encodeConsentData(consentData), COOKIE_EXPIRATION);

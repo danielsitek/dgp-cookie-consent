@@ -1,4 +1,4 @@
-import { ConsentOptions, getConsent, updateConsent } from '../utils/consent';
+import { ConsentOptions, createConsentId, getConsent, updateConsent } from '../utils/consent';
 import { dispatchEventContentUpdated } from '../utils/events';
 
 const cache: ConsentOptions = {
@@ -7,6 +7,7 @@ const cache: ConsentOptions = {
   statistics: false,
   marketing: false,
   updated: '',
+  id: '',
 };
 
 export class ConsentService {
@@ -59,6 +60,11 @@ export class ConsentService {
     return cache.updated;
   }
 
+  get id(): string {
+    this.getConsentData();
+    return cache.id;
+  }
+
   private getConsentData() {
     const consentData = getConsent();
 
@@ -67,6 +73,12 @@ export class ConsentService {
     cache.statistics = consentData.statistics;
     cache.marketing = consentData.marketing;
     cache.updated = consentData.updated;
+    cache.id = consentData.id;
+
+    // Backup for adding consent ID to exsisting consents.
+    if (cache.id === undefined && cache.updated.length) {
+      cache.id = createConsentId().id;
+    }
   }
 
   private updateConsentData() {
