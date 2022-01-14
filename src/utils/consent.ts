@@ -19,11 +19,15 @@ const defaultConsent = {
 };
 
 function encodeConsentData(data: ConsentOptions): string {
-  return btoa(encodeURIComponent(JSON.stringify(data)));
+  return encodeURIComponent(JSON.stringify(data));
 }
 
 function decodeConsentData(encodedData: string): ConsentOptions {
-  return JSON.parse(decodeURIComponent(atob(encodedData)));
+  try {
+    return JSON.parse(decodeURIComponent(encodedData));
+  } catch (e) {
+    return JSON.parse(decodeURIComponent(atob(encodedData)));
+  }
 }
 
 export function getConsent(): ConsentOptions {
