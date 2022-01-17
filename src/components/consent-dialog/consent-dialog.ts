@@ -1,7 +1,8 @@
-import { DIALOG_ELEMENT_NAME, DIALOG_FADE_IN_DURATION, DIALOG_FADE_OUT_DURATION, EVENT_CLICK, INLINE_STYLES_MAIN } from '../../config';
+import { CONSENT_TYPE_ADVANCED, CONSENT_TYPE_FULL, CONSENT_TYPE_REJECTED, DIALOG_ELEMENT_NAME, DIALOG_FADE_IN_DURATION, DIALOG_FADE_OUT_DURATION, EVENT_CLICK, INLINE_STYLES_MAIN } from '../../config';
 import { themeService } from '../../services/theme-service';
 import { translationService } from '../../services/translation-service';
 import { fadeIn, fadeOut } from '../../utils/animation';
+import { ConsentType } from '../../utils/consent';
 import { createElement, createDivElement } from '../../utils/elements';
 import { dispatchEventConsentHide, dispatchEventConsentShow } from '../../utils/events';
 import { consentButton, BUTTON_DEFAULT, BUTTON_PRIMARY } from '../consent-button/consent-button';
@@ -169,6 +170,17 @@ export class ConsentDialog extends HTMLElement {
     });
   }
 
+  updateConsentOnClick(preferences: boolean, statistics: boolean, marketing: boolean, type: ConsentType):void {
+    // Consent Update type
+    window.CookieConsent.type = type;
+
+    window.CookieConsent.preferences = preferences;
+    window.CookieConsent.statistics = statistics;
+    window.CookieConsent.marketing = marketing;
+
+    this.closeModal();
+  }
+
   createButtonEdit(): HTMLButtonElement {
     const button = consentButton({
       label: i18n.buttonEdit.label,
@@ -189,11 +201,7 @@ export class ConsentDialog extends HTMLElement {
     });
 
     button.addEventListener(EVENT_CLICK, () => {
-      window.CookieConsent.preferences = true;
-      window.CookieConsent.statistics = true;
-      window.CookieConsent.marketing = true;
-
-      this.closeModal();
+      this.updateConsentOnClick(true, true, true, CONSENT_TYPE_FULL);
     });
 
     return button;
@@ -210,11 +218,7 @@ export class ConsentDialog extends HTMLElement {
       this.switchButtonStatistics.setChecked(false);
       this.switchButtonMarketing.setChecked(false);
 
-      window.CookieConsent.preferences = false;
-      window.CookieConsent.statistics = false;
-      window.CookieConsent.marketing = false;
-
-      this.closeModal();
+      this.updateConsentOnClick(false, false, false, CONSENT_TYPE_REJECTED);
     });
 
     return button;
@@ -227,11 +231,14 @@ export class ConsentDialog extends HTMLElement {
     });
 
     button.addEventListener(EVENT_CLICK, () => {
-      window.CookieConsent.preferences = this.switchButtonPreferences.isChecked();
-      window.CookieConsent.statistics = this.switchButtonStatistics.isChecked();
-      window.CookieConsent.marketing = this.switchButtonMarketing.isChecked();
-
       this.closeModal();
+
+      this.updateConsentOnClick(
+        this.switchButtonPreferences.isChecked(),
+        this.switchButtonStatistics.isChecked(),
+        this.switchButtonMarketing.isChecked(),
+        CONSENT_TYPE_ADVANCED
+      );
     });
 
     return button;

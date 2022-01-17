@@ -25,6 +25,7 @@ Awesome one-of-a-kind Cookie Consent panel.
   - [`window.CookieConsent.necessary`](#windowcookieconsentnecessary)
   - [`window.CookieConsent.updated`](#windowcookieconsentupdated)
   - [`window.CookieConsent.id`](#windowcookieconsentid)
+  - [`window.CookieConsent.type`](#windowcookieconsenttype)
   - [Event `consent-updated`](#event-consent-updated)
   - [Event `consent-show`](#event-consent-show)
   - [Event `consent-hide`](#event-consent-hide)
@@ -406,6 +407,12 @@ Returns a ISO string formated date and time, or empty string if consent has not 
 * Returns `<string>`.
 
 Returns a unique ID of user given consent, or empty string if consent has not yet been given.
+
+### `window.CookieConsent.type`
+
+* Returns `<string>`.
+
+Returns a consent type of user given consent, or empty string if consent has not yet been given.
 
 ### Event `consent-updated`
 

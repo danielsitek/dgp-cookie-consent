@@ -10,7 +10,10 @@ export interface ConsentOptions {
   marketing: boolean;
   updated: string;
   id: string;
+  type: ConsentType;
 }
+
+export type ConsentType = 'full' | 'advanced' | 'rejected' | string;
 
 const defaultConsent = {
   necessary: true,
@@ -19,6 +22,7 @@ const defaultConsent = {
   marketing: false,
   updated: '',
   id: '',
+  type: '',
 };
 
 function encodeConsentData(data: ConsentOptions): string {

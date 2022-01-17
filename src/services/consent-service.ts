@@ -1,4 +1,4 @@
-import { ConsentOptions, createConsentId, getConsent, updateConsent } from '../utils/consent';
+import { ConsentOptions, ConsentType, createConsentId, getConsent, updateConsent } from '../utils/consent';
 import { dispatchEventConsentReady, dispatchEventConsentUpdated } from '../utils/events';
 
 const cache: ConsentOptions = {
@@ -8,6 +8,7 @@ const cache: ConsentOptions = {
   marketing: false,
   updated: '',
   id: '',
+  type: '' as ConsentType,
 };
 
 export class ConsentService {
@@ -66,6 +67,16 @@ export class ConsentService {
     return cache.id;
   }
 
+  get type(): ConsentType {
+    this.getConsentData();
+    return cache.type;
+  }
+
+  set type(value: ConsentType) {
+    cache.type = value;
+    this.updateConsentData();
+  }
+
   private getConsentData() {
     const consentData = getConsent();
 
@@ -75,6 +86,7 @@ export class ConsentService {
     cache.marketing = consentData.marketing;
     cache.updated = consentData.updated;
     cache.id = consentData.id;
+    cache.type = consentData.type || '';
 
     // Backup for adding consent ID to existing consents.
     if (cache.id === undefined && cache.updated.length) {
