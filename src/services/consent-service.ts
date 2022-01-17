@@ -1,5 +1,5 @@
 import { ConsentOptions, createConsentId, getConsent, updateConsent } from '../utils/consent';
-import { dispatchEventContentUpdated } from '../utils/events';
+import { dispatchEventConsentReady, dispatchEventConsentUpdated } from '../utils/events';
 
 const cache: ConsentOptions = {
   necessary: true,
@@ -13,6 +13,7 @@ const cache: ConsentOptions = {
 export class ConsentService {
   constructor() {
     this.getConsentData();
+    dispatchEventConsentReady();
   }
 
   get necessary(): boolean {
@@ -75,7 +76,7 @@ export class ConsentService {
     cache.updated = consentData.updated;
     cache.id = consentData.id;
 
-    // Backup for adding consent ID to exsisting consents.
+    // Backup for adding consent ID to existing consents.
     if (cache.id === undefined && cache.updated.length) {
       cache.id = createConsentId().id;
     }
@@ -83,7 +84,7 @@ export class ConsentService {
 
   private updateConsentData() {
     updateConsent(cache, () => {
-      dispatchEventContentUpdated();
+      dispatchEventConsentUpdated();
     });
   }
 }

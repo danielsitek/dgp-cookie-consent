@@ -3,6 +3,7 @@ import { themeService } from '../../services/theme-service';
 import { translationService } from '../../services/translation-service';
 import { fadeIn, fadeOut } from '../../utils/animation';
 import { createElement, createDivElement } from '../../utils/elements';
+import { dispatchEventConsentHide, dispatchEventConsentShow } from '../../utils/events';
 import { consentButton, BUTTON_DEFAULT, BUTTON_PRIMARY } from '../consent-button/consent-button';
 import { ConsentTab } from '../consent-tab/consent-tab';
 import { consentTabs } from '../consent-tabs/consent-tabs';
@@ -106,19 +107,16 @@ export class ConsentDialog extends HTMLElement {
   }
 
   setTabContentAgree(): void {
-    // console.log('Souhlas je aktivní');
     this.setTabContent(this.tabContentAgree());
     this.tabButtonAgree.active = true;
   }
 
   setTabContentDetails(): void {
-    // console.log('Detaily je aktivní');
     this.setTabContent(this.tabContentDetails());
     this.tabButtonDetails.active = true;
   }
 
   setTabContentAbout(): void {
-    // console.log('O aplikaci je aktivní');
     this.setTabContent(this.tabContentAbout());
     this.tabButtonAbout.active = true;
   }
@@ -191,8 +189,6 @@ export class ConsentDialog extends HTMLElement {
     });
 
     button.addEventListener(EVENT_CLICK, () => {
-      // console.log('Povolit vše');
-
       window.CookieConsent.preferences = true;
       window.CookieConsent.statistics = true;
       window.CookieConsent.marketing = true;
@@ -210,8 +206,6 @@ export class ConsentDialog extends HTMLElement {
     });
 
     button.addEventListener(EVENT_CLICK, () => {
-      // console.log('Odmítnout vše');
-
       this.switchButtonPreferences.setChecked(false);
       this.switchButtonStatistics.setChecked(false);
       this.switchButtonMarketing.setChecked(false);
@@ -276,12 +270,30 @@ export class ConsentDialog extends HTMLElement {
     }, 500);
   }
 
-  main(): void {
+  async main(): Promise<void> {
     this.initStyles();
     this.appendCode();
     this.setTabContentAgree();
 
-    fadeIn(this.mainElement, DIALOG_FADE_IN_DURATION);
+    await fadeIn(this.mainElement, DIALOG_FADE_IN_DURATION);
+  }
+
+  /**
+   * Connected Lifecycle Callback
+   *
+   * @link <https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks>
+   */
+  connectedCallback() {
+    dispatchEventConsentShow();
+  }
+
+  /**
+   * Disconnected Lifecycle Callback.
+   *
+   * @link <https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks>
+   */
+   disconnectedCallback() {
+    dispatchEventConsentHide();
   }
 }
 

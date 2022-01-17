@@ -1,5 +1,5 @@
 
-export const createElement = (tagName: string, classes?: Array<string|null>) => {
+export const createElement = (tagName: string, classes?: Array<string|null>): HTMLElement => {
   const el = document.createElement(tagName);
 
   if (classes) {
@@ -9,4 +9,4 @@ export const createElement = (tagName: string, classes?: Array<string|null>) => 
   return el;
 }
 
-export const createDivElement = (classes?: string[]): HTMLDivElement => createElement('div', classes) as HTMLDivElement;;
+export const createDivElement = (classes?: string[]): HTMLDivElement => createElement('div', classes) as HTMLDivElement;

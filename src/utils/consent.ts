@@ -49,7 +49,7 @@ export function getConsent(): ConsentOptions {
   return cookieData;
 }
 
-// Backup for adding consent ID to exsisting consents.
+// Backup for adding consent ID to existing consents.
 export function createConsentId(): ConsentOptions {
   const consentData = getConsent();
 

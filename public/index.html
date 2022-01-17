@@ -104,7 +104,21 @@
 
     <script>
       window.addEventListener('consent-updated', () => {
-        console.log('CookieConsent byl aktualizován');
+        console.log('CookieConsent fired event "consent-updated"');
+        console.log(CookieConsent);
+      });
+
+      window.addEventListener('consent-show', () => {
+        console.log('CookieConsent fired event "consent-show"');
+      });
+
+      window.addEventListener('consent-hide', () => {
+        console.log('CookieConsent fired event "consent-hide"');
+      });
+
+      window.addEventListener('consent-ready', () => {
+        console.log('CookieConsent fired event "consent-ready"');
+        console.log(CookieConsent);
       });
 
       window.CookieConsentTheme = {};

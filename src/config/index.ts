@@ -2,7 +2,11 @@ export const COOKIE_NAME = 'CookieConsent';
 export const COOKIE_EXPIRATION = 365;
 
 export const EVENT_CONSENT_UPDATED = 'consent-updated';
+export const EVENT_CONSENT_SHOW = 'consent-show';
+export const EVENT_CONSENT_HIDE = 'consent-hide';
+export const EVENT_CONSENT_READY = 'consent-ready';
 export const EVENT_DEBOUNCE = 300;
+export const EVENT_DEBOUNCE_FAST = 50;
 export const EVENT_CLICK = 'click';
 export const EVENT_CHANGE = 'change';
 
