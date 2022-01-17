@@ -45,7 +45,11 @@ module.exports = async function rollup() {
     .pipe(strip())
     .pipe(dest('./dist'))
     .pipe(stripDebug())
-    .pipe(terser())
+    .pipe(terser({
+      mangle: {
+        reserved: ['ConsentService'],
+      },
+    }))
     .pipe(
       rename({
         suffix: '.min',
