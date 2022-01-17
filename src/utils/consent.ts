@@ -1,7 +1,7 @@
 import { COOKIE_NAME, COOKIE_EXPIRATION, CONSENT_ID_LENGTH } from '../config';
 import { getCookieByName, setCookie } from './cookies';
 import { getDateString } from './datetime';
-import { randomId } from './random-id';
+import { randomClientId } from './random-client-id';
 
 export interface ConsentOptions {
   necessary: boolean;
@@ -54,7 +54,7 @@ export function createConsentId(): ConsentOptions {
   const consentData = getConsent();
 
   if (!consentData.id || !consentData.id.length) {
-    consentData.id = randomId(CONSENT_ID_LENGTH);
+    consentData.id = randomClientId(CONSENT_ID_LENGTH);
   }
 
   setCookie(COOKIE_NAME, encodeConsentData(consentData), COOKIE_EXPIRATION);
@@ -66,7 +66,7 @@ export function updateConsent(data: ConsentOptions, cb?: (consent: ConsentOption
   let { id } = getConsent();
 
   if (!id || !id.length) {
-    id = randomId(CONSENT_ID_LENGTH);
+    id = randomClientId(CONSENT_ID_LENGTH);
   }
 
   const consentData = {

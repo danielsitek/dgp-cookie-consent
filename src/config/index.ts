@@ -17,4 +17,5 @@ export const DIALOG_FADE_OUT_DURATION = 300;
 
 export const DIALOG_ELEMENT_NAME = 'consent-dialog';
 
-export const CONSENT_ID_LENGTH = 50;
+export const CONSENT_ID_LENGTH = 10;
+export const CONSENT_ID_TIMESTAMP_LENGTH = 10;
