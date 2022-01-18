@@ -288,7 +288,7 @@ export class ConsentDialog extends HTMLElement {
    *
    * @link <https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks>
    */
-  connectedCallback() {
+  connectedCallback(): void {
     dispatchEventConsentShow();
   }
 
@@ -297,7 +297,7 @@ export class ConsentDialog extends HTMLElement {
    *
    * @link <https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks>
    */
-   disconnectedCallback() {
+   disconnectedCallback(): void {
     dispatchEventConsentHide();
   }
 }
