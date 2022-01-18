@@ -1,9 +1,6 @@
 import { EVENT_CLICK } from '../../config';
+import { ComponentProps } from '../../utils/component-helpers';
 import { createElement } from '../../utils/elements';
-
-interface ComponentProps {
-  modifier?: string;
-}
 
 interface ConsentTabProps extends ComponentProps {
   label: string;
