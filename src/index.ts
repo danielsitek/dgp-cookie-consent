@@ -17,7 +17,7 @@ const windowCookieConsent = (): WindowCookieConsent => {
 
   const consent = new ConsentService();
 
-  if (!consent.updated.length) {
+  if (!consent.updated.length || !consent.type.length) {
     cookieConsentModal();
   }
 
