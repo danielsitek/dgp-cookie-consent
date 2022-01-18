@@ -18,25 +18,27 @@ const readCookiesStyles = () => {
   }).toString();
 };
 
+const createRollupConfig = () => ({
+  input: 'src/index.ts',
+  output: {
+    file: packageJson.main,
+    format: 'iife',
+    sourcemap: isDevelopment(),
+  },
+  plugins: [
+    resolve(),
+    typescript(),
+    replace({
+      values: {
+        __INLINE_STYLES__: readCookiesStyles(),
+      },
+      preventAssignment: true,
+    }),
+  ],
+});
+
 module.exports = async function rollup() {
-  const rollupConfig = {
-    input: 'src/index.ts',
-    output: {
-      file: packageJson.main,
-      format: 'iife',
-      sourcemap: isDevelopment(),
-    },
-    plugins: [
-      resolve(),
-      typescript(),
-      replace({
-        values: {
-          __INLINE_STYLES__: readCookiesStyles(),
-        },
-        preventAssignment: true,
-      }),
-    ],
-  };
+  const rollupConfig = createRollupConfig();
 
   return src(['index.ts'], {
     cwd: 'src',
@@ -45,7 +47,11 @@ module.exports = async function rollup() {
     .pipe(strip())
     .pipe(dest('./dist'))
     .pipe(stripDebug())
-    .pipe(terser())
+    .pipe(terser({
+      mangle: {
+        reserved: ['ConsentService'],
+      },
+    }))
     .pipe(
       rename({
         suffix: '.min',

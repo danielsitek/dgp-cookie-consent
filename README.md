@@ -24,8 +24,13 @@ Awesome one-of-a-kind Cookie Consent panel.
   - [`window.CookieConsent.statistics`](#windowcookieconsentstatistics)
   - [`window.CookieConsent.necessary`](#windowcookieconsentnecessary)
   - [`window.CookieConsent.updated`](#windowcookieconsentupdated)
+  - [`window.CookieConsent.id`](#windowcookieconsentid)
+  - [`window.CookieConsent.type`](#windowcookieconsenttype)
   - [Event `consent-updated`](#event-consent-updated)
-- [GTM Implementation](#gtm-implementation)
+  - [Event `consent-show`](#event-consent-show)
+  - [Event `consent-hide`](#event-consent-hide)
+  - [Event `consent-ready`](#event-consent-ready)
+- [GTM Implementation with custom rules](#gtm-implementation-with-custom-rules)
   - [1. Create Variables](#1-create-variables)
   - [2. Create Rules](#2-create-rules)
   - [3. Create tag](#3-create-tag)
@@ -345,7 +350,7 @@ Object to pass theme configuration to consent modal window. This needs to be pla
 
 ### `window.CookieConsentTranslations`
 
-Object to pass translation configuration to consent modal window. This needs to be placed before the consent script src tag.
+Object to pass translation to consent modal window. This needs to be placed before the consent script src tag.
 
 ### `window.CookieConsentModalOpen()`
 
@@ -390,15 +395,29 @@ Returns a boolean value of consent category.
 * Returns `<boolean>`.
 
 Returns a boolean value of consent category.
+
 ### `window.CookieConsent.updated`
 
 * Returns `<string>`.
 
 Returns a ISO string formated date and time, or empty string if consent has not yet been updated.
 
+### `window.CookieConsent.id`
+
+* Returns `<string>`.
+
+Returns a unique ID of user given consent, or empty string if consent has not yet been given.
+
+### `window.CookieConsent.type`
+
+* Returns `<string>`.
+
+Returns a consent type of user given consent, or empty string if consent has not yet been given.
+
 ### Event `consent-updated`
 
 Fires every time the consent is updated.
+
 
 **Example**:
 
@@ -408,7 +427,46 @@ window.addEventListener('consent-updated', () => {
 });
 ```
 
-## GTM Implementation
+### Event `consent-show`
+
+Fires every time the modal consent window is being shown.
+
+
+**Example**:
+
+```js
+window.addEventListener('consent-show', () => {
+  console.log('Consent window is being shown.');
+});
+```
+
+### Event `consent-hide`
+
+Fires every time the modal consent window closes.
+
+
+**Example**:
+
+```js
+window.addEventListener('consent-hide', () => {
+  console.log('Consent window closes.');
+});
+```
+
+### Event `consent-ready`
+
+Fires one time when consent script is loaded on page and ready.
+
+
+**Example**:
+
+```js
+window.addEventListener('consent-ready', () => {
+  console.log('Consent is ready.');
+});
+```
+
+## GTM Implementation with custom rules
 
 ### 1. Create Variables
 
@@ -531,16 +589,17 @@ window.addEventListener('consent-updated', () => {
       });
     });
 
+    window.addEventListener('consent-ready', function () {
+      dataLayer.push({
+        'event': 'cookieconsent_ready',
+      });
+    });
+
     (function cookiesInit() {
       var scriptEl = document.createElement('script');
-      scriptEl.src = 'https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.0.0/dist/cookies.min.js';
+      scriptEl.src = 'https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.2.0/dist/cookies.min.js';
       scriptEl.type = 'text/javascript';
       scriptEl.id = 'cookie-consent';
-      scriptEl.addEventListener('load', function cookiesInitLoad() {
-        dataLayer.push({
-          'event': 'cookieconsent_updated',
-        });
-      });
 
       document.body.appendChild(scriptEl);
     })();

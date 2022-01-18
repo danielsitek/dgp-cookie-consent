@@ -1,8 +1,10 @@
-import { DIALOG_ELEMENT_NAME, DIALOG_FADE_IN_DURATION, DIALOG_FADE_OUT_DURATION, EVENT_CLICK, INLINE_STYLES_MAIN } from '../../config';
+import { CONSENT_TYPE_ADVANCED, CONSENT_TYPE_FULL, CONSENT_TYPE_REJECTED, DIALOG_ELEMENT_NAME, DIALOG_FADE_IN_DURATION, DIALOG_FADE_OUT_DURATION, EVENT_CLICK, INLINE_STYLES_MAIN } from '../../config';
 import { themeService } from '../../services/theme-service';
 import { translationService } from '../../services/translation-service';
 import { fadeIn, fadeOut } from '../../utils/animation';
+import { ConsentType } from '../../utils/consent';
 import { createElement, createDivElement } from '../../utils/elements';
+import { dispatchEventConsentHide, dispatchEventConsentShow } from '../../utils/events';
 import { consentButton, BUTTON_DEFAULT, BUTTON_PRIMARY } from '../consent-button/consent-button';
 import { ConsentTab } from '../consent-tab/consent-tab';
 import { consentTabs } from '../consent-tabs/consent-tabs';
@@ -106,19 +108,16 @@ export class ConsentDialog extends HTMLElement {
   }
 
   setTabContentAgree(): void {
-    // console.log('Souhlas je aktivní');
     this.setTabContent(this.tabContentAgree());
     this.tabButtonAgree.active = true;
   }
 
   setTabContentDetails(): void {
-    // console.log('Detaily je aktivní');
     this.setTabContent(this.tabContentDetails());
     this.tabButtonDetails.active = true;
   }
 
   setTabContentAbout(): void {
-    // console.log('O aplikaci je aktivní');
     this.setTabContent(this.tabContentAbout());
     this.tabButtonAbout.active = true;
   }
@@ -171,6 +170,17 @@ export class ConsentDialog extends HTMLElement {
     });
   }
 
+  updateConsentOnClick(preferences: boolean, statistics: boolean, marketing: boolean, type: ConsentType):void {
+    // Consent Update type
+    window.CookieConsent.type = type;
+
+    window.CookieConsent.preferences = preferences;
+    window.CookieConsent.statistics = statistics;
+    window.CookieConsent.marketing = marketing;
+
+    this.closeModal();
+  }
+
   createButtonEdit(): HTMLButtonElement {
     const button = consentButton({
       label: i18n.buttonEdit.label,
@@ -191,13 +201,7 @@ export class ConsentDialog extends HTMLElement {
     });
 
     button.addEventListener(EVENT_CLICK, () => {
-      // console.log('Povolit vše');
-
-      window.CookieConsent.preferences = true;
-      window.CookieConsent.statistics = true;
-      window.CookieConsent.marketing = true;
-
-      this.closeModal();
+      this.updateConsentOnClick(true, true, true, CONSENT_TYPE_FULL);
     });
 
     return button;
@@ -210,17 +214,11 @@ export class ConsentDialog extends HTMLElement {
     });
 
     button.addEventListener(EVENT_CLICK, () => {
-      // console.log('Odmítnout vše');
-
       this.switchButtonPreferences.setChecked(false);
       this.switchButtonStatistics.setChecked(false);
       this.switchButtonMarketing.setChecked(false);
 
-      window.CookieConsent.preferences = false;
-      window.CookieConsent.statistics = false;
-      window.CookieConsent.marketing = false;
-
-      this.closeModal();
+      this.updateConsentOnClick(false, false, false, CONSENT_TYPE_REJECTED);
     });
 
     return button;
@@ -233,11 +231,12 @@ export class ConsentDialog extends HTMLElement {
     });
 
     button.addEventListener(EVENT_CLICK, () => {
-      window.CookieConsent.preferences = this.switchButtonPreferences.isChecked();
-      window.CookieConsent.statistics = this.switchButtonStatistics.isChecked();
-      window.CookieConsent.marketing = this.switchButtonMarketing.isChecked();
-
-      this.closeModal();
+      this.updateConsentOnClick(
+        this.switchButtonPreferences.isChecked(),
+        this.switchButtonStatistics.isChecked(),
+        this.switchButtonMarketing.isChecked(),
+        CONSENT_TYPE_ADVANCED
+      );
     });
 
     return button;
@@ -276,12 +275,30 @@ export class ConsentDialog extends HTMLElement {
     }, 500);
   }
 
-  main(): void {
+  async main(): Promise<void> {
     this.initStyles();
     this.appendCode();
     this.setTabContentAgree();
 
-    fadeIn(this.mainElement, DIALOG_FADE_IN_DURATION);
+    await fadeIn(this.mainElement, DIALOG_FADE_IN_DURATION);
+  }
+
+  /**
+   * Connected Lifecycle Callback
+   *
+   * @link <https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks>
+   */
+  connectedCallback(): void {
+    dispatchEventConsentShow();
+  }
+
+  /**
+   * Disconnected Lifecycle Callback.
+   *
+   * @link <https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks>
+   */
+   disconnectedCallback(): void {
+    dispatchEventConsentHide();
   }
 }
 

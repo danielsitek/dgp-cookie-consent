@@ -1,5 +1,5 @@
-import { ConsentOptions, getConsent, updateConsent } from '../utils/consent';
-import { dispatchEventContentUpdated } from '../utils/events';
+import { ConsentOptions, ConsentOptionsKeys, ConsentType, getConsent, updateConsent } from '../utils/consent';
+import { dispatchEventConsentReady, dispatchEventConsentUpdated } from '../utils/events';
 
 const cache: ConsentOptions = {
   necessary: true,
@@ -7,11 +7,14 @@ const cache: ConsentOptions = {
   statistics: false,
   marketing: false,
   updated: '',
+  id: '',
+  type: '',
 };
 
 export class ConsentService {
   constructor() {
     this.getConsentData();
+    dispatchEventConsentReady();
   }
 
   get necessary(): boolean {
@@ -59,19 +62,34 @@ export class ConsentService {
     return cache.updated;
   }
 
+  get id(): string {
+    this.getConsentData();
+    return cache.id;
+  }
+
+  get type(): ConsentType {
+    this.getConsentData();
+    return cache.type;
+  }
+
+  set type(value: ConsentType) {
+    cache.type = value;
+    this.updateConsentData();
+  }
+
   private getConsentData() {
     const consentData = getConsent();
 
-    cache.necessary = consentData.necessary;
-    cache.preferences = consentData.preferences;
-    cache.statistics = consentData.statistics;
-    cache.marketing = consentData.marketing;
-    cache.updated = consentData.updated;
+    const consentKeys: ConsentOptionsKeys[] = Object.keys(consentData) as ConsentOptionsKeys[];
+
+    consentKeys.forEach((key) => {
+      cache[key] = consentData[key] as never;
+    });
   }
 
   private updateConsentData() {
     updateConsent(cache, () => {
-      dispatchEventContentUpdated();
+      dispatchEventConsentUpdated();
     });
   }
 }
