@@ -13,6 +13,8 @@ export interface ConsentOptions {
   type: ConsentType;
 }
 
+export type ConsentOptionsKeys = keyof ConsentOptions;
+
 export type ConsentType = 'full' | 'advanced' | 'rejected' | string;
 
 const defaultConsent = {
@@ -41,13 +43,28 @@ export function getConsent(): ConsentOptions {
   let cookieData: ConsentOptions = defaultConsent;
 
   if (!getCookieByName(COOKIE_NAME)) {
-    setCookie(COOKIE_NAME, encodeConsentData(defaultConsent), COOKIE_EXPIRATION);
+    setCookie(COOKIE_NAME, encodeConsentData({
+      ...defaultConsent,
+      id: randomClientId(CONSENT_ID_LENGTH),
+    }), COOKIE_EXPIRATION);
+
+    return getConsent();
   }
 
   const cookieDataString = getCookieByName(COOKIE_NAME);
 
   if (cookieDataString) {
     cookieData = decodeConsentData(cookieDataString);
+  }
+
+  // Check if ID exsits, otherwise set a new ID.
+  if (!cookieData.id || !cookieData.id.length) {
+    setCookie(COOKIE_NAME, encodeConsentData({
+      ...cookieData,
+      id: randomClientId(CONSENT_ID_LENGTH),
+    }), COOKIE_EXPIRATION);
+
+    return getConsent();
   }
 
   return cookieData;
@@ -67,11 +84,7 @@ export function createConsentId(): ConsentOptions {
 }
 
 export function updateConsent(data: ConsentOptions, cb?: (consent: ConsentOptions) => void): ConsentOptions {
-  let { id } = getConsent();
-
-  if (!id || !id.length) {
-    id = randomClientId(CONSENT_ID_LENGTH);
-  }
+  const { id } = getConsent();
 
   const consentData = {
     ...defaultConsent,

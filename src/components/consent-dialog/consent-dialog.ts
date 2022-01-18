@@ -231,8 +231,6 @@ export class ConsentDialog extends HTMLElement {
     });
 
     button.addEventListener(EVENT_CLICK, () => {
-      this.closeModal();
-
       this.updateConsentOnClick(
         this.switchButtonPreferences.isChecked(),
         this.switchButtonStatistics.isChecked(),
