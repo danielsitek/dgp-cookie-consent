@@ -30,7 +30,7 @@ Awesome one-of-a-kind Cookie Consent panel.
   - [Event `consent-show`](#event-consent-show)
   - [Event `consent-hide`](#event-consent-hide)
   - [Event `consent-ready`](#event-consent-ready)
-- [GTM Implementation](#gtm-implementation)
+- [GTM Implementation with custom rules](#gtm-implementation-with-custom-rules)
   - [1. Create Variables](#1-create-variables)
   - [2. Create Rules](#2-create-rules)
   - [3. Create tag](#3-create-tag)
@@ -466,7 +466,7 @@ window.addEventListener('consent-ready', () => {
 });
 ```
 
-## GTM Implementation
+## GTM Implementation with custom rules
 
 ### 1. Create Variables
 
@@ -589,16 +589,17 @@ window.addEventListener('consent-ready', () => {
       });
     });
 
+    window.addEventListener('consent-ready', function () {
+      dataLayer.push({
+        'event': 'cookieconsent_ready',
+      });
+    });
+
     (function cookiesInit() {
       var scriptEl = document.createElement('script');
       scriptEl.src = 'https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.2.0/dist/cookies.min.js';
       scriptEl.type = 'text/javascript';
       scriptEl.id = 'cookie-consent';
-      scriptEl.addEventListener('load', function cookiesInitLoad() {
-        dataLayer.push({
-          'event': 'cookieconsent_updated',
-        });
-      });
 
       document.body.appendChild(scriptEl);
     })();

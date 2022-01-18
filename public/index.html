@@ -104,20 +104,20 @@
 
     <script>
       window.addEventListener('consent-updated', () => {
-        console.log('CookieConsent fired event "consent-updated"');
+        console.log('CookieConsent fired event "consent-updated"', (new Date()).toISOString());
         console.log(CookieConsent);
       });
 
       window.addEventListener('consent-show', () => {
-        console.log('CookieConsent fired event "consent-show"');
+        console.log('CookieConsent fired event "consent-show"', (new Date()).toISOString());
       });
 
       window.addEventListener('consent-hide', () => {
-        console.log('CookieConsent fired event "consent-hide"');
+        console.log('CookieConsent fired event "consent-hide"', (new Date()).toISOString());
       });
 
       window.addEventListener('consent-ready', () => {
-        console.log('CookieConsent fired event "consent-ready"');
+        console.log('CookieConsent fired event "consent-ready"', (new Date()).toISOString());
         console.log(CookieConsent);
       });
 
