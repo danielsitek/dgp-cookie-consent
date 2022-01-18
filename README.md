@@ -350,7 +350,7 @@ Object to pass theme configuration to consent modal window. This needs to be pla
 
 ### `window.CookieConsentTranslations`
 
-Object to pass translation configuration to consent modal window. This needs to be placed before the consent script src tag.
+Object to pass translation to consent modal window. This needs to be placed before the consent script src tag.
 
 ### `window.CookieConsentModalOpen()`
 
