@@ -73,6 +73,7 @@ export const tabContentDetails = (props: TabContentDefaultProps): HTMLDivElement
   const updated = tabContentDetailsUpdated(props);
 
   content.appendChild(tabContentDetailsBody(props));
+  content.setAttribute('role', 'tabpanel');
 
   if (updated) {
     content.appendChild(updated);

@@ -13,6 +13,8 @@ export const consentTabs = (props: ConsentTabsProps): HTMLDivElement => {
     props.modifier
   ));
 
+  element.setAttribute('role', 'tablist');
+
   props.tabs.forEach((tabElement) => {
     element.appendChild(tabElement);
   });

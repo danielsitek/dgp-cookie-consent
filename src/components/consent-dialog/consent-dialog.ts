@@ -40,7 +40,12 @@ export class ConsentDialog extends HTMLElement {
 
     this.componentStyle = createElement('style') as HTMLStyleElement;
     this.componentThemeStyle = createElement('style') as HTMLStyleElement;
+
     this.mainElement = createDivElement(['c-d', 't']);
+    this.mainElement.setAttribute('role', 'dialog');
+    this.mainElement.setAttribute('aria-modal', 'true');
+    this.mainElement.setAttribute('aria-hidden', 'false');
+
     this.innerElement = createDivElement(['c-d__i']);
 
     this.tabButtonAgree = new ConsentTab(

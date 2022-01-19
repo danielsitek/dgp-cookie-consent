@@ -23,13 +23,15 @@ export const switchButton = (props?: SwitchButtonProps): HTMLSwitchButtonElement
 
   background.innerHTML = '<div class="s-b__p"></div>';
 
-  input.addEventListener(EVENT_CHANGE, (event) => {
+  input.addEventListener(EVENT_CHANGE, (event): void => {
     event.preventDefault();
+    labelEl.setAttribute('aria-checked', `${(event.target as HTMLInputElement).checked}`);
     content.dispatchEvent(new Event(EVENT_CHANGE));
   });
 
   labelEl.appendChild(input);
   labelEl.appendChild(background);
+  labelEl.setAttribute('role', 'switch');
 
   content.appendChild(labelEl);
 
@@ -39,6 +41,7 @@ export const switchButton = (props?: SwitchButtonProps): HTMLSwitchButtonElement
 
   content.setChecked = (value) => {
     input.checked = value;
+    labelEl.setAttribute('aria-checked', `${value}`);
   };
 
   return content;

@@ -12,6 +12,7 @@ export const tabContentDefault = (props: TabContentDefaultProps): HTMLDivElement
   const body = createDivElement(['c-d__b']);
 
   body.innerHTML = props.body || 'props.body';
+  content.setAttribute('role', 'tabpanel');
 
   const buttons = [];
 

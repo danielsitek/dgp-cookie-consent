@@ -17,6 +17,7 @@ export class ConsentTab {
   constructor(props: ConsentTabProps, activeCb?: () => void) {
     this.props = props;
     this.element = createElement('button', ['c-t']) as HTMLButtonElement;
+    this.element.setAttribute('role', 'tab');
     this.activeCallBack = activeCb;
 
     this.element.innerHTML = `
@@ -39,12 +40,15 @@ export class ConsentTab {
   set active(value: boolean) {
     this.element.parentElement?.querySelectorAll('button').forEach((el) => {
       el.classList.remove('c-t--a');
+      el.setAttribute('aria-selected', 'false');
     });
 
     if (value) {
       this.element.classList.add('c-t--a');
+      this.element.setAttribute('aria-selected', 'true');
     } else {
       this.element.classList.remove('c-t--a');
+      this.element.setAttribute('aria-selected', 'false');
     }
 
     if (this.active) {
