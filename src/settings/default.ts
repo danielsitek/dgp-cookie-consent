@@ -3,11 +3,11 @@ import { CookieConsentSettings } from '../services/settings-service';
 export const defaultSettings: CookieConsentSettings = {
   // Settings for tab agree.
   tabAgree: {
-    buttonRejectAll: false,
+    showButtonRejectAll: false,
   },
 
   // Settings for tab about.
   tabAbout: {
-    buttonRejectAll: false,
+    showButtonRejectAll: false,
   },
 };

@@ -121,7 +121,7 @@ export class ConsentDialog extends HTMLElement {
     this.setTabContent(tabContentDefault({
       body: i18n.tabAgree.body,
       buttons: [
-        settings.tabAgree.buttonRejectAll ? this.createButtonRejectAll() : false,
+        settings.tabAgree.showButtonRejectAll ? this.createButtonRejectAll() : false,
         this.createButtonEdit(),
         this.createButtonAllowAll(),
       ],
@@ -139,7 +139,7 @@ export class ConsentDialog extends HTMLElement {
     this.setTabContent(tabContentDefault({
       body: i18n.tabAbout.body,
       buttons: [
-        settings.tabAbout.buttonRejectAll ? this.createButtonRejectAll() : false,
+        settings.tabAbout.showButtonRejectAll ? this.createButtonRejectAll() : false,
         this.createButtonEdit(),
         this.createButtonAllowAll(),
       ],

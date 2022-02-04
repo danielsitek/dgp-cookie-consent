@@ -1,7 +1,7 @@
 import { defaultSettings } from '../settings/default';
 
 export interface CookieConsentSettingsTab {
-  buttonRejectAll: boolean
+  showButtonRejectAll: boolean
 }
 
 export interface CookieConsentSettings {
@@ -16,13 +16,13 @@ export const settingsService = (): CookieConsentSettings => {
     // Settings for tab agree.
     tabAgree: {
       ...defaultSettings.tabAgree,
-      ...windowSettings.tabAgree,
+      ...windowSettings?.tabAgree,
     },
 
     // Settings for tab about.
     tabAbout: {
       ...defaultSettings.tabAbout,
-      ...windowSettings.tabAbout,
+      ...windowSettings?.tabAbout,
     },
   };
 };
