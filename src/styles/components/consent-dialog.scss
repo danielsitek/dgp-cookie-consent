@@ -75,16 +75,22 @@
     position: relative;
     z-index: 1;
     display: flex;
-    gap: $spacing-1;
     flex-direction: column-reverse;
     justify-content: flex-end;
     margin: 0;
     padding: $spacing-2;
     border-top: var(--base-line, $base-line);
 
+    .c-b + .c-b {
+      margin: 0 0 $spacing-1 0;
+    }
+
     @media (min-width: 600px) {
-      gap: $spacing-2;
       flex-direction: row;
+
+      .c-b + .c-b {
+        margin: 0 0 0 $spacing-2;
+      }
     }
   }
 }
