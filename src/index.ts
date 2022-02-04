@@ -4,6 +4,7 @@ import { CookieConsentTranslations } from './services/translation-service';
 import { CookieConsentTheme } from './services/theme-service';
 import { createElement } from './utils/elements';
 import { DIALOG_ELEMENT_NAME } from './config';
+import { CookieConsentSettings } from './services/settings-service';
 
 const cookieConsentModal = () => {
   const ui = createElement(DIALOG_ELEMENT_NAME);
@@ -29,6 +30,7 @@ declare global {
     CookieConsent: WindowCookieConsent;
     CookieConsentTranslations: CookieConsentTranslations;
     CookieConsentTheme: CookieConsentTheme;
+    CookieConsentSettings: CookieConsentSettings;
     CookieConsentModalOpen: () => void;
   }
 }
