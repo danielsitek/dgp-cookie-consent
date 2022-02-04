@@ -5,6 +5,7 @@ interface TabContentDefaultProps {
   body?: string;
   buttonEdit?: HTMLButtonElement;
   buttonAllowAll?: HTMLButtonElement;
+  buttons?: Array<HTMLButtonElement | boolean>;
 }
 
 export const tabContentDefault = (props: TabContentDefaultProps): HTMLDivElement => {
@@ -14,20 +15,10 @@ export const tabContentDefault = (props: TabContentDefaultProps): HTMLDivElement
   body.innerHTML = props.body || 'props.body';
   content.setAttribute('role', 'tabpanel');
 
-  const buttons = [];
-
-  if (props.buttonEdit) {
-    buttons.push(props.buttonEdit);
-  }
-
-  if (props.buttonAllowAll) {
-    buttons.push(props.buttonAllowAll);
-  }
-
   content.appendChild(body);
   content.appendChild(
     consentDialogFooter({
-      buttons,
+      buttons: props.buttons || [],
     }),
   );
 

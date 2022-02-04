@@ -2,7 +2,7 @@ import { componentClassList, ComponentProps } from '../../utils/component-helper
 import { createDivElement } from '../../utils/elements';
 
 interface ConsentTabProps extends ComponentProps {
-  buttons: HTMLButtonElement[];
+  buttons: Array<HTMLButtonElement | boolean>;
 }
 
 export const consentDialogFooter = (props: ConsentTabProps): HTMLDivElement => {
@@ -13,7 +13,11 @@ export const consentDialogFooter = (props: ConsentTabProps): HTMLDivElement => {
     props.modifier
   ));
 
-  props.buttons.forEach((buttonElement) => {
+  props.buttons.filter(e => e).forEach((buttonElement) => {
+    if (typeof buttonElement === 'boolean') {
+      return;
+    }
+
     element.appendChild(buttonElement);
   });
 

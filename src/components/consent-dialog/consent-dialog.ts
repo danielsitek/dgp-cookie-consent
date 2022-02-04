@@ -1,4 +1,5 @@
 import { CONSENT_TYPE_ADVANCED, CONSENT_TYPE_FULL, CONSENT_TYPE_REJECTED, DIALOG_ELEMENT_NAME, DIALOG_FADE_IN_DURATION, DIALOG_FADE_OUT_DURATION, EVENT_CLICK, INLINE_STYLES_MAIN } from '../../config';
+import { settingsService } from '../../services/settings-service';
 import { themeService } from '../../services/theme-service';
 import { translationService } from '../../services/translation-service';
 import { fadeIn, fadeOut } from '../../utils/animation';
@@ -13,6 +14,7 @@ import { tabContentDefault } from '../tab-content-default/tab-content-default';
 import { tabContentDetails } from '../tab-content-details/tab-content-details';
 
 const i18n = translationService();
+const settings = settingsService();
 
 export class ConsentDialog extends HTMLElement {
   private componentStyle: HTMLStyleElement;
@@ -118,9 +120,13 @@ export class ConsentDialog extends HTMLElement {
   setTabContentAgree(): void {
     this.setTabContent(tabContentDefault({
       body: i18n.tabAgree.body,
-      buttonEdit: this.createButtonEdit(),
-      buttonAllowAll: this.createButtonAllowAll(),
+      buttons: [
+        settings.tabAgree.buttonRejectAll ? this.createButtonRejectAll() : false,
+        this.createButtonEdit(),
+        this.createButtonAllowAll(),
+      ],
     }));
+
     this.tabButtonAgree.active = true;
   }
 
@@ -132,9 +138,13 @@ export class ConsentDialog extends HTMLElement {
   setTabContentAbout(): void {
     this.setTabContent(tabContentDefault({
       body: i18n.tabAbout.body,
-      buttonEdit: this.createButtonEdit(),
-      buttonAllowAll: this.createButtonAllowAll(),
+      buttons: [
+        settings.tabAbout.buttonRejectAll ? this.createButtonRejectAll() : false,
+        this.createButtonEdit(),
+        this.createButtonAllowAll(),
+      ],
     }));
+
     this.tabButtonAbout.active = true;
   }
 
@@ -144,8 +154,10 @@ export class ConsentDialog extends HTMLElement {
     this.switchButtonMarketing.setChecked(window.CookieConsent.marketing);
 
     return tabContentDetails({
-      buttonRejectAll: this.createButtonRejectAll(),
-      buttonConfirm: this.createButtonConfirm(),
+      buttons: [
+        this.createButtonRejectAll(),
+        this.createButtonConfirm(),
+      ],
       lastUpdated: i18n.lastUpdated,
       sections: {
         necessary: {
