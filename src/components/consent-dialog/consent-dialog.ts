@@ -67,10 +67,13 @@ export class ConsentDialog extends HTMLElement {
       },
     );
 
-    this.switchButtonNecessary = this.createSwitchNecessary();
-    this.switchButtonPreferences = this.createSwitchPreferences();
-    this.switchButtonStatistics = this.createSwitchStatistics();
-    this.switchButtonMarketing = this.createSwitchMarketing();
+    this.switchButtonNecessary = switchButton({
+      checked: true,
+      disabled: true,
+    });
+    this.switchButtonPreferences = switchButton();
+    this.switchButtonStatistics = switchButton();
+    this.switchButtonMarketing = switchButton();
 
     this.main();
   }
@@ -113,7 +116,11 @@ export class ConsentDialog extends HTMLElement {
   }
 
   setTabContentAgree(): void {
-    this.setTabContent(this.tabContentAgree());
+    this.setTabContent(tabContentDefault({
+      body: i18n.tabAgree.body,
+      buttonEdit: this.createButtonEdit(),
+      buttonAllowAll: this.createButtonAllowAll(),
+    }));
     this.tabButtonAgree.active = true;
   }
 
@@ -123,16 +130,12 @@ export class ConsentDialog extends HTMLElement {
   }
 
   setTabContentAbout(): void {
-    this.setTabContent(this.tabContentAbout());
-    this.tabButtonAbout.active = true;
-  }
-
-  tabContentAgree(): HTMLDivElement {
-    return tabContentDefault({
-      body: i18n.tabAgree.body,
+    this.setTabContent(tabContentDefault({
+      body: i18n.tabAbout.body,
       buttonEdit: this.createButtonEdit(),
       buttonAllowAll: this.createButtonAllowAll(),
-    });
+    }));
+    this.tabButtonAbout.active = true;
   }
 
   tabContentDetails(): HTMLDivElement {
@@ -162,16 +165,6 @@ export class ConsentDialog extends HTMLElement {
           switch: this.switchButtonMarketing,
         },
       },
-    });
-  }
-
-  tabContentAbout(): HTMLDivElement {
-    const body = i18n.tabAbout.body;
-
-    return tabContentDefault({
-      body,
-      buttonEdit: this.createButtonEdit(),
-      buttonAllowAll: this.createButtonAllowAll(),
     });
   }
 
@@ -249,25 +242,6 @@ export class ConsentDialog extends HTMLElement {
     });
 
     return button;
-  }
-
-  createSwitchNecessary(): HTMLSwitchButtonElement {
-    return switchButton({
-      checked: true,
-      disabled: true,
-    });
-  }
-
-  createSwitchStatistics(): HTMLSwitchButtonElement {
-    return switchButton();
-  }
-
-  createSwitchMarketing(): HTMLSwitchButtonElement {
-    return switchButton();
-  }
-
-  createSwitchPreferences(): HTMLSwitchButtonElement {
-    return switchButton();
   }
 
   appendCode(): void {
