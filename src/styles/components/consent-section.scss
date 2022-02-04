@@ -15,12 +15,6 @@
       'header switch'
       'perex perex';
     gap: $spacing-2 $spacing-3;
-
-    @media (min-width: 600px) {
-      grid-template-areas:
-        'header header'
-        'perex switch';
-    }
   }
 
   // .consent-section__area-header
@@ -38,5 +32,13 @@
   // .consent-section__area-switch
   &__a-s {
     grid-area: switch;
+  }
+
+  @media ($md-up) {
+    &__i {
+      grid-template-areas:
+        'header header'
+        'perex switch';
+    }
   }
 }
