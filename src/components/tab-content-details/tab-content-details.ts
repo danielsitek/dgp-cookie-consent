@@ -15,6 +15,7 @@ interface TabContentDefaultProps {
   buttonRejectAll?: HTMLButtonElement;
   buttonConfirm?: HTMLButtonElement;
   sections: TabContentDefaultsectionsProps;
+  buttons?: Array<HTMLButtonElement | boolean>;
 }
 
 const i18n = translationService();
@@ -37,22 +38,6 @@ const tabContentDetailsBody = (props: TabContentDefaultProps): HTMLDivElement =>
   });
 
   return body;
-};
-
-const tabContentDetailsFooter = (props: TabContentDefaultProps): HTMLDivElement => {
-  const buttons = [];
-
-  if (props.buttonRejectAll) {
-    buttons.push(props.buttonRejectAll);
-  }
-
-  if (props.buttonConfirm) {
-    buttons.push(props.buttonConfirm);
-  }
-
-  return consentDialogFooter({
-    buttons,
-  })
 };
 
 const tabContentDetailsUpdated = (props: TabContentDefaultProps): HTMLDivElement|undefined => {
@@ -79,7 +64,9 @@ export const tabContentDetails = (props: TabContentDefaultProps): HTMLDivElement
     content.appendChild(updated);
   }
 
-  content.appendChild(tabContentDetailsFooter(props));
+  content.appendChild(consentDialogFooter({
+    buttons: props.buttons || [],
+  }));
 
   return content;
 };
