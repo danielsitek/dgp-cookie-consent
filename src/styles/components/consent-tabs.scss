@@ -6,7 +6,7 @@
   padding: 0 $spacing-2;
   border-bottom: var(--base-line, $base-line);
 
-  @media (min-width: 600px) {
+  @media ($md-up) {
     gap: $spacing-3;
     padding: 0 $spacing-5;
   }

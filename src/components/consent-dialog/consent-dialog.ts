@@ -190,6 +190,7 @@ export class ConsentDialog extends HTMLElement {
     const button = consentButton({
       label: i18n.buttonEdit.label,
       variant: BUTTON_DEFAULT,
+      modifier: 'c-d__f-b',
     });
 
     button.addEventListener(EVENT_CLICK, () => {
@@ -203,6 +204,7 @@ export class ConsentDialog extends HTMLElement {
     const button = consentButton({
       label: i18n.buttonAllowAll.label,
       variant: BUTTON_PRIMARY,
+      modifier: 'c-d__f-b',
     });
 
     button.addEventListener(EVENT_CLICK, () => {
@@ -216,6 +218,7 @@ export class ConsentDialog extends HTMLElement {
     const button = consentButton({
       label: i18n.buttonRejectAll.label,
       variant: BUTTON_DEFAULT,
+      modifier: 'c-d__f-b',
     });
 
     button.addEventListener(EVENT_CLICK, () => {
@@ -233,6 +236,7 @@ export class ConsentDialog extends HTMLElement {
     const button = consentButton({
       label: i18n.buttonConfirm.label,
       variant: BUTTON_PRIMARY,
+      modifier: 'c-d__f-b',
     });
 
     button.addEventListener(EVENT_CLICK, () => {
