@@ -9,6 +9,7 @@ import { CookieConsentTheme } from '../services/theme-service';
   'base-line': '1px solid #d0d0d0',
   'base-font-family': 'sans-serif',
   'border-radius': '6px',
+  'button-border-radius': '6px',
 
   'color-grey': '#d6d6d6',
   'color-primary': '#f8c132',

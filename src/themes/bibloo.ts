@@ -3,6 +3,7 @@ import { CookieConsentTheme } from '../services/theme-service';
 export const themeBibloo: CookieConsentTheme = {
   'base-color': '#3c3c3c',
   'border-radius': '0',
+  'button-border-radius': '0',
 
   'color-primary': '#000000',
 

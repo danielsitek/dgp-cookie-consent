@@ -2,6 +2,7 @@ import { CookieConsentTheme } from '../services/theme-service';
 
 export const themeUrban: CookieConsentTheme = {
   'border-radius': '0',
+  'button-border-radius': '0',
 
   'color-primary': '#cfad69',
 

@@ -7,7 +7,7 @@
   min-height: $spacing-6;
   margin: 0;
   padding: $spacing-05 $spacing-1;
-  border-radius: var(--border-radius, $base-border-radius);
+  border-radius: var(--button-border-radius, $base-button-border-radius);
   font-family: inherit;
   font-weight: 600;
   font-size: 100%;
