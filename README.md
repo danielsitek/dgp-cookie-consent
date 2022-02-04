@@ -15,9 +15,11 @@ Awesome one-of-a-kind Cookie Consent panel.
 - [Translations](#translations)
 - [Theme Customisation](#theme-customisation)
   - [Predefined themes](#predefined-themes)
+- [Settings](#settings)
 - [API Methods](#api-methods)
   - [`window.CookieConsentTheme`](#windowcookieconsenttheme)
   - [`window.CookieConsentTranslations`](#windowcookieconsenttranslations)
+  - [`window.CookieConsentSettings`](#windowcookieconsentsettings)
   - [`window.CookieConsentModalOpen()`](#windowcookieconsentmodalopen)
   - [`window.CookieConsent.marketing`](#windowcookieconsentmarketing)
   - [`window.CookieConsent.preferences`](#windowcookieconsentpreferences)
@@ -141,6 +143,7 @@ window.CookieConsentTheme = {
   'base-line': '1px solid #d0d0d0',
   'base-font-family': 'sans-serif',
   'border-radius': '6px',
+  'button-border-radius': '6px',
 
   'color-grey': '#d6d6d6',
   'color-primary': '#f8c132',
@@ -213,6 +216,7 @@ window.CookieConsentTheme = {
   ```js
   window.CookieConsentTheme = {
     'border-radius': '0',
+    'button-border-radius': '0',
 
     'color-primary': '#cfad69',
 
@@ -243,6 +247,7 @@ window.CookieConsentTheme = {
   window.CookieConsentTheme = {
     'base-color': '#3c3c3c',
     'border-radius': '0',
+    'button-border-radius': '0',
 
     'color-primary': '#000000',
 
@@ -265,6 +270,30 @@ window.CookieConsentTheme = {
   ```
   </details>
 
+## Settings
+
+You can set few settings options for Cookie Consent.
+
+```js
+window.CookieConsentSettings = {
+  tabAgree: {
+    showButtonRejectAll: true,
+  },
+  tabAbout: {
+    showButtonRejectAll: true,
+  },
+};
+```
+
+Here is the complete list of setting options:
+
+
+| Property | Value | description |
+| --- | --- | --- |
+| `tabAgree.showButtonRejectAll` | `boolean` | Enable reject all button in first tab. Default value is `false`. |
+| `tabAbout.showButtonRejectAll` | `boolean` | Enable reject all button in last tab. Default value is `false`. |
+
+
 ## API Methods
 
 ### `window.CookieConsentTheme`
@@ -274,6 +303,10 @@ Object to pass theme configuration to consent modal window. This needs to be pla
 ### `window.CookieConsentTranslations`
 
 Object to pass translation to consent modal window. This needs to be placed before the consent script src tag.
+
+### `window.CookieConsentSettings`
+
+Object to pass settings to consent modal window. This needs to be placed before the consent script src tag.
 
 ### `window.CookieConsentModalOpen()`
 
@@ -505,6 +538,9 @@ window.addEventListener('consent-ready', () => {
 
     // Optional: add own theme
     // window.CookieConsentTheme = {};
+
+    // Optional: add own theme
+    // window.CookieConsentSettings = {};
 
     window.addEventListener('consent-updated', function consentUpdatedListener() {
       dataLayer.push({
