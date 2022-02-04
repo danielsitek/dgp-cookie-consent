@@ -39,19 +39,22 @@ function decodeConsentData(encodedData: string): ConsentOptions {
   }
 }
 
+function createConsent(data: ConsentOptions): ConsentOptions {
+  setCookie(COOKIE_NAME, encodeConsentData({
+    ...data,
+    id: randomClientId(CONSENT_ID_LENGTH),
+  }), COOKIE_EXPIRATION);
+
+  return getConsent();
+}
+
 export function getConsent(): ConsentOptions {
-  let cookieData: ConsentOptions = defaultConsent;
-
   if (!getCookieByName(COOKIE_NAME)) {
-    setCookie(COOKIE_NAME, encodeConsentData({
-      ...defaultConsent,
-      id: randomClientId(CONSENT_ID_LENGTH),
-    }), COOKIE_EXPIRATION);
-
-    return getConsent();
+    return createConsent(defaultConsent);
   }
 
   const cookieDataString = getCookieByName(COOKIE_NAME);
+  let cookieData: ConsentOptions = defaultConsent;
 
   if (cookieDataString) {
     cookieData = decodeConsentData(cookieDataString);
@@ -59,12 +62,7 @@ export function getConsent(): ConsentOptions {
 
   // Check if ID exsits, otherwise set a new ID.
   if (!cookieData.id || !cookieData.id.length) {
-    setCookie(COOKIE_NAME, encodeConsentData({
-      ...cookieData,
-      id: randomClientId(CONSENT_ID_LENGTH),
-    }), COOKIE_EXPIRATION);
-
-    return getConsent();
+    return createConsent(cookieData);
   }
 
   return cookieData;
