@@ -21,6 +21,7 @@ $switch-border-radius: 1000px;
 
   // .switch-button__input
   &__i {
+    @extend %switch-border-radius;
     position: absolute;
     top: 0;
     left: 0;
@@ -31,6 +32,7 @@ $switch-border-radius: 1000px;
     margin: 0;
     padding: 0;
     border: 0 none;
+    background: transparent;
     appearance: none;
   }
 
