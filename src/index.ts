@@ -7,6 +7,10 @@ import { DIALOG_ELEMENT_NAME } from './config';
 import { CookieConsentSettings } from './services/settings-service';
 
 const cookieConsentModal = () => {
+  if (document.querySelectorAll(DIALOG_ELEMENT_NAME).length) {
+    return;
+  }
+
   const ui = createElement(DIALOG_ELEMENT_NAME);
   document.body.appendChild(ui);
 };
