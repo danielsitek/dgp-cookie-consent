@@ -3,6 +3,7 @@ const { ENV_DEVELOPMENT, ENV_PRODUCTION } = require('./tasks/helpers/config');
 const scss = require('./tasks/scss');
 const watch = require('./tasks/watch');
 const rollup = require('./tasks/rollup');
+const rollupGtm = require('./tasks/rollup-gtm');
 const lintJs = require('./tasks/lint-js');
 const lintScss = require('./tasks/lint-scss');
 
@@ -20,6 +21,7 @@ const build = function build(done) {
     styles,
     lintJs,
     rollup,
+    rollupGtm,
   )(done);
 };
 
@@ -43,6 +45,7 @@ module.exports = {
   prod,
   default: dev,
   rollup,
+  rollupGtm,
   lintJs,
   styles,
 }
