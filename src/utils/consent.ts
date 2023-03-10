@@ -3,11 +3,14 @@ import { getCookieByName, setCookie } from './cookies';
 import { getDateString } from './datetime';
 import { randomClientId } from './random-client-id';
 
-export interface ConsentOptions {
+export interface ConsentRules {
   necessary: boolean;
   preferences: boolean;
   statistics: boolean;
   marketing: boolean;
+}
+
+export interface ConsentOptions extends ConsentRules {
   updated: string;
   id: string;
   type: ConsentType;
@@ -40,10 +43,14 @@ function decodeConsentData(encodedData: string): ConsentOptions {
 }
 
 function createConsent(data: ConsentOptions): ConsentOptions {
-  setCookie(COOKIE_NAME, encodeConsentData({
-    ...data,
-    id: randomClientId(CONSENT_ID_LENGTH),
-  }), COOKIE_EXPIRATION);
+  setCookie(
+    COOKIE_NAME,
+    encodeConsentData({
+      ...data,
+      id: randomClientId(CONSENT_ID_LENGTH),
+    }),
+    COOKIE_EXPIRATION,
+  );
 
   return getConsent();
 }

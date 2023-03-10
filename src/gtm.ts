@@ -1,42 +1,19 @@
-// Constants
-var DENIED = 'denied';
-var GRANTED = 'granted';
+import { DENIED, EVENT_CONSENT_HIDE, EVENT_CONSENT_READY, EVENT_CONSENT_SHOW, EVENT_CONSENT_UPDATED, GRANTED } from './config';
+import { dataLayerPush } from './utils/data-layer-push';
+import { readConsent } from './utils/read-consent';
+
+declare global {
+  interface Window {
+    dataLayer: unknown[];
+  }
+}
 
 // DataLayer init.
 window.dataLayer = window.dataLayer || [];
 
-// GTM push fn.
-function dataLayerPush() {
-  window.dataLayer.push(arguments);
-}
-
-// Simple CookieConsent reader with fallback to defaults.
-function readConsent() {
-  try {
-    return JSON.parse(
-      decodeURIComponent(
-        document.cookie
-          .split(';')
-          .filter(function (i) {
-            return i.trim().includes('CookieConsent=');
-          })[0]
-          .replace('CookieConsent=', '')
-          .trim(),
-      ),
-    );
-  } catch (e) {
-    return {
-      necessary: true,
-      marketing: false,
-      preferences: false,
-      statistics: false,
-    };
-  }
-}
-
 // SET DEFAULT CONSENT
 // ===
-var defaultConsent = readConsent();
+const defaultConsent = readConsent();
 
 dataLayerPush('consent', 'default', {
   ad_storage: defaultConsent.marketing ? GRANTED : DENIED,
@@ -50,18 +27,15 @@ window.dataLayer.push({
   event: 'cookie_consent_default',
 });
 
-// HANDLE COOKIE CONSENT PANEL
-// ===
-
 // Send event to dataLayer when dgp-cookie-consent is loaded and initializedocument.
-window.addEventListener('consent-ready', function () {
+window.addEventListener(EVENT_CONSENT_READY, function () {
   window.dataLayer.push({
     event: 'cookie_consent_ready',
   });
 });
 
 // Send updated consent with actual consent options.
-window.addEventListener('consent-updated', function () {
+window.addEventListener(EVENT_CONSENT_UPDATED, function () {
   // GTM consent
   dataLayerPush('consent', 'update', {
     ad_storage: window.CookieConsent.marketing ? GRANTED : DENIED,
@@ -82,14 +56,14 @@ window.addEventListener('consent-updated', function () {
 });
 
 // Send event to dataLayer on consent window open
-window.addEventListener('consent-show', function () {
+window.addEventListener(EVENT_CONSENT_SHOW, function () {
   window.dataLayer.push({
     event: 'cookie_consent_bar_show',
   });
 });
 
 // Send event to dataLayer on consent window close.
-window.addEventListener('consent-hide', function () {
+window.addEventListener(EVENT_CONSENT_HIDE, function () {
   window.dataLayer.push({
     event: 'cookie_consent_bar_hide',
   });
@@ -127,7 +101,7 @@ window.CookieConsentSettings = window.CookieConsentSettings || {};
 
 // COOKIE CONSENT PANEL INITIALIZATION
 // ===
-var scriptEl = document.createElement('script');
+const scriptEl = document.createElement('script');
 scriptEl.src = 'https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.4.0/dist/cookies.min.js';
 scriptEl.type = 'text/javascript';
 scriptEl.id = 'cookie-consent';

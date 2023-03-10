@@ -25,3 +25,6 @@ export const CONSENT_ID_TIMESTAMP_LENGTH = 10;
 export const CONSENT_TYPE_FULL: ConsentType = 'full';
 export const CONSENT_TYPE_ADVANCED: ConsentType = 'advanced';
 export const CONSENT_TYPE_REJECTED: ConsentType = 'rejected';
+
+export const DENIED = 'denied';
+export const GRANTED = 'granted';
