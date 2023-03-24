@@ -1,6 +1,6 @@
 import { DENIED, EVENT_CONSENT_HIDE, EVENT_CONSENT_READY, EVENT_CONSENT_SHOW, EVENT_CONSENT_UPDATED, GRANTED } from './config';
 import { dataLayerPush } from './utils/data-layer-push';
-import { readConsent } from './utils/read-consent';
+import { getDefaultConsent } from './utils/read-consent';
 
 declare global {
   interface Window {
@@ -13,7 +13,7 @@ window.dataLayer = window.dataLayer || [];
 
 // SET DEFAULT CONSENT
 // ===
-const defaultConsent = readConsent();
+const defaultConsent = getDefaultConsent();
 
 dataLayerPush('consent', 'default', {
   ad_storage: defaultConsent.marketing ? GRANTED : DENIED,
@@ -23,13 +23,15 @@ dataLayerPush('consent', 'default', {
   security_storage: GRANTED,
 });
 
-window.dataLayer.push({
+// window.dataLayer.push({
+dataLayerPush({
   event: 'cookie_consent_default',
 });
 
 // Send event to dataLayer when dgp-cookie-consent is loaded and initializedocument.
 window.addEventListener(EVENT_CONSENT_READY, function () {
-  window.dataLayer.push({
+  // window.dataLayer.push({
+  dataLayerPush({
     event: 'cookie_consent_ready',
   });
 });
@@ -46,7 +48,8 @@ window.addEventListener(EVENT_CONSENT_UPDATED, function () {
   });
 
   // Custom consent from document
-  window.dataLayer.push({
+  // window.dataLayer.push({
+  dataLayerPush({
     event: 'cookie_consent_update',
     type: window.CookieConsent.type,
     personalization_storage: window.CookieConsent.preferences ? GRANTED : DENIED,
@@ -57,14 +60,16 @@ window.addEventListener(EVENT_CONSENT_UPDATED, function () {
 
 // Send event to dataLayer on consent window open
 window.addEventListener(EVENT_CONSENT_SHOW, function () {
-  window.dataLayer.push({
+  // window.dataLayer.push({
+  dataLayerPush({
     event: 'cookie_consent_bar_show',
   });
 });
 
 // Send event to dataLayer on consent window close.
 window.addEventListener(EVENT_CONSENT_HIDE, function () {
-  window.dataLayer.push({
+  // window.dataLayer.push({
+  dataLayerPush({
     event: 'cookie_consent_bar_hide',
   });
 });
@@ -105,5 +110,6 @@ const scriptEl = document.createElement('script');
 scriptEl.src = 'https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.4.0/dist/cookies.min.js';
 scriptEl.type = 'text/javascript';
 scriptEl.id = 'cookie-consent';
+scriptEl.defer = true;
 
 document.body.appendChild(scriptEl);

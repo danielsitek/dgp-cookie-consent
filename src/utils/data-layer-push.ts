@@ -1,4 +1,10 @@
 export function dataLayerPush(...args: unknown[]) {
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push(...args);
+
+  if (args.length === 1) {
+    window.dataLayer.push(args[0]);
+    return;
+  }
+
+  window.dataLayer.push(args);
 }
