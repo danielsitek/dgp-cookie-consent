@@ -8,9 +8,6 @@ declare global {
   }
 }
 
-// DataLayer init.
-window.dataLayer = window.dataLayer || [];
-
 // SET DEFAULT CONSENT
 // ===
 const defaultConsent = getDefaultConsent();
@@ -48,7 +45,6 @@ window.addEventListener(EVENT_CONSENT_UPDATED, function () {
   });
 
   // Custom consent from document
-  // window.dataLayer.push({
   dataLayerPush({
     event: 'cookie_consent_update',
     type: window.CookieConsent.type,
@@ -60,7 +56,6 @@ window.addEventListener(EVENT_CONSENT_UPDATED, function () {
 
 // Send event to dataLayer on consent window open
 window.addEventListener(EVENT_CONSENT_SHOW, function () {
-  // window.dataLayer.push({
   dataLayerPush({
     event: 'cookie_consent_bar_show',
   });
@@ -68,7 +63,6 @@ window.addEventListener(EVENT_CONSENT_SHOW, function () {
 
 // Send event to dataLayer on consent window close.
 window.addEventListener(EVENT_CONSENT_HIDE, function () {
-  // window.dataLayer.push({
   dataLayerPush({
     event: 'cookie_consent_bar_hide',
   });
@@ -107,7 +101,7 @@ window.CookieConsentSettings = window.CookieConsentSettings || {};
 // COOKIE CONSENT PANEL INITIALIZATION
 // ===
 const scriptEl = document.createElement('script');
-scriptEl.src = 'https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.4.0/dist/cookies.min.js';
+scriptEl.src = 'https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@latest/dist/cookies.min.js';
 scriptEl.type = 'text/javascript';
 scriptEl.id = 'cookie-consent';
 scriptEl.defer = true;
