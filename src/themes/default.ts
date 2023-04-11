@@ -42,3 +42,5 @@ import { CookieConsentTheme } from '../services/theme-service';
  */
 
 export const themeDefault: CookieConsentTheme = {};
+
+export const themeDefaultDark: CookieConsentTheme = {};

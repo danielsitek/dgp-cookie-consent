@@ -18,7 +18,7 @@ const cookieConsentModal = () => {
 type WindowCookieConsent = ConsentService;
 
 const windowCookieConsent = (): WindowCookieConsent => {
-  console.log('Hello from windowCookieConsent', (new Date()).toISOString());
+  console.log('Hello from windowCookieConsent', new Date().toISOString());
 
   const consent = new ConsentService();
 
@@ -34,6 +34,7 @@ declare global {
     CookieConsent: WindowCookieConsent;
     CookieConsentTranslations: CookieConsentTranslations;
     CookieConsentTheme: CookieConsentTheme;
+    CookieConsentThemeDark: CookieConsentTheme;
     CookieConsentSettings: CookieConsentSettings;
     CookieConsentModalOpen: () => void;
   }
