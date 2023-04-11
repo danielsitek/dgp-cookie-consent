@@ -25,6 +25,7 @@
     "@rollup/plugin-node-resolve": "^13.1.1",
     "@rollup/plugin-replace": "^3.0.0",
     "@rollup/plugin-typescript": "^8.3.0",
+    "@ronilaukkarinen/gulp-stylelint": "^14.1.1",
     "@types/node": "^16.11.13",
     "@typescript-eslint/eslint-plugin": "^5.7.0",
     "@typescript-eslint/parser": "^5.7.0",
@@ -41,7 +42,6 @@
     "gulp-sass": "^5.0.0",
     "gulp-strip-comments": "^2.5.2",
     "gulp-strip-debug": "^4.0.0",
-    "gulp-stylelint": "^13.0.0",
     "gulp-terser": "^2.1.0",
     "http-server": "^14.0.0",
     "postcss": "^8.4.5",
@@ -57,12 +57,11 @@
     "typescript": "^4.5.4"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "browserslist": [
     "last 3 versions",
     "ie >= 11"
   ],
-  "private": "true",
-  "dependencies": {}
+  "private": "true"
 }
