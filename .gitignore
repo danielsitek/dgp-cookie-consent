@@ -1,3 +1,4 @@
 node_modules
 dist/*
 !dist/cookies.min.js
+!dist/cookies-gtm.min.js
