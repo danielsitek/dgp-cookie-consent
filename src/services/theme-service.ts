@@ -56,14 +56,14 @@ export const themeService = (): ThemeServiceInterface => {
   };
 
   const baseThemeVars = Object.keys(composedBaseTheme).map((key) => {
-    return `--${key}: ${composedBaseTheme[key]};`;
+    return `--${key}:${composedBaseTheme[key]};`;
   });
 
   const darkThemeVars = Object.keys(composedDarkTheme).map((key) => {
-    return `--${key}: ${composedDarkTheme[key]};`;
+    return `--${key}:${composedDarkTheme[key]};`;
   });
 
   return {
-    themeTextContent: `.t { ${baseThemeVars.join(' ')} } @media (prefers-color-scheme: dark) { .t { ${darkThemeVars.join(' ')} }}`,
+    themeTextContent: `.t{${baseThemeVars.join('')}}@media(prefers-color-scheme: dark){.t{${darkThemeVars.join('')}}}`,
   };
 };
