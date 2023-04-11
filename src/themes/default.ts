@@ -8,6 +8,7 @@ import { CookieConsentTheme } from '../services/theme-service';
   'base-font-size': '15px',
   'base-line': '1px solid #d0d0d0',
   'base-font-family': 'sans-serif',
+  'base-shadow': '0 1px 6px rgba(5,27,44,.06),0 2px 32px rgba(5,27,44,.16)',
   'border-radius': '6px',
   'button-border-radius': '6px',
 
@@ -43,4 +44,13 @@ import { CookieConsentTheme } from '../services/theme-service';
 
 export const themeDefault: CookieConsentTheme = {};
 
-export const themeDefaultDark: CookieConsentTheme = {};
+export const themeDefaultDark: CookieConsentTheme = {
+  'base-color': '#959ea8',
+  'base-line': '1px solid #3e454d',
+  'base-shadow': '0 1px 6px rgba(0,0,0,.2)',
+
+  'color-white': '#2b2e31',
+  'color-grey': '#44484c',
+  'color-text': '#dee5ec',
+  'color-text-light': '#8b939d',
+};

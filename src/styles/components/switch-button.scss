@@ -12,7 +12,7 @@ $switch-border-radius: 1000px;
 
 // .switch-button
 .s-b {
-  $r: &;
+  $this: &;
   position: relative;
   display: grid;
   width: 2 * $spacing-3;
@@ -81,7 +81,7 @@ $switch-border-radius: 1000px;
       background-color: var(--color-primary, $color-primary);
     }
 
-    #{$r}__p {
+    #{$this}__p {
       transform: translateX(100%);
     }
   }
