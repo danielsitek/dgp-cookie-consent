@@ -92,6 +92,9 @@ window.CookieConsentTheme = {
   ...window.CookieConsentTheme,
 };
 
+// Darkmode theme
+window.CookieConsentThemeDark = window.CookieConsentThemeDark || {};
+
 // Translation
 window.CookieConsentTranslations = window.CookieConsentTranslations || {};
 

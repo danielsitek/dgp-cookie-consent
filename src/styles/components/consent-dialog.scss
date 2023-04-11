@@ -27,7 +27,7 @@
   transition: $base-transition;
   transition-property: width, max-width, top, bottom, left, opacity;
   box-sizing: border-box;
-  box-shadow: $base-shadow;
+  box-shadow: var(--base-shadow, $base-shadow);
 
   // .consent-dialog__header
   &__h {
