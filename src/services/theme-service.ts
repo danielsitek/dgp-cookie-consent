@@ -5,6 +5,7 @@ export interface CookieConsentTheme {
   'base-font-size'?: string;
   'base-line'?: string;
   'base-font-family'?: string;
+  'base-shadow'?: string;
   'border-radius'?: string;
   'button-border-radius'?: string;
 
