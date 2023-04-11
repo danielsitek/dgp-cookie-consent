@@ -429,5 +429,6 @@ module.exports = {
 				ignoreInside: ['at-rule', 'nested-at-rule']
 			},
 		],
+    'custom-property-pattern': null,
 	},
 };
