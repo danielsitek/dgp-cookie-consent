@@ -1,4 +1,4 @@
-export function dataLayerPush(...args: unknown[]) {
+export function dataLayerPush(...args: unknown[]): void {
   window.dataLayer = window.dataLayer || [];
 
   if (args.length === 1) {
