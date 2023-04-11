@@ -15,9 +15,11 @@ Awesome one-of-a-kind Cookie Consent panel.
 - [Translations](#translations)
 - [Theme Customisation](#theme-customisation)
   - [Predefined themes](#predefined-themes)
+- [Darkmode Theme Customisation](#darkmode-theme-customisation)
 - [Settings](#settings)
 - [API Methods](#api-methods)
   - [`window.CookieConsentTheme`](#windowcookieconsenttheme)
+  - [`window.CookieConsentThemeDark`](#windowcookieconsentthemedark)
   - [`window.CookieConsentTranslations`](#windowcookieconsenttranslations)
   - [`window.CookieConsentSettings`](#windowcookieconsentsettings)
   - [`window.CookieConsentModalOpen()`](#windowcookieconsentmodalopen)
@@ -142,6 +144,7 @@ window.CookieConsentTheme = {
   'base-font-size': '15px',
   'base-line': '1px solid #d0d0d0',
   'base-font-family': 'sans-serif',
+  'base-shadow': '0 1px 6px rgba(5,27,44,.06),0 2px 32px rgba(5,27,44,.16)',
   'border-radius': '6px',
   'button-border-radius': '6px',
 
@@ -270,6 +273,16 @@ window.CookieConsentTheme = {
   ```
   </details>
 
+## Darkmode Theme Customisation
+
+Same options like `window.CookieConsentTheme`. Darkmode theme is automatically applied by settings from the browser/OS.
+
+```js
+window.CookieConsentThemeDark = {
+  ...
+};
+```
+
 ## Settings
 
 You can set few settings options for Cookie Consent.
@@ -299,6 +312,10 @@ Here is the complete list of setting options:
 ### `window.CookieConsentTheme`
 
 Object to pass theme configuration to consent modal window. This needs to be placed before the consent script src tag.
+
+### `window.CookieConsentThemeDark`
+
+Object to pass theme configuration for darkmode. This needs to be placed before the consent script src tag.
 
 ### `window.CookieConsentTranslations`
 
@@ -538,6 +555,9 @@ window.addEventListener('consent-ready', () => {
 
     // Optional: add own theme
     // window.CookieConsentTheme = {};
+
+    // Optional: add own theme for darkmode
+    // window.CookieConsentThemeDark = {};
 
     // Optional: add own theme
     // window.CookieConsentSettings = {};
