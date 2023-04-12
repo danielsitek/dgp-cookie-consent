@@ -1,6 +1,6 @@
 {
   "name": "@zoot/cookie-consent",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "ZOOT cookie consent",
   "main": "dist/cookies.js",
   "files": [
