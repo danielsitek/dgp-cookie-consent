@@ -1,4 +1,5 @@
 import { themeDefault, themeDefaultDark } from '../themes/default';
+import { settingsService } from './settings-service';
 
 export interface CookieConsentTheme {
   'base-color'?: string;
@@ -44,6 +45,8 @@ export interface ThemeServiceInterface {
   themeTextContent: string;
 }
 
+const settings = settingsService();
+
 export const themeService = (): ThemeServiceInterface => {
   const composedBaseTheme: CookieConsentTheme = {
     ...themeDefault,
@@ -63,7 +66,13 @@ export const themeService = (): ThemeServiceInterface => {
     return `--${key}:${composedDarkTheme[key]};`;
   });
 
+  if (settings.enableDarkMode) {
+    return {
+      themeTextContent: `.t{${baseThemeVars.join('')}}@media(prefers-color-scheme: dark){.t{${darkThemeVars.join('')}}}`,
+    };
+  }
+
   return {
-    themeTextContent: `.t{${baseThemeVars.join('')}}@media(prefers-color-scheme: dark){.t{${darkThemeVars.join('')}}}`,
+    themeTextContent: `.t{${baseThemeVars.join('')}}`,
   };
 };

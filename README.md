@@ -295,6 +295,7 @@ window.CookieConsentSettings = {
   tabAbout: {
     showButtonRejectAll: true,
   },
+  enableDarkMode: true,
 };
 ```
 
@@ -305,6 +306,7 @@ Here is the complete list of setting options:
 | --- | --- | --- |
 | `tabAgree.showButtonRejectAll` | `boolean` | Enable reject all button in first tab. Default value is `false`. |
 | `tabAbout.showButtonRejectAll` | `boolean` | Enable reject all button in last tab. Default value is `false`. |
+| `enableDarkMode` | `boolean` | Enable automatic switch to dark mode theme. Default value is `false`. |
 
 
 ## API Methods
