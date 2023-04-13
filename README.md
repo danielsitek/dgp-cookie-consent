@@ -2,6 +2,7 @@
 
 ![Size](https://img.shields.io/github/size/danielsitek/dgp-cookie-consent/dist/cookies.min.js)
 [![Stable version](https://img.shields.io/github/v/release/danielsitek/dgp-cookie-consent)](https://github.com/danielsitek/dgp-cookie-consent/releases)
+[![Monthly downloads](https://img.shields.io/jsdelivr/gh/hm/danielsitek/dgp-cookie-consent)](https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.5.1/dist/cookies.min.js)
 [![CDN](https://img.shields.io/badge/CDN-orange?style=flat&logo=jsdelivr&logoColor=white)](https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.5.1/dist/cookies.min.js)
 [![Maintainability](https://api.codeclimate.com/v1/badges/27b5b5b749d18039f303/maintainability)](https://codeclimate.com/github/danielsitek/dgp-cookie-consent/maintainability)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/65b56152a2a84981b10576ad7081411d)](https://www.codacy.com/gh/danielsitek/dgp-cookie-consent/dashboard)
