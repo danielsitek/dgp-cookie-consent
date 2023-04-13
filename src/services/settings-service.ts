@@ -1,12 +1,13 @@
 import { defaultSettings } from '../settings/default';
 
 export interface CookieConsentSettingsTab {
-  showButtonRejectAll: boolean
+  showButtonRejectAll: boolean;
 }
 
 export interface CookieConsentSettings {
   tabAgree: CookieConsentSettingsTab;
   tabAbout: CookieConsentSettingsTab;
+  enableDarkMode: boolean;
 }
 
 export const settingsService = (): CookieConsentSettings => {
@@ -24,5 +25,7 @@ export const settingsService = (): CookieConsentSettings => {
       ...defaultSettings.tabAbout,
       ...windowSettings?.tabAbout,
     },
+
+    enableDarkMode: windowSettings.enableDarkMode !== undefined ? windowSettings.enableDarkMode : defaultSettings.enableDarkMode,
   };
 };

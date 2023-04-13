@@ -10,4 +10,6 @@ export const defaultSettings: CookieConsentSettings = {
   tabAbout: {
     showButtonRejectAll: false,
   },
+
+  enableDarkMode: false,
 };
