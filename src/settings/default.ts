@@ -11,5 +11,6 @@ export const defaultSettings: CookieConsentSettings = {
     showButtonRejectAll: false,
   },
 
+  // Enable / Disable automatic theme switch to dark mode.
   enableDarkMode: false,
 };

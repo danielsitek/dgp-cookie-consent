@@ -26,6 +26,6 @@ export const settingsService = (): CookieConsentSettings => {
       ...windowSettings?.tabAbout,
     },
 
-    enableDarkMode: windowSettings.enableDarkMode !== undefined ? windowSettings.enableDarkMode : defaultSettings.enableDarkMode,
+    enableDarkMode: windowSettings?.enableDarkMode !== undefined ? windowSettings.enableDarkMode : defaultSettings.enableDarkMode,
   };
 };

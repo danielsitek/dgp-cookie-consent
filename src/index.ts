@@ -18,8 +18,6 @@ const cookieConsentModal = () => {
 type WindowCookieConsent = ConsentService;
 
 const windowCookieConsent = (): WindowCookieConsent => {
-  console.log('Hello from windowCookieConsent', new Date().toISOString());
-
   const consent = new ConsentService();
 
   if (!consent.updated.length || !consent.type.length) {
