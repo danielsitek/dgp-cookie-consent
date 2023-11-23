@@ -222,7 +222,7 @@ export class ConsentDialog extends HTMLElement {
   createButtonRejectAll(): HTMLButtonElement {
     const button = consentButton({
       label: i18n.buttonRejectAll.label,
-      variant: BUTTON_DEFAULT,
+      variant: BUTTON_PRIMARY,
       modifier: 'c-d__f-b',
     });
 
