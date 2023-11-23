@@ -7,8 +7,6 @@
 // .consent-dialog
 .c-d {
   position: fixed;
-  top: 50%;
-  left: 50%;
   z-index: 2147483631;
   display: block;
   width: calc(100% - $spacing-2);
@@ -23,11 +21,12 @@
   letter-spacing: 0.1px;
   text-align: initial;
   overflow: hidden;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 0);
   transition: $base-transition;
   transition-property: width, max-width, top, bottom, left, opacity;
   box-sizing: border-box;
   box-shadow: var(--base-shadow, $base-shadow);
+  inset: auto auto 1rem 50%;
 
   // .consent-dialog__header
   &__h {
