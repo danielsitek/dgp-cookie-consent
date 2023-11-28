@@ -9,6 +9,7 @@ export const EVENT_CONSENT_HIDE = 'consent-hide';
 export const EVENT_CONSENT_READY = 'consent-ready';
 export const EVENT_CONSENT_CLOSE = 'consent-close';
 export const EVENT_BADGE_SHOW = 'consent-badge-show';
+export const EVENT_BADGE_HIDE = 'consent-badge-hide';
 export const EVENT_BADGE_CLICK = 'consent-badge-click';
 export const EVENT_DEBOUNCE = 300;
 export const EVENT_DEBOUNCE_FAST = 50;
