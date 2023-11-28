@@ -3,24 +3,24 @@ $t: 0.3s;
 @keyframes animate-in {
   0% {
     opacity: 0;
-    transform: translate(-50%, 20%);
+    transform: var(--_animate-in);
   }
 
   100% {
     opacity: 1;
-    transform: translate(-50%, 0);
+    transform: var(--_animate-out);
   }
 }
 
 @keyframes animate-out {
   0% {
     opacity: 1;
-    transform: translate(-50%, 0);
+    transform: var(--_animate-out);
   }
 
   100% {
     opacity: 0;
-    transform: translate(-50%, 20%);
+    transform: var(--_animate-in);
   }
 }
 

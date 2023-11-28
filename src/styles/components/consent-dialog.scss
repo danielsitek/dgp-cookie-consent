@@ -1,11 +1,15 @@
 %consent-dialog-inner-shadow {
-  box-shadow: 0 0 $spacing-4 var(--color-white, $color-white), 0 0 $spacing-3 var(--color-white, $color-white), 0 0 $spacing-2 var(--color-white, $color-white), 0 0 $spacing-1 var(--color-white, $color-white), 0 0 $spacing-05 var(--color-white, $color-white);
+  box-shadow: 0 0 $spacing-4 var(--color-white, $color-white), 0 0 $spacing-3 var(--color-white, $color-white),
+    0 0 $spacing-2 var(--color-white, $color-white), 0 0 $spacing-1 var(--color-white, $color-white),
+    0 0 $spacing-05 var(--color-white, $color-white);
 
   // box-shadow: 0 0 $spacing-4 var(--color-bw-10, $color-bw-10), 0 0 $spacing-3 var(--color-bw-10, $color-bw-10), 0 0 $spacing-2 var(--color-bw-10, $color-bw-10), 0 0 $spacing-1 var(--color-bw-10, $color-bw-10), 0 0 $spacing-05 var(--color-bw-10, $color-bw-10);
 }
 
 // .consent-dialog
 .c-d {
+  --_animate-in: translate(-50%, 20%);
+  --_animate-out: translate(-50%, 0);
   position: fixed;
   z-index: 2147483631;
   display: block;
