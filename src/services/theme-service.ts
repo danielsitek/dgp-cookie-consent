@@ -38,6 +38,13 @@ export interface CookieConsentTheme {
   'button-primary--hover__border'?: string;
   'button-primary--hover__box-shadow'?: string;
 
+  'badge__bg-color'?: string;
+  badge__color?: string;
+  badge__border?: string;
+  'badge__border-radius'?: string;
+  'badge__box-shadow'?: string;
+  badge__position?: string;
+
   [key: string]: string | undefined;
 }
 

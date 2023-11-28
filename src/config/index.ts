@@ -17,11 +17,13 @@ export const EVENT_CLICK = 'click';
 export const EVENT_CHANGE = 'change';
 
 export const INLINE_STYLES_MAIN = `__INLINE_STYLES__`;
+export const INLINE_STYLES_BADGE = `__INLINE_BADGE_STYLES__`;
 
 export const DIALOG_FADE_IN_DURATION = 300;
 export const DIALOG_FADE_OUT_DURATION = 300;
 
 export const DIALOG_ELEMENT_NAME = 'consent-dialog';
+export const BADGE_ELEMENT_NAME = 'consent-badge';
 
 export const CONSENT_ID_LENGTH = 10;
 export const CONSENT_ID_TIMESTAMP_LENGTH = 10;

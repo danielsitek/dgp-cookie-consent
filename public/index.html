@@ -136,11 +136,17 @@
         console.log('CookieConsent fired event "consent-badge-show"', (new Date()).toISOString());
       });
 
+      window.addEventListener('consent-badge-hide', () => {
+        console.log('CookieConsent fired event "consent-badge-hide"', (new Date()).toISOString());
+      });
+
       window.addEventListener('consent-badge-click', () => {
         console.log('CookieConsent fired event "consent-badge-click"', (new Date()).toISOString());
       });
 
-      window.CookieConsentTheme = {};
+      window.CookieConsentTheme = {
+        'badge__color': 'magenta',
+      };
 
       window.CookieConsentThemeDark = {};
 

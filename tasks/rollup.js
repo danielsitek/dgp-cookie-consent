@@ -18,6 +18,12 @@ const readCookiesStyles = () => {
   }).toString();
 };
 
+const readBadgeStyles = () => {
+  return readFileSync('dist/badge.min.css', {
+    encoding: 'utf8',
+  }).toString();
+};
+
 const createRollupConfig = () => ({
   input: 'src/index.ts',
   output: {
@@ -31,6 +37,7 @@ const createRollupConfig = () => ({
     replace({
       values: {
         __INLINE_STYLES__: readCookiesStyles(),
+        __INLINE_BADGE_STYLES__: readBadgeStyles(),
       },
       preventAssignment: true,
     }),
@@ -40,22 +47,26 @@ const createRollupConfig = () => ({
 module.exports = async function rollup() {
   const rollupConfig = createRollupConfig();
 
-  return src(['index.ts'], {
-    cwd: 'src',
-  })
-    .pipe(rollupJs(rollupConfig))
-    .pipe(strip())
-    .pipe(dest('./dist'))
-    .pipe(stripDebug())
-    .pipe(terser({
-      mangle: {
-        reserved: ['ConsentService'],
-      },
-    }))
-    .pipe(
-      rename({
-        suffix: '.min',
-      }),
-    )
-    .pipe(dest('./dist'));
+  return (
+    src(['index.ts'], {
+      cwd: 'src',
+    })
+      .pipe(rollupJs(rollupConfig))
+      .pipe(strip())
+      .pipe(dest('./dist'))
+      // .pipe(stripDebug())
+      .pipe(
+        terser({
+          mangle: {
+            reserved: ['ConsentService'],
+          },
+        }),
+      )
+      .pipe(
+        rename({
+          suffix: '.min',
+        }),
+      )
+      .pipe(dest('./dist'))
+  );
 };
