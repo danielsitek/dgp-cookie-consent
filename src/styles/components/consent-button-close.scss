@@ -1,0 +1,17 @@
+.c-b-c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  border: 0 none;
+  background: none;
+  color: var(--color-text, #242424);
+  cursor: pointer;
+  appearance: none;
+
+  &__i {
+    display: flex;
+    width: 1.5rem;
+  }
+}

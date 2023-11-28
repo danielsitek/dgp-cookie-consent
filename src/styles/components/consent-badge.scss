@@ -22,6 +22,7 @@
     color: var(--badge__color, $badge-color);
     cursor: pointer;
     box-shadow: var(--badge__box-shadow, $badge-box-shadow);
+    appearance: none;
   }
 
   &__i {

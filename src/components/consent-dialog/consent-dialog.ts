@@ -15,6 +15,7 @@ import { fadeIn, fadeOut } from '../../utils/animation';
 import { ConsentType } from '../../utils/consent';
 import { createElement, createDivElement } from '../../utils/elements';
 import { dispatchEventConsentHide, dispatchEventConsentShow } from '../../utils/events';
+import { consentButtonClose } from '../consent-button-close/consent-button-close';
 import { consentButton, BUTTON_DEFAULT, BUTTON_PRIMARY } from '../consent-button/consent-button';
 import { ConsentTab } from '../consent-tab/consent-tab';
 import { consentTabs } from '../consent-tabs/consent-tabs';
@@ -90,12 +91,13 @@ export class ConsentDialog extends HTMLElement {
     const tabButtonAgree = this.tabButtonAgree.render();
     const tabButtonDetails = this.tabButtonDetails.render();
     const tabButtonAbout = this.tabButtonAbout.render();
+    const tabButtonClose = consentButtonClose();
 
     this.mainElement.style.display = 'none';
 
     this.mainElement.appendChild(
       consentTabs({
-        tabs: [tabButtonAgree, tabButtonDetails, tabButtonAbout],
+        tabs: [tabButtonAgree, tabButtonDetails, tabButtonAbout, tabButtonClose],
         modifier: 'c-d__h',
       }),
     );

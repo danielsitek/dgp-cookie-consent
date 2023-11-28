@@ -1,7 +1,7 @@
 // .consent-tabs
 .c-ts {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr) auto;
   gap: $spacing-1;
   padding: 0 $spacing-2;
   border-bottom: var(--base-line, $base-line);
