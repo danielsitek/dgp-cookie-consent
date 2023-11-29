@@ -13,6 +13,18 @@ const svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 
 <path fill="currentColor" d="M6.808 6.808a1 1 0 0 0 0 1.414L14.586 16l-7.778 7.778a1 1 0 1 0 1.414 1.414L16 17.414l7.778 7.778a1 1 0 0 0 1.414-1.414L17.414 16l7.778-7.778a1 1 0 0 0-1.414-1.414L16 14.586 8.222 6.808a1 1 0 0 0-1.414 0Z"/>
 </svg>`;
 
+const handleEscKey = (e: KeyboardEvent) => {
+  if (e.key === 'Escape') {
+    dispatchEventConsentClose();
+
+    document.querySelectorAll<ConsentModalElement>(DIALOG_ELEMENT_NAME).forEach((el) => {
+      el?.closeModal();
+    });
+
+    window.removeEventListener('keydown', handleEscKey);
+  }
+};
+
 export const consentButtonClose = () => {
   const el = createVElement(
     'button',
@@ -32,6 +44,8 @@ export const consentButtonClose = () => {
       el?.closeModal();
     });
   });
+
+  window.addEventListener('keydown', handleEscKey);
 
   return el;
 };
