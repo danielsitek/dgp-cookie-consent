@@ -23,8 +23,6 @@ const i18n = translationService();
 
 export class ConsentBadge extends HTMLElement {
   private mainElement: HTMLElement;
-  private componentStyle: HTMLStyleElement;
-  private componentThemeStyle: HTMLStyleElement;
 
   private shadow: ShadowRoot;
 
@@ -32,9 +30,6 @@ export class ConsentBadge extends HTMLElement {
     super();
 
     this.shadow = this.attachShadow({ mode: 'closed' });
-
-    this.componentStyle = createVElement<HTMLStyleElement>('style');
-    this.componentThemeStyle = createVElement<HTMLStyleElement>('style');
 
     this.mainElement = createVElement<HTMLElement>(
       'div',
@@ -57,14 +52,9 @@ export class ConsentBadge extends HTMLElement {
     });
   }
 
-  initStyles(): void {
-    this.componentStyle.textContent = INLINE_STYLES_BADGE;
-    this.componentThemeStyle.textContent = themeService().themeTextContent;
-  }
-
   appendCode(): void {
-    this.shadow.appendChild(this.componentStyle);
-    this.shadow.appendChild(this.componentThemeStyle);
+    this.shadow.appendChild(createVElement<HTMLStyleElement>('style', {}, INLINE_STYLES_BADGE));
+    this.shadow.appendChild(createVElement<HTMLStyleElement>('style', {}, themeService().themeTextContent));
     this.shadow.appendChild(this.mainElement);
   }
 
@@ -90,7 +80,6 @@ export class ConsentBadge extends HTMLElement {
    * @link <https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks>
    */
   async connectedCallback(): Promise<void> {
-    this.initStyles();
     this.appendCode();
 
     dispatchEventBadgeShow();
