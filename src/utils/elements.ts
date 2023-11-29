@@ -14,35 +14,40 @@ export const createElement = (tagName: string, classes?: Array<string | null>): 
 
 export const createDivElement = (classes?: string[]): HTMLDivElement => createElement('div', classes) as HTMLDivElement;
 
-function createHtmlElementsFromString(htmlString: string): NodeListOf<ChildNode> {
+function parseStringToHtmlElements(htmlString: string): NodeListOf<ChildNode> {
   const template = document.createElement('template');
   template.innerHTML = htmlString.trim();
   return template.content.childNodes;
 }
 
-export function createVElement(
+// Experimenal function for creating virtual DOM elements.
+export function createVElement<T extends HTMLElement>(
   tagName: string,
-  attributes?: { [key: string]: string },
+  attributes?: { [key: string]: string | boolean },
   ...children: Array<string | HTMLElement>
-) {
+): T {
   const element = document.createElement(tagName);
 
-  // Nastavení atributů
+  // Set attributes
   if (attributes) {
     for (const [key, value] of Object.entries(attributes)) {
-      element.setAttribute(key, value);
+      if (key === 'disabled' || key === 'checked') {
+        (element as HTMLInputElement)[key] = value as boolean;
+      } else {
+        element.setAttribute(key, `${value}`);
+      }
     }
   }
 
-  // Přidání potomků
+  // Add children
   children.forEach((child) => {
     if (typeof child === 'string') {
-      const childNodes = createHtmlElementsFromString(child);
+      const childNodes = parseStringToHtmlElements(child);
       childNodes.forEach((node) => element.append(node));
     } else {
       element.append(child);
     }
   });
 
-  return element;
+  return element as T;
 }

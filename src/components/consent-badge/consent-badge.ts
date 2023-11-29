@@ -33,13 +33,13 @@ export class ConsentBadge extends HTMLElement {
 
     this.shadow = this.attachShadow({ mode: 'closed' });
 
-    this.componentStyle = createVElement('style') as HTMLStyleElement;
-    this.componentThemeStyle = createVElement('style') as HTMLStyleElement;
+    this.componentStyle = createVElement<HTMLStyleElement>('style');
+    this.componentThemeStyle = createVElement<HTMLStyleElement>('style');
 
-    this.mainElement = createVElement(
+    this.mainElement = createVElement<HTMLElement>(
       'div',
       { class: 'cb t' },
-      createVElement(
+      createVElement<HTMLButtonElement>(
         'button',
         {
           class: 'cb__b',
@@ -47,7 +47,7 @@ export class ConsentBadge extends HTMLElement {
           'aria-label': i18n.badge.label,
           title: i18n.badge.label,
         },
-        createVElement('span', { class: 'cb__i' }, svgIcon),
+        createVElement<HTMLElement>('span', { class: 'cb__i' }, svgIcon),
       ),
     );
 
