@@ -52,8 +52,6 @@ export class ConsentBadge extends HTMLElement {
       dispatchEventBadgeClick();
       this.hideBadge();
     });
-
-    this.main();
   }
 
   initStyles(): void {
@@ -65,14 +63,6 @@ export class ConsentBadge extends HTMLElement {
     this.shadow.appendChild(this.componentStyle);
     this.shadow.appendChild(this.componentThemeStyle);
     this.shadow.appendChild(this.mainElement);
-  }
-
-  async main(): Promise<void> {
-    this.initStyles();
-    this.appendCode();
-    dispatchEventBadgeShow();
-
-    await fadeIn(this.mainElement, DIALOG_FADE_IN_DURATION);
   }
 
   hideBadge(): void {
@@ -99,8 +89,13 @@ export class ConsentBadge extends HTMLElement {
    *
    * @link <https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks>
    */
-  connectedCallback(): void {
+  async connectedCallback(): Promise<void> {
+    this.initStyles();
+    this.appendCode();
+
     dispatchEventBadgeShow();
+
+    await fadeIn(this.mainElement, DIALOG_FADE_IN_DURATION);
   }
 
   /**

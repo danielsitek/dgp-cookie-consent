@@ -80,8 +80,6 @@ export class ConsentDialog extends HTMLElement {
     this.switchButtonPreferences = switchButton();
     this.switchButtonStatistics = switchButton();
     this.switchButtonMarketing = switchButton();
-
-    this.main();
   }
 
   initStyles(): void {
@@ -276,21 +274,19 @@ export class ConsentDialog extends HTMLElement {
     }, 300);
   }
 
-  async main(): Promise<void> {
-    this.initStyles();
-    this.appendCode();
-    this.setTabContentAgree();
-
-    await fadeIn(this.mainElement, DIALOG_FADE_IN_DURATION);
-  }
-
   /**
    * Connected Lifecycle Callback
    *
    * @link <https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks>
    */
-  connectedCallback(): void {
+  async connectedCallback(): Promise<void> {
+    this.initStyles();
+    this.appendCode();
+    this.setTabContentAgree();
+
     dispatchEventConsentShow();
+
+    await fadeIn(this.mainElement, DIALOG_FADE_IN_DURATION);
   }
 
   /**
