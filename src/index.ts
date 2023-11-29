@@ -27,7 +27,6 @@ declare global {
     CookieConsentThemeDark: CookieConsentTheme;
     CookieConsentSettings: CookieConsentSettings;
     CookieConsentModalOpen: () => void;
-    CookieConsentBadgeOpen: () => void;
   }
 }
 
@@ -35,8 +34,4 @@ window.CookieConsent = windowCookieConsent();
 
 window.CookieConsentModalOpen = () => {
   initConsentModal();
-};
-
-window.CookieConsentBadgeOpen = () => {
-  initConsentBadge();
 };

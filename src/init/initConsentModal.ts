@@ -1,12 +1,13 @@
 import '../components/consent-dialog/consent-dialog';
 import { BADGE_ELEMENT_NAME, DIALOG_ELEMENT_NAME, EVENT_CONSENT_HIDE, EVENT_CONSENT_SHOW } from '../config';
+import { initConsentBadge } from './initConsentBadge';
 
 interface BadgeElement extends HTMLElement {
   hideBadge: () => void;
 }
 
 const handleConsentHide = () => {
-  window.CookieConsentBadgeOpen();
+  initConsentBadge();
 
   window.removeEventListener(EVENT_CONSENT_HIDE, handleConsentHide);
 };

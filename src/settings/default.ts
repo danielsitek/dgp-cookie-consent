@@ -13,4 +13,7 @@ export const defaultSettings: CookieConsentSettings = {
 
   // Enable / Disable automatic theme switch to dark mode.
   enableDarkMode: false,
+
+  // Disable / Enable consent badge.
+  disableBadge: false,
 };
