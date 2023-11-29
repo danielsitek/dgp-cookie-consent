@@ -39,18 +39,24 @@ import { CookieConsentTheme } from '../services/theme-service';
   'button-primary--hover__color': '#242424',
   'button-primary--hover__border': '0 none',
   'button-primary--hover__box-shadow': 'none',
+
+  'badge__bg-color': '#ffffff',
+  'badge__color': '#f8c132',
+  'badge__border': '0 none',
+  'badge__border-radius': '10rem',
+  'badge__box-shadow': '0 1px 6px rgba(5,27,44,.06),0 2px 32px rgba(5,27,44,.16)',
+  'badge__position': 'auto auto 1rem 1rem',
  * ```
  */
 
 export const themeDefault: CookieConsentTheme = {};
 
 export const themeDefaultDark: CookieConsentTheme = {
-  'base-color': '#959ea8',
-  'base-line': '1px solid #3e454d',
-  'base-shadow': '0 1px 6px rgba(0,0,0,.2)',
-
-  'color-white': '#2b2e31',
-  'color-grey': '#44484c',
-  'color-text': '#dee5ec',
-  'color-text-light': '#8b939d',
+  // 'base-color': '#959ea8',
+  // 'base-line': '1px solid #3e454d',
+  // 'base-shadow': '0 1px 6px rgba(0,0,0,.2)',
+  // 'color-white': '#2b2e31',
+  // 'color-grey': '#44484c',
+  // 'color-text': '#dee5ec',
+  // 'color-text-light': '#8b939d',
 };
