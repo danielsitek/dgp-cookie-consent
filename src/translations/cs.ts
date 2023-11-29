@@ -56,6 +56,9 @@ const cs: CookieConsentTranslations = {
   buttonClose: {
     label: 'Odložit rozhodnutí na později',
   },
+  badge: {
+    label: 'Upravit nastavení cookies',
+  },
   lastUpdated: 'Prohlášení o cookies bylo naposledy aktualizováno %date.',
 };
 

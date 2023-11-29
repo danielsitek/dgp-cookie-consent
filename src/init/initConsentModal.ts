@@ -12,7 +12,7 @@ const handleConsentHide = () => {
 };
 
 const handleConsentShow = () => {
-  (document.querySelectorAll(BADGE_ELEMENT_NAME) as NodeListOf<BadgeElement>).forEach((badge: BadgeElement) => {
+  document.querySelectorAll<BadgeElement>(BADGE_ELEMENT_NAME).forEach((badge: BadgeElement) => {
     badge.hideBadge();
   });
 

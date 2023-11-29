@@ -6,6 +6,7 @@ import {
   INLINE_STYLES_BADGE,
 } from '../../config';
 import { themeService } from '../../services/theme-service';
+import { translationService } from '../../services/translation-service';
 import { fadeIn, fadeOut } from '../../utils/animation';
 import { createVElement } from '../../utils/elements';
 import { dispatchEventBadgeClick, dispatchEventBadgeHide, dispatchEventBadgeShow } from '../../utils/events';
@@ -17,6 +18,8 @@ const svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 
 </svg>`;
 
 let hideTimeout: ReturnType<typeof setTimeout>;
+
+const i18n = translationService();
 
 export class ConsentBadge extends HTMLElement {
   private mainElement: HTMLElement;
@@ -41,8 +44,8 @@ export class ConsentBadge extends HTMLElement {
         {
           class: 'cb__b',
           type: 'button',
-          'aria-label': 'Upravit nastavení cookies',
-          title: 'Upravit nastavení cookies',
+          'aria-label': i18n.badge.label,
+          title: i18n.badge.label,
         },
         createVElement('span', { class: 'cb__i' }, svgIcon),
       ),
@@ -71,10 +74,7 @@ export class ConsentBadge extends HTMLElement {
       return;
     }
 
-    console.trace('hideBadge');
-
     hideTimeout = setTimeout(async () => {
-      console.log('hideBadge timeout');
       if (document.querySelector(BADGE_ELEMENT_NAME) === null) {
         return;
       }
