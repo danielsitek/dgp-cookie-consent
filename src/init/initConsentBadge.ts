@@ -11,7 +11,7 @@ const handleBadgeClick = () => {
   window.removeEventListener(EVENT_BADGE_CLICK, handleBadgeClick);
 };
 
-export const initConsentBadge = () => {
+export const initConsentBadge = (): void => {
   if (settings.disableBadge === true) {
     return;
   }

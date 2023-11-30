@@ -25,8 +25,8 @@ const handleEscKey = (e: KeyboardEvent) => {
   }
 };
 
-export const consentButtonClose = () => {
-  const el = createVElement(
+export const consentButtonClose = (): HTMLButtonElement => {
+  const el = createVElement<HTMLButtonElement>(
     'button',
     {
       type: 'button',
@@ -34,7 +34,7 @@ export const consentButtonClose = () => {
       title: i18n.buttonClose.label,
       class: 'c-b-c',
     },
-    createVElement('span', { class: 'c-b-c__i' }, svgIcon),
+    createVElement<HTMLElement>('span', { class: 'c-b-c__i' }, svgIcon),
   );
 
   el.addEventListener(EVENT_CLICK, () => {

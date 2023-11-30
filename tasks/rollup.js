@@ -54,7 +54,7 @@ module.exports = async function rollup() {
       .pipe(rollupJs(rollupConfig))
       .pipe(strip())
       .pipe(dest('./dist'))
-      // .pipe(stripDebug())
+      .pipe(stripDebug())
       .pipe(
         terser({
           mangle: {

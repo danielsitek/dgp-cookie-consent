@@ -6,14 +6,14 @@ interface BadgeElement extends HTMLElement {
   hideBadge: () => void;
 }
 
-const handleConsentHide = () => {
+const handleConsentHide = (): void => {
   initConsentBadge();
 
   window.removeEventListener(EVENT_CONSENT_HIDE, handleConsentHide);
 };
 
-const handleConsentShow = () => {
-  document.querySelectorAll<BadgeElement>(BADGE_ELEMENT_NAME).forEach((badge: BadgeElement) => {
+const handleConsentShow = (): void => {
+  document.querySelectorAll<BadgeElement>(BADGE_ELEMENT_NAME).forEach((badge) => {
     badge.hideBadge();
   });
 
