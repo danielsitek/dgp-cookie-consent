@@ -20,7 +20,7 @@ const handleConsentShow = (): void => {
   window.removeEventListener(EVENT_CONSENT_SHOW, handleConsentShow);
 };
 
-export const initConsentModal = () => {
+export const initConsentModal = (): void => {
   if (document.querySelectorAll(DIALOG_ELEMENT_NAME).length) {
     return;
   }

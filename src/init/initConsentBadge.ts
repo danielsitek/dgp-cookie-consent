@@ -5,7 +5,7 @@ import { initConsentModal } from './initConsentModal';
 
 const settings = settingsService();
 
-const handleBadgeClick = () => {
+const handleBadgeClick = (): void => {
   initConsentModal();
 
   window.removeEventListener(EVENT_BADGE_CLICK, handleBadgeClick);
