@@ -3,4 +3,5 @@
   display: flex;
   flex-direction: column;
   max-height: calc(100vh - $spacing-11);
+  max-height: calc(100dvh - $spacing-11);
 }
