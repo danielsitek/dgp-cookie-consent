@@ -1,4 +1,4 @@
-import { DIALOG_ELEMENT_NAME, EVENT_CLICK } from '../../config';
+import { DIALOG_ELEMENT_NAME, EVENT_CLICK, EVENT_KEYDOWN } from '../../config';
 import { translationService } from '../../services/translation-service';
 import { createVElement } from '../../utils/elements';
 import { dispatchEventConsentClose } from '../../utils/events';
@@ -21,7 +21,7 @@ const handleEscKey = (e: KeyboardEvent) => {
       el?.closeModal();
     });
 
-    window.removeEventListener('keydown', handleEscKey);
+    window.removeEventListener(EVENT_KEYDOWN, handleEscKey);
   }
 };
 
@@ -45,7 +45,7 @@ export const consentButtonClose = (): HTMLButtonElement => {
     });
   });
 
-  window.addEventListener('keydown', handleEscKey);
+  window.addEventListener(EVENT_KEYDOWN, handleEscKey);
 
   return el;
 };

@@ -15,6 +15,7 @@ export const EVENT_DEBOUNCE = 300;
 export const EVENT_DEBOUNCE_FAST = 50;
 export const EVENT_CLICK = 'click';
 export const EVENT_CHANGE = 'change';
+export const EVENT_KEYDOWN = 'keydown';
 
 export const INLINE_STYLES_MAIN = `__INLINE_STYLES__`;
 export const INLINE_STYLES_BADGE = `__INLINE_BADGE_STYLES__`;
