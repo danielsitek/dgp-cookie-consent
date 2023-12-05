@@ -54,6 +54,14 @@ export interface ThemeServiceInterface {
 
 const settings = settingsService();
 
+const themeString = (theme: CookieConsentTheme): string => {
+  return Object.keys(theme)
+    .map((key) => {
+      return `--${key}:${theme[key]};`;
+    })
+    .join('');
+};
+
 export const themeService = (): ThemeServiceInterface => {
   const composedBaseTheme: CookieConsentTheme = {
     ...themeDefault,
@@ -65,17 +73,9 @@ export const themeService = (): ThemeServiceInterface => {
     ...window?.CookieConsentThemeDark,
   };
 
-  const baseThemeVars = Object.keys(composedBaseTheme)
-    .map((key) => {
-      return `--${key}:${composedBaseTheme[key]};`;
-    })
-    .join('');
+  const baseThemeVars = themeString(composedBaseTheme);
 
-  const darkThemeVars = Object.keys(composedDarkTheme)
-    .map((key) => {
-      return `--${key}:${composedDarkTheme[key]};`;
-    })
-    .join('');
+  const darkThemeVars = themeString(composedDarkTheme);
 
   if (settings.enableDarkMode) {
     return {
