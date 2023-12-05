@@ -38,6 +38,13 @@ export interface CookieConsentTheme {
   'button-primary--hover__border'?: string;
   'button-primary--hover__box-shadow'?: string;
 
+  'badge__bg-color'?: string;
+  badge__color?: string;
+  badge__border?: string;
+  'badge__border-radius'?: string;
+  'badge__box-shadow'?: string;
+  badge__position?: string;
+
   [key: string]: string | undefined;
 }
 
@@ -58,21 +65,25 @@ export const themeService = (): ThemeServiceInterface => {
     ...window?.CookieConsentThemeDark,
   };
 
-  const baseThemeVars = Object.keys(composedBaseTheme).map((key) => {
-    return `--${key}:${composedBaseTheme[key]};`;
-  });
+  const baseThemeVars = Object.keys(composedBaseTheme)
+    .map((key) => {
+      return `--${key}:${composedBaseTheme[key]};`;
+    })
+    .join('');
 
-  const darkThemeVars = Object.keys(composedDarkTheme).map((key) => {
-    return `--${key}:${composedDarkTheme[key]};`;
-  });
+  const darkThemeVars = Object.keys(composedDarkTheme)
+    .map((key) => {
+      return `--${key}:${composedDarkTheme[key]};`;
+    })
+    .join('');
 
   if (settings.enableDarkMode) {
     return {
-      themeTextContent: `.t{${baseThemeVars.join('')}}@media(prefers-color-scheme: dark){.t{${darkThemeVars.join('')}}}`,
+      themeTextContent: `.t{${baseThemeVars}}@media(prefers-color-scheme: dark){.t{${darkThemeVars}}}`,
     };
   }
 
   return {
-    themeTextContent: `.t{${baseThemeVars.join('')}}`,
+    themeTextContent: `.t{${baseThemeVars}}`,
   };
 };

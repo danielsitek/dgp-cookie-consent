@@ -1,0 +1,33 @@
+.cb {
+  --_animate-in: translateY(20%);
+  --_animate-out: translateY(0);
+  position: fixed;
+  z-index: 2147483630;
+  transform: translateY(0);
+  transition: $base-transition;
+  transition-property: transform, opacity;
+  inset: var(--badge__position, $badge-position);
+
+  &__b {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 3rem;
+    margin: 0;
+    padding: 0;
+    border: var(--badge__border, $badge-border);
+    border-radius: var(--badge__border-radius, $badge-border-radius);
+    background: var(--badge__bg-color, $badge-bg-color);
+    color: var(--badge__color, $badge-color);
+    cursor: pointer;
+    box-shadow: var(--badge__box-shadow, $badge-box-shadow);
+    appearance: none;
+  }
+
+  &__i {
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+  }
+}

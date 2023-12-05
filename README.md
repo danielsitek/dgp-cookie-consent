@@ -35,6 +35,10 @@ Awesome one-of-a-kind Cookie Consent panel.
   - [Event `consent-show`](#event-consent-show)
   - [Event `consent-hide`](#event-consent-hide)
   - [Event `consent-ready`](#event-consent-ready)
+  - [Event `consent-close`](#event-consent-close)
+  - [Event `consent-badge-show`](#event-consent-badge-show)
+  - [Event `consent-badge-hide`](#event-consent-badge-hide)
+  - [Event `consent-badge-click`](#event-consent-badge-click)
 - [GTM Implementation with custom rules](#gtm-implementation-with-custom-rules)
   - [1. Create Variables](#1-create-variables)
   - [2. Create Rules](#2-create-rules)
@@ -129,6 +133,9 @@ window.CookieConsentTranslations = {
   buttonConfirm: {
     label: 'Potvrdit',
   },
+  badge: {
+    label: 'Upravit nastavení cookies',
+  },
   lastUpdated: 'Prohlášení o cookies bylo naposledy aktualizováno %date.',
 };
 ```
@@ -176,6 +183,13 @@ window.CookieConsentTheme = {
   'button-primary--hover__color': '#242424',
   'button-primary--hover__border': '0 none',
   'button-primary--hover__box-shadow': 'none',
+
+  'badge__bg-color': '#ffffff',
+  'badge__color': '#f8c132',
+  'badge__border': '0 none',
+  'badge__border-radius': '10rem',
+  'badge__box-shadow': '0 1px 6px rgba(5,27,44,.06),0 2px 32px rgba(5,27,44,.16)',
+  'badge__position': 'auto auto 1rem 1rem',
 };
 ```
 
@@ -297,6 +311,7 @@ window.CookieConsentSettings = {
     showButtonRejectAll: true,
   },
   enableDarkMode: true,
+  disableBadge: false,
 };
 ```
 
@@ -305,9 +320,10 @@ Here is the complete list of setting options:
 
 | Property | Value | description |
 | --- | --- | --- |
-| `tabAgree.showButtonRejectAll` | `boolean` | Enable reject all button in first tab. Default value is `false`. |
-| `tabAbout.showButtonRejectAll` | `boolean` | Enable reject all button in last tab. Default value is `false`. |
+| `tabAgree.showButtonRejectAll` | `boolean` | Enable reject all button in first tab. Default value is `true`. |
+| `tabAbout.showButtonRejectAll` | `boolean` | Enable reject all button in last tab. Default value is `true`. |
 | `enableDarkMode` | `boolean` | Enable automatic switch to dark mode theme. Default value is `false`. |
+| `disableBadge` | `boolean` | Disable badge button. Default value is `false`. |
 
 
 ## API Methods
@@ -332,7 +348,7 @@ Object to pass settings to consent modal window. This needs to be placed before 
 
 * Returns `<void>`.
 
-Open the consent modal window.
+Open the consent modal window and hide the badge button.
 
 **Example**:
 
@@ -439,6 +455,58 @@ Fires one time when consent script is loaded on page and ready.
 ```js
 window.addEventListener('consent-ready', () => {
   console.log('Consent is ready.');
+});
+```
+
+### Event `consent-close`
+
+Fires every time the modal consent window is closed by ESC key or by clicking on cross.
+
+
+**Example**:
+
+```js
+window.addEventListener('consent-close', () => {
+  console.log('Consent is closed.');
+});
+```
+
+### Event `consent-badge-show`
+
+Fires every time the consent badge is shown.
+
+
+**Example**:
+
+```js
+window.addEventListener('consent-badge-show', () => {
+  console.log('Consent badge is shown.');
+});
+```
+
+### Event `consent-badge-hide`
+
+Fires every time the consent badge hides.
+
+
+**Example**:
+
+```js
+window.addEventListener('consent-badge-hide', () => {
+  console.log('Consent badge hides.');
+});
+```
+
+### Event `consent-badge-click`
+
+Fires every time the consent badge is clicked.
+
+
+**Example**:
+
+```js
+window.addEventListener('consent-badge-click', () => {
+  console.log('Consent badge is clicked.');
 });
 ```
 
@@ -605,7 +673,7 @@ npm i
 npm run dev
 ```
 
-Then open the localhost url from terminal in browser and navigate to `/public/`.
+Then open the localhost url from terminal in browser and navigate to `http://localhost:3000/public/`.
 
 ### Production build
 

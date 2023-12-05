@@ -3,14 +3,17 @@ import { CookieConsentSettings } from '../services/settings-service';
 export const defaultSettings: CookieConsentSettings = {
   // Settings for tab agree.
   tabAgree: {
-    showButtonRejectAll: false,
+    showButtonRejectAll: true,
   },
 
   // Settings for tab about.
   tabAbout: {
-    showButtonRejectAll: false,
+    showButtonRejectAll: true,
   },
 
   // Enable / Disable automatic theme switch to dark mode.
   enableDarkMode: false,
+
+  // Disable / Enable consent badge.
+  disableBadge: false,
 };

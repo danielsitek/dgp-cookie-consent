@@ -1,23 +1,47 @@
-import { EVENT_CONSENT_HIDE, EVENT_CONSENT_READY, EVENT_CONSENT_SHOW, EVENT_CONSENT_UPDATED, EVENT_DEBOUNCE, EVENT_DEBOUNCE_FAST } from '../config';
+import {
+  EVENT_BADGE_CLICK,
+  EVENT_BADGE_HIDE,
+  EVENT_BADGE_SHOW,
+  EVENT_CONSENT_CLOSE,
+  EVENT_CONSENT_HIDE,
+  EVENT_CONSENT_READY,
+  EVENT_CONSENT_SHOW,
+  EVENT_CONSENT_UPDATED,
+  EVENT_DEBOUNCE,
+  EVENT_DEBOUNCE_FAST,
+} from '../config';
 import { debounce } from './debounce';
 
-export const eventConsentUpdated = new Event(EVENT_CONSENT_UPDATED);
-export const eventConsentShow = new Event(EVENT_CONSENT_SHOW);
-export const eventConsentHide = new Event(EVENT_CONSENT_HIDE);
-export const eventConsentReady = new Event(EVENT_CONSENT_READY);
+const dispatchEvent = (eventName: string) => window.dispatchEvent(new Event(eventName));
 
 export const dispatchEventConsentUpdated = debounce(() => {
-  window.dispatchEvent(eventConsentUpdated);
+  dispatchEvent(EVENT_CONSENT_UPDATED);
 }, EVENT_DEBOUNCE);
 
 export const dispatchEventConsentShow = debounce(() => {
-  window.dispatchEvent(eventConsentShow);
+  dispatchEvent(EVENT_CONSENT_SHOW);
 }, EVENT_DEBOUNCE_FAST);
 
 export const dispatchEventConsentHide = debounce(() => {
-  window.dispatchEvent(eventConsentHide);
+  dispatchEvent(EVENT_CONSENT_HIDE);
 }, EVENT_DEBOUNCE_FAST);
 
 export const dispatchEventConsentReady = debounce(() => {
-  window.dispatchEvent(eventConsentReady);
+  dispatchEvent(EVENT_CONSENT_READY);
+}, EVENT_DEBOUNCE_FAST);
+
+export const dispatchEventConsentClose = debounce(() => {
+  dispatchEvent(EVENT_CONSENT_CLOSE);
+}, EVENT_DEBOUNCE_FAST);
+
+export const dispatchEventBadgeShow = debounce(() => {
+  dispatchEvent(EVENT_BADGE_SHOW);
+}, EVENT_DEBOUNCE_FAST);
+
+export const dispatchEventBadgeClick = debounce(() => {
+  dispatchEvent(EVENT_BADGE_CLICK);
+}, EVENT_DEBOUNCE_FAST);
+
+export const dispatchEventBadgeHide = debounce(() => {
+  dispatchEvent(EVENT_BADGE_HIDE);
 }, EVENT_DEBOUNCE_FAST);

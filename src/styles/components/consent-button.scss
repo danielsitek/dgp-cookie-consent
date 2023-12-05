@@ -4,7 +4,7 @@
   flex: 0 0 auto;
   justify-content: center;
   align-items: center;
-  min-height: $spacing-6;
+  min-height: $spacing-5;
   margin: 0;
   padding: $spacing-05 $spacing-1;
   border-radius: var(--button-border-radius, $base-button-border-radius);
@@ -57,7 +57,8 @@
   }
 
   @media ($md-up) {
-    min-width: 200px;
+    min-width: min(28vw, 200px);
+    min-height: $spacing-6;
     padding: $spacing-1 $spacing-2;
   }
 }

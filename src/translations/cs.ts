@@ -22,19 +22,23 @@ const cs: CookieConsentTranslations = {
     title: 'Detail',
     necessary: {
       title: 'Nutné',
-      perex: 'Nutné cookies pomáhají, aby byla webová stránka použitelná tak, že umožní základní funkce jako navigace stránky a přístup k zabezpečeným sekcím webové stránky. Webová stránka nemůže správně fungovat bez těchto cookies.',
+      perex:
+        'Nutné cookies pomáhají, aby byla webová stránka použitelná tak, že umožní základní funkce jako navigace stránky a přístup k zabezpečeným sekcím webové stránky. Webová stránka nemůže správně fungovat bez těchto cookies.',
     },
     preferences: {
       title: 'Preferenční',
-      perex: 'Preferenční cookies umožňují, aby si webová stránka zapamatovala informace, které mění, jak se webová stránka chová nebo jak vypadá. Je to například preferovaný jazyk nebo region, kde se nacházíte.',
+      perex:
+        'Preferenční cookies umožňují, aby si webová stránka zapamatovala informace, které mění, jak se webová stránka chová nebo jak vypadá. Je to například preferovaný jazyk nebo region, kde se nacházíte.',
     },
     statistics: {
       title: 'Statistické',
-      perex: 'Statistické cookies pomáhají majitelům webových stránek, aby porozuměli, jak návštěvníci používají webové stránky. Anonymně sbírají a sdělují informace.',
+      perex:
+        'Statistické cookies pomáhají majitelům webových stránek, aby porozuměli, jak návštěvníci používají webové stránky. Anonymně sbírají a sdělují informace.',
     },
     marketing: {
       title: 'Marketingové',
-      perex: 'Marketingové cookies jsou používány pro sledování návštěvníků na webových stránkách. Záměrem je zobrazit reklamu, která je relevantní a zajímavá pro jednotlivého uživatele a tímto hodnotnější pro vydavatele a inzerenty třetích stran.',
+      perex:
+        'Marketingové cookies jsou používány pro sledování návštěvníků na webových stránkách. Záměrem je zobrazit reklamu, která je relevantní a zajímavá pro jednotlivého uživatele a tímto hodnotnější pro vydavatele a inzerenty třetích stran.',
     },
   },
   buttonEdit: {
@@ -48,6 +52,12 @@ const cs: CookieConsentTranslations = {
   },
   buttonConfirm: {
     label: 'Potvrdit',
+  },
+  buttonClose: {
+    label: 'Odložit rozhodnutí na později',
+  },
+  badge: {
+    label: 'Upravit nastavení cookies',
   },
   lastUpdated: 'Prohlášení o cookies bylo naposledy aktualizováno %date.',
 };

@@ -2,29 +2,25 @@ $t: 0.3s;
 
 @keyframes animate-in {
   0% {
-    visibility: hidden;
     opacity: 0;
-    transform: translate(-50%, -20%);
+    transform: var(--_animate-in);
   }
 
   100% {
-    visibility: visible;
     opacity: 1;
-    transform: translate(-50%, -50%);
+    transform: var(--_animate-out);
   }
 }
 
 @keyframes animate-out {
   0% {
-    visibility: visible;
     opacity: 1;
-    transform: translate(-50%, -50%);
+    transform: var(--_animate-out);
   }
 
   100% {
-    visibility: hidden;
     opacity: 0;
-    transform: translate(-50%, -20%);
+    transform: var(--_animate-in);
   }
 }
 

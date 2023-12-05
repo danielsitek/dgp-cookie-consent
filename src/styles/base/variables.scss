@@ -75,3 +75,11 @@ $button-primary-hover-color: #242424;
 $button-primary-hover-border: 0 none;
 $button-primary-hover-text-transform: none;
 $button-primary-hover-shadow: none;
+
+// Badge
+$badge-border: 0 none;
+$badge-border-radius: 10rem;
+$badge-bg-color: $color-white;
+$badge-color: $button-primary-bg;
+$badge-box-shadow: $base-shadow;
+$badge-position: auto auto 1rem 1rem;

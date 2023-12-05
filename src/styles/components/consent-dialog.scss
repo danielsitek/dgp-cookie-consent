@@ -1,4 +1,5 @@
 %consent-dialog-inner-shadow {
+  // prettier-ignore
   box-shadow: 0 0 $spacing-4 var(--color-white, $color-white), 0 0 $spacing-3 var(--color-white, $color-white), 0 0 $spacing-2 var(--color-white, $color-white), 0 0 $spacing-1 var(--color-white, $color-white), 0 0 $spacing-05 var(--color-white, $color-white);
 
   // box-shadow: 0 0 $spacing-4 var(--color-bw-10, $color-bw-10), 0 0 $spacing-3 var(--color-bw-10, $color-bw-10), 0 0 $spacing-2 var(--color-bw-10, $color-bw-10), 0 0 $spacing-1 var(--color-bw-10, $color-bw-10), 0 0 $spacing-05 var(--color-bw-10, $color-bw-10);
@@ -6,14 +7,15 @@
 
 // .consent-dialog
 .c-d {
+  --_animate-in: translate(-50%, 20%);
+  --_animate-out: translate(-50%, 0);
   position: fixed;
-  top: 50%;
-  left: 50%;
   z-index: 2147483631;
   display: block;
-  width: calc(100% - $spacing-2);
+  width: calc(100vw - $spacing-2);
   max-width: 900px;
-  max-height: calc(100% - $spacing-2);
+  max-height: calc(100% - $spacing-3);
+  max-height: calc(100dvh - $spacing-3);
   border-radius: var(--border-radius, $base-border-radius);
   background-color: var(--color-white, $color-white);
   color: var(--base-color, $color-grey-3);
@@ -23,11 +25,12 @@
   letter-spacing: 0.1px;
   text-align: initial;
   overflow: hidden;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 0);
   transition: $base-transition;
   transition-property: width, max-width, top, bottom, left, opacity;
   box-sizing: border-box;
   box-shadow: var(--base-shadow, $base-shadow);
+  inset: auto auto 1rem 50%;
 
   // .consent-dialog__header
   &__h {
@@ -65,16 +68,13 @@
     position: relative;
     z-index: 1;
     display: flex;
+    gap: $spacing-1;
+    flex: 1 0 auto;
     flex-direction: column-reverse;
     justify-content: flex-end;
     margin: 0;
     padding: $spacing-2;
     border-top: var(--base-line, $base-line);
-  }
-
-  // .consent-dialog__footer-buton
-  &__f-b + &__f-b {
-    margin: 0 0 $spacing-1 0;
   }
 
   @media ($md-up) {
@@ -87,11 +87,8 @@
     }
 
     &__f {
+      gap: $spacing-2;
       flex-direction: row;
-    }
-
-    &__f-b + &__f-b {
-      margin: 0 0 0 $spacing-2;
     }
   }
 }

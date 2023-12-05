@@ -1,4 +1,13 @@
-import { CONSENT_TYPE_ADVANCED, CONSENT_TYPE_FULL, CONSENT_TYPE_REJECTED, DIALOG_ELEMENT_NAME, DIALOG_FADE_IN_DURATION, DIALOG_FADE_OUT_DURATION, EVENT_CLICK, INLINE_STYLES_MAIN } from '../../config';
+import {
+  CONSENT_TYPE_ADVANCED,
+  CONSENT_TYPE_FULL,
+  CONSENT_TYPE_REJECTED,
+  DIALOG_ELEMENT_NAME,
+  DIALOG_FADE_IN_DURATION,
+  DIALOG_FADE_OUT_DURATION,
+  EVENT_CLICK,
+  INLINE_STYLES_MAIN,
+} from '../../config';
 import { settingsService } from '../../services/settings-service';
 import { themeService } from '../../services/theme-service';
 import { translationService } from '../../services/translation-service';
@@ -6,6 +15,7 @@ import { fadeIn, fadeOut } from '../../utils/animation';
 import { ConsentType } from '../../utils/consent';
 import { createElement, createDivElement } from '../../utils/elements';
 import { dispatchEventConsentHide, dispatchEventConsentShow } from '../../utils/events';
+import { consentButtonClose } from '../consent-button-close/consent-button-close';
 import { consentButton, BUTTON_DEFAULT, BUTTON_PRIMARY } from '../consent-button/consent-button';
 import { ConsentTab } from '../consent-tab/consent-tab';
 import { consentTabs } from '../consent-tabs/consent-tabs';
@@ -50,24 +60,18 @@ export class ConsentDialog extends HTMLElement {
 
     this.innerElement = createDivElement(['c-d__i']);
 
-    this.tabButtonAgree = new ConsentTab(
-      {
-        label: i18n.tabAgree.title,
-        active: true,
-      },
-    );
+    this.tabButtonAgree = new ConsentTab({
+      label: i18n.tabAgree.title,
+      active: true,
+    });
 
-    this.tabButtonDetails = new ConsentTab(
-      {
-        label: i18n.tabDetail.title,
-      },
-    );
+    this.tabButtonDetails = new ConsentTab({
+      label: i18n.tabDetail.title,
+    });
 
-    this.tabButtonAbout = new ConsentTab(
-      {
-        label: i18n.tabAbout.title,
-      },
-    );
+    this.tabButtonAbout = new ConsentTab({
+      label: i18n.tabAbout.title,
+    });
 
     this.switchButtonNecessary = switchButton({
       checked: true,
@@ -76,8 +80,6 @@ export class ConsentDialog extends HTMLElement {
     this.switchButtonPreferences = switchButton();
     this.switchButtonStatistics = switchButton();
     this.switchButtonMarketing = switchButton();
-
-    this.main();
   }
 
   initStyles(): void {
@@ -87,12 +89,13 @@ export class ConsentDialog extends HTMLElement {
     const tabButtonAgree = this.tabButtonAgree.render();
     const tabButtonDetails = this.tabButtonDetails.render();
     const tabButtonAbout = this.tabButtonAbout.render();
+    const tabButtonClose = consentButtonClose();
 
     this.mainElement.style.display = 'none';
 
     this.mainElement.appendChild(
       consentTabs({
-        tabs: [tabButtonAgree, tabButtonDetails, tabButtonAbout],
+        tabs: [tabButtonAgree, tabButtonDetails, tabButtonAbout, tabButtonClose],
         modifier: 'c-d__h',
       }),
     );
@@ -118,14 +121,16 @@ export class ConsentDialog extends HTMLElement {
   }
 
   setTabContentAgree(): void {
-    this.setTabContent(tabContentDefault({
-      body: i18n.tabAgree.body,
-      buttons: [
-        settings.tabAgree.showButtonRejectAll ? this.createButtonRejectAll() : false,
-        this.createButtonEdit(),
-        this.createButtonAllowAll(),
-      ],
-    }));
+    this.setTabContent(
+      tabContentDefault({
+        body: i18n.tabAgree.body,
+        buttons: [
+          settings.tabAgree.showButtonRejectAll ? this.createButtonRejectAll() : false,
+          this.createButtonEdit(),
+          this.createButtonAllowAll(),
+        ],
+      }),
+    );
 
     this.tabButtonAgree.active = true;
   }
@@ -136,14 +141,16 @@ export class ConsentDialog extends HTMLElement {
   }
 
   setTabContentAbout(): void {
-    this.setTabContent(tabContentDefault({
-      body: i18n.tabAbout.body,
-      buttons: [
-        settings.tabAbout.showButtonRejectAll ? this.createButtonRejectAll() : false,
-        this.createButtonEdit(),
-        this.createButtonAllowAll(),
-      ],
-    }));
+    this.setTabContent(
+      tabContentDefault({
+        body: i18n.tabAbout.body,
+        buttons: [
+          settings.tabAbout.showButtonRejectAll ? this.createButtonRejectAll() : false,
+          this.createButtonEdit(),
+          this.createButtonAllowAll(),
+        ],
+      }),
+    );
 
     this.tabButtonAbout.active = true;
   }
@@ -154,10 +161,7 @@ export class ConsentDialog extends HTMLElement {
     this.switchButtonMarketing.setChecked(window.CookieConsent.marketing);
 
     return tabContentDetails({
-      buttons: [
-        this.createButtonRejectAll(),
-        this.createButtonConfirm(),
-      ],
+      buttons: [this.createButtonRejectAll(), this.createButtonConfirm()],
       lastUpdated: i18n.lastUpdated,
       sections: {
         necessary: {
@@ -180,7 +184,7 @@ export class ConsentDialog extends HTMLElement {
     });
   }
 
-  updateConsentOnClick(preferences: boolean, statistics: boolean, marketing: boolean, type: ConsentType):void {
+  updateConsentOnClick(preferences: boolean, statistics: boolean, marketing: boolean, type: ConsentType): void {
     // Consent Update type
     window.CookieConsent.type = type;
 
@@ -222,7 +226,7 @@ export class ConsentDialog extends HTMLElement {
   createButtonRejectAll(): HTMLButtonElement {
     const button = consentButton({
       label: i18n.buttonRejectAll.label,
-      variant: BUTTON_DEFAULT,
+      variant: BUTTON_PRIMARY,
       modifier: 'c-d__f-b',
     });
 
@@ -249,7 +253,7 @@ export class ConsentDialog extends HTMLElement {
         this.switchButtonPreferences.isChecked(),
         this.switchButtonStatistics.isChecked(),
         this.switchButtonMarketing.isChecked(),
-        CONSENT_TYPE_ADVANCED
+        CONSENT_TYPE_ADVANCED,
       );
     });
 
@@ -267,15 +271,7 @@ export class ConsentDialog extends HTMLElement {
       await fadeOut(this.mainElement, DIALOG_FADE_OUT_DURATION);
       const consentModal = document.querySelector(DIALOG_ELEMENT_NAME);
       consentModal?.remove();
-    }, 500);
-  }
-
-  async main(): Promise<void> {
-    this.initStyles();
-    this.appendCode();
-    this.setTabContentAgree();
-
-    await fadeIn(this.mainElement, DIALOG_FADE_IN_DURATION);
+    }, 300);
   }
 
   /**
@@ -283,8 +279,14 @@ export class ConsentDialog extends HTMLElement {
    *
    * @link <https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks>
    */
-  connectedCallback(): void {
+  async connectedCallback(): Promise<void> {
+    this.initStyles();
+    this.appendCode();
+    this.setTabContentAgree();
+
     dispatchEventConsentShow();
+
+    await fadeIn(this.mainElement, DIALOG_FADE_IN_DURATION);
   }
 
   /**
@@ -292,7 +294,7 @@ export class ConsentDialog extends HTMLElement {
    *
    * @link <https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks>
    */
-   disconnectedCallback(): void {
+  disconnectedCallback(): void {
     dispatchEventConsentHide();
   }
 }
