@@ -13,7 +13,7 @@ import { themeService } from '../../services/theme-service';
 import { translationService } from '../../services/translation-service';
 import { fadeIn, fadeOut } from '../../utils/animation';
 import { ConsentType } from '../../utils/consent';
-import { createElement, createDivElement } from '../../utils/elements';
+import { createDivElement, createVElement } from '../../utils/elements';
 import { dispatchEventConsentHide, dispatchEventConsentShow } from '../../utils/events';
 import { consentButtonClose } from '../consent-button-close/consent-button-close';
 import { consentButton, BUTTON_DEFAULT, BUTTON_PRIMARY } from '../consent-button/consent-button';
@@ -27,11 +27,7 @@ const i18n = translationService();
 const settings = settingsService();
 
 export class ConsentDialog extends HTMLElement {
-  private componentStyle: HTMLStyleElement;
-  private componentThemeStyle: HTMLStyleElement;
-
   private mainElement: HTMLDivElement;
-
   private innerElement: HTMLDivElement;
 
   private tabButtonAgree: ConsentTab;
@@ -49,9 +45,6 @@ export class ConsentDialog extends HTMLElement {
     super();
 
     this.shadow = this.attachShadow({ mode: 'closed' });
-
-    this.componentStyle = createElement('style') as HTMLStyleElement;
-    this.componentThemeStyle = createElement('style') as HTMLStyleElement;
 
     this.mainElement = createDivElement(['c-d', 't']);
     this.mainElement.setAttribute('role', 'dialog');
@@ -83,9 +76,6 @@ export class ConsentDialog extends HTMLElement {
   }
 
   initStyles(): void {
-    this.componentStyle.textContent = INLINE_STYLES_MAIN;
-    this.componentThemeStyle.textContent = themeService().themeTextContent;
-
     const tabButtonAgree = this.tabButtonAgree.render();
     const tabButtonDetails = this.tabButtonDetails.render();
     const tabButtonAbout = this.tabButtonAbout.render();
@@ -261,8 +251,8 @@ export class ConsentDialog extends HTMLElement {
   }
 
   appendCode(): void {
-    this.shadow.appendChild(this.componentStyle);
-    this.shadow.appendChild(this.componentThemeStyle);
+    this.shadow.appendChild(createVElement<HTMLStyleElement>('style', {}, INLINE_STYLES_MAIN));
+    this.shadow.appendChild(createVElement<HTMLStyleElement>('style', {}, themeService().themeTextContent));
     this.shadow.appendChild(this.mainElement);
   }
 
