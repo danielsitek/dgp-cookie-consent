@@ -76,21 +76,19 @@ export class ConsentDialog extends HTMLElement {
   }
 
   initStyles(): void {
+    // TODO: Add styles.
+    this.mainElement.style.display = 'none';
+  }
+
+  initHeaderTabs(): void {
+    if (settings.disableHeader) {
+      return;
+    }
+
     const tabButtonAgree = this.tabButtonAgree.render();
     const tabButtonDetails = this.tabButtonDetails.render();
     const tabButtonAbout = this.tabButtonAbout.render();
     const tabButtonClose = consentButtonClose();
-
-    this.mainElement.style.display = 'none';
-
-    this.mainElement.appendChild(
-      consentTabs({
-        tabs: [tabButtonAgree, tabButtonDetails, tabButtonAbout, tabButtonClose],
-        modifier: 'c-d__h',
-      }),
-    );
-
-    this.mainElement.appendChild(this.innerElement);
 
     tabButtonAgree.addEventListener(EVENT_CLICK, () => {
       this.setTabContentAgree();
@@ -103,6 +101,13 @@ export class ConsentDialog extends HTMLElement {
     tabButtonAbout.addEventListener(EVENT_CLICK, () => {
       this.setTabContentAbout();
     });
+
+    this.mainElement.appendChild(
+      consentTabs({
+        tabs: [tabButtonAgree, tabButtonDetails, tabButtonAbout, tabButtonClose],
+        modifier: 'c-d__h',
+      }),
+    );
   }
 
   setTabContent(tabContent: HTMLDivElement): void {
@@ -254,6 +259,8 @@ export class ConsentDialog extends HTMLElement {
     this.shadow.appendChild(createVElement<HTMLStyleElement>('style', {}, INLINE_STYLES_MAIN));
     this.shadow.appendChild(createVElement<HTMLStyleElement>('style', {}, themeService().themeTextContent));
     this.shadow.appendChild(this.mainElement);
+
+    this.mainElement.appendChild(this.innerElement);
   }
 
   closeModal(): void {
@@ -271,6 +278,7 @@ export class ConsentDialog extends HTMLElement {
    */
   async connectedCallback(): Promise<void> {
     this.initStyles();
+    this.initHeaderTabs();
     this.appendCode();
     this.setTabContentAgree();
 
