@@ -1,4 +1,7 @@
 import {
+  BODY_ANCHOR_HREF_ABOUT,
+  BODY_ANCHOR_HREF_AGREE,
+  BODY_ANCHOR_HREF_DETAILS,
   CONSENT_TYPE_ADVANCED,
   CONSENT_TYPE_FULL,
   CONSENT_TYPE_REJECTED,
@@ -124,6 +127,9 @@ export class ConsentDialog extends HTMLElement {
           this.createButtonEdit(),
           this.createButtonAllowAll(),
         ],
+        onAnchorClick: (event) => {
+          this.handleBodyAnchorsClick(event);
+        },
       }),
     );
 
@@ -144,10 +150,43 @@ export class ConsentDialog extends HTMLElement {
           this.createButtonEdit(),
           this.createButtonAllowAll(),
         ],
+        onAnchorClick: (event) => {
+          this.handleBodyAnchorsClick(event);
+        },
       }),
     );
 
     this.tabButtonAbout.active = true;
+  }
+
+  handleBodyAnchorsClick(event: Event): void {
+    if (event.target === null) {
+      return;
+    }
+
+    const el = (event.target as HTMLAnchorElement).closest('a');
+
+    if (el === null) {
+      return;
+    }
+
+    if (el.href.includes(BODY_ANCHOR_HREF_AGREE)) {
+      event.preventDefault();
+      this.setTabContentAgree();
+      return;
+    }
+
+    if (el.href.includes(BODY_ANCHOR_HREF_DETAILS)) {
+      event.preventDefault();
+      this.setTabContentDetails();
+      return;
+    }
+
+    if (el.href.includes(BODY_ANCHOR_HREF_ABOUT)) {
+      event.preventDefault();
+      this.setTabContentAbout();
+      return;
+    }
   }
 
   tabContentDetails(): HTMLDivElement {
@@ -166,18 +205,30 @@ export class ConsentDialog extends HTMLElement {
         necessary: {
           ...i18n.tabDetail.necessary,
           switch: this.switchButtonNecessary,
+          onAnchorClick: (event) => {
+            this.handleBodyAnchorsClick(event);
+          },
         },
         preferences: {
           ...i18n.tabDetail.preferences,
           switch: this.switchButtonPreferences,
+          onAnchorClick: (event) => {
+            this.handleBodyAnchorsClick(event);
+          },
         },
         statistics: {
           ...i18n.tabDetail.statistics,
           switch: this.switchButtonStatistics,
+          onAnchorClick: (event) => {
+            this.handleBodyAnchorsClick(event);
+          },
         },
         marketing: {
           ...i18n.tabDetail.marketing,
           switch: this.switchButtonMarketing,
+          onAnchorClick: (event) => {
+            this.handleBodyAnchorsClick(event);
+          },
         },
       },
     });

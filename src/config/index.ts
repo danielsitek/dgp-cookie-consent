@@ -35,3 +35,7 @@ export const CONSENT_TYPE_REJECTED: ConsentType = 'rejected';
 
 export const DENIED = 'denied';
 export const GRANTED = 'granted';
+
+export const BODY_ANCHOR_HREF_ABOUT = '#consent-about';
+export const BODY_ANCHOR_HREF_DETAILS = '#consent-details';
+export const BODY_ANCHOR_HREF_AGREE = '#consent-agree';

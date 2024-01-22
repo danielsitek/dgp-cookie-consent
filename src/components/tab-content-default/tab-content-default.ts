@@ -1,4 +1,5 @@
 import { createDivElement } from '../../utils/elements';
+import { handleBodyAnchorClicks } from '../../utils/handleBodyAnchorClicks';
 import { consentDialogFooter } from '../consent-dialog-footer/consent-dialog-footer';
 
 interface TabContentDefaultProps {
@@ -6,6 +7,7 @@ interface TabContentDefaultProps {
   buttonEdit?: HTMLButtonElement;
   buttonAllowAll?: HTMLButtonElement;
   buttons?: Array<HTMLButtonElement | boolean>;
+  onAnchorClick?: (event: Event) => void;
 }
 
 export const tabContentDefault = (props: TabContentDefaultProps): HTMLDivElement => {
@@ -14,6 +16,8 @@ export const tabContentDefault = (props: TabContentDefaultProps): HTMLDivElement
 
   body.innerHTML = props.body || 'props.body';
   content.setAttribute('role', 'tabpanel');
+
+  handleBodyAnchorClicks(body, props);
 
   content.appendChild(body);
   content.appendChild(

@@ -1,9 +1,11 @@
 import { createDivElement } from '../../utils/elements';
+import { handleBodyAnchorClicks } from '../../utils/handleBodyAnchorClicks';
 
 export interface ConsentSectionProps {
   title: string;
   perex: string;
   switch: HTMLElement;
+  onAnchorClick?: (event: Event) => void;
 }
 
 export const consentSection = (props: ConsentSectionProps): HTMLDivElement => {
@@ -16,6 +18,8 @@ export const consentSection = (props: ConsentSectionProps): HTMLDivElement => {
   header.innerHTML = `<strong>${props.title}</strong>`;
 
   perex.innerHTML = props.perex;
+
+  handleBodyAnchorClicks(perex, props);
 
   switchContainer.appendChild(props.switch);
 
