@@ -7,6 +7,11 @@ export const defaultSettings: CookieConsentSettings = {
   },
 
   // Settings for tab about.
+  tabDetails: {
+    showButtonAllowAll: true,
+  },
+
+  // Settings for tab about.
   tabAbout: {
     showButtonRejectAll: true,
   },
