@@ -53,6 +53,10 @@
     overflow-y: auto;
   }
 
+  &__b-i {
+    margin: $spacing-3 0;
+  }
+
   // .consent-dialog__updated
   &__u {
     display: block;

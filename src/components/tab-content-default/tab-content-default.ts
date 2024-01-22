@@ -13,12 +13,14 @@ interface TabContentDefaultProps {
 export const tabContentDefault = (props: TabContentDefaultProps): HTMLDivElement => {
   const content = createDivElement(['c-t-c']);
   const body = createDivElement(['c-d__b']);
+  const inner = createDivElement(['c-d__b-i']);
 
-  body.innerHTML = props.body || 'props.body';
+  inner.innerHTML = props.body || 'props.body';
   content.setAttribute('role', 'tabpanel');
 
-  handleBodyAnchorClicks(body, props);
+  handleBodyAnchorClicks(inner, props);
 
+  body.appendChild(inner);
   content.appendChild(body);
   content.appendChild(
     consentDialogFooter({
