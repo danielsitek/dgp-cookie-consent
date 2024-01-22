@@ -156,7 +156,11 @@ export class ConsentDialog extends HTMLElement {
     this.switchButtonMarketing.setChecked(window.CookieConsent.marketing);
 
     return tabContentDetails({
-      buttons: [this.createButtonRejectAll(), this.createButtonConfirm()],
+      buttons: [
+        this.createButtonRejectAll(),
+        this.createButtonConfirm(),
+        settings.tabDetails.showButtonAllowAll ? this.createButtonAllowAll() : false,
+      ],
       lastUpdated: i18n.lastUpdated,
       sections: {
         necessary: {
