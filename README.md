@@ -48,36 +48,36 @@ Awesome one-of-a-kind Cookie Consent panel.
 
 ## Key features
 
-* Lightweight
-* Zero dependency
-* All-in-one - no aditional css needed
-* GDPR Compliant
-* Custom themes
-* Custom translations
+- Lightweight
+- Zero dependency
+- All-in-one - no aditional css needed
+- GDPR Compliant
+- Custom themes
+- Custom translations
 
 ## How to install
 
 1. Download the latest release or use CDN.
 
-    ```
-    https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.6.0/dist/cookies.min.js
-    ```
+   ```
+   https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.6.0/dist/cookies.min.js
+   ```
 
 1. Insert this code on the bottom of the page, or [inject it via GTM](#gtm-implementation).
 
-    ```html
-    <script type="text/javascript" src="<path-to-your>cookies.min.js"></script>
-    ```
+   ```html
+   <script type="text/javascript" src="<path-to-your>cookies.min.js"></script>
+   ```
 
-2. Customize and run.
+1. Customize and run.
 
-    ```html
-    <script type="text/javascript">
-      window.CookieConsentTranslations = {};
-      window.CookieConsentTheme = {};
-    </script>
-    <script type="text/javascript" src="<path-to-your>cookies.min.js"></script>
-    ```
+   ```html
+   <script type="text/javascript">
+     window.CookieConsentTranslations = {};
+     window.CookieConsentTheme = {};
+   </script>
+   <script type="text/javascript" src="<path-to-your>cookies.min.js"></script>
+   ```
 
 ## Translations
 
@@ -106,19 +106,23 @@ window.CookieConsentTranslations = {
     title: 'Detail',
     necessary: {
       title: 'Nutné',
-      perex: 'Nutné cookies pomáhají, aby byla webová stránka použitelná tak, že umožní základní funkce jako navigace stránky a přístup k zabezpečeným sekcím webové stránky. Webová stránka nemůže správně fungovat bez těchto cookies.',
+      perex:
+        'Nutné cookies pomáhají, aby byla webová stránka použitelná tak, že umožní základní funkce jako navigace stránky a přístup k zabezpečeným sekcím webové stránky. Webová stránka nemůže správně fungovat bez těchto cookies.',
     },
     preferences: {
       title: 'Preferenční',
-      perex: 'Preferenční cookies umožňují, aby si webová stránka zapamatovala informace, které mění, jak se webová stránka chová nebo jak vypadá. Je to například preferovaný jazyk nebo region, kde se nacházíte.',
+      perex:
+        'Preferenční cookies umožňují, aby si webová stránka zapamatovala informace, které mění, jak se webová stránka chová nebo jak vypadá. Je to například preferovaný jazyk nebo region, kde se nacházíte.',
     },
     statistics: {
       title: 'Statistické',
-      perex: 'Statistické cookies pomáhají majitelům webových stránek, aby porozuměli, jak návštěvníci používají webové stránky. Anonymně sbírají a sdělují informace.',
+      perex:
+        'Statistické cookies pomáhají majitelům webových stránek, aby porozuměli, jak návštěvníci používají webové stránky. Anonymně sbírají a sdělují informace.',
     },
     marketing: {
       title: 'Marketingové',
-      perex: 'Marketingové cookies jsou používány pro sledování návštěvníků na webových stránkách. Záměrem je zobrazit reklamu, která je relevantní a zajímavá pro jednotlivého uživatele a tímto hodnotnější pro vydavatele a inzerenty třetích stran.',
+      perex:
+        'Marketingové cookies jsou používány pro sledování návštěvníků na webových stránkách. Záměrem je zobrazit reklamu, která je relevantní a zajímavá pro jednotlivého uživatele a tímto hodnotnější pro vydavatele a inzerenty třetích stran.',
     },
   },
   buttonEdit: {
@@ -185,17 +189,17 @@ window.CookieConsentTheme = {
   'button-primary--hover__box-shadow': 'none',
 
   'badge__bg-color': '#ffffff',
-  'badge__color': '#f8c132',
-  'badge__border': '0 none',
+  badge__color: '#f8c132',
+  badge__border: '0 none',
   'badge__border-radius': '10rem',
   'badge__box-shadow': '0 1px 6px rgba(5,27,44,.06),0 2px 32px rgba(5,27,44,.16)',
-  'badge__position': 'auto auto 1rem 1rem',
+  badge__position: 'auto auto 1rem 1rem',
 };
 ```
 
 ### Predefined themes
 
-* <details>
+- <details>
   <summary>ZOOT / Default theme</summary>
 
   ```js
@@ -203,9 +207,10 @@ window.CookieConsentTheme = {
     /* ZOOT theme is same as default theme */
   };
   ```
+
   </details>
 
-* <details>
+- <details>
   <summary>Different</summary>
 
   ```js
@@ -224,11 +229,14 @@ window.CookieConsentTheme = {
 
     'button-primary--hover__bg-color': '#007379',
     'button-primary--hover__color': '#fff',
+
+    badge__color: '#008c95',
   };
   ```
+
   </details>
 
-* <details>
+- <details>
   <summary>UrbanStore</summary>
 
   ```js
@@ -254,11 +262,14 @@ window.CookieConsentTheme = {
 
     'button-primary--hover__bg-color': '#cfad69',
     'button-primary--hover__color': '#fff',
+
+    badge__color: '#cfad69',
   };
   ```
+
   </details>
 
-* <details>
+- <details>
   <summary>Bibloo</summary>
 
   ```js
@@ -284,8 +295,11 @@ window.CookieConsentTheme = {
 
     'button-primary--hover__bg-color': '#f3f3f2',
     'button-primary--hover__color': '#000',
+
+    badge__color: '#000000',
   };
   ```
+
   </details>
 
 ## Darkmode Theme Customisation
@@ -312,19 +326,19 @@ window.CookieConsentSettings = {
   },
   enableDarkMode: true,
   disableBadge: false,
+  disableHeader: false,
 };
 ```
 
 Here is the complete list of setting options:
 
-
-| Property | Value | description |
-| --- | --- | --- |
-| `tabAgree.showButtonRejectAll` | `boolean` | Enable reject all button in first tab. Default value is `true`. |
-| `tabAbout.showButtonRejectAll` | `boolean` | Enable reject all button in last tab. Default value is `true`. |
-| `enableDarkMode` | `boolean` | Enable automatic switch to dark mode theme. Default value is `false`. |
-| `disableBadge` | `boolean` | Disable badge button. Default value is `false`. |
-
+| Property                       | Value     | description                                                           |
+| ------------------------------ | --------- | --------------------------------------------------------------------- |
+| `tabAgree.showButtonRejectAll` | `boolean` | Enable reject all button in first tab. Default value is `true`.       |
+| `tabAbout.showButtonRejectAll` | `boolean` | Enable reject all button in last tab. Default value is `true`.        |
+| `enableDarkMode`               | `boolean` | Enable automatic switch to dark mode theme. Default value is `false`. |
+| `disableBadge`                 | `boolean` | Disable badge button. Default value is `false`.                       |
+| `disableHeader`                | `boolean` | Disable header. Default value is `false`.                             |
 
 ## API Methods
 
@@ -346,7 +360,7 @@ Object to pass settings to consent modal window. This needs to be placed before 
 
 ### `window.CookieConsentModalOpen()`
 
-* Returns `<void>`.
+- Returns `<void>`.
 
 Open the consent modal window and hide the badge button.
 
@@ -366,50 +380,49 @@ Open the consent modal window and hide the badge button.
 
 ### `window.CookieConsent.marketing`
 
-* Returns `<boolean>`.
+- Returns `<boolean>`.
 
 Returns a boolean value of consent category.
 
 ### `window.CookieConsent.preferences`
 
-* Returns `<boolean>`.
+- Returns `<boolean>`.
 
 Returns a boolean value of consent category.
 
 ### `window.CookieConsent.statistics`
 
-* Returns `<boolean>`.
+- Returns `<boolean>`.
 
 Returns a boolean value of consent category.
 
 ### `window.CookieConsent.necessary`
 
-* Returns `<boolean>`.
+- Returns `<boolean>`.
 
 Returns a boolean value of consent category.
 
 ### `window.CookieConsent.updated`
 
-* Returns `<string>`.
+- Returns `<string>`.
 
 Returns a ISO string formated date and time, or empty string if consent has not yet been updated.
 
 ### `window.CookieConsent.id`
 
-* Returns `<string>`.
+- Returns `<string>`.
 
 Returns a unique ID of user given consent, or empty string if consent has not yet been given.
 
 ### `window.CookieConsent.type`
 
-* Returns `<string>`.
+- Returns `<string>`.
 
 Returns a consent type of user given consent, or empty string if consent has not yet been given.
 
 ### Event `consent-updated`
 
 Fires every time the consent is updated.
-
 
 **Example**:
 
@@ -423,7 +436,6 @@ window.addEventListener('consent-updated', () => {
 
 Fires every time the modal consent window is being shown.
 
-
 **Example**:
 
 ```js
@@ -435,7 +447,6 @@ window.addEventListener('consent-show', () => {
 ### Event `consent-hide`
 
 Fires every time the modal consent window closes.
-
 
 **Example**:
 
@@ -449,7 +460,6 @@ window.addEventListener('consent-hide', () => {
 
 Fires one time when consent script is loaded on page and ready.
 
-
 **Example**:
 
 ```js
@@ -461,7 +471,6 @@ window.addEventListener('consent-ready', () => {
 ### Event `consent-close`
 
 Fires every time the modal consent window is closed by ESC key or by clicking on cross.
-
 
 **Example**:
 
@@ -475,7 +484,6 @@ window.addEventListener('consent-close', () => {
 
 Fires every time the consent badge is shown.
 
-
 **Example**:
 
 ```js
@@ -487,7 +495,6 @@ window.addEventListener('consent-badge-show', () => {
 ### Event `consent-badge-hide`
 
 Fires every time the consent badge hides.
-
 
 **Example**:
 
@@ -501,7 +508,6 @@ window.addEventListener('consent-badge-hide', () => {
 
 Fires every time the consent badge is clicked.
 
-
 **Example**:
 
 ```js
@@ -514,7 +520,7 @@ window.addEventListener('consent-badge-click', () => {
 
 ### 1. Create Variables
 
-* **CookieConsent.marketing**
+- **CookieConsent.marketing**
 
   **Type**: JavaScript Code
 
@@ -524,7 +530,7 @@ window.addEventListener('consent-badge-click', () => {
   function () { return CookieConsent.marketing.toString(); }
   ```
 
-* **CookieConsent.preferences**
+- **CookieConsent.preferences**
 
   **Type**: JavaScript Code
 
@@ -534,7 +540,7 @@ window.addEventListener('consent-badge-click', () => {
   function () { return CookieConsent.preferences.toString(); }
   ```
 
-* **CookieConsent.statistics**
+- **CookieConsent.statistics**
 
   **Type**: JavaScript Code
 
@@ -544,7 +550,7 @@ window.addEventListener('consent-badge-click', () => {
   function () { return CookieConsent.statistics.toString(); }
   ```
 
-* CookieConsent Version (optional)
+- CookieConsent Version (optional)
 
   This variable is only for simplified version changes.
 
@@ -558,7 +564,7 @@ window.addEventListener('consent-badge-click', () => {
 
 ### 2. Create Rules
 
-* **CookieConsent - Marketing**
+- **CookieConsent - Marketing**
 
   **Rule type**: Custom event
 
@@ -571,29 +577,12 @@ window.addEventListener('consent-badge-click', () => {
   **This rule run on**: Some custom events
 
   **Run this rule when...**:
-    * `CookieConsent.marketing`
-    * contains
-    * `true`
 
-* **CookieConsent - Preference**
+  - `CookieConsent.marketing`
+  - contains
+  - `true`
 
-  **Rule type**: Custom event
-
-  **Event name**:
-
-  ```md
-  cookieconsent_updated
-  ```
-
-  **This rule run on**: Some custom events
-
-  **Run this rule when...**:
-    * `CookieConsent.preferences`
-    * contains
-    * `true`
-
-
-* **CookieConsent - Statistics**
+- **CookieConsent - Preference**
 
   **Rule type**: Custom event
 
@@ -606,13 +595,32 @@ window.addEventListener('consent-badge-click', () => {
   **This rule run on**: Some custom events
 
   **Run this rule when...**:
-    * `CookieConsent.statistics`
-    * contains
-    * `true`
+
+  - `CookieConsent.preferences`
+  - contains
+  - `true`
+
+- **CookieConsent - Statistics**
+
+  **Rule type**: Custom event
+
+  **Event name**:
+
+  ```md
+  cookieconsent_updated
+  ```
+
+  **This rule run on**: Some custom events
+
+  **Run this rule when...**:
+
+  - `CookieConsent.statistics`
+  - contains
+  - `true`
 
 ### 3. Create tag
 
-* **CookieConsent**
+- **CookieConsent**
 
   **Type of tag**: Custom HTML
 
@@ -620,7 +628,6 @@ window.addEventListener('consent-badge-click', () => {
 
   ```html
   <script type="text/javascript" id="cookie-consent-init">
-
     // Optional: add own translations
     // window.CookieConsentTranslations = {};
 
@@ -635,13 +642,13 @@ window.addEventListener('consent-badge-click', () => {
 
     window.addEventListener('consent-updated', function consentUpdatedListener() {
       dataLayer.push({
-        'event': 'cookieconsent_updated',
+        event: 'cookieconsent_updated',
       });
     });
 
     window.addEventListener('consent-ready', function () {
       dataLayer.push({
-        'event': 'cookieconsent_ready',
+        event: 'cookieconsent_ready',
       });
     });
 
