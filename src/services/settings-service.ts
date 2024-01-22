@@ -9,6 +9,7 @@ export interface CookieConsentSettings {
   tabAbout: CookieConsentSettingsTab;
   enableDarkMode: boolean;
   disableBadge: boolean;
+  disableHeader: boolean;
 }
 
 export const settingsService = (): CookieConsentSettings => {
@@ -30,5 +31,7 @@ export const settingsService = (): CookieConsentSettings => {
     enableDarkMode: windowSettings?.enableDarkMode !== undefined ? windowSettings.enableDarkMode : defaultSettings.enableDarkMode,
 
     disableBadge: windowSettings?.disableBadge !== undefined ? windowSettings.disableBadge : defaultSettings.disableBadge,
+
+    disableHeader: windowSettings?.disableHeader !== undefined ? windowSettings.disableHeader : defaultSettings.disableHeader,
   };
 };
