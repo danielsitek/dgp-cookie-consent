@@ -46,6 +46,11 @@ import { CookieConsentTheme } from '../services/theme-service';
   'badge__border-radius': '10rem',
   'badge__box-shadow': '0 1px 6px rgba(5,27,44,.06),0 2px 32px rgba(5,27,44,.16)',
   'badge__position': 'auto auto 1rem 1rem',
+
+  'base-link__color': '#242424',
+  'base-link__text-decoration': 'underline',
+  'base-link--hover__color': '#efaf08',
+  'base-link--hover__text-decoration': 'underline',
  * ```
  */
 

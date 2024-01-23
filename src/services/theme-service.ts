@@ -45,6 +45,11 @@ export interface CookieConsentTheme {
   'badge__box-shadow'?: string;
   badge__position?: string;
 
+  'base-link__color'?: string;
+  'base-link__text-decoration'?: string;
+  'base-link--hover__color'?: string;
+  'base-link--hover__text-decoration'?: string;
+
   [key: string]: string | undefined;
 }
 
