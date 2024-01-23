@@ -1,4 +1,15 @@
-import { DENIED, EVENT_CONSENT_HIDE, EVENT_CONSENT_READY, EVENT_CONSENT_SHOW, EVENT_CONSENT_UPDATED, GRANTED } from './config';
+import {
+  DENIED,
+  EVENT_BADGE_CLICK,
+  EVENT_BADGE_HIDE,
+  EVENT_BADGE_SHOW,
+  EVENT_CONSENT_CLOSE,
+  EVENT_CONSENT_HIDE,
+  EVENT_CONSENT_READY,
+  EVENT_CONSENT_SHOW,
+  EVENT_CONSENT_UPDATED,
+  GRANTED,
+} from './config';
 import { dataLayerPush } from './utils/data-layer-push';
 import { getDefaultConsent } from './utils/read-consent';
 
@@ -68,6 +79,34 @@ window.addEventListener(EVENT_CONSENT_HIDE, function () {
   });
 });
 
+// Send event to dataLayer on consent window close by cross/ESC.
+window.addEventListener(EVENT_CONSENT_CLOSE, function () {
+  dataLayerPush({
+    event: 'cookie_consent_bar_close',
+  });
+});
+
+// Send event to dataLayer on consent badge show.
+window.addEventListener(EVENT_BADGE_SHOW, function () {
+  dataLayerPush({
+    event: 'cookie_consent_badge_show',
+  });
+});
+
+// Send event to dataLayer on consent badge hide.
+window.addEventListener(EVENT_BADGE_HIDE, function () {
+  dataLayerPush({
+    event: 'cookie_consent_badge_hide',
+  });
+});
+
+// Send event to dataLayer on consent badge click.
+window.addEventListener(EVENT_BADGE_CLICK, function () {
+  dataLayerPush({
+    event: 'cookie_consent_badge_click',
+  });
+});
+
 // Theme
 window.CookieConsentTheme = {
   'base-color': '#3c3c3c',
@@ -89,6 +128,13 @@ window.CookieConsentTheme = {
 
   'button-primary--hover__bg-color': '#f3f3f2',
   'button-primary--hover__color': '#000',
+
+  badge__color: '#000000',
+
+  'base-link__color': '#000000',
+  'base-link__text-decoration': 'underline',
+  'base-link--hover__color': '#3c3c3c',
+  'base-link--hover__text-decoration': 'underline',
   ...window.CookieConsentTheme,
 };
 
@@ -99,7 +145,13 @@ window.CookieConsentThemeDark = window.CookieConsentThemeDark || {};
 window.CookieConsentTranslations = window.CookieConsentTranslations || {};
 
 // Settings
-window.CookieConsentSettings = window.CookieConsentSettings || {};
+window.CookieConsentSettings = {
+  ...window.CookieConsentSettings,
+  tabDetails: {
+    showButtonAllowAll: false,
+    ...(window.CookieConsentSettings.tabDetails || {}),
+  },
+};
 
 // COOKIE CONSENT PANEL INITIALIZATION
 // ===
