@@ -146,6 +146,20 @@ window.CookieConsentTranslations = {
 
 > **Info**: Key `%date` in `window.CookieConsentTranslations.lastUpdated` will be replaced with locale date, based on `window.CookieConsentTranslations.locale`.
 
+> **Info**: `perex` and `body` values are rendered as HTML content.
+
+> **Since v1.6.1**
+>
+> Since version 1.6.1 you can insert anchor links to other tabs in `perex` and `body`. The script will look for anchor elements and if they have `#consent-agree|#consent-details|#consent-about` in href attribute, click on such element will switch to selected tab.
+>
+> Examples:
+>
+> ```
+> <a href="#consent-agree">Go to tab Agree</a>
+> <a href="#consent-details">Go to tab Details</a>
+> <a href="#consent-about">Go to tab About</a>
+> ```
+
 ## Theme Customisation
 
 For theming purposes, these all the keys with it's default values.
@@ -194,6 +208,11 @@ window.CookieConsentTheme = {
   'badge__border-radius': '10rem',
   'badge__box-shadow': '0 1px 6px rgba(5,27,44,.06),0 2px 32px rgba(5,27,44,.16)',
   badge__position: 'auto auto 1rem 1rem',
+
+  'base-link__color': '#242424',
+  'base-link__text-decoration': 'underline',
+  'base-link--hover__color': '#efaf08',
+  'base-link--hover__text-decoration': 'underline',
 };
 ```
 
@@ -332,13 +351,14 @@ window.CookieConsentSettings = {
 
 Here is the complete list of setting options:
 
-| Property                       | Value     | description                                                           |
-| ------------------------------ | --------- | --------------------------------------------------------------------- |
-| `tabAgree.showButtonRejectAll` | `boolean` | Enable reject all button in first tab. Default value is `true`.       |
-| `tabAbout.showButtonRejectAll` | `boolean` | Enable reject all button in last tab. Default value is `true`.        |
-| `enableDarkMode`               | `boolean` | Enable automatic switch to dark mode theme. Default value is `false`. |
-| `disableBadge`                 | `boolean` | Disable badge button. Default value is `false`.                       |
-| `disableHeader`                | `boolean` | Disable header. Default value is `false`.                             |
+| Property                        | Value     | Description                                 | Default value |
+| ------------------------------- | --------- | ------------------------------------------- | ------------- |
+| `tabAgree.showButtonRejectAll`  | `boolean` | Enable reject all button in first tab.      | `true`        |
+| `tabDetails.showButtonAllowAll` | `boolean` | Enable allow all button in details tab.     | `true`        |
+| `tabAbout.showButtonRejectAll`  | `boolean` | Enable reject all button in last tab.       | `true`        |
+| `enableDarkMode`                | `boolean` | Enable automatic switch to dark mode theme. | `false`       |
+| `disableBadge`                  | `boolean` | Disable badge button.                       | `false`       |
+| `disableHeader`                 | `boolean` | Disable header.                             | `false`       |
 
 ## API Methods
 
