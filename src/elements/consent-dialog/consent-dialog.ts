@@ -112,6 +112,14 @@ export class ConsentDialog extends HTMLElement {
     this.innerElement.append(tabContent);
   }
 
+  onAnchorClickProp(): { onAnchorClick: (el: HTMLAnchorElement) => void } {
+    return {
+      onAnchorClick: (el: HTMLAnchorElement): void => {
+        this.handleBodyAnchorsClick(el);
+      },
+    };
+  }
+
   setTabContentAgree(): void {
     this.setTabContent(
       tabContentDefault({
@@ -121,9 +129,7 @@ export class ConsentDialog extends HTMLElement {
           this.createButtonEdit(),
           this.createButtonAllowAll(),
         ],
-        onAnchorClick: (el) => {
-          this.handleBodyAnchorsClick(el);
-        },
+        ...this.onAnchorClickProp(),
       }),
     );
 
@@ -148,9 +154,7 @@ export class ConsentDialog extends HTMLElement {
           this.createButtonEdit(),
           this.createButtonAllowAll(),
         ],
-        onAnchorClick: (el) => {
-          this.handleBodyAnchorsClick(el);
-        },
+        ...this.onAnchorClickProp(),
       }),
     );
 
@@ -172,10 +176,6 @@ export class ConsentDialog extends HTMLElement {
   }
 
   tabContentDetailsProps(): TabContentDetailsProps {
-    const onAnchorClick = (el: HTMLAnchorElement) => {
-      this.handleBodyAnchorsClick(el);
-    };
-
     return {
       buttons: [
         this.createButtonRejectAll(),
@@ -187,22 +187,22 @@ export class ConsentDialog extends HTMLElement {
         necessary: {
           ...i18n.tabDetail.necessary,
           switch: this.switchButtonNecessary,
-          onAnchorClick,
+          ...this.onAnchorClickProp(),
         },
         preferences: {
           ...i18n.tabDetail.preferences,
           switch: this.switchButtonPreferences,
-          onAnchorClick,
+          ...this.onAnchorClickProp(),
         },
         statistics: {
           ...i18n.tabDetail.statistics,
           switch: this.switchButtonStatistics,
-          onAnchorClick,
+          ...this.onAnchorClickProp(),
         },
         marketing: {
           ...i18n.tabDetail.marketing,
           switch: this.switchButtonMarketing,
-          onAnchorClick,
+          ...this.onAnchorClickProp(),
         },
       },
     };
