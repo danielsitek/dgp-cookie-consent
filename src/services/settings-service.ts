@@ -1,4 +1,4 @@
-import { defaultSettings } from '../settings/default';
+import { defaultSettings } from '@/settings/default';
 
 export interface CookieConsentSettingsTab {
   showButtonRejectAll?: boolean;
@@ -36,10 +36,13 @@ export const settingsService = (): CookieConsentSettings => {
       ...windowSettings?.tabAbout,
     },
 
-    enableDarkMode: windowSettings?.enableDarkMode !== undefined ? windowSettings.enableDarkMode : defaultSettings.enableDarkMode,
+    enableDarkMode:
+      windowSettings?.enableDarkMode !== undefined ? windowSettings.enableDarkMode : defaultSettings.enableDarkMode,
 
-    disableBadge: windowSettings?.disableBadge !== undefined ? windowSettings.disableBadge : defaultSettings.disableBadge,
+    disableBadge:
+      windowSettings?.disableBadge !== undefined ? windowSettings.disableBadge : defaultSettings.disableBadge,
 
-    disableHeader: windowSettings?.disableHeader !== undefined ? windowSettings.disableHeader : defaultSettings.disableHeader,
+    disableHeader:
+      windowSettings?.disableHeader !== undefined ? windowSettings.disableHeader : defaultSettings.disableHeader,
   };
 };

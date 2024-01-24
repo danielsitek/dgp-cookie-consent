@@ -1,6 +1,6 @@
-import { EVENT_CLICK } from '../../config';
-import { ComponentProps } from '../../utils/component-helpers';
-import { createElement } from '../../utils/elements';
+import { EVENT_CLICK } from '@/config';
+import { ComponentProps } from '@/utils/component-helpers';
+import { createVElement } from '@/utils/elements';
 
 interface ConsentTabProps extends ComponentProps {
   label: string;
@@ -16,19 +16,18 @@ export class ConsentTab {
 
   constructor(props: ConsentTabProps, activeCb?: () => void) {
     this.props = props;
-    this.element = createElement('button', ['c-t']) as HTMLButtonElement;
-    this.element.setAttribute('role', 'tab');
     this.activeCallBack = activeCb;
 
-    this.element.innerHTML = `
-      <span class="c-t__i">${props.label}</span>
-      <div class="c-t__l"></div>
-    `;
-
-    if (this.props.modifier) {
-      const modifiers = this.props.modifier.split(' ');
-      this.element.classList.add(...modifiers);
-    }
+    this.element = createVElement<HTMLButtonElement>(
+      'button',
+      {
+        class: 'c-t',
+        role: 'tab',
+        'aria-selected': false,
+      },
+      createVElement('span', { class: 'c-t__i' }, props.label),
+      createVElement<HTMLDivElement>('div', { class: 'c-t__l' }),
+    );
 
     if (this.props.active) {
       this.active = this.props.active;

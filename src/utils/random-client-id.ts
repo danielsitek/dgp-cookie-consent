@@ -1,4 +1,4 @@
-import { CONSENT_ID_TIMESTAMP_LENGTH } from '../config';
+import { CONSENT_ID_TIMESTAMP_LENGTH } from '@/config';
 
 /**
  * Generate random ID in similar format like GMT's ClientID.
@@ -12,7 +12,7 @@ export const randomClientId = (length: number): string => {
 
   const random = Math.random().toFixed(fullLength).slice(start, fullLength);
 
-  const timeString = (new Date()).getTime().toString().slice(0, CONSENT_ID_TIMESTAMP_LENGTH);
+  const timeString = new Date().getTime().toString().slice(0, CONSENT_ID_TIMESTAMP_LENGTH);
 
   return `${random}.${timeString}`;
 };

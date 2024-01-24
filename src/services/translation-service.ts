@@ -1,4 +1,4 @@
-import cs from '../translations/cs';
+import cs from '@/translations/cs';
 
 export interface CookieConsentTranslationsDetailSection {
   title: string;

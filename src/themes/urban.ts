@@ -1,4 +1,4 @@
-import { CookieConsentTheme } from '../services/theme-service';
+import { CookieConsentTheme } from '@/services/theme-service';
 
 export const themeUrban: CookieConsentTheme = {
   'border-radius': '0',

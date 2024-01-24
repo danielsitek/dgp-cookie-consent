@@ -1,4 +1,4 @@
-import { ConsentType } from '../utils/consent';
+import { ConsentType } from '@/utils/consent';
 
 export const COOKIE_NAME = 'CookieConsent';
 export const COOKIE_EXPIRATION = 365;

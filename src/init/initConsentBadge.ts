@@ -1,7 +1,8 @@
-import '../components/consent-badge/consent-badge';
-import { BADGE_ELEMENT_NAME, EVENT_BADGE_CLICK } from '../config';
-import { settingsService } from '../services/settings-service';
+import '@/elements/consent-badge/consent-badge';
+import { BADGE_ELEMENT_NAME, EVENT_BADGE_CLICK } from '@/config';
+import { settingsService } from '@/services/settings-service';
 import { initConsentModal } from './initConsentModal';
+import { createVElement } from '@/utils/elements';
 
 const settings = settingsService();
 
@@ -22,6 +23,5 @@ export const initConsentBadge = (): void => {
 
   window.addEventListener(EVENT_BADGE_CLICK, handleBadgeClick);
 
-  const badge = document.createElement(BADGE_ELEMENT_NAME);
-  document.body.appendChild(badge);
+  document.body.append(createVElement(BADGE_ELEMENT_NAME));
 };

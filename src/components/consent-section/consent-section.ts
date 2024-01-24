@@ -1,5 +1,5 @@
-import { createDivElement } from '../../utils/elements';
-import { handleAnchorClicks } from '../../utils/handleBodyAnchorClicks';
+import { createVElement } from '@/utils/elements';
+import { handleAnchorClicks } from '@/utils/handleBodyAnchorClicks';
 
 export interface ConsentSectionProps {
   title: string;
@@ -9,25 +9,40 @@ export interface ConsentSectionProps {
 }
 
 export const consentSection = (props: ConsentSectionProps): HTMLDivElement => {
-  const content = createDivElement(['c-s']);
-  const inner = createDivElement(['c-s__i']);
-  const header = createDivElement(['c-s__a-h']);
-  const perex = createDivElement(['c-s__a-p']);
-  const switchContainer = createDivElement(['c-s__a-s']);
-
-  header.innerHTML = `<strong>${props.title}</strong>`;
-
-  perex.innerHTML = props.perex;
-
-  handleAnchorClicks(perex, props);
-
-  switchContainer.appendChild(props.switch);
-
-  inner.appendChild(header);
-  inner.appendChild(perex);
-  inner.appendChild(switchContainer);
-
-  content.appendChild(inner);
-
-  return content;
+  return createVElement<HTMLDivElement>(
+    'div',
+    {
+      class: 'c-s',
+    },
+    createVElement<HTMLDivElement>(
+      'div',
+      {
+        class: 'c-s__i',
+      },
+      createVElement<HTMLDivElement>(
+        'div',
+        {
+          class: 'c-s__a-h',
+        },
+        createVElement('strong', {}, props.title),
+      ),
+      handleAnchorClicks(
+        createVElement<HTMLDivElement>(
+          'div',
+          {
+            class: 'c-s__a-p',
+          },
+          props.perex,
+        ),
+        props,
+      ),
+      createVElement<HTMLDivElement>(
+        'div',
+        {
+          class: 'c-s__a-s',
+        },
+        props.switch,
+      ),
+    ),
+  );
 };

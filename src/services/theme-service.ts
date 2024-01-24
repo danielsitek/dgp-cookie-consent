@@ -1,4 +1,4 @@
-import { themeDefault, themeDefaultDark } from '../themes/default';
+import { themeDefault, themeDefaultDark } from '@/themes/default';
 import { settingsService } from './settings-service';
 
 export interface CookieConsentTheme {

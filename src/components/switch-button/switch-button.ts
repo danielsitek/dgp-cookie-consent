@@ -1,5 +1,5 @@
-import { EVENT_CHANGE } from '../../config';
-import { createElement, createDivElement } from '../../utils/elements';
+import { EVENT_CHANGE } from '@/config';
+import { createVElement } from '@/utils/elements';
 
 interface SwitchButtonProps {
   checked?: boolean;
@@ -12,16 +12,26 @@ export interface HTMLSwitchButtonElement extends HTMLDivElement {
 }
 
 export const switchButton = (props?: SwitchButtonProps): HTMLSwitchButtonElement => {
-  const content: HTMLSwitchButtonElement = createDivElement() as HTMLSwitchButtonElement;
-  const labelEl = createElement('label', ['s-b']) as HTMLLabelElement;
-  const input = createElement('input', ['s-b__i']) as HTMLInputElement;
-  const background = createDivElement(['s-b__b']);
+  const content: HTMLSwitchButtonElement = createVElement<HTMLSwitchButtonElement>('div');
 
-  input.type = 'checkbox';
-  input.checked = !!props?.checked;
-  input.disabled = !!props?.disabled;
+  const labelEl = createVElement<HTMLLabelElement>('label', {
+    class: 's-b',
+    role: 'switch',
+    'aria-checked': !!props?.checked,
+  });
 
-  background.innerHTML = '<div class="s-b__p"></div>';
+  const input = createVElement<HTMLInputElement>('input', {
+    class: 's-b__i',
+    type: 'checkbox',
+    checked: !!props?.checked,
+    disabled: !!props?.disabled,
+  });
+
+  const background = createVElement<HTMLDivElement>(
+    'div',
+    { class: 's-b__b' },
+    createVElement('div', { class: 's-b__p' }),
+  );
 
   input.addEventListener(EVENT_CHANGE, (event): void => {
     event.preventDefault();
@@ -29,11 +39,10 @@ export const switchButton = (props?: SwitchButtonProps): HTMLSwitchButtonElement
     content.dispatchEvent(new Event(EVENT_CHANGE));
   });
 
-  labelEl.appendChild(input);
-  labelEl.appendChild(background);
-  labelEl.setAttribute('role', 'switch');
+  labelEl.append(input);
+  labelEl.append(background);
 
-  content.appendChild(labelEl);
+  content.append(labelEl);
 
   content.isChecked = () => {
     return input.checked;

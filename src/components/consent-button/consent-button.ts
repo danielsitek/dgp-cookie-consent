@@ -1,6 +1,6 @@
 import { EVENT_CLICK } from '@/config';
-import { componentClassList, ComponentProps } from '../../utils/component-helpers';
-import { createElement } from '../../utils/elements';
+import { componentClassList, ComponentProps } from '@/utils/component-helpers';
+import { createVElement } from '@/utils/elements';
 
 interface ConsentButtonProps extends ComponentProps {
   label: string;
@@ -12,12 +12,19 @@ export const BUTTON_DEFAULT = 'd';
 export const BUTTON_PRIMARY = 'p';
 
 export const consentButton = (props: ConsentButtonProps): HTMLButtonElement => {
-  const element = createElement(
+  const element = createVElement<HTMLButtonElement>(
     'button',
-    componentClassList(['c-b', props.variant ? `c-b--${props.variant}` : ''], props.modifier),
-  ) as HTMLButtonElement;
-
-  element.innerHTML = `<span class="c-b__i">${props.label}</span>`;
+    {
+      class: componentClassList(['c-b', props.variant ? `c-b--${props.variant}` : ''], props.modifier).join(' '),
+    },
+    createVElement(
+      'span',
+      {
+        class: 'c-b__i',
+      },
+      props.label,
+    ),
+  );
 
   element.addEventListener(EVENT_CLICK, () => {
     if (props.onClick !== undefined && typeof props.onClick === 'function') {

@@ -9,7 +9,7 @@ import {
   EVENT_CONSENT_UPDATED,
   EVENT_DEBOUNCE,
   EVENT_DEBOUNCE_FAST,
-} from '../config';
+} from '@/config';
 import { debounce } from './debounce';
 
 const dispatchEvent = (eventName: string) => window.dispatchEvent(new Event(eventName));

@@ -1,7 +1,7 @@
-import { translationService } from '../../services/translation-service';
-import { createDivElement } from '../../utils/elements';
-import { consentDialogFooter } from '../consent-dialog-footer/consent-dialog-footer';
-import { consentSection, ConsentSectionProps } from '../consent-section/consent-section';
+import { translationService } from '@/services/translation-service';
+import { createVElement } from '@/utils/elements';
+import { consentDialogFooter } from '@/components/consent-dialog-footer/consent-dialog-footer';
+import { consentSection, ConsentSectionProps } from '@/components/consent-section/consent-section';
 
 interface TabContentDefaultsectionsProps {
   necessary: ConsentSectionProps;
@@ -31,42 +31,42 @@ const getLocalizedUpdatedDate = (): string => {
 };
 
 const tabContentDetailsBody = (props: TabContentDefaultProps): HTMLDivElement => {
-  const body = createDivElement(['c-d__b']);
+  const sections: HTMLDivElement[] = [];
 
   Object.keys(props.sections).forEach((section: string): void => {
-    body.appendChild(consentSection(props.sections[section]));
+    sections.push(consentSection(props.sections[section]));
   });
 
-  return body;
+  return createVElement<HTMLDivElement>('div', { class: 'c-d__b' }, ...sections);
 };
 
-const tabContentDetailsUpdated = (props: TabContentDefaultProps): HTMLDivElement|undefined => {
-  const updated = createDivElement(['c-d__u']);
+const tabContentDetailsUpdated = (props: TabContentDefaultProps): HTMLDivElement | undefined => {
   const updatedDate = getLocalizedUpdatedDate();
 
   if (!updatedDate.length || !props.lastUpdated) {
     return;
   }
 
-  updated.innerHTML = props.lastUpdated.replace('%date', updatedDate);
-
-  return updated;
+  return createVElement<HTMLDivElement>(
+    'div',
+    {
+      class: 'c-d__u',
+    },
+    props.lastUpdated.replace('%date', updatedDate),
+  );
 };
 
 export const tabContentDetails = (props: TabContentDefaultProps): HTMLDivElement => {
-  const content = createDivElement(['c-t-c']);
-  const updated = tabContentDetailsUpdated(props);
-
-  content.appendChild(tabContentDetailsBody(props));
-  content.setAttribute('role', 'tabpanel');
-
-  if (updated) {
-    content.appendChild(updated);
-  }
-
-  content.appendChild(consentDialogFooter({
-    buttons: props.buttons || [],
-  }));
-
-  return content;
+  return createVElement<HTMLDivElement>(
+    'div',
+    {
+      class: 'c-t-c',
+      role: 'tabpanel',
+    },
+    tabContentDetailsBody(props),
+    tabContentDetailsUpdated(props),
+    consentDialogFooter({
+      buttons: props.buttons || [],
+    }),
+  );
 };

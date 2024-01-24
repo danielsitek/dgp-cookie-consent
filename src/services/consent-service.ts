@@ -1,5 +1,5 @@
-import { ConsentOptions, ConsentOptionsKeys, ConsentType, getConsent, updateConsent } from '../utils/consent';
-import { dispatchEventConsentReady, dispatchEventConsentUpdated } from '../utils/events';
+import { ConsentOptions, ConsentOptionsKeys, ConsentType, getConsent, updateConsent } from '@/utils/consent';
+import { dispatchEventConsentReady, dispatchEventConsentUpdated } from '@/utils/events';
 
 const cache: ConsentOptions = {
   necessary: true,

@@ -9,9 +9,9 @@ import {
   EVENT_CONSENT_SHOW,
   EVENT_CONSENT_UPDATED,
   GRANTED,
-} from './config';
-import { dataLayerPush } from './utils/data-layer-push';
-import { getDefaultConsent } from './utils/read-consent';
+} from '@/config';
+import { dataLayerPush } from '@/utils/data-layer-push';
+import { getDefaultConsent } from '@/utils/read-consent';
 
 declare global {
   interface Window {

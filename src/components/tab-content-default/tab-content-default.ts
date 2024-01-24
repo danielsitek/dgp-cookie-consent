@@ -1,6 +1,6 @@
-import { createDivElement } from '../../utils/elements';
-import { handleAnchorClicks } from '../../utils/handleBodyAnchorClicks';
-import { consentDialogFooter } from '../consent-dialog-footer/consent-dialog-footer';
+import { createVElement } from '@/utils/elements';
+import { handleAnchorClicks } from '@/utils/handleBodyAnchorClicks';
+import { consentDialogFooter } from '@/components/consent-dialog-footer/consent-dialog-footer';
 
 interface TabContentDefaultProps {
   body?: string;
@@ -11,22 +11,30 @@ interface TabContentDefaultProps {
 }
 
 export const tabContentDefault = (props: TabContentDefaultProps): HTMLDivElement => {
-  const content = createDivElement(['c-t-c']);
-  const body = createDivElement(['c-d__b']);
-  const inner = createDivElement(['c-d__b-i']);
-
-  inner.innerHTML = props.body || 'props.body';
-  content.setAttribute('role', 'tabpanel');
-
-  handleAnchorClicks(inner, props);
-
-  body.appendChild(inner);
-  content.appendChild(body);
-  content.appendChild(
+  return createVElement<HTMLDivElement>(
+    'div',
+    {
+      class: 'c-t-c',
+      role: 'tabpanel',
+    },
+    createVElement<HTMLDivElement>(
+      'div',
+      {
+        class: 'c-d__b',
+      },
+      handleAnchorClicks(
+        createVElement<HTMLDivElement>(
+          'div',
+          {
+            class: 'c-d__b-i',
+          },
+          props.body || 'props.body',
+        ),
+        props,
+      ),
+    ),
     consentDialogFooter({
       buttons: props.buttons || [],
     }),
   );
-
-  return content;
 };
