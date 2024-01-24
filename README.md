@@ -150,14 +150,16 @@ window.CookieConsentTranslations = {
 
 > **Since v1.6.1**
 >
-> Since version 1.6.1 you can insert anchor links to other tabs in `perex` and `body`. The script will look for anchor elements and if they have `#consent-agree|#consent-details|#consent-about` in href attribute, click on such element will switch to selected tab.
+> Since version 1.6.1 you can insert anchor links to other tabs in `perex` and `body`. The script will look for anchor elements and if they have `#tab-agree|#tab-details|#tab-about|#allow-all|#reject-all` in href attribute, click on such element will switch to selected tab.
 >
 > Examples:
 >
 > ```
-> <a href="#consent-agree">Go to tab Agree</a>
-> <a href="#consent-details">Go to tab Details</a>
-> <a href="#consent-about">Go to tab About</a>
+> <a href="#tab-agree">Go to tab Agree</a>
+> <a href="#tab-details">Go to tab Details</a>
+> <a href="#tab-about">Go to tab About</a>
+> <a href="#allow-all">Allow all cookies</a>
+> <a href="#reject-all">Reject all cookies</a>
 > ```
 
 ## Theme Customisation

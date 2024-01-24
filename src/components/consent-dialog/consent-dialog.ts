@@ -1,7 +1,9 @@
 import {
-  BODY_ANCHOR_HREF_ABOUT,
-  BODY_ANCHOR_HREF_AGREE,
-  BODY_ANCHOR_HREF_DETAILS,
+  BODY_ANCHOR_HREF_ACTION_AGREE_ALL,
+  BODY_ANCHOR_HREF_ACTION_REJECT_ALL,
+  BODY_ANCHOR_HREF_TAB_ABOUT,
+  BODY_ANCHOR_HREF_TAB_AGREE,
+  BODY_ANCHOR_HREF_TAB_DETAILS,
   CONSENT_TYPE_ADVANCED,
   CONSENT_TYPE_FULL,
   CONSENT_TYPE_REJECTED,
@@ -170,21 +172,33 @@ export class ConsentDialog extends HTMLElement {
       return;
     }
 
-    if (el.href.includes(BODY_ANCHOR_HREF_AGREE)) {
+    if (el.href.includes(BODY_ANCHOR_HREF_TAB_AGREE)) {
       event.preventDefault();
       this.setTabContentAgree();
       return;
     }
 
-    if (el.href.includes(BODY_ANCHOR_HREF_DETAILS)) {
+    if (el.href.includes(BODY_ANCHOR_HREF_TAB_DETAILS)) {
       event.preventDefault();
       this.setTabContentDetails();
       return;
     }
 
-    if (el.href.includes(BODY_ANCHOR_HREF_ABOUT)) {
+    if (el.href.includes(BODY_ANCHOR_HREF_TAB_ABOUT)) {
       event.preventDefault();
       this.setTabContentAbout();
+      return;
+    }
+
+    if (el.href.includes(BODY_ANCHOR_HREF_ACTION_AGREE_ALL)) {
+      event.preventDefault();
+      this.updateConsentOnClick(true, true, true, CONSENT_TYPE_FULL);
+      return;
+    }
+
+    if (el.href.includes(BODY_ANCHOR_HREF_ACTION_REJECT_ALL)) {
+      event.preventDefault();
+      this.updateConsentOnClick(false, false, false, CONSENT_TYPE_REJECTED);
       return;
     }
   }

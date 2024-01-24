@@ -36,6 +36,8 @@ export const CONSENT_TYPE_REJECTED: ConsentType = 'rejected';
 export const DENIED = 'denied';
 export const GRANTED = 'granted';
 
-export const BODY_ANCHOR_HREF_ABOUT = '#consent-about';
-export const BODY_ANCHOR_HREF_DETAILS = '#consent-details';
-export const BODY_ANCHOR_HREF_AGREE = '#consent-agree';
+export const BODY_ANCHOR_HREF_TAB_ABOUT = '#tab-about';
+export const BODY_ANCHOR_HREF_TAB_DETAILS = '#tab-details';
+export const BODY_ANCHOR_HREF_TAB_AGREE = '#tab-agree';
+export const BODY_ANCHOR_HREF_ACTION_AGREE_ALL = '#allow-all';
+export const BODY_ANCHOR_HREF_ACTION_REJECT_ALL = '#reject-all';
