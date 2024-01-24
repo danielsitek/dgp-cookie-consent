@@ -208,6 +208,10 @@ export class ConsentDialog extends HTMLElement {
     this.switchButtonStatistics.setChecked(window.CookieConsent.statistics);
     this.switchButtonMarketing.setChecked(window.CookieConsent.marketing);
 
+    const onAnchorClick = (event: Event) => {
+      this.handleBodyAnchorsClick(event);
+    };
+
     return tabContentDetails({
       buttons: [
         this.createButtonRejectAll(),
@@ -219,30 +223,22 @@ export class ConsentDialog extends HTMLElement {
         necessary: {
           ...i18n.tabDetail.necessary,
           switch: this.switchButtonNecessary,
-          onAnchorClick: (event) => {
-            this.handleBodyAnchorsClick(event);
-          },
+          onAnchorClick,
         },
         preferences: {
           ...i18n.tabDetail.preferences,
           switch: this.switchButtonPreferences,
-          onAnchorClick: (event) => {
-            this.handleBodyAnchorsClick(event);
-          },
+          onAnchorClick,
         },
         statistics: {
           ...i18n.tabDetail.statistics,
           switch: this.switchButtonStatistics,
-          onAnchorClick: (event) => {
-            this.handleBodyAnchorsClick(event);
-          },
+          onAnchorClick,
         },
         marketing: {
           ...i18n.tabDetail.marketing,
           switch: this.switchButtonMarketing,
-          onAnchorClick: (event) => {
-            this.handleBodyAnchorsClick(event);
-          },
+          onAnchorClick,
         },
       },
     });
