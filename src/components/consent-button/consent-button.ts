@@ -16,7 +16,7 @@ export const consentButton = (props: ConsentButtonProps): HTMLButtonElement => {
     'button',
     {
       class: componentClassList(
-        ['c-b', props.variant ? `c-b--${props.variant || BUTTON_DEFAULT}` : ''],
+        ['c-b', props.variant ? `c-b--${props.variant}` : `c-b--${BUTTON_DEFAULT}`],
         props.modifier,
       ).join(' '),
     },

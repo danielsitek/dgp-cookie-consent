@@ -26,7 +26,7 @@ import { ConsentTab } from '@/components/consent-tab/consent-tab';
 import { consentTabs } from '@/components/consent-tabs/consent-tabs';
 import { HTMLSwitchButtonElement, switchButton } from '@/components/switch-button/switch-button';
 import { tabContentDefault } from '@/components/tab-content-default/tab-content-default';
-import { tabContentDetails } from '@/components/tab-content-details/tab-content-details';
+import { TabContentDetailsProps, tabContentDetails } from '@/components/tab-content-details/tab-content-details';
 import { consentDialog } from '@/components/consent-dialog/consent-dialog';
 import { consentDialogInner } from '@/components/consent-dialog-inner/consent-dialog-inner';
 
@@ -171,7 +171,7 @@ export class ConsentDialog extends HTMLElement {
     }
   }
 
-  tabContentDetailsProps() {
+  tabContentDetailsProps(): TabContentDetailsProps {
     const onAnchorClick = (el: HTMLAnchorElement) => {
       this.handleBodyAnchorsClick(el);
     };

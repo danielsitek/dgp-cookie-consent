@@ -11,27 +11,35 @@ export interface HTMLSwitchButtonElement extends HTMLDivElement {
   setChecked: (value: boolean) => void;
 }
 
-export const switchButton = (props?: SwitchButtonProps): HTMLSwitchButtonElement => {
-  const content: HTMLSwitchButtonElement = createVElement<HTMLSwitchButtonElement>('div');
+const backgroundElement = (): HTMLDivElement => {
+  return createVElement<HTMLDivElement>('div', { class: 's-b__b' }, createVElement('div', { class: 's-b__p' }));
+};
 
-  const labelEl = createVElement<HTMLLabelElement>('label', {
-    class: 's-b',
-    role: 'switch',
-    'aria-checked': !!props?.checked,
-  });
+const labelElement = (props?: SwitchButtonProps): HTMLLabelElement => {
+  return createVElement<HTMLLabelElement>(
+    'label',
+    {
+      class: 's-b',
+      role: 'switch',
+      'aria-checked': !!props?.checked,
+    },
+    backgroundElement(),
+  );
+};
 
-  const input = createVElement<HTMLInputElement>('input', {
+const inputElement = (props?: SwitchButtonProps): HTMLInputElement => {
+  return createVElement<HTMLInputElement>('input', {
     class: 's-b__i',
     type: 'checkbox',
     checked: !!props?.checked,
     disabled: !!props?.disabled,
   });
+};
 
-  const background = createVElement<HTMLDivElement>(
-    'div',
-    { class: 's-b__b' },
-    createVElement('div', { class: 's-b__p' }),
-  );
+export const switchButton = (props?: SwitchButtonProps): HTMLSwitchButtonElement => {
+  const content: HTMLSwitchButtonElement = createVElement<HTMLSwitchButtonElement>('div');
+  const labelEl = labelElement(props);
+  const input = inputElement(props);
 
   input.addEventListener(EVENT_CHANGE, (event): void => {
     event.preventDefault();
@@ -39,8 +47,7 @@ export const switchButton = (props?: SwitchButtonProps): HTMLSwitchButtonElement
     content.dispatchEvent(new Event(EVENT_CHANGE));
   });
 
-  labelEl.append(input);
-  labelEl.append(background);
+  labelEl.prepend(input);
 
   content.append(labelEl);
 

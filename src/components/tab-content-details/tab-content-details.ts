@@ -3,14 +3,14 @@ import { createVElement } from '@/utils/elements';
 import { consentDialogFooter } from '@/components/consent-dialog-footer/consent-dialog-footer';
 import { consentSection, ConsentSectionProps } from '@/components/consent-section/consent-section';
 
-interface TabContentDefaultsectionsProps {
+export interface TabContentDefaultsectionsProps {
   necessary: ConsentSectionProps;
   preferences: ConsentSectionProps;
   statistics: ConsentSectionProps;
   marketing: ConsentSectionProps;
   [key: string]: ConsentSectionProps;
 }
-interface TabContentDetailsProps {
+export interface TabContentDetailsProps {
   lastUpdated?: string;
   buttonRejectAll?: HTMLButtonElement;
   buttonConfirm?: HTMLButtonElement;

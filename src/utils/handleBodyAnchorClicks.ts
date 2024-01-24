@@ -6,20 +6,18 @@ interface TextAnchorClickProps {
 
 const handleBodyClicks = (onAnchorClick: (el: HTMLAnchorElement) => void) => {
   return (event: Event): void => {
-    if (event.target === null) {
+    if (event.target === null || !(event.target as Element).matches('a[href^="#"], a[href^="#"] *')) {
       return;
     }
 
-    if ((event.target as Element).matches('a[href^="#"], a[href^="#"] *')) {
-      event.preventDefault();
-      const el = (event.target as HTMLAnchorElement).closest('a');
+    const el = (event.target as HTMLAnchorElement).closest('a');
 
-      if (el === null) {
-        return;
-      }
-
-      onAnchorClick(el);
+    if (el === null) {
+      return;
     }
+
+    event.preventDefault();
+    onAnchorClick(el);
   };
 };
 
