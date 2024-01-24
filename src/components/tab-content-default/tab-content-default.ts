@@ -7,8 +7,21 @@ interface TabContentDefaultProps {
   buttonEdit?: HTMLButtonElement;
   buttonAllowAll?: HTMLButtonElement;
   buttons?: Array<HTMLButtonElement | boolean>;
-  onAnchorClick?: (event: Event) => void;
+  onAnchorClick?: (el: HTMLAnchorElement) => void;
 }
+
+const innerEl = (props: TabContentDefaultProps): HTMLDivElement => {
+  return handleAnchorClicks(
+    createVElement<HTMLDivElement>(
+      'div',
+      {
+        class: 'c-d__b-i',
+      },
+      props.body || 'props.body',
+    ),
+    props,
+  );
+};
 
 export const tabContentDefault = (props: TabContentDefaultProps): HTMLDivElement => {
   return createVElement<HTMLDivElement>(
@@ -22,16 +35,7 @@ export const tabContentDefault = (props: TabContentDefaultProps): HTMLDivElement
       {
         class: 'c-d__b',
       },
-      handleAnchorClicks(
-        createVElement<HTMLDivElement>(
-          'div',
-          {
-            class: 'c-d__b-i',
-          },
-          props.body || 'props.body',
-        ),
-        props,
-      ),
+      innerEl(props),
     ),
     consentDialogFooter({
       buttons: props.buttons || [],

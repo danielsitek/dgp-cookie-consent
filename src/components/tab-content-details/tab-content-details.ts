@@ -10,7 +10,7 @@ interface TabContentDefaultsectionsProps {
   marketing: ConsentSectionProps;
   [key: string]: ConsentSectionProps;
 }
-interface TabContentDefaultProps {
+interface TabContentDetailsProps {
   lastUpdated?: string;
   buttonRejectAll?: HTMLButtonElement;
   buttonConfirm?: HTMLButtonElement;
@@ -30,7 +30,7 @@ const getLocalizedUpdatedDate = (): string => {
   return new Intl.DateTimeFormat(i18n.locale).format(date);
 };
 
-const tabContentDetailsBody = (props: TabContentDefaultProps): HTMLDivElement => {
+const tabContentDetailsBody = (props: TabContentDetailsProps): HTMLDivElement => {
   const sections: HTMLDivElement[] = [];
 
   Object.keys(props.sections).forEach((section: string): void => {
@@ -40,7 +40,7 @@ const tabContentDetailsBody = (props: TabContentDefaultProps): HTMLDivElement =>
   return createVElement<HTMLDivElement>('div', { class: 'c-d__b' }, ...sections);
 };
 
-const tabContentDetailsUpdated = (props: TabContentDefaultProps): HTMLDivElement | undefined => {
+const tabContentDetailsUpdated = (props: TabContentDetailsProps): HTMLDivElement | undefined => {
   const updatedDate = getLocalizedUpdatedDate();
 
   if (!updatedDate.length || !props.lastUpdated) {
@@ -56,7 +56,7 @@ const tabContentDetailsUpdated = (props: TabContentDefaultProps): HTMLDivElement
   );
 };
 
-export const tabContentDetails = (props: TabContentDefaultProps): HTMLDivElement => {
+export const tabContentDetails = (props: TabContentDetailsProps): HTMLDivElement => {
   return createVElement<HTMLDivElement>(
     'div',
     {

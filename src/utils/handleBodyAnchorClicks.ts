@@ -1,8 +1,27 @@
 import { EVENT_CLICK } from '@/config';
 
 interface TextAnchorClickProps {
-  onAnchorClick?: (event: Event) => void;
+  onAnchorClick?: (el: HTMLAnchorElement) => void;
 }
+
+const handleBodyClicks = (onAnchorClick: (el: HTMLAnchorElement) => void) => {
+  return (event: Event): void => {
+    if (event.target === null) {
+      return;
+    }
+
+    if ((event.target as Element).matches('a[href^="#"], a[href^="#"] *')) {
+      event.preventDefault();
+      const el = (event.target as HTMLAnchorElement).closest('a');
+
+      if (el === null) {
+        return;
+      }
+
+      onAnchorClick(el);
+    }
+  };
+};
 
 export const handleAnchorClicks = <T extends TextAnchorClickProps, E extends HTMLElement>(
   bodyEl: E,
@@ -12,16 +31,7 @@ export const handleAnchorClicks = <T extends TextAnchorClickProps, E extends HTM
     return bodyEl;
   }
 
-  bodyEl.addEventListener(EVENT_CLICK, (event): void => {
-    if (event.target === null) {
-      return;
-    }
-
-    if ((event.target as Element).matches('a[href^="#"], a[href^="#"] *')) {
-      event.preventDefault();
-      onAnchorClick(event);
-    }
-  });
+  bodyEl.addEventListener(EVENT_CLICK, handleBodyClicks(onAnchorClick));
 
   return bodyEl;
 };

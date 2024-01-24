@@ -8,7 +8,7 @@ function parseStringToHtmlElements(htmlString: string): NodeListOf<ChildNode> {
 export function createVElement<T extends HTMLElement>(
   tagName: string,
   attributes?: { [key: string]: string | boolean },
-  ...children: Array<string | HTMLElement | undefined>
+  ...children: Array<string | HTMLElement | undefined | boolean | null>
 ): T {
   const element = document.createElement(tagName);
 

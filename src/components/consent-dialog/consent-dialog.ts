@@ -11,5 +11,6 @@ export const consentDialog = (props?: ConsentDialogProps): HTMLDivElement => {
     role: 'dialog',
     'aria-modal': 'true',
     'aria-hidden': 'false',
+    style: 'display: block;',
   });
 };

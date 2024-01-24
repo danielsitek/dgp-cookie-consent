@@ -21,13 +21,14 @@ import { ConsentType } from '@/utils/consent';
 import { createVElement } from '@/utils/elements';
 import { dispatchEventConsentHide, dispatchEventConsentShow } from '@/utils/events';
 import { consentButtonClose } from '@/components/consent-button-close/consent-button-close';
-import { consentButton, BUTTON_DEFAULT, BUTTON_PRIMARY } from '@/components/consent-button/consent-button';
+import { consentButton, consentButtonPrimary } from '@/components/consent-button/consent-button';
 import { ConsentTab } from '@/components/consent-tab/consent-tab';
 import { consentTabs } from '@/components/consent-tabs/consent-tabs';
 import { HTMLSwitchButtonElement, switchButton } from '@/components/switch-button/switch-button';
 import { tabContentDefault } from '@/components/tab-content-default/tab-content-default';
 import { tabContentDetails } from '@/components/tab-content-details/tab-content-details';
 import { consentDialog } from '@/components/consent-dialog/consent-dialog';
+import { consentDialogInner } from '@/components/consent-dialog-inner/consent-dialog-inner';
 
 const i18n = translationService();
 const settings = settingsService();
@@ -51,10 +52,8 @@ export class ConsentDialog extends HTMLElement {
     super();
 
     this.shadow = this.attachShadow({ mode: 'closed' });
-
     this.mainElement = consentDialog();
-
-    this.innerElement = createVElement('div', { class: 'c-d__i' });
+    this.innerElement = consentDialogInner();
 
     this.tabButtonAgree = new ConsentTab({
       label: i18n.tabAgree.title,
@@ -122,8 +121,8 @@ export class ConsentDialog extends HTMLElement {
           this.createButtonEdit(),
           this.createButtonAllowAll(),
         ],
-        onAnchorClick: (event) => {
-          this.handleBodyAnchorsClick(event);
+        onAnchorClick: (el) => {
+          this.handleBodyAnchorsClick(el);
         },
       }),
     );
@@ -132,7 +131,11 @@ export class ConsentDialog extends HTMLElement {
   }
 
   setTabContentDetails(): void {
-    this.setTabContent(this.tabContentDetails());
+    this.switchButtonPreferences.setChecked(window.CookieConsent.preferences);
+    this.switchButtonStatistics.setChecked(window.CookieConsent.statistics);
+    this.switchButtonMarketing.setChecked(window.CookieConsent.marketing);
+
+    this.setTabContent(tabContentDetails(this.tabContentDetailsProps()));
     this.tabButtonDetails.active = true;
   }
 
@@ -145,8 +148,8 @@ export class ConsentDialog extends HTMLElement {
           this.createButtonEdit(),
           this.createButtonAllowAll(),
         ],
-        onAnchorClick: (event) => {
-          this.handleBodyAnchorsClick(event);
+        onAnchorClick: (el) => {
+          this.handleBodyAnchorsClick(el);
         },
       }),
     );
@@ -154,13 +157,7 @@ export class ConsentDialog extends HTMLElement {
     this.tabButtonAbout.active = true;
   }
 
-  handleBodyAnchorsClick(event: Event): void {
-    const el = (event.target as HTMLAnchorElement).closest('a');
-
-    if (!el) {
-      return;
-    }
-
+  handleBodyAnchorsClick(el: HTMLAnchorElement): void {
     if (el.href.includes(BODY_ANCHOR_HREF_TAB_AGREE)) {
       this.setTabContentAgree();
     } else if (el.href.includes(BODY_ANCHOR_HREF_TAB_DETAILS)) {
@@ -174,16 +171,12 @@ export class ConsentDialog extends HTMLElement {
     }
   }
 
-  tabContentDetails(): HTMLDivElement {
-    this.switchButtonPreferences.setChecked(window.CookieConsent.preferences);
-    this.switchButtonStatistics.setChecked(window.CookieConsent.statistics);
-    this.switchButtonMarketing.setChecked(window.CookieConsent.marketing);
-
-    const onAnchorClick = (event: Event) => {
-      this.handleBodyAnchorsClick(event);
+  tabContentDetailsProps() {
+    const onAnchorClick = (el: HTMLAnchorElement) => {
+      this.handleBodyAnchorsClick(el);
     };
 
-    return tabContentDetails({
+    return {
       buttons: [
         this.createButtonRejectAll(),
         this.createButtonConfirm(),
@@ -212,7 +205,7 @@ export class ConsentDialog extends HTMLElement {
           onAnchorClick,
         },
       },
-    });
+    };
   }
 
   updateConsentOnClick(preferences: boolean, statistics: boolean, marketing: boolean, type: ConsentType): void {
@@ -229,7 +222,6 @@ export class ConsentDialog extends HTMLElement {
   createButtonEdit(): HTMLButtonElement {
     return consentButton({
       label: i18n.buttonEdit.label,
-      variant: BUTTON_DEFAULT,
       onClick: () => {
         this.setTabContentDetails();
       },
@@ -237,9 +229,8 @@ export class ConsentDialog extends HTMLElement {
   }
 
   createButtonAllowAll(): HTMLButtonElement {
-    return consentButton({
+    return consentButtonPrimary({
       label: i18n.buttonAllowAll.label,
-      variant: BUTTON_PRIMARY,
       onClick: () => {
         this.switchButtonPreferences.setChecked(true);
         this.switchButtonStatistics.setChecked(true);
@@ -251,9 +242,8 @@ export class ConsentDialog extends HTMLElement {
   }
 
   createButtonRejectAll(): HTMLButtonElement {
-    return consentButton({
+    return consentButtonPrimary({
       label: i18n.buttonRejectAll.label,
-      variant: BUTTON_PRIMARY,
       onClick: () => {
         this.switchButtonPreferences.setChecked(false);
         this.switchButtonStatistics.setChecked(false);
@@ -265,9 +255,8 @@ export class ConsentDialog extends HTMLElement {
   }
 
   createButtonConfirm(): HTMLButtonElement {
-    return consentButton({
+    return consentButtonPrimary({
       label: i18n.buttonConfirm.label,
-      variant: BUTTON_PRIMARY,
       onClick: () => {
         this.updateConsentOnClick(
           this.switchButtonPreferences.isChecked(),
@@ -302,8 +291,6 @@ export class ConsentDialog extends HTMLElement {
    * @link <https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks>
    */
   async connectedCallback(): Promise<void> {
-    this.mainElement.style.display = 'none';
-
     this.initHeaderTabs();
     this.appendCode();
     this.setTabContentAgree();

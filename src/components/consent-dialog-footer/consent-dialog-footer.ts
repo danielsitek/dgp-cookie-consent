@@ -6,19 +6,11 @@ interface ConsentTabProps extends ComponentProps {
 }
 
 export const consentDialogFooter = (props: ConsentTabProps): HTMLDivElement => {
-  const element = createVElement<HTMLDivElement>('div', {
-    class: componentClassList(['c-d__f'], props.modifier).join(' '),
-  });
-
-  props.buttons
-    .filter((e) => e)
-    .forEach((buttonElement) => {
-      if (typeof buttonElement === 'boolean') {
-        return;
-      }
-
-      element.append(buttonElement);
-    });
-
-  return element;
+  return createVElement<HTMLDivElement>(
+    'div',
+    {
+      class: componentClassList(['c-d__f'], props.modifier).join(' '),
+    },
+    ...props.buttons,
+  );
 };

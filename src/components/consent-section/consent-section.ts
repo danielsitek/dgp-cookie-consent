@@ -5,8 +5,41 @@ export interface ConsentSectionProps {
   title: string;
   perex: string;
   switch: HTMLElement;
-  onAnchorClick?: (event: Event) => void;
+  onAnchorClick?: (el: HTMLAnchorElement) => void;
 }
+
+const headerEl = (props: ConsentSectionProps): HTMLDivElement => {
+  return createVElement<HTMLDivElement>(
+    'div',
+    {
+      class: 'c-s__a-h',
+    },
+    createVElement('strong', {}, props.title),
+  );
+};
+
+const perexEl = (props: ConsentSectionProps): HTMLDivElement => {
+  return handleAnchorClicks(
+    createVElement<HTMLDivElement>(
+      'div',
+      {
+        class: 'c-s__a-p',
+      },
+      props.perex,
+    ),
+    props,
+  );
+};
+
+const switchEl = (props: ConsentSectionProps): HTMLDivElement => {
+  return createVElement<HTMLDivElement>(
+    'div',
+    {
+      class: 'c-s__a-s',
+    },
+    props.switch,
+  );
+};
 
 export const consentSection = (props: ConsentSectionProps): HTMLDivElement => {
   return createVElement<HTMLDivElement>(
@@ -19,30 +52,9 @@ export const consentSection = (props: ConsentSectionProps): HTMLDivElement => {
       {
         class: 'c-s__i',
       },
-      createVElement<HTMLDivElement>(
-        'div',
-        {
-          class: 'c-s__a-h',
-        },
-        createVElement('strong', {}, props.title),
-      ),
-      handleAnchorClicks(
-        createVElement<HTMLDivElement>(
-          'div',
-          {
-            class: 'c-s__a-p',
-          },
-          props.perex,
-        ),
-        props,
-      ),
-      createVElement<HTMLDivElement>(
-        'div',
-        {
-          class: 'c-s__a-s',
-        },
-        props.switch,
-      ),
+      headerEl(props),
+      perexEl(props),
+      switchEl(props),
     ),
   );
 };
