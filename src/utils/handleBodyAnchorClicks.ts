@@ -4,17 +4,17 @@ interface TextAnchorClickProps {
   onAnchorClick?: (event: Event) => void;
 }
 
-export const handleBodyAnchorClicks = <T extends TextAnchorClickProps>(bodyEl: HTMLElement, { onAnchorClick }: T) => {
+export const handleAnchorClicks = <T extends TextAnchorClickProps>(bodyEl: HTMLElement, { onAnchorClick }: T): void => {
   if (onAnchorClick === undefined || typeof onAnchorClick !== 'function') {
     return;
   }
 
-  bodyEl.addEventListener(EVENT_CLICK, (event) => {
+  bodyEl.addEventListener(EVENT_CLICK, (event): void => {
     if (event.target === null) {
       return;
     }
 
-    if ((event.target as Element).matches('a, a *')) {
+    if ((event.target as Element).matches('a[href^="#"], a[href^="#"] *')) {
       onAnchorClick(event);
     }
   });

@@ -172,34 +172,20 @@ export class ConsentDialog extends HTMLElement {
       return;
     }
 
-    if (el.href.includes(BODY_ANCHOR_HREF_TAB_AGREE)) {
-      event.preventDefault();
+    event.preventDefault();
+
+    const href = el.href;
+
+    if (href.includes(BODY_ANCHOR_HREF_TAB_AGREE)) {
       this.setTabContentAgree();
-      return;
-    }
-
-    if (el.href.includes(BODY_ANCHOR_HREF_TAB_DETAILS)) {
-      event.preventDefault();
+    } else if (href.includes(BODY_ANCHOR_HREF_TAB_DETAILS)) {
       this.setTabContentDetails();
-      return;
-    }
-
-    if (el.href.includes(BODY_ANCHOR_HREF_TAB_ABOUT)) {
-      event.preventDefault();
+    } else if (href.includes(BODY_ANCHOR_HREF_TAB_ABOUT)) {
       this.setTabContentAbout();
-      return;
-    }
-
-    if (el.href.includes(BODY_ANCHOR_HREF_ACTION_AGREE_ALL)) {
-      event.preventDefault();
+    } else if (href.includes(BODY_ANCHOR_HREF_ACTION_AGREE_ALL)) {
       this.updateConsentOnClick(true, true, true, CONSENT_TYPE_FULL);
-      return;
-    }
-
-    if (el.href.includes(BODY_ANCHOR_HREF_ACTION_REJECT_ALL)) {
-      event.preventDefault();
+    } else if (href.includes(BODY_ANCHOR_HREF_ACTION_REJECT_ALL)) {
       this.updateConsentOnClick(false, false, false, CONSENT_TYPE_REJECTED);
-      return;
     }
   }
 
