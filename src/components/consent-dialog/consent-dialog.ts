@@ -80,11 +80,6 @@ export class ConsentDialog extends HTMLElement {
     this.switchButtonMarketing = switchButton();
   }
 
-  initStyles(): void {
-    // TODO: Add styles.
-    this.mainElement.style.display = 'none';
-  }
-
   initHeaderTabs(): void {
     if (settings.disableHeader) {
       return;
@@ -162,29 +157,21 @@ export class ConsentDialog extends HTMLElement {
   }
 
   handleBodyAnchorsClick(event: Event): void {
-    if (event.target === null) {
-      return;
-    }
-
     const el = (event.target as HTMLAnchorElement).closest('a');
 
-    if (el === null) {
+    if (!el) {
       return;
     }
 
-    event.preventDefault();
-
-    const href = el.href;
-
-    if (href.includes(BODY_ANCHOR_HREF_TAB_AGREE)) {
+    if (el.href.includes(BODY_ANCHOR_HREF_TAB_AGREE)) {
       this.setTabContentAgree();
-    } else if (href.includes(BODY_ANCHOR_HREF_TAB_DETAILS)) {
+    } else if (el.href.includes(BODY_ANCHOR_HREF_TAB_DETAILS)) {
       this.setTabContentDetails();
-    } else if (href.includes(BODY_ANCHOR_HREF_TAB_ABOUT)) {
+    } else if (el.href.includes(BODY_ANCHOR_HREF_TAB_ABOUT)) {
       this.setTabContentAbout();
-    } else if (href.includes(BODY_ANCHOR_HREF_ACTION_AGREE_ALL)) {
+    } else if (el.href.includes(BODY_ANCHOR_HREF_ACTION_AGREE_ALL)) {
       this.updateConsentOnClick(true, true, true, CONSENT_TYPE_FULL);
-    } else if (href.includes(BODY_ANCHOR_HREF_ACTION_REJECT_ALL)) {
+    } else if (el.href.includes(BODY_ANCHOR_HREF_ACTION_REJECT_ALL)) {
       this.updateConsentOnClick(false, false, false, CONSENT_TYPE_REJECTED);
     }
   }
@@ -242,68 +229,52 @@ export class ConsentDialog extends HTMLElement {
   }
 
   createButtonEdit(): HTMLButtonElement {
-    const button = consentButton({
+    return consentButton({
       label: i18n.buttonEdit.label,
       variant: BUTTON_DEFAULT,
-      modifier: 'c-d__f-b',
+      onClick: () => {
+        this.setTabContentDetails();
+      },
     });
-
-    button.addEventListener(EVENT_CLICK, () => {
-      this.setTabContentDetails();
-    });
-
-    return button;
   }
 
   createButtonAllowAll(): HTMLButtonElement {
-    const button = consentButton({
+    return consentButton({
       label: i18n.buttonAllowAll.label,
       variant: BUTTON_PRIMARY,
-      modifier: 'c-d__f-b',
+      onClick: () => {
+        this.updateConsentOnClick(true, true, true, CONSENT_TYPE_FULL);
+      },
     });
-
-    button.addEventListener(EVENT_CLICK, () => {
-      this.updateConsentOnClick(true, true, true, CONSENT_TYPE_FULL);
-    });
-
-    return button;
   }
 
   createButtonRejectAll(): HTMLButtonElement {
-    const button = consentButton({
+    return consentButton({
       label: i18n.buttonRejectAll.label,
       variant: BUTTON_PRIMARY,
-      modifier: 'c-d__f-b',
+      onClick: () => {
+        this.switchButtonPreferences.setChecked(false);
+        this.switchButtonStatistics.setChecked(false);
+        this.switchButtonMarketing.setChecked(false);
+
+        this.updateConsentOnClick(false, false, false, CONSENT_TYPE_REJECTED);
+      },
     });
-
-    button.addEventListener(EVENT_CLICK, () => {
-      this.switchButtonPreferences.setChecked(false);
-      this.switchButtonStatistics.setChecked(false);
-      this.switchButtonMarketing.setChecked(false);
-
-      this.updateConsentOnClick(false, false, false, CONSENT_TYPE_REJECTED);
-    });
-
-    return button;
   }
 
   createButtonConfirm(): HTMLButtonElement {
-    const button = consentButton({
+    return consentButton({
       label: i18n.buttonConfirm.label,
       variant: BUTTON_PRIMARY,
-      modifier: 'c-d__f-b',
+      onClick: () => {
+        this.updateConsentOnClick(
+          this.switchButtonPreferences.isChecked(),
+          this.switchButtonStatistics.isChecked(),
+          this.switchButtonMarketing.isChecked(),
+          CONSENT_TYPE_ADVANCED,
+        );
+      },
     });
-
-    button.addEventListener(EVENT_CLICK, () => {
-      this.updateConsentOnClick(
-        this.switchButtonPreferences.isChecked(),
-        this.switchButtonStatistics.isChecked(),
-        this.switchButtonMarketing.isChecked(),
-        CONSENT_TYPE_ADVANCED,
-      );
-    });
-
-    return button;
   }
 
   appendCode(): void {
@@ -328,7 +299,8 @@ export class ConsentDialog extends HTMLElement {
    * @link <https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks>
    */
   async connectedCallback(): Promise<void> {
-    this.initStyles();
+    this.mainElement.style.display = 'none';
+
     this.initHeaderTabs();
     this.appendCode();
     this.setTabContentAgree();

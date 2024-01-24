@@ -15,6 +15,7 @@ export const handleAnchorClicks = <T extends TextAnchorClickProps>(bodyEl: HTMLE
     }
 
     if ((event.target as Element).matches('a[href^="#"], a[href^="#"] *')) {
+      event.preventDefault();
       onAnchorClick(event);
     }
   });
