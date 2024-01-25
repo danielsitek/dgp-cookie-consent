@@ -9,6 +9,20 @@
 }
 
 p {
-  margin-top: $spacing-3;
-  margin-bottom: $spacing-3;
+  margin-top: $spacing-2;
+  margin-bottom: $spacing-2;
+}
+
+a {
+  color: var(--base-link__color, $base-link-color);
+  text-decoration: var(--base-link__text-decoration, $base-link-text-decoration);
+  transition: color $base-transition;
+  cursor: pointer;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: var(--base-link--hover__color, $base-link-hover-color);
+    text-decoration: var(--base-link--hover__text-decoration, $base-link-hover-text-decoration);
+  }
 }

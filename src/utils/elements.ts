@@ -1,30 +1,14 @@
-export const createElement = (tagName: string, classes?: Array<string | null>): HTMLElement => {
-  const el = document.createElement(tagName);
-
-  if (tagName === 'button') {
-    el.setAttribute('type', tagName);
-  }
-
-  if (classes) {
-    el.classList.add(...(classes.filter((i) => i) as string[]));
-  }
-
-  return el;
-};
-
-export const createDivElement = (classes?: string[]): HTMLDivElement => createElement('div', classes) as HTMLDivElement;
-
 function parseStringToHtmlElements(htmlString: string): NodeListOf<ChildNode> {
   const template = document.createElement('template');
   template.innerHTML = htmlString.trim();
   return template.content.childNodes;
 }
 
-// Experimenal function for creating virtual DOM elements.
+// Create Virtual DOM Elements.
 export function createVElement<T extends HTMLElement>(
   tagName: string,
   attributes?: { [key: string]: string | boolean },
-  ...children: Array<string | HTMLElement>
+  ...children: Array<string | HTMLElement | undefined | boolean | null>
 ): T {
   const element = document.createElement(tagName);
 
@@ -44,6 +28,8 @@ export function createVElement<T extends HTMLElement>(
     if (typeof child === 'string') {
       const childNodes = parseStringToHtmlElements(child);
       childNodes.forEach((node) => element.append(node));
+    } else if (child === undefined || child === null || typeof child === 'boolean') {
+      // Just ignore.
     } else {
       element.append(child);
     }

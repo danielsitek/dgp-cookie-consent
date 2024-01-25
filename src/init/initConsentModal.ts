@@ -1,6 +1,7 @@
-import '../components/consent-dialog/consent-dialog';
-import { BADGE_ELEMENT_NAME, DIALOG_ELEMENT_NAME, EVENT_CONSENT_HIDE, EVENT_CONSENT_SHOW } from '../config';
+import '@/elements/consent-dialog/consent-dialog';
+import { BADGE_ELEMENT_NAME, DIALOG_ELEMENT_NAME, EVENT_CONSENT_HIDE, EVENT_CONSENT_SHOW } from '@/config';
 import { initConsentBadge } from './initConsentBadge';
+import { createVElement } from '@/utils/elements';
 
 interface BadgeElement extends HTMLElement {
   hideBadge: () => void;
@@ -25,8 +26,7 @@ export const initConsentModal = (): void => {
     return;
   }
 
-  const ui = document.createElement(DIALOG_ELEMENT_NAME);
-  document.body.appendChild(ui);
+  document.body.append(createVElement(DIALOG_ELEMENT_NAME));
 
   window.addEventListener(EVENT_CONSENT_HIDE, handleConsentHide);
 

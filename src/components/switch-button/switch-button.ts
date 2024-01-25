@@ -1,5 +1,5 @@
-import { EVENT_CHANGE } from '../../config';
-import { createElement, createDivElement } from '../../utils/elements';
+import { EVENT_CHANGE } from '@/config';
+import { createVElement } from '@/utils/elements';
 
 interface SwitchButtonProps {
   checked?: boolean;
@@ -11,17 +11,35 @@ export interface HTMLSwitchButtonElement extends HTMLDivElement {
   setChecked: (value: boolean) => void;
 }
 
+const backgroundElement = (): HTMLDivElement => {
+  return createVElement<HTMLDivElement>('div', { class: 's-b__b' }, createVElement('div', { class: 's-b__p' }));
+};
+
+const labelElement = (props?: SwitchButtonProps): HTMLLabelElement => {
+  return createVElement<HTMLLabelElement>(
+    'label',
+    {
+      class: 's-b',
+      role: 'switch',
+      'aria-checked': !!props?.checked,
+    },
+    backgroundElement(),
+  );
+};
+
+const inputElement = (props?: SwitchButtonProps): HTMLInputElement => {
+  return createVElement<HTMLInputElement>('input', {
+    class: 's-b__i',
+    type: 'checkbox',
+    checked: !!props?.checked,
+    disabled: !!props?.disabled,
+  });
+};
+
 export const switchButton = (props?: SwitchButtonProps): HTMLSwitchButtonElement => {
-  const content: HTMLSwitchButtonElement = createDivElement() as HTMLSwitchButtonElement;
-  const labelEl = createElement('label', ['s-b']) as HTMLLabelElement;
-  const input = createElement('input', ['s-b__i']) as HTMLInputElement;
-  const background = createDivElement(['s-b__b']);
-
-  input.type = 'checkbox';
-  input.checked = !!props?.checked;
-  input.disabled = !!props?.disabled;
-
-  background.innerHTML = '<div class="s-b__p"></div>';
+  const content: HTMLSwitchButtonElement = createVElement<HTMLSwitchButtonElement>('div');
+  const labelEl = labelElement(props);
+  const input = inputElement(props);
 
   input.addEventListener(EVENT_CHANGE, (event): void => {
     event.preventDefault();
@@ -29,11 +47,9 @@ export const switchButton = (props?: SwitchButtonProps): HTMLSwitchButtonElement
     content.dispatchEvent(new Event(EVENT_CHANGE));
   });
 
-  labelEl.appendChild(input);
-  labelEl.appendChild(background);
-  labelEl.setAttribute('role', 'switch');
+  labelEl.prepend(input);
 
-  content.appendChild(labelEl);
+  content.append(labelEl);
 
   content.isChecked = () => {
     return input.checked;

@@ -1,4 +1,4 @@
-import { COOKIE_NAME, COOKIE_EXPIRATION, CONSENT_ID_LENGTH } from '../config';
+import { COOKIE_NAME, COOKIE_EXPIRATION, CONSENT_ID_LENGTH } from '@/config';
 import { getCookieByName, setCookie } from './cookies';
 import { getDateString } from './datetime';
 import { randomClientId } from './random-client-id';

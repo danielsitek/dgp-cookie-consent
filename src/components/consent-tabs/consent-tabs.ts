@@ -1,23 +1,17 @@
-import { componentClassList, ComponentProps } from '../../utils/component-helpers';
-import { createDivElement } from '../../utils/elements';
+import { componentClassList, ComponentProps } from '@/utils/component-helpers';
+import { createVElement } from '@/utils/elements';
 
 interface ConsentTabsProps extends ComponentProps {
   tabs: HTMLElement[];
 }
 
 export const consentTabs = (props: ConsentTabsProps): HTMLDivElement => {
-  const element = createDivElement(componentClassList(
-    [
-      'c-ts'
-    ],
-    props.modifier
-  ));
-
-  element.setAttribute('role', 'tablist');
-
-  props.tabs.forEach((tabElement) => {
-    element.appendChild(tabElement);
-  });
-
-  return element;
+  return createVElement<HTMLDivElement>(
+    'div',
+    {
+      class: componentClassList(['c-ts'], props.modifier).join(' '),
+      role: 'tablist',
+    },
+    ...props.tabs,
+  );
 };

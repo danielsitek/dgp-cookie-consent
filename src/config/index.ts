@@ -1,4 +1,4 @@
-import { ConsentType } from '../utils/consent';
+import { ConsentType } from '@/utils/consent';
 
 export const COOKIE_NAME = 'CookieConsent';
 export const COOKIE_EXPIRATION = 365;
@@ -35,3 +35,9 @@ export const CONSENT_TYPE_REJECTED: ConsentType = 'rejected';
 
 export const DENIED = 'denied';
 export const GRANTED = 'granted';
+
+export const BODY_ANCHOR_HREF_TAB_ABOUT = '#tab-about';
+export const BODY_ANCHOR_HREF_TAB_DETAILS = '#tab-details';
+export const BODY_ANCHOR_HREF_TAB_AGREE = '#tab-agree';
+export const BODY_ANCHOR_HREF_ACTION_AGREE_ALL = '#allow-all';
+export const BODY_ANCHOR_HREF_ACTION_REJECT_ALL = '#reject-all';

@@ -30,13 +30,7 @@ export function getCookieByName(name: string): string | undefined {
 }
 
 export function setCookie(name: string, data: string, days?: number): string {
-  const cookieData = [
-    `${name}=${data}`,
-    'path=/',
-    `domain=${window.location.hostname.replace('www.', '')}`,
-    'Secure',
-    'SameSite=Lax',
-  ];
+  const cookieData = [`${name}=${data}`, 'path=/', 'Secure', 'SameSite=Lax'];
 
   if (days) {
     const utcString = getDateUTCString(days);

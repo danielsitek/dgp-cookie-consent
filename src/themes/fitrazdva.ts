@@ -1,4 +1,4 @@
-import { CookieConsentTheme } from '../services/theme-service';
+import { CookieConsentTheme } from '@/services/theme-service';
 
 export const themeFitrazdva: CookieConsentTheme = {
   'color-primary': '#781036',

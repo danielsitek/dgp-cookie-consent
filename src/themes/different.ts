@@ -1,4 +1,4 @@
-import { CookieConsentTheme } from '../services/theme-service';
+import { CookieConsentTheme } from '@/services/theme-service';
 
 export const themeDifferent: CookieConsentTheme = {
   'color-primary': '#008c95',

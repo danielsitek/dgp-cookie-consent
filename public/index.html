@@ -65,7 +65,7 @@
         <hr>
 
         <button type="button" onclick="window.CookieConsentModalOpen();">Open</button>
-        <button type="button" onclick="document.cookie = `CookieConsent=;Path=/;Expires=Thu, 01 Jan 1970 00:00:01 GMT;`;">Reset</button>
+        <button type="button" onclick="document.cookie = `CookieConsent=;Path=/;Expires=Thu, 01 Jan 1970 00:00:01 GMT;`; window.location.reload();">Reset</button>
 
         <hr>
 
@@ -150,10 +150,38 @@
 
       window.CookieConsentThemeDark = {};
 
-      window.CookieConsentTranslations = {};
+      window.CookieConsentTranslations = {
+        tabAgree: {
+          body: `
+            <p><strong>Tato webová stránka používá cookies</strong></p>
+            <p>Snažíme se náš web neustále vylepšovat. K tomu však potřebujeme data. Sbíráme je pomocí cookies, jež nám pomáhají analyzovat návštěvnost a následně přizpůsobovat obsah a reklamu. Pokud se sběrem cookies nesouhlasíte klikněte <a href="#reject-all">zde</a></p>.</p>
+            <p><a href="#tab-agree">Tab Souhlas</a>, <a href="#tab-details">Tab Detail</a>, <a href="#tab-about">Tab O Aplikaci</a>, <a href="#allow-all">Povolit všechny cookies</a>, <a href="#reject-all"><strong>Povolit vše</strong></a></p>
+          `,
+        },
+        tabAbout: {
+          body: `
+            <p>Cookies jsou malé textové soubory, které mohou být používány webovými stránkami, aby učinily uživatelský zážitek více efektivní.</p>
+            <p>Zákon uvádí, že můžeme ukládat cookies na vašem zařízení, pokud jsou nezbytně nutné pro provoz této stránky. Pro všechny ostatní typy cookies potřebujeme vaše povolení.</p>
+            <p>Tato stránka používá různé typy cookies. Některé cookies jsou umístěny službami třetích stran, které se objevují na našich stránkách.</p>
+            <p>Kdykoliv můžete změnit nebo zrušit svůj souhlas prostřednictvím Vyjádření o souborech cookie na našich webových stránkách.</p>
+            <p><a href="#tab-agree">Tab Souhlas</a>, <a href="#tab-details">Tab Detail</a>, <a href="#tab-about">Tab O Aplikaci</a>, <a href="#allow-all">Povolit všechny cookies</a>, <a href="#reject-all">Zamítnout cookies</a></p>
+          `,
+        },
+        buttonEdit: {
+          label: 'Přizpůsobit',
+        },
+        buttonConfirm: {
+          label: 'Uložit',
+        },
+      };
 
       window.CookieConsentSettings = {
+        tabAgree: {
+          showButtonRejectAll: false,
+        },
         enableDarkMode: true,
+        disableBadge: true,
+        disableHeader: true,
       };
     </script>
 

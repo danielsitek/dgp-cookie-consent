@@ -1,4 +1,4 @@
-import { themeDefault, themeDefaultDark } from '../themes/default';
+import { themeDefault, themeDefaultDark } from '@/themes/default';
 import { settingsService } from './settings-service';
 
 export interface CookieConsentTheme {
@@ -44,6 +44,11 @@ export interface CookieConsentTheme {
   'badge__border-radius'?: string;
   'badge__box-shadow'?: string;
   badge__position?: string;
+
+  'base-link__color'?: string;
+  'base-link__text-decoration'?: string;
+  'base-link--hover__color'?: string;
+  'base-link--hover__text-decoration'?: string;
 
   [key: string]: string | undefined;
 }

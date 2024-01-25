@@ -1,7 +1,7 @@
-import { DIALOG_ELEMENT_NAME, EVENT_CLICK, EVENT_KEYDOWN } from '../../config';
-import { translationService } from '../../services/translation-service';
-import { createVElement } from '../../utils/elements';
-import { dispatchEventConsentClose } from '../../utils/events';
+import { DIALOG_ELEMENT_NAME, EVENT_CLICK, EVENT_KEYDOWN } from '@/config';
+import { translationService } from '@/services/translation-service';
+import { createVElement } from '@/utils/elements';
+import { dispatchEventConsentClose } from '@/utils/events';
 
 interface ConsentModalElement extends HTMLElement {
   closeModal: () => void;
