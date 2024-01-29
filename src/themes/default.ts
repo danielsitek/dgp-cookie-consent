@@ -16,7 +16,7 @@ import { CookieConsentTheme } from '@/services/theme-service';
   'color-primary': '#f8c132',
   'color-text-light': '#757575',
   'color-text': '#242424',
-  'color-white': '#fff',
+  'color-white': '#ffffff',
 
   'button-default__bg-color': '#f4f4f4',
   'button-default__color': '#242424',
@@ -24,7 +24,7 @@ import { CookieConsentTheme } from '@/services/theme-service';
   'button-default__border': '1px solid #f4f4f4',
   'button-default__box-shadow': 'none',
 
-  'button-default--hover__bg-color': '#fff',
+  'button-default--hover__bg-color': '#ffffff',
   'button-default--hover__color': '#242424',
   'button-default--hover__border': '1px solid #d1d1d1',
   'button-default--hover__box-shadow': '0 0 17px 0 rgba(0,0,0,.1)',
@@ -49,7 +49,7 @@ import { CookieConsentTheme } from '@/services/theme-service';
 
   'base-link__color': '#242424',
   'base-link__text-decoration': 'underline',
-  'base-link--hover__color': '#efaf08',
+  'base-link--hover__color': '#000000',
   'base-link--hover__text-decoration': 'underline',
  * ```
  */
