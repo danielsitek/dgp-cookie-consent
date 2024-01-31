@@ -27,7 +27,7 @@ export function createVElement<T extends HTMLElement>(
   children.forEach((child) => {
     if (typeof child === 'string') {
       const childNodes = parseStringToHtmlElements(child);
-      childNodes.forEach((node) => element.append(node));
+      Array.from(childNodes).forEach((node) => element.append(node));
     } else if (child === undefined || child === null || typeof child === 'boolean') {
       // Just ignore.
     } else {
