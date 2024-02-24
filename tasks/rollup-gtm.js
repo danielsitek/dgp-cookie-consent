@@ -7,6 +7,9 @@ const rename = require('gulp-rename');
 const terser = require('gulp-terser');
 const stripDebug = require('gulp-strip-debug');
 const strip = require('gulp-strip-comments');
+const insert = require('gulp-insert');
+
+const packageJson = require('../package.json');
 
 const createRollupConfig = () => ({
   input: 'src/gtm.ts',
@@ -35,6 +38,7 @@ module.exports = async function rollup() {
         },
       }),
     )
+    .pipe(insert.prepend(`/* v${packageJson.version} */`))
     .pipe(
       rename({
         suffix: '.min',
