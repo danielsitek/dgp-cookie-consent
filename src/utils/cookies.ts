@@ -1,4 +1,4 @@
-import { getDateUTCString } from './datetime';
+import { getDateUTCString } from './date-time';
 
 export type CookiesObject = Record<string, string>;
 
