@@ -18,9 +18,9 @@ export interface ConsentOptions extends ConsentRules {
 
 export type ConsentOptionsKeys = keyof ConsentOptions;
 
-export type ConsentType = 'full' | 'advanced' | 'rejected' | string;
+export type ConsentType = 'full' | 'advanced' | 'rejected' | '';
 
-const defaultConsent = {
+const defaultConsent: ConsentOptions = {
   necessary: true,
   preferences: false,
   statistics: false,
