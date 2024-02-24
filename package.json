@@ -3,8 +3,10 @@
   "version": "1.6.2",
   "description": "DGP cookie consent",
   "main": "dist/cookies.js",
+  "types": "./types.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "./types.d.ts"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\"",
