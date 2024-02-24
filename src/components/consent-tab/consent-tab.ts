@@ -1,5 +1,5 @@
 import { EVENT_CLICK } from '@/config';
-import { ComponentProps } from '@/utils/component-helpers';
+import type { ComponentProps } from '@/utils/component-helpers';
 import { createVElement } from '@/utils/elements';
 
 interface ConsentTabProps extends ComponentProps {

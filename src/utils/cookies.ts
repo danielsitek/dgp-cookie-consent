@@ -1,8 +1,6 @@
 import { getDateUTCString } from './datetime';
 
-export interface CookiesObject {
-  [name: string]: string;
-}
+export type CookiesObject = Record<string, string>;
 
 export function getCookies(): CookiesObject {
   const cookies: CookiesObject = {};

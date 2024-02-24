@@ -17,12 +17,12 @@ import { settingsService } from '@/services/settings-service';
 import { themeService } from '@/services/theme-service';
 import { translationService } from '@/services/translation-service';
 import { fadeIn, fadeOut } from '@/utils/animation';
-import { ConsentType } from '@/utils/consent';
+import type { ConsentType } from '@/utils/consent';
 import { createVElement } from '@/utils/elements';
 import { dispatchEventConsentHide, dispatchEventConsentShow } from '@/utils/events';
 import { consentButton, consentButtonPrimary } from '@/components/consent-button/consent-button';
 import { tabContentDefault } from '@/components/tab-content-default/tab-content-default';
-import { TabContentDetailsProps, tabContentDetails } from '@/components/tab-content-details/tab-content-details';
+import { type TabContentDetailsProps, tabContentDetails } from '@/components/tab-content-details/tab-content-details';
 import {
   switchMarketing,
   switchNecessary,
