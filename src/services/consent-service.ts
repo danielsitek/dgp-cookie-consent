@@ -1,4 +1,10 @@
-import { ConsentOptions, ConsentOptionsKeys, ConsentType, getConsent, updateConsent } from '@/utils/consent';
+import {
+  type ConsentOptions,
+  type ConsentOptionsKeys,
+  type ConsentType,
+  getConsent,
+  updateConsent,
+} from '@/utils/consent';
 import { dispatchEventConsentReady, dispatchEventConsentUpdated } from '@/utils/events';
 
 const cache: ConsentOptions = {

@@ -1,4 +1,4 @@
-import { ComponentProps, componentClassList } from '@/utils/component-helpers';
+import { type ComponentProps, componentClassList } from '@/utils/component-helpers';
 import { createVElement } from '@/utils/elements';
 import { consentTabs } from '../consent-tabs/consent-tabs';
 import { tabButtonAboutEl, tabButtonAgreeEl, tabButtonDetailsEl } from '../consent-tab/consent-tab-instances';

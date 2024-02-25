@@ -1,4 +1,4 @@
-import { componentClassList, ComponentProps } from '@/utils/component-helpers';
+import { componentClassList, type ComponentProps } from '@/utils/component-helpers';
 import { createVElement } from '@/utils/elements';
 
 interface ConsentTabsProps extends ComponentProps {

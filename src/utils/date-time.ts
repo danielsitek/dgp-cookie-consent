@@ -5,8 +5,8 @@ export function getDateUTCString(days: number): string {
   return date.toUTCString();
 }
 
-export function getDateString(datetime?: string | number | Date): string {
-  const date = datetime ? new Date(datetime) : new Date();
+export function getDateString(dateTime?: string | number | Date): string {
+  const date = dateTime ? new Date(dateTime) : new Date();
 
   return date.toJSON();
 }

@@ -1,6 +1,6 @@
 import { COOKIE_NAME, COOKIE_EXPIRATION, CONSENT_ID_LENGTH } from '@/config';
 import { getCookieByName, setCookie } from './cookies';
-import { getDateString } from './datetime';
+import { getDateString } from './date-time';
 import { randomClientId } from './random-client-id';
 
 export interface ConsentRules {
@@ -18,9 +18,9 @@ export interface ConsentOptions extends ConsentRules {
 
 export type ConsentOptionsKeys = keyof ConsentOptions;
 
-export type ConsentType = 'full' | 'advanced' | 'rejected' | string;
+export type ConsentType = 'full' | 'advanced' | 'rejected' | '';
 
-const defaultConsent = {
+const defaultConsent: ConsentOptions = {
   necessary: true,
   preferences: false,
   statistics: false,

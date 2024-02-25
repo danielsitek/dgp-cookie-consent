@@ -1,11 +1,22 @@
 import { ConsentService } from '@/services/consent-service';
-import { CookieConsentTranslations } from '@/services/translation-service';
-import { CookieConsentTheme } from '@/services/theme-service';
-import { CookieConsentSettings } from '@/services/settings-service';
+import type { CookieConsentTranslations } from '@/services/translation-service';
+import type { CookieConsentTheme } from '@/services/theme-service';
+import type { CookieConsentSettings } from '@/services/settings-service';
 import { initConsentModal } from '@/init/initConsentModal';
 import { initConsentBadge } from '@/init/initConsentBadge';
 
 type WindowCookieConsent = ConsentService;
+
+declare global {
+  interface Window {
+    CookieConsent: WindowCookieConsent;
+    CookieConsentTranslations: CookieConsentTranslations;
+    CookieConsentTheme: CookieConsentTheme;
+    CookieConsentThemeDark: CookieConsentTheme;
+    CookieConsentSettings: CookieConsentSettings;
+    CookieConsentModalOpen: () => void;
+  }
+}
 
 const windowCookieConsent = (): WindowCookieConsent => {
   const consent = new ConsentService();
@@ -18,17 +29,6 @@ const windowCookieConsent = (): WindowCookieConsent => {
 
   return consent;
 };
-
-declare global {
-  interface Window {
-    CookieConsent: WindowCookieConsent;
-    CookieConsentTranslations: CookieConsentTranslations;
-    CookieConsentTheme: CookieConsentTheme;
-    CookieConsentThemeDark: CookieConsentTheme;
-    CookieConsentSettings: CookieConsentSettings;
-    CookieConsentModalOpen: () => void;
-  }
-}
 
 window.CookieConsent = windowCookieConsent();
 

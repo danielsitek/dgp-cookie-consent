@@ -1,4 +1,4 @@
-import { CookieConsentTranslations } from '@/services/translation-service';
+import type { CookieConsentTranslations } from '@/services/translation-service';
 
 const cs: CookieConsentTranslations = {
   locale: 'cs-CZ',

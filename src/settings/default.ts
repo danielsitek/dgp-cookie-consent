@@ -1,4 +1,4 @@
-import { CookieConsentSettings } from '@/services/settings-service';
+import type { CookieConsentSettings } from '@/services/settings-service';
 
 export const defaultSettings: CookieConsentSettings = {
   // Settings for tab agree.

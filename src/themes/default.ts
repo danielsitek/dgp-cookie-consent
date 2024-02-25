@@ -1,4 +1,4 @@
-import { CookieConsentTheme } from '@/services/theme-service';
+import type { CookieConsentTheme } from '@/services/theme-service';
 
 /**
  * All available theme properties:

@@ -1,57 +1,49 @@
 import { themeDefault, themeDefaultDark } from '@/themes/default';
 import { settingsService } from './settings-service';
 
-export interface CookieConsentTheme {
-  'base-color'?: string;
-  'base-font-size'?: string;
-  'base-line'?: string;
-  'base-font-family'?: string;
-  'base-shadow'?: string;
-  'border-radius'?: string;
-  'button-border-radius'?: string;
+export type CookieConsentThemeKeys =
+  | 'base-color'
+  | 'base-font-size'
+  | 'base-line'
+  | 'base-font-family'
+  | 'base-shadow'
+  | 'border-radius'
+  | 'button-border-radius'
+  | 'color-grey'
+  | 'color-primary'
+  | 'color-text-light'
+  | 'color-text'
+  | 'color-white'
+  | 'button-default__bg-color'
+  | 'button-default__color'
+  | 'button-default__text-transform'
+  | 'button-default__border'
+  | 'button-default__box-shadow'
+  | 'button-default--hover__bg-color'
+  | 'button-default--hover__color'
+  | 'button-default--hover__border'
+  | 'button-default--hover__box-shadow'
+  | 'button-primary__bg-color'
+  | 'button-primary__color'
+  | 'button-primary__text-transform'
+  | 'button-primary__border'
+  | 'button-primary__box-shadow'
+  | 'button-primary--hover__bg-color'
+  | 'button-primary--hover__color'
+  | 'button-primary--hover__border'
+  | 'button-primary--hover__box-shadow'
+  | 'badge__bg-color'
+  | 'badge__color'
+  | 'badge__border'
+  | 'badge__border-radius'
+  | 'badge__box-shadow'
+  | 'badge__position'
+  | 'base-link__color'
+  | 'base-link__text-decoration'
+  | 'base-link--hover__color'
+  | 'base-link--hover__text-decoration';
 
-  'color-grey'?: string;
-  'color-primary'?: string;
-  'color-text-light'?: string;
-  'color-text'?: string;
-  'color-white'?: string;
-
-  'button-default__bg-color'?: string;
-  'button-default__color'?: string;
-  'button-default__text-transform'?: string;
-  'button-default__border'?: string;
-  'button-default__box-shadow'?: string;
-
-  'button-default--hover__bg-color'?: string;
-  'button-default--hover__color'?: string;
-  'button-default--hover__border'?: string;
-  'button-default--hover__box-shadow'?: string;
-
-  'button-primary__bg-color'?: string;
-  'button-primary__color'?: string;
-  'button-primary__text-transform'?: string;
-  'button-primary__border'?: string;
-  'button-primary__box-shadow'?: string;
-
-  'button-primary--hover__bg-color'?: string;
-  'button-primary--hover__color'?: string;
-  'button-primary--hover__border'?: string;
-  'button-primary--hover__box-shadow'?: string;
-
-  'badge__bg-color'?: string;
-  badge__color?: string;
-  badge__border?: string;
-  'badge__border-radius'?: string;
-  'badge__box-shadow'?: string;
-  badge__position?: string;
-
-  'base-link__color'?: string;
-  'base-link__text-decoration'?: string;
-  'base-link--hover__color'?: string;
-  'base-link--hover__text-decoration'?: string;
-
-  [key: string]: string | undefined;
-}
+export type CookieConsentTheme = Partial<Record<CookieConsentThemeKeys, string>>;
 
 export interface ThemeServiceInterface {
   themeTextContent: string;
@@ -62,7 +54,7 @@ const settings = settingsService();
 const themeString = (theme: CookieConsentTheme): string => {
   return Object.keys(theme)
     .map((key) => {
-      return `--${key}:${theme[key]};`;
+      return `--${key}:${theme[key as CookieConsentThemeKeys]};`;
     })
     .join('');
 };

@@ -1,5 +1,5 @@
 import { COOKIE_NAME } from '@/config';
-import { ConsentRules } from './consent';
+import type { ConsentRules } from './consent';
 import { getCookieByName } from './cookies';
 
 // Simple CookieConsent reader with fallback to defaults.

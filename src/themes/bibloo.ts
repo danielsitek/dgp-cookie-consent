@@ -1,4 +1,4 @@
-import { CookieConsentTheme } from '@/services/theme-service';
+import type { CookieConsentTheme } from '@/services/theme-service';
 
 export const themeBibloo: CookieConsentTheme = {
   'base-color': '#3c3c3c',

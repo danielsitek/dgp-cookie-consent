@@ -1,5 +1,5 @@
 import { EVENT_CLICK } from '@/config';
-import { componentClassList, ComponentProps } from '@/utils/component-helpers';
+import { componentClassList, type ComponentProps } from '@/utils/component-helpers';
 import { createVElement } from '@/utils/elements';
 
 interface ConsentButtonProps extends ComponentProps {

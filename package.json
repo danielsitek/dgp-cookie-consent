@@ -1,10 +1,12 @@
 {
-  "name": "@zoot/cookie-consent",
+  "name": "@danielsitek/dgp-cookie-consent",
   "version": "1.6.2",
-  "description": "ZOOT cookie consent",
+  "description": "DGP cookie consent",
   "main": "dist/cookies.js",
+  "types": "./types.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "./types.d.ts"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\"",
@@ -17,7 +19,13 @@
   },
   "keywords": [
     "cookie",
-    "cookiebar"
+    "cookiebar",
+    "cookieconsent",
+    "consent",
+    "gdpr",
+    "privacy",
+    "privacybar",
+    "privacyconsent"
   ],
   "author": "Daniel Sitek <dan.sitek@gmail.com>",
   "license": "MIT",
@@ -37,6 +45,7 @@
     "gulp": "^4.0.2",
     "gulp-cli": "^2.3.0",
     "gulp-eslint": "^6.0.0",
+    "gulp-insert": "^0.5.0",
     "gulp-postcss": "^9.0.1",
     "gulp-rename": "^2.0.0",
     "gulp-sass": "^5.0.0",

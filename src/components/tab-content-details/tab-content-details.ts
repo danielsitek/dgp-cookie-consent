@@ -1,9 +1,9 @@
 import { translationService } from '@/services/translation-service';
 import { createVElement } from '@/utils/elements';
 import { consentDialogFooter } from '@/components/consent-dialog-footer/consent-dialog-footer';
-import { consentSection, ConsentSectionProps } from '@/components/consent-section/consent-section';
+import { consentSection, type ConsentSectionProps } from '@/components/consent-section/consent-section';
 
-export interface TabContentDefaultsectionsProps {
+export interface TabContentDefaultSectionsProps {
   necessary: ConsentSectionProps;
   preferences: ConsentSectionProps;
   statistics: ConsentSectionProps;
@@ -14,7 +14,7 @@ export interface TabContentDetailsProps {
   lastUpdated?: string;
   buttonRejectAll?: HTMLButtonElement;
   buttonConfirm?: HTMLButtonElement;
-  sections: TabContentDefaultsectionsProps;
+  sections: TabContentDefaultSectionsProps;
   buttons?: Array<HTMLButtonElement | boolean>;
 }
 
