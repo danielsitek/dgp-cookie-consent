@@ -22,6 +22,9 @@ export const defaultSettings: CookieConsentSettings = {
   // Disable / Enable consent badge.
   disableBadge: false,
 
+  // Disable / Enable cross button in header.
+  disableCross: false,
+
   // Disable / Enable consent header.
   disableHeader: false,
 };

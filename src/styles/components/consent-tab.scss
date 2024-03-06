@@ -2,6 +2,7 @@
 .c-t {
   position: relative;
   display: flex;
+  flex: 1;
   justify-content: center;
   align-items: center;
   min-height: $spacing-6;
@@ -41,10 +42,6 @@
   }
 
   // .consent-tab--active
-  &--a {
-    display: flex;
-  }
-
   &--a &__l {
     width: 100%;
     opacity: 1;

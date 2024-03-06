@@ -11,6 +11,7 @@ export interface CookieConsentSettings {
   tabDetails: CookieConsentSettingsTab;
   enableDarkMode: boolean;
   disableBadge: boolean;
+  disableCross: boolean;
   disableHeader: boolean;
 }
 
@@ -41,6 +42,9 @@ export const settingsService = (): CookieConsentSettings => {
 
     disableBadge:
       windowSettings?.disableBadge !== undefined ? windowSettings.disableBadge : defaultSettings.disableBadge,
+
+    disableCross:
+      windowSettings?.disableCross !== undefined ? windowSettings.disableCross : defaultSettings.disableCross,
 
     disableHeader:
       windowSettings?.disableHeader !== undefined ? windowSettings.disableHeader : defaultSettings.disableHeader,

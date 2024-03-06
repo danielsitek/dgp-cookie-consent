@@ -347,6 +347,7 @@ window.CookieConsentSettings = {
   },
   enableDarkMode: true,
   disableBadge: false,
+  disableCross: false,
   disableHeader: false,
 };
 ```
@@ -360,6 +361,7 @@ Here is the complete list of setting options:
 | `tabAbout.showButtonRejectAll`  | `boolean` | Enable reject all button in last tab.       | `true`        |
 | `enableDarkMode`                | `boolean` | Enable automatic switch to dark mode theme. | `false`       |
 | `disableBadge`                  | `boolean` | Disable badge button.                       | `false`       |
+| `disableCross`                  | `boolean` | Disable cross button in header.             | `false`       |
 | `disableHeader`                 | `boolean` | Disable header.                             | `false`       |
 
 ## API Methods

@@ -110,6 +110,7 @@ export interface CookieConsentSettings {
   tabDetails: CookieConsentSettingsTab;
   enableDarkMode: boolean;
   disableBadge: boolean;
+  disableCross: boolean;
   disableHeader: boolean;
 }
 
