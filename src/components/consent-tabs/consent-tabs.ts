@@ -2,7 +2,7 @@ import { componentClassList, type ComponentProps } from '@/utils/component-helpe
 import { createVElement } from '@/utils/elements';
 
 interface ConsentTabsProps extends ComponentProps {
-  tabs: HTMLElement[];
+  tabs: (HTMLElement | null)[];
 }
 
 export const consentTabs = (props: ConsentTabsProps): HTMLDivElement => {
