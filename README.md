@@ -2,8 +2,8 @@
 
 ![Size](https://img.shields.io/github/size/danielsitek/dgp-cookie-consent/dist/cookies.min.js)
 [![Stable version](https://img.shields.io/github/v/release/danielsitek/dgp-cookie-consent)](https://github.com/danielsitek/dgp-cookie-consent/releases)
-[![Monthly downloads](https://img.shields.io/jsdelivr/gh/hm/danielsitek/dgp-cookie-consent)](https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.6.2/dist/cookies.min.js)
-[![CDN](https://img.shields.io/badge/CDN-orange?style=flat&logo=jsdelivr&logoColor=white)](https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.6.2/dist/cookies.min.js)
+[![Monthly downloads](https://img.shields.io/jsdelivr/gh/hm/danielsitek/dgp-cookie-consent)](https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.6.3/dist/cookies.min.js)
+[![CDN](https://img.shields.io/badge/CDN-orange?style=flat&logo=jsdelivr&logoColor=white)](https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.6.3/dist/cookies.min.js)
 [![Maintainability](https://api.codeclimate.com/v1/badges/27b5b5b749d18039f303/maintainability)](https://codeclimate.com/github/danielsitek/dgp-cookie-consent/maintainability)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/65b56152a2a84981b10576ad7081411d)](https://www.codacy.com/gh/danielsitek/dgp-cookie-consent/dashboard)
 
@@ -60,7 +60,7 @@ Awesome one-of-a-kind Cookie Consent panel.
 1. Download the latest release or use CDN.
 
    ```
-   https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.6.2/dist/cookies.min.js
+   https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.6.3/dist/cookies.min.js
    ```
 
 1. Insert this code on the bottom of the page, or [inject it via GTM](#gtm-implementation).
@@ -208,7 +208,8 @@ window.CookieConsentTheme = {
   badge__color: '#f8c132',
   badge__border: '0 none',
   'badge__border-radius': '10rem',
-  'badge__box-shadow': '0 1px 6px rgba(5,27,44,.06),0 2px 32px rgba(5,27,44,.16)',
+  'badge__box-shadow':
+    '0 1px 6px rgba(5,27,44,.06),0 2px 32px rgba(5,27,44,.16)',
   badge__position: 'auto auto 1rem 1rem',
 
   'base-link__color': '#242424',
@@ -664,11 +665,14 @@ window.addEventListener('consent-badge-click', () => {
     // Optional: add own theme
     // window.CookieConsentSettings = {};
 
-    window.addEventListener('consent-updated', function consentUpdatedListener() {
-      dataLayer.push({
-        event: 'cookieconsent_updated',
-      });
-    });
+    window.addEventListener(
+      'consent-updated',
+      function consentUpdatedListener() {
+        dataLayer.push({
+          event: 'cookieconsent_updated',
+        });
+      },
+    );
 
     window.addEventListener('consent-ready', function () {
       dataLayer.push({
@@ -678,7 +682,8 @@ window.addEventListener('consent-badge-click', () => {
 
     (function cookiesInit() {
       var scriptEl = document.createElement('script');
-      scriptEl.src = 'https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.6.2/dist/cookies.min.js';
+      scriptEl.src =
+        'https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.6.3/dist/cookies.min.js';
       scriptEl.type = 'text/javascript';
       scriptEl.id = 'cookie-consent';
 
