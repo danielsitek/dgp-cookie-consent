@@ -389,7 +389,7 @@ Object to pass settings to consent modal window. This needs to be placed before 
 
 Open the consent modal window and hide the badge button.
 
-**Example**:
+**Example 01**:
 
 ```html
 <button type="button" class="js-consent-open">Open Modal</button>
@@ -401,6 +401,16 @@ Open the consent modal window and hide the badge button.
     });
   });
 </script>
+```
+
+**Example 02**:
+
+```html
+<a
+  href="javascript:if (window.CookieConsentModalOpen !== undefined) { window.CookieConsentModalOpen(); }"
+>
+  Cookies Settings
+</a>
 ```
 
 ### `window.CookieConsent.marketing`
