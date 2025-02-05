@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14, 16, 18, 20]
+        node-version: [20, 22]
 
     steps:
       - name: Getting configuration from GitHub
