@@ -721,6 +721,8 @@ npm run dev
 
 Then open the localhost url from terminal in browser and navigate to `http://localhost:3000/public/`.
 
+> **TIP**: Sometimes it's usefull to comment out `.pipe(stripDebug())` in `tasks/helpers/rollupPipe.js` to enable console logs and other debug functions.
+
 ### Production build
 
 ```
