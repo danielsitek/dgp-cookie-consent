@@ -62,12 +62,12 @@
 
         <p>Awesome one-of-a-kind Cookie Consent panel.</p>
 
-        <hr>
+        <hr />
 
         <button type="button" onclick="window.CookieConsentModalOpen();">Open</button>
         <button type="button" onclick="document.cookie = `CookieConsent=;Path=/;Expires=Thu, 01 Jan 1970 00:00:01 GMT;`; window.location.reload();">Reset</button>
 
-        <hr>
+        <hr />
 
         <h2>How to install</h2>
 
@@ -111,41 +111,41 @@
 
     <script>
       window.addEventListener('consent-updated', () => {
-        console.log('CookieConsent fired event "consent-updated"', (new Date()).toISOString());
+        console.log('CookieConsent fired event "consent-updated"', new Date().toISOString());
         console.log(CookieConsent);
       });
 
       window.addEventListener('consent-show', () => {
-        console.log('CookieConsent fired event "consent-show"', (new Date()).toISOString());
+        console.log('CookieConsent fired event "consent-show"', new Date().toISOString());
       });
 
       window.addEventListener('consent-hide', () => {
-        console.log('CookieConsent fired event "consent-hide"', (new Date()).toISOString());
+        console.log('CookieConsent fired event "consent-hide"', new Date().toISOString());
       });
 
       window.addEventListener('consent-ready', () => {
-        console.log('CookieConsent fired event "consent-ready"', (new Date()).toISOString());
+        console.log('CookieConsent fired event "consent-ready"', new Date().toISOString());
         console.log(CookieConsent);
       });
 
       window.addEventListener('consent-close', () => {
-        console.log('CookieConsent fired event "consent-close"', (new Date()).toISOString());
+        console.log('CookieConsent fired event "consent-close"', new Date().toISOString());
       });
 
       window.addEventListener('consent-badge-show', () => {
-        console.log('CookieConsent fired event "consent-badge-show"', (new Date()).toISOString());
+        console.log('CookieConsent fired event "consent-badge-show"', new Date().toISOString());
       });
 
       window.addEventListener('consent-badge-hide', () => {
-        console.log('CookieConsent fired event "consent-badge-hide"', (new Date()).toISOString());
+        console.log('CookieConsent fired event "consent-badge-hide"', new Date().toISOString());
       });
 
       window.addEventListener('consent-badge-click', () => {
-        console.log('CookieConsent fired event "consent-badge-click"', (new Date()).toISOString());
+        console.log('CookieConsent fired event "consent-badge-click"', new Date().toISOString());
       });
 
       window.CookieConsentTheme = {
-        'badge__color': 'magenta',
+        badge__color: 'magenta',
       };
 
       window.CookieConsentThemeDark = {};

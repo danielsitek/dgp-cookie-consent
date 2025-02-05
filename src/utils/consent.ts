@@ -36,9 +36,16 @@ function encodeConsentData(data: ConsentOptions): string {
 
 function decodeConsentData(encodedData: string): ConsentOptions {
   try {
+    // Try to parse the data as is.
     return JSON.parse(decodeURIComponent(encodedData));
   } catch (e) {
-    return JSON.parse(decodeURIComponent(atob(encodedData)));
+    try {
+      // Fallback for base64 encoded data.
+      return JSON.parse(decodeURIComponent(atob(encodedData)));
+    } catch (e) {
+      // If both fail, return default consent. It might happened if CookieConsent is set by different provider.
+      return defaultConsent;
+    }
   }
 }
 
