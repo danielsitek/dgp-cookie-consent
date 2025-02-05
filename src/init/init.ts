@@ -1,11 +1,20 @@
 import '@/elements/consent-dialog/consent-dialog';
-import { BADGE_ELEMENT_NAME, DIALOG_ELEMENT_NAME, EVENT_CONSENT_HIDE, EVENT_CONSENT_SHOW } from '@/config';
-import { initConsentBadge } from './initConsentBadge';
+import '@/elements/consent-badge/consent-badge';
+import { BADGE_ELEMENT_NAME, DIALOG_ELEMENT_NAME, EVENT_BADGE_CLICK, EVENT_CONSENT_HIDE, EVENT_CONSENT_SHOW } from '@/config';
 import { createVElement } from '@/utils/elements';
+import { settingsService } from '@/services/settings-service';
 
 interface BadgeElement extends HTMLElement {
   hideBadge: () => void;
 }
+
+const settings = settingsService();
+
+const handleBadgeClick = (): void => {
+  initConsentModal();
+
+  window.removeEventListener(EVENT_BADGE_CLICK, handleBadgeClick);
+};
 
 const handleConsentHide = (): void => {
   initConsentBadge();
@@ -31,4 +40,18 @@ export const initConsentModal = (): void => {
   window.addEventListener(EVENT_CONSENT_HIDE, handleConsentHide);
 
   window.addEventListener(EVENT_CONSENT_SHOW, handleConsentShow);
+};
+
+export const initConsentBadge = (): void => {
+  if (settings.disableBadge === true) {
+    return;
+  }
+
+  if (document.querySelectorAll(BADGE_ELEMENT_NAME).length) {
+    return;
+  }
+
+  window.addEventListener(EVENT_BADGE_CLICK, handleBadgeClick);
+
+  document.body.append(createVElement(BADGE_ELEMENT_NAME));
 };
