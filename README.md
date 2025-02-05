@@ -106,23 +106,19 @@ window.CookieConsentTranslations = {
     title: 'Detail',
     necessary: {
       title: 'Nutné',
-      perex:
-        'Nutné cookies pomáhají, aby byla webová stránka použitelná tak, že umožní základní funkce jako navigace stránky a přístup k zabezpečeným sekcím webové stránky. Webová stránka nemůže správně fungovat bez těchto cookies.',
+      perex: 'Nutné cookies pomáhají, aby byla webová stránka použitelná tak, že umožní základní funkce jako navigace stránky a přístup k zabezpečeným sekcím webové stránky. Webová stránka nemůže správně fungovat bez těchto cookies.',
     },
     preferences: {
       title: 'Preferenční',
-      perex:
-        'Preferenční cookies umožňují, aby si webová stránka zapamatovala informace, které mění, jak se webová stránka chová nebo jak vypadá. Je to například preferovaný jazyk nebo region, kde se nacházíte.',
+      perex: 'Preferenční cookies umožňují, aby si webová stránka zapamatovala informace, které mění, jak se webová stránka chová nebo jak vypadá. Je to například preferovaný jazyk nebo region, kde se nacházíte.',
     },
     statistics: {
       title: 'Statistické',
-      perex:
-        'Statistické cookies pomáhají majitelům webových stránek, aby porozuměli, jak návštěvníci používají webové stránky. Anonymně sbírají a sdělují informace.',
+      perex: 'Statistické cookies pomáhají majitelům webových stránek, aby porozuměli, jak návštěvníci používají webové stránky. Anonymně sbírají a sdělují informace.',
     },
     marketing: {
       title: 'Marketingové',
-      perex:
-        'Marketingové cookies jsou používány pro sledování návštěvníků na webových stránkách. Záměrem je zobrazit reklamu, která je relevantní a zajímavá pro jednotlivého uživatele a tímto hodnotnější pro vydavatele a inzerenty třetích stran.',
+      perex: 'Marketingové cookies jsou používány pro sledování návštěvníků na webových stránkách. Záměrem je zobrazit reklamu, která je relevantní a zajímavá pro jednotlivého uživatele a tímto hodnotnější pro vydavatele a inzerenty třetích stran.',
     },
   },
   buttonEdit: {
@@ -208,8 +204,7 @@ window.CookieConsentTheme = {
   badge__color: '#f8c132',
   badge__border: '0 none',
   'badge__border-radius': '10rem',
-  'badge__box-shadow':
-    '0 1px 6px rgba(5,27,44,.06),0 2px 32px rgba(5,27,44,.16)',
+  'badge__box-shadow': '0 1px 6px rgba(5,27,44,.06),0 2px 32px rgba(5,27,44,.16)',
   badge__position: 'auto auto 1rem 1rem',
 
   'base-link__color': '#242424',
@@ -406,11 +401,7 @@ Open the consent modal window and hide the badge button.
 **Example 02**:
 
 ```html
-<a
-  href="javascript:if (window.CookieConsentModalOpen !== undefined) { window.CookieConsentModalOpen(); }"
->
-  Cookies Settings
-</a>
+<a href="javascript:if (window.CookieConsentModalOpen !== undefined) { window.CookieConsentModalOpen(); }"> Cookies Settings </a>
 ```
 
 ### `window.CookieConsent.marketing`
@@ -675,14 +666,11 @@ window.addEventListener('consent-badge-click', () => {
     // Optional: add own theme
     // window.CookieConsentSettings = {};
 
-    window.addEventListener(
-      'consent-updated',
-      function consentUpdatedListener() {
-        dataLayer.push({
-          event: 'cookieconsent_updated',
-        });
-      },
-    );
+    window.addEventListener('consent-updated', function consentUpdatedListener() {
+      dataLayer.push({
+        event: 'cookieconsent_updated',
+      });
+    });
 
     window.addEventListener('consent-ready', function () {
       dataLayer.push({
@@ -692,8 +680,7 @@ window.addEventListener('consent-badge-click', () => {
 
     (function cookiesInit() {
       var scriptEl = document.createElement('script');
-      scriptEl.src =
-        'https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.6.3/dist/cookies.min.js';
+      scriptEl.src = 'https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.6.3/dist/cookies.min.js';
       scriptEl.type = 'text/javascript';
       scriptEl.id = 'cookie-consent';
 
