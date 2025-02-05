@@ -44,12 +44,10 @@ const i18n = translationService();
 const settings = settingsService();
 
 export class ConsentDialog extends HTMLElement {
-  private shadow: ShadowRoot;
-
   constructor() {
     super();
 
-    this.shadow = this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: 'open' });
   }
 
   initHeaderTabs(): void {
@@ -232,10 +230,10 @@ export class ConsentDialog extends HTMLElement {
   }
 
   appendCode(): void {
-    this.shadow.append(
-      createVElement<HTMLStyleElement>('style', {}, INLINE_STYLES_MAIN, themeService().themeTextContent),
-    );
-    this.shadow.append(consentDialogInstance);
+    if (this.shadowRoot) {
+      this.shadowRoot.append(createVElement<HTMLStyleElement>('style', {}, INLINE_STYLES_MAIN, themeService().themeTextContent));
+      this.shadowRoot.append(consentDialogInstance);
+    }
   }
 
   closeModal(): void {
