@@ -1,11 +1,5 @@
 import { consentBadge } from '@/components/consent-badge/consent-badge';
-import {
-  BADGE_ELEMENT_NAME,
-  DIALOG_FADE_IN_DURATION,
-  DIALOG_FADE_OUT_DURATION,
-  EVENT_CLICK,
-  INLINE_STYLES_BADGE,
-} from '@/config';
+import { BADGE_ELEMENT_NAME, DIALOG_FADE_IN_DURATION, DIALOG_FADE_OUT_DURATION, EVENT_CLICK, INLINE_STYLES_BADGE } from '@/config';
 import { themeService } from '@/services/theme-service';
 import { fadeIn, fadeOut } from '@/utils/animation';
 import { createVElement } from '@/utils/elements';
