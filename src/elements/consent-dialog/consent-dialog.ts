@@ -23,20 +23,8 @@ import { dispatchEventConsentHide, dispatchEventConsentShow } from '@/utils/even
 import { consentButton, consentButtonPrimary } from '@/components/consent-button/consent-button';
 import { tabContentDefault } from '@/components/tab-content-default/tab-content-default';
 import { type TabContentDetailsProps, tabContentDetails } from '@/components/tab-content-details/tab-content-details';
-import {
-  switchMarketing,
-  switchNecessary,
-  switchPreferences,
-  switchStatistics,
-} from '@/components/switch-button/switch-buttons';
-import {
-  tabButtonAgree,
-  tabButtonDetails,
-  tabButtonAbout,
-  tabButtonAgreeEl,
-  tabButtonDetailsEl,
-  tabButtonAboutEl,
-} from '@/components/consent-tab/consent-tab-instances';
+import { switchMarketing, switchNecessary, switchPreferences, switchStatistics } from '@/components/switch-button/switch-buttons';
+import { tabButtonAgree, tabButtonDetails, tabButtonAbout, tabButtonAgreeEl, tabButtonDetailsEl, tabButtonAboutEl } from '@/components/consent-tab/consent-tab-instances';
 import { consentDialogInnerInstance } from '@/components/consent-dialog-inner/consent-dialog-inner-instances';
 import { consentDialogInstance } from '@/components/consent-dialog/consent-dialog-instances';
 
@@ -44,12 +32,10 @@ const i18n = translationService();
 const settings = settingsService();
 
 export class ConsentDialog extends HTMLElement {
-  private shadow: ShadowRoot;
-
   constructor() {
     super();
 
-    this.shadow = this.attachShadow({ mode: 'closed' });
+    this.attachShadow({ mode: 'open' });
   }
 
   initHeaderTabs(): void {
@@ -87,11 +73,7 @@ export class ConsentDialog extends HTMLElement {
     this.setTabContent(
       tabContentDefault({
         body: i18n.tabAgree.body,
-        buttons: [
-          settings.tabAgree.showButtonRejectAll ? this.createButtonRejectAll() : false,
-          this.createButtonEdit(),
-          this.createButtonAllowAll(),
-        ],
+        buttons: [settings.tabAgree.showButtonRejectAll ? this.createButtonRejectAll() : false, this.createButtonEdit(), this.createButtonAllowAll()],
         ...this.onAnchorClickProp(),
       }),
     );
@@ -112,11 +94,7 @@ export class ConsentDialog extends HTMLElement {
     this.setTabContent(
       tabContentDefault({
         body: i18n.tabAbout.body,
-        buttons: [
-          settings.tabAbout.showButtonRejectAll ? this.createButtonRejectAll() : false,
-          this.createButtonEdit(),
-          this.createButtonAllowAll(),
-        ],
+        buttons: [settings.tabAbout.showButtonRejectAll ? this.createButtonRejectAll() : false, this.createButtonEdit(), this.createButtonAllowAll()],
         ...this.onAnchorClickProp(),
       }),
     );
@@ -140,11 +118,7 @@ export class ConsentDialog extends HTMLElement {
 
   tabContentDetailsProps(): TabContentDetailsProps {
     return {
-      buttons: [
-        this.createButtonRejectAll(),
-        this.createButtonConfirm(),
-        settings.tabDetails.showButtonAllowAll ? this.createButtonAllowAll() : false,
-      ],
+      buttons: [this.createButtonRejectAll(), this.createButtonConfirm(), settings.tabDetails.showButtonAllowAll ? this.createButtonAllowAll() : false],
       lastUpdated: i18n.lastUpdated,
       sections: {
         necessary: {
@@ -221,21 +195,16 @@ export class ConsentDialog extends HTMLElement {
     return consentButtonPrimary({
       label: i18n.buttonConfirm.label,
       onClick: () => {
-        this.updateConsentOnClick(
-          switchPreferences.isChecked(),
-          switchStatistics.isChecked(),
-          switchMarketing.isChecked(),
-          CONSENT_TYPE_ADVANCED,
-        );
+        this.updateConsentOnClick(switchPreferences.isChecked(), switchStatistics.isChecked(), switchMarketing.isChecked(), CONSENT_TYPE_ADVANCED);
       },
     });
   }
 
   appendCode(): void {
-    this.shadow.append(
-      createVElement<HTMLStyleElement>('style', {}, INLINE_STYLES_MAIN, themeService().themeTextContent),
-    );
-    this.shadow.append(consentDialogInstance);
+    if (this.shadowRoot) {
+      this.shadowRoot.append(createVElement<HTMLStyleElement>('style', {}, INLINE_STYLES_MAIN, themeService().themeTextContent));
+      this.shadowRoot.append(consentDialogInstance);
+    }
   }
 
   closeModal(): void {

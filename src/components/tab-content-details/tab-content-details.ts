@@ -27,7 +27,7 @@ const getLocalizedUpdatedDate = (): string => {
 
   const date = new Date(window.CookieConsent.updated);
 
-  return new Intl.DateTimeFormat(i18n.locale).format(date);
+  return new Intl.DateTimeFormat(i18n.locale).format(date).replaceAll(/\s+/g, '&nbsp;');
 };
 
 const tabContentDetailsBody = (props: TabContentDetailsProps): HTMLDivElement => {
