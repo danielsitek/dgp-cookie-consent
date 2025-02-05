@@ -49,7 +49,7 @@ export class ConsentDialog extends HTMLElement {
   constructor() {
     super();
 
-    this.shadow = this.attachShadow({ mode: 'closed' });
+    this.shadow = this.attachShadow({ mode: 'open' });
   }
 
   initHeaderTabs(): void {
