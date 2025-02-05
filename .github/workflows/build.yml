@@ -28,7 +28,7 @@ jobs:
         node -v > dist/node-version.txt
 
     - name: Archive production artifacts
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v4
       with:
         name: dist-node-${{ matrix.node-version }}
         path: dist
