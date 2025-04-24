@@ -59,6 +59,9 @@ const cs: CookieConsentTranslations = {
   badge: {
     label: 'Upravit nastavení cookies',
   },
+  dialog: {
+    label: 'Vaše nastavení cookies',
+  },
   lastUpdated: 'Prohlášení o cookies bylo naposledy aktualizováno %date.',
 };
 
