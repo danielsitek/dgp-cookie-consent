@@ -15,10 +15,7 @@ export const consentButton = (props: ConsentButtonProps): HTMLButtonElement => {
   const element = createVElement<HTMLButtonElement>(
     'button',
     {
-      class: componentClassList(
-        ['c-b', props.variant ? `c-b--${props.variant}` : `c-b--${BUTTON_DEFAULT}`],
-        props.modifier,
-      ).join(' '),
+      class: componentClassList('c-b', props.variant ? `c-b--${props.variant}` : `c-b--${BUTTON_DEFAULT}`, props.modifier),
     },
     createVElement(
       'span',

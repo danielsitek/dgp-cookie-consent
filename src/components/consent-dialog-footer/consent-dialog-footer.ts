@@ -9,7 +9,7 @@ export const consentDialogFooter = (props: ConsentTabProps): HTMLDivElement => {
   return createVElement<HTMLDivElement>(
     'div',
     {
-      class: componentClassList(['c-d__f'], props.modifier).join(' '),
+      class: componentClassList('c-d__f', props.modifier),
     },
     ...props.buttons,
   );
