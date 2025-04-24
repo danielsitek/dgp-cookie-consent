@@ -167,6 +167,7 @@ export class ConsentDialog extends HTMLElement {
   createButtonEdit(): HTMLButtonElement {
     return consentButton({
       label: i18n.buttonEdit.label,
+      modifier: 'ae',
       onClick: () => {
         this.setTabContentDetails();
       },
@@ -176,6 +177,7 @@ export class ConsentDialog extends HTMLElement {
   createButtonAllowAll(): HTMLButtonElement {
     return consentButtonPrimary({
       label: i18n.buttonAllowAll.label,
+      modifier: 'aa',
       onClick: () => {
         this.updateConsentOnClickSwitch(true, true, true, CONSENT_TYPE_FULL);
       },
@@ -185,6 +187,7 @@ export class ConsentDialog extends HTMLElement {
   createButtonRejectAll(): HTMLButtonElement {
     return consentButtonPrimary({
       label: i18n.buttonRejectAll.label,
+      modifier: 'ar',
       onClick: () => {
         this.updateConsentOnClickSwitch(false, false, false, CONSENT_TYPE_REJECTED);
       },
@@ -194,6 +197,7 @@ export class ConsentDialog extends HTMLElement {
   createButtonConfirm(): HTMLButtonElement {
     return consentButtonPrimary({
       label: i18n.buttonConfirm.label,
+      modifier: 'ac',
       onClick: () => {
         this.updateConsentOnClick(switchPreferences.isChecked(), switchStatistics.isChecked(), switchMarketing.isChecked(), CONSENT_TYPE_ADVANCED);
       },
