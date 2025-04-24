@@ -5,11 +5,13 @@ import { tabButtonAboutEl, tabButtonAgreeEl, tabButtonDetailsEl } from '../conse
 import { consentButtonClose } from '../consent-button-close/consent-button-close';
 import { consentDialogInnerInstance } from '../consent-dialog-inner/consent-dialog-inner-instances';
 import { settingsService } from '@/services/settings-service';
+import { translationService } from '@/services/translation-service';
 
 interface ConsentDialogProps extends ComponentProps {
   [key: string]: unknown;
 }
 
+const i18n = translationService();
 const settings = settingsService();
 
 export const consentDialog = (props?: ConsentDialogProps): HTMLDivElement => {
@@ -19,7 +21,7 @@ export const consentDialog = (props?: ConsentDialogProps): HTMLDivElement => {
       class: componentClassList('c-d', 't', props?.modifier),
       role: 'dialog',
       'aria-modal': 'true',
-      'aria-hidden': 'false',
+      'aria-label': i18n.dialog.label,
       style: 'display: block;',
     },
     settings.disableHeader === true
