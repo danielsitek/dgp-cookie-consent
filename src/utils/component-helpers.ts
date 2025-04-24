@@ -1,15 +1,10 @@
-
 export interface ComponentProps {
   modifier?: string;
 }
 
-export const componentClassList = (main: string[], modifiers?: string): string[] => {
-  if (modifiers) {
-    return [
-      ...main,
-      ...modifiers.split(' '),
-    ]
-  }
-
-  return main;
+export const componentClassList = (...classNames: (string | undefined)[]): string => {
+  return classNames
+    .filter((val) => val)
+    .join(' ')
+    .trim();
 };

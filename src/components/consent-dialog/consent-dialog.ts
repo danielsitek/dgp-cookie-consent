@@ -16,7 +16,7 @@ export const consentDialog = (props?: ConsentDialogProps): HTMLDivElement => {
   return createVElement<HTMLDivElement>(
     'div',
     {
-      class: componentClassList(['c-d', 't'], props?.modifier).join(' '),
+      class: componentClassList('c-d', 't', props?.modifier),
       role: 'dialog',
       'aria-modal': 'true',
       'aria-hidden': 'false',

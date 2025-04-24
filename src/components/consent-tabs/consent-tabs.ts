@@ -9,7 +9,7 @@ export const consentTabs = (props: ConsentTabsProps): HTMLDivElement => {
   return createVElement<HTMLDivElement>(
     'div',
     {
-      class: componentClassList(['c-ts'], props.modifier).join(' '),
+      class: componentClassList('c-ts', props.modifier),
       role: 'tablist',
     },
     ...props.tabs,
