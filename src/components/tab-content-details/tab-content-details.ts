@@ -34,7 +34,7 @@ const tabContentDetailsBody = (props: TabContentDetailsProps): HTMLDivElement =>
   const sections: HTMLDivElement[] = [];
 
   Object.keys(props.sections).forEach((section: string): void => {
-    sections.push(consentSection(props.sections[section]));
+    sections.push(consentSection({ ...props.sections[section], headerId: section }));
   });
 
   return createVElement<HTMLDivElement>('div', { class: 'c-d__b' }, ...sections);
