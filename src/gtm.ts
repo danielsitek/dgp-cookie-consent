@@ -168,3 +168,15 @@ scriptEl.id = 'cookie-consent';
 scriptEl.defer = true;
 
 document.body.appendChild(scriptEl);
+
+// Handle click on the button with class "js-consent-open" to open the consent modal.
+document.body.addEventListener('click', function (event) {
+  const target = event.target as HTMLElement;
+
+  if (target && target.classList.contains('js-consent-open')) {
+    if (window.CookieConsentModalOpen) {
+      event.preventDefault();
+      window.CookieConsentModalOpen();
+    }
+  }
+});
