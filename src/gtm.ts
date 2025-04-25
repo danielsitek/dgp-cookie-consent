@@ -153,10 +153,7 @@ window.CookieConsentTranslations = window.CookieConsentTranslations || {};
 // Settings
 window.CookieConsentSettings = {
   ...window.CookieConsentSettings,
-  tabDetails: {
-    showButtonAllowAll: false,
-    ...(window.CookieConsentSettings.tabDetails || {}),
-  },
+  disableCross: true,
 };
 
 // COOKIE CONSENT PANEL INITIALIZATION
