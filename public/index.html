@@ -106,6 +106,8 @@
     }
   });
 &lt;/script&gt;</code></pre>
+
+        <p id="dynamic-link-container"></p>
       </div>
     </div>
 
@@ -187,5 +189,22 @@
     </script>
 
     <script type="text/javascript" src="/dist/cookies.min.js"></script>
+
+    <template id="cookie-settings-template">
+      <a href="#" class="js-consent-open">Cookie Settings</a>
+    </template>
+
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+          const container = document.getElementById('dynamic-link-container');
+          const template = document.getElementById('cookie-settings-template');
+
+          if (container && template?.content) {
+            container.appendChild(template.content.cloneNode(true));
+          }
+        }, 2000);
+      });
+    </script>
   </body>
 </html>
