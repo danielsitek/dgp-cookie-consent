@@ -82,9 +82,9 @@ export class ConsentDialog extends HTMLElement {
   }
 
   setTabContentDetails(): void {
-    switchPreferences.setChecked(window.CookieConsent.preferences);
-    switchStatistics.setChecked(window.CookieConsent.statistics);
-    switchMarketing.setChecked(window.CookieConsent.marketing);
+    switchPreferences.setChecked(window.CookieConsent?.preferences);
+    switchStatistics.setChecked(window.CookieConsent?.statistics);
+    switchMarketing.setChecked(window.CookieConsent?.marketing);
 
     this.setTabContent(tabContentDetails(this.tabContentDetailsProps()));
     tabButtonDetails.active = true;

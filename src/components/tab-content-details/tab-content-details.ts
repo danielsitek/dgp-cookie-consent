@@ -21,7 +21,7 @@ export interface TabContentDetailsProps {
 const i18n = translationService();
 
 const getLocalizedUpdatedDate = (): string => {
-  if (!window.CookieConsent.updated.length) {
+  if (!window.CookieConsent?.updated.length) {
     return '';
   }
 
