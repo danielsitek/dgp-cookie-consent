@@ -1,15 +1,4 @@
-import {
-  DENIED,
-  EVENT_BADGE_CLICK,
-  EVENT_BADGE_HIDE,
-  EVENT_BADGE_SHOW,
-  EVENT_CONSENT_CLOSE,
-  EVENT_CONSENT_HIDE,
-  EVENT_CONSENT_READY,
-  EVENT_CONSENT_SHOW,
-  EVENT_CONSENT_UPDATED,
-  GRANTED,
-} from '@/config';
+import { DENIED, EVENT_BADGE_CLICK, EVENT_BADGE_HIDE, EVENT_BADGE_SHOW, EVENT_CONSENT_CLOSE, EVENT_CONSENT_HIDE, EVENT_CONSENT_READY, EVENT_CONSENT_SHOW, EVENT_CONSENT_UPDATED, GRANTED } from '@/config';
 import { dataLayerPush } from '@/utils/data-layer-push';
 import { getDefaultConsent } from '@/utils/read-consent';
 
@@ -141,6 +130,7 @@ window.CookieConsentTheme = {
   'base-link__text-decoration': 'underline',
   'base-link--hover__color': '#3c3c3c',
   'base-link--hover__text-decoration': 'underline',
+
   ...window.CookieConsentTheme,
 };
 
