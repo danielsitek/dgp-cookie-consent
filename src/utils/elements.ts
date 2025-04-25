@@ -5,11 +5,7 @@ function parseStringToHtmlElements(htmlString: string): NodeListOf<ChildNode> {
 }
 
 // Create Virtual DOM Elements.
-export function createVElement<T extends HTMLElement>(
-  tagName: string,
-  attributes?: { [key: string]: string | boolean },
-  ...children: Array<string | HTMLElement | undefined | boolean | null>
-): T {
+export function createVElement<T extends HTMLElement>(tagName: string, attributes?: { [key: string]: string | boolean | undefined }, ...children: Array<string | HTMLElement | undefined | boolean | null>): T {
   const element = document.createElement(tagName);
 
   // Set attributes
@@ -17,6 +13,8 @@ export function createVElement<T extends HTMLElement>(
     for (const [key, value] of Object.entries(attributes)) {
       if (key === 'disabled' || key === 'checked') {
         (element as HTMLInputElement)[key] = value as boolean;
+      } else if (value === undefined) {
+        // Do not render undefined attributes.
       } else {
         element.setAttribute(key, `${value}`);
       }
