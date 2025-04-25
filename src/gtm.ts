@@ -25,6 +25,8 @@ const defaultConsent = getDefaultConsent();
 
 dataLayerPush('consent', 'default', {
   ad_storage: defaultConsent.marketing ? GRANTED : DENIED,
+  ad_user_data: defaultConsent.marketing ? GRANTED : DENIED,
+  ad_personalization: defaultConsent.marketing ? GRANTED : DENIED,
   analytics_storage: defaultConsent.statistics ? GRANTED : DENIED,
   personalization_storage: defaultConsent.preferences ? GRANTED : DENIED,
   functionality_storage: GRANTED,
@@ -49,6 +51,8 @@ window.addEventListener(EVENT_CONSENT_UPDATED, function () {
   // GTM consent
   dataLayerPush('consent', 'update', {
     ad_storage: window.CookieConsent.marketing ? GRANTED : DENIED,
+    ad_user_data: window.CookieConsent.marketing ? GRANTED : DENIED,
+    ad_personalization: window.CookieConsent.marketing ? GRANTED : DENIED,
     analytics_storage: window.CookieConsent.statistics ? GRANTED : DENIED,
     personalization_storage: window.CookieConsent.preferences ? GRANTED : DENIED,
     functionality_storage: GRANTED,
@@ -61,6 +65,8 @@ window.addEventListener(EVENT_CONSENT_UPDATED, function () {
     type: window.CookieConsent.type,
     personalization_storage: window.CookieConsent.preferences ? GRANTED : DENIED,
     ad_storage: window.CookieConsent.marketing ? GRANTED : DENIED,
+    ad_user_data: window.CookieConsent.marketing ? GRANTED : DENIED,
+    ad_personalization: window.CookieConsent.marketing ? GRANTED : DENIED,
     analytics_storage: window.CookieConsent.statistics ? GRANTED : DENIED,
   });
 });
