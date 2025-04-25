@@ -89,8 +89,8 @@ window.CookieConsentTranslations = {
   tabAgree: {
     title: 'Souhlas',
     body: `
-     <p><strong>Tato webová stránka používá cookies</strong></p>
-     <p>K personalizaci obsahu a reklam, poskytování funkcí sociálních médií a analýze naší návštěvnosti využíváme soubory cookie. Informace o tom, jak náš web používáte, sdílíme se svými partnery pro sociální média, inzerci a analýzy. Partneři tyto údaje mohou zkombinovat s dalšími informacemi, které jste jim poskytli nebo které získali v důsledku toho, že používáte jejich služby.</p>
+      <p><strong>Tato webová stránka používá cookies</strong></p>
+      <p>K personalizaci obsahu a reklam, poskytování funkcí sociálních médií a analýze naší návštěvnosti využíváme soubory cookie. Informace o tom, jak náš web používáte, sdílíme se svými partnery pro sociální média, inzerci a analýzy. Partneři tyto údaje mohou zkombinovat s dalšími informacemi, které jste jim poskytli nebo které získali v důsledku toho, že používáte jejich služby.</p>
     `,
   },
   tabAbout: {
@@ -135,6 +135,9 @@ window.CookieConsentTranslations = {
   },
   badge: {
     label: 'Upravit nastavení cookies',
+  },
+  dialog: {
+    label: 'Vaše nastavení cookies',
   },
   lastUpdated: 'Prohlášení o cookies bylo naposledy aktualizováno %date.',
 };
