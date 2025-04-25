@@ -36,6 +36,7 @@ export const consentButtonClose = (): HTMLButtonElement | null => {
       type: 'button',
       'aria-label': i18n.buttonClose.label,
       title: i18n.buttonClose.label,
+      role: 'tab',
       class: 'c-b-c',
     },
     createVElement<HTMLElement>('span', { class: 'c-b-c__i' }, svgIcon),
