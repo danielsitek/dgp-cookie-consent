@@ -2,8 +2,8 @@
 
 ![Size](https://img.shields.io/github/size/danielsitek/dgp-cookie-consent/dist/cookies.min.js)
 [![Stable version](https://img.shields.io/github/v/release/danielsitek/dgp-cookie-consent)](https://github.com/danielsitek/dgp-cookie-consent/releases)
-[![Monthly downloads](https://img.shields.io/jsdelivr/gh/hm/danielsitek/dgp-cookie-consent)](https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.7.0/dist/cookies.min.js)
-[![CDN](https://img.shields.io/badge/CDN-orange?style=flat&logo=jsdelivr&logoColor=white)](https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.7.0/dist/cookies.min.js)
+[![Monthly downloads](https://img.shields.io/jsdelivr/gh/hm/danielsitek/dgp-cookie-consent)](https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.8.0/dist/cookies.min.js)
+[![CDN](https://img.shields.io/badge/CDN-orange?style=flat&logo=jsdelivr&logoColor=white)](https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.8.0/dist/cookies.min.js)
 [![Maintainability](https://api.codeclimate.com/v1/badges/27b5b5b749d18039f303/maintainability)](https://codeclimate.com/github/danielsitek/dgp-cookie-consent/maintainability)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/65b56152a2a84981b10576ad7081411d)](https://www.codacy.com/gh/danielsitek/dgp-cookie-consent/dashboard)
 
@@ -60,7 +60,7 @@ Awesome one-of-a-kind Cookie Consent panel.
 1. Download the latest release or use CDN.
 
    ```
-   https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.7.0/dist/cookies.min.js
+   https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.8.0/dist/cookies.min.js
    ```
 
 1. Insert this code on the bottom of the page, or [inject it via GTM](#gtm-implementation).
@@ -683,7 +683,7 @@ window.addEventListener('consent-badge-click', () => {
 
     (function cookiesInit() {
       var scriptEl = document.createElement('script');
-      scriptEl.src = 'https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.7.0/dist/cookies.min.js';
+      scriptEl.src = 'https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.8.0/dist/cookies.min.js';
       scriptEl.type = 'text/javascript';
       scriptEl.id = 'cookie-consent';
 

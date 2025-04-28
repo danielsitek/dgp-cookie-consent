@@ -1,6 +1,6 @@
 {
   "name": "@danielsitek/dgp-cookie-consent",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "DGP cookie consent",
   "main": "dist/cookies.js",
   "types": "./types.d.ts",
