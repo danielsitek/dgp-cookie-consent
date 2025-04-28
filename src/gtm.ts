@@ -1,15 +1,4 @@
-import {
-  DENIED,
-  EVENT_BADGE_CLICK,
-  EVENT_BADGE_HIDE,
-  EVENT_BADGE_SHOW,
-  EVENT_CONSENT_CLOSE,
-  EVENT_CONSENT_HIDE,
-  EVENT_CONSENT_READY,
-  EVENT_CONSENT_SHOW,
-  EVENT_CONSENT_UPDATED,
-  GRANTED,
-} from '@/config';
+import { DENIED, EVENT_BADGE_CLICK, EVENT_BADGE_HIDE, EVENT_BADGE_SHOW, EVENT_CONSENT_CLOSE, EVENT_CONSENT_HIDE, EVENT_CONSENT_READY, EVENT_CONSENT_SHOW, EVENT_CONSENT_UPDATED, GRANTED } from '@/config';
 import { dataLayerPush } from '@/utils/data-layer-push';
 import { getDefaultConsent } from '@/utils/read-consent';
 
@@ -25,6 +14,8 @@ const defaultConsent = getDefaultConsent();
 
 dataLayerPush('consent', 'default', {
   ad_storage: defaultConsent.marketing ? GRANTED : DENIED,
+  ad_user_data: defaultConsent.marketing ? GRANTED : DENIED,
+  ad_personalization: defaultConsent.marketing ? GRANTED : DENIED,
   analytics_storage: defaultConsent.statistics ? GRANTED : DENIED,
   personalization_storage: defaultConsent.preferences ? GRANTED : DENIED,
   functionality_storage: GRANTED,
@@ -49,6 +40,8 @@ window.addEventListener(EVENT_CONSENT_UPDATED, function () {
   // GTM consent
   dataLayerPush('consent', 'update', {
     ad_storage: window.CookieConsent.marketing ? GRANTED : DENIED,
+    ad_user_data: window.CookieConsent.marketing ? GRANTED : DENIED,
+    ad_personalization: window.CookieConsent.marketing ? GRANTED : DENIED,
     analytics_storage: window.CookieConsent.statistics ? GRANTED : DENIED,
     personalization_storage: window.CookieConsent.preferences ? GRANTED : DENIED,
     functionality_storage: GRANTED,
@@ -61,6 +54,8 @@ window.addEventListener(EVENT_CONSENT_UPDATED, function () {
     type: window.CookieConsent.type,
     personalization_storage: window.CookieConsent.preferences ? GRANTED : DENIED,
     ad_storage: window.CookieConsent.marketing ? GRANTED : DENIED,
+    ad_user_data: window.CookieConsent.marketing ? GRANTED : DENIED,
+    ad_personalization: window.CookieConsent.marketing ? GRANTED : DENIED,
     analytics_storage: window.CookieConsent.statistics ? GRANTED : DENIED,
   });
 });
@@ -135,6 +130,7 @@ window.CookieConsentTheme = {
   'base-link__text-decoration': 'underline',
   'base-link--hover__color': '#3c3c3c',
   'base-link--hover__text-decoration': 'underline',
+
   ...window.CookieConsentTheme,
 };
 
@@ -147,10 +143,7 @@ window.CookieConsentTranslations = window.CookieConsentTranslations || {};
 // Settings
 window.CookieConsentSettings = {
   ...window.CookieConsentSettings,
-  tabDetails: {
-    showButtonAllowAll: false,
-    ...(window.CookieConsentSettings.tabDetails || {}),
-  },
+  disableCross: true,
 };
 
 // COOKIE CONSENT PANEL INITIALIZATION
@@ -162,3 +155,15 @@ scriptEl.id = 'cookie-consent';
 scriptEl.defer = true;
 
 document.body.appendChild(scriptEl);
+
+// Handle click on the button with class "js-consent-open" to open the consent modal.
+document.body.addEventListener('click', function (event) {
+  const target = event.target as HTMLElement;
+
+  if (target && target.classList.contains('js-consent-open')) {
+    if (window.CookieConsentModalOpen) {
+      event.preventDefault();
+      window.CookieConsentModalOpen();
+    }
+  }
+});
