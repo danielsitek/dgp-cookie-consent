@@ -9,6 +9,10 @@ export interface CookieConsentTranslationsButton {
   label: string;
 }
 
+export interface CookieConsentTranslationsDialog {
+  label: string;
+}
+
 export interface CookieConsentTranslationsTab {
   title: string;
 }
@@ -39,6 +43,7 @@ export interface CookieConsentTranslations {
   buttonConfirm: CookieConsentTranslationsButton;
   buttonClose: CookieConsentTranslationsButton;
   badge: CookieConsentTranslationsButton;
+  dialog: CookieConsentTranslationsDialog;
   lastUpdated: string;
 }
 
@@ -99,6 +104,10 @@ export const translationService = (): CookieConsentTranslations => {
     badge: {
       ...defaultTranslations.badge,
       ...windowTranslations?.badge,
+    },
+    dialog: {
+      ...defaultTranslations.dialog,
+      ...windowTranslations?.dialog,
     },
     lastUpdated: windowTranslations?.lastUpdated || defaultTranslations.lastUpdated,
   };

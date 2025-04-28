@@ -5,6 +5,7 @@ export interface ConsentSectionProps {
   title: string;
   perex: string;
   switch: HTMLElement;
+  headerId?: string;
   onAnchorClick?: (el: HTMLAnchorElement) => void;
 }
 
@@ -13,6 +14,7 @@ const headerEl = (props: ConsentSectionProps): HTMLDivElement => {
     'div',
     {
       class: 'c-s__a-h',
+      id: props?.headerId,
     },
     createVElement('strong', {}, props.title),
   );
