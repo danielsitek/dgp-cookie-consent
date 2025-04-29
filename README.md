@@ -147,7 +147,7 @@ window.CookieConsentTranslations = {
 
 > **Info**: `perex` and `body` values are rendered as HTML content.
 
-> **Since v1.6.2**
+> [**Since v1.6.2**](https://github.com/danielsitek/dgp-cookie-consent/releases/tag/v1.6.2)
 >
 > Since version 1.6.2 you can insert anchor links to other tabs in `perex` and `body`. The script will look for anchor elements and if they have `#tab-agree|#tab-details|#tab-about|#allow-all|#reject-all` in href attribute, click on such element will switch to selected tab.
 >
@@ -160,6 +160,10 @@ window.CookieConsentTranslations = {
 > <a href="#allow-all">Allow all cookies</a>
 > <a href="#reject-all">Reject all cookies</a>
 > ```
+
+> [**Since v1.8.0**](https://github.com/danielsitek/dgp-cookie-consent/releases/tag/v1.8.0)
+>
+> Since version 1.8.0 we added translation `dialog.label` for setting aria-label on `role="dialog"` element.
 
 ## Theme Customisation
 
