@@ -2,7 +2,13 @@ import { getDateUTCString } from './date-time';
 
 export type CookiesObject = Record<string, string>;
 
-export function getCookies(): CookiesObject {
+export function getCookies(): CookiesObject | undefined {
+  if (document.cookie.length === 0) {
+    // console.debug('No cookies found');
+    return undefined;
+  }
+
+  // Split the cookies string into individual cookies
   const cookies: CookiesObject = {};
 
   document.cookie.split(';').forEach((pair) => {
@@ -18,6 +24,10 @@ export function getCookies(): CookiesObject {
 
 export function getCookieByName(name: string): string | undefined {
   const cookies = getCookies();
+
+  if (!cookies) {
+    return undefined;
+  }
 
   if (!Object.keys(cookies).includes(name)) {
     // console.debug(`No cookie "${name}" found`);

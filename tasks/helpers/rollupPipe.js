@@ -7,25 +7,27 @@ const strip = require('gulp-strip-comments');
 const insert = require('gulp-insert');
 
 module.exports = function rollupPipe({ file, rollupConfig, packageJson }) {
-  return src([file], {
-    cwd: 'src',
-  })
-    .pipe(rollupJs(rollupConfig))
-    .pipe(strip())
-    .pipe(dest('./dist'))
-    .pipe(stripDebug())
-    .pipe(
-      terser({
-        mangle: {
-          reserved: ['ConsentService'],
-        },
-      }),
-    )
-    .pipe(insert.prepend(`/* v${packageJson.version} */`))
-    .pipe(
-      rename({
-        suffix: '.min',
-      }),
-    )
-    .pipe(dest('./dist'));
+  return (
+    src([file], {
+      cwd: 'src',
+    })
+      .pipe(rollupJs(rollupConfig))
+      .pipe(strip())
+      .pipe(dest('./dist'))
+      // .pipe(stripDebug())
+      .pipe(
+        terser({
+          mangle: {
+            reserved: ['ConsentService'],
+          },
+        }),
+      )
+      .pipe(insert.prepend(`/* v${packageJson.version} */`))
+      .pipe(
+        rename({
+          suffix: '.min',
+        }),
+      )
+      .pipe(dest('./dist'))
+  );
 };
