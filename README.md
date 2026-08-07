@@ -50,7 +50,7 @@ Awesome one-of-a-kind Cookie Consent panel.
 
 - Lightweight
 - Zero dependency
-- All-in-one - no aditional css needed
+- All-in-one - no additional CSS needed
 - GDPR Compliant
 - Custom themes
 - Custom translations
@@ -167,7 +167,7 @@ window.CookieConsentTranslations = {
 
 ## Theme Customisation
 
-For theming purposes, these all the keys with it's default values.
+For theming purposes, here are all keys with their default values.
 
 ```js
 window.CookieConsentTheme = {
@@ -338,7 +338,7 @@ window.CookieConsentThemeDark = {
 
 ## Settings
 
-You can set few settings options for Cookie Consent.
+You can set a few options for Cookie Consent.
 
 ```js
 window.CookieConsentSettings = {
@@ -438,18 +438,20 @@ Returns a boolean value of consent category.
 ### `window.CookieConsent.updated`
 
 - Returns `<string>`.
+- Example: `"2026-05-25T20:52:09.158Z"`
 
-Returns a ISO string formated date and time, or empty string if consent has not yet been updated.
+Returns an ISO-formatted date-time string, or an empty string if consent has not yet been updated.
 
 ### `window.CookieConsent.id`
 
 - Returns `<string>`.
+- Example: `"7249335781.1779742326"`
 
 Returns a unique ID of user given consent, or empty string if consent has not yet been given.
 
 ### `window.CookieConsent.type`
 
-- Returns `<string>`.
+- Returns `"full" | "advanced" | "rejected"`.
 
 Returns a consent type of user given consent, or empty string if consent has not yet been given.
 
@@ -607,7 +609,7 @@ window.addEventListener('consent-badge-click', () => {
   cookieconsent_updated
   ```
 
-  **This rule run on**: Some custom events
+  **This rule runs on**: Some custom events
 
   **Run this rule when...**:
 
@@ -625,7 +627,7 @@ window.addEventListener('consent-badge-click', () => {
   cookieconsent_updated
   ```
 
-  **This rule run on**: Some custom events
+  **This rule runs on**: Some custom events
 
   **Run this rule when...**:
 
@@ -643,7 +645,7 @@ window.addEventListener('consent-badge-click', () => {
   cookieconsent_updated
   ```
 
-  **This rule run on**: Some custom events
+  **This rule runs on**: Some custom events
 
   **Run this rule when...**:
 
@@ -655,7 +657,7 @@ window.addEventListener('consent-badge-click', () => {
 
 - **CookieConsent**
 
-  **Type of tag**: Custom HTML
+  **Tag type**: Custom HTML
 
   **HTML**
 
@@ -715,7 +717,7 @@ npm run dev
 
 Then open the localhost url from terminal in browser and navigate to `http://localhost:3000/public/`.
 
-> **TIP**: Sometimes it's usefull to comment out `.pipe(stripDebug())` in `tasks/helpers/rollupPipe.js` to enable console logs and other debug functions.
+> **TIP**: Sometimes it is useful to comment out `.pipe(stripDebug())` in `tasks/helpers/rollupPipe.js` to enable console logs and other debug functions.
 
 ### Production build
 
