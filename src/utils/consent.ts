@@ -74,7 +74,7 @@ export function getConsent(): ConsentOptions {
     cookieData = decodeConsentData(cookieDataString);
   }
 
-  // Check if ID exsits, otherwise set a new ID.
+  // Check if ID exists, otherwise set a new ID.
   if (!cookieData.id || !cookieData.id.length) {
     return createConsent(cookieData);
   }
