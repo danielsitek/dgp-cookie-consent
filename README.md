@@ -438,18 +438,20 @@ Returns a boolean value of consent category.
 ### `window.CookieConsent.updated`
 
 - Returns `<string>`.
+- Example: `"2026-05-25T20:52:09.158Z"`
 
 Returns an ISO-formatted date-time string, or an empty string if consent has not yet been updated.
 
 ### `window.CookieConsent.id`
 
 - Returns `<string>`.
+- Example: `"7249335781.1779742326"`
 
 Returns a unique ID of user given consent, or empty string if consent has not yet been given.
 
 ### `window.CookieConsent.type`
 
-- Returns `<string>`.
+- Returns `"full" | "advanced" | "rejected"`.
 
 Returns a consent type of user given consent, or empty string if consent has not yet been given.
 
