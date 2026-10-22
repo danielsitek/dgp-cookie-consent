@@ -178,6 +178,7 @@ window.CookieConsentTheme = {
   'base-shadow': '0 1px 6px rgba(5,27,44,.06),0 2px 32px rgba(5,27,44,.16)',
   'border-radius': '6px',
   'button-border-radius': '6px',
+  'button-font-weight': '600',
 
   'color-grey': '#d6d6d6',
   'color-primary': '#f8c132',
