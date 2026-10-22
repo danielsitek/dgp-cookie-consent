@@ -68,6 +68,7 @@ export type CookieConsentThemeKeys =
   | 'base-shadow'
   | 'border-radius'
   | 'button-border-radius'
+  | 'button-font-weight'
   | 'color-grey'
   | 'color-primary'
   | 'color-text-light'
