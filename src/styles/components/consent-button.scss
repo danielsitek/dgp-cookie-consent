@@ -9,7 +9,7 @@
   padding: $spacing-05 $spacing-1;
   border-radius: var(--button-border-radius, $base-button-border-radius);
   font-family: inherit;
-  font-weight: 600;
+  font-weight: var(--button-font-weight, $base-button-font-weight);
   font-size: 100%;
   line-height: 1.4;
   text-decoration: none;
