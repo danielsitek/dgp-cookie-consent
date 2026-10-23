@@ -79,6 +79,8 @@ Awesome one-of-a-kind Cookie Consent panel.
    <script type="text/javascript" src="<path-to-your>cookies.min.js"></script>
    ```
 
+> Consent is stored in the `CookieConsent` cookie (`Secure` flag is set on `https` only). If the cookie cannot be written (e.g. cookies are blocked), consent is kept in memory for the current page only.
+
 ## Translations
 
 You can use your own translation for every text in DGP Cookie Consent.
