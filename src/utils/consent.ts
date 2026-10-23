@@ -49,30 +49,39 @@ function decodeConsentData(encodedData: string): ConsentOptions {
   }
 }
 
+// Fallback for the page lifetime when the cookie cannot be written (blocked cookies, insecure context).
+let memoryConsent: ConsentOptions | undefined;
+
+function saveConsent(data: ConsentOptions): void {
+  const encodedData = encodeConsentData(data);
+
+  setCookie(COOKIE_NAME, encodedData, COOKIE_EXPIRATION);
+
+  // Verify the write, otherwise keep the consent in memory.
+  memoryConsent = getCookieByName(COOKIE_NAME) === encodedData ? undefined : data;
+}
+
 function createConsent(data: ConsentOptions): ConsentOptions {
-  setCookie(
-    COOKIE_NAME,
-    encodeConsentData({
-      ...data,
-      id: randomClientId(CONSENT_ID_LENGTH),
-    }),
-    COOKIE_EXPIRATION,
-  );
+  saveConsent({
+    ...data,
+    id: randomClientId(CONSENT_ID_LENGTH),
+  });
 
   return getConsent();
 }
 
 export function getConsent(): ConsentOptions {
-  if (!getCookieByName(COOKIE_NAME)) {
-    return createConsent(defaultConsent);
+  if (memoryConsent) {
+    return { ...memoryConsent };
   }
 
   const cookieDataString = getCookieByName(COOKIE_NAME);
-  let cookieData: ConsentOptions = defaultConsent;
 
-  if (cookieDataString) {
-    cookieData = decodeConsentData(cookieDataString);
+  if (!cookieDataString) {
+    return createConsent(defaultConsent);
   }
+
+  const cookieData = decodeConsentData(cookieDataString);
 
   // Check if ID exists, otherwise set a new ID.
   if (!cookieData.id || !cookieData.id.length) {
@@ -90,7 +99,7 @@ export function createConsentId(): ConsentOptions {
     consentData.id = randomClientId(CONSENT_ID_LENGTH);
   }
 
-  setCookie(COOKIE_NAME, encodeConsentData(consentData), COOKIE_EXPIRATION);
+  saveConsent(consentData);
 
   return getConsent();
 }
@@ -105,7 +114,7 @@ export function updateConsent(data: ConsentOptions, cb?: (consent: ConsentOption
     id,
   };
 
-  setCookie(COOKIE_NAME, encodeConsentData(consentData), COOKIE_EXPIRATION);
+  saveConsent(consentData);
 
   const consent = getConsent();
 
