@@ -28,7 +28,12 @@ export function getCookieByName(name: string): string | undefined {
 }
 
 export function setCookie(name: string, data: string, days?: number): string {
-  const cookieData = [`${name}=${data}`, 'path=/', 'Secure', 'SameSite=Lax'];
+  const cookieData = [`${name}=${data}`, 'path=/', 'SameSite=Lax'];
+
+  // Browsers reject Secure cookies on plain http.
+  if (window.location.protocol === 'https:') {
+    cookieData.push('Secure');
+  }
 
   if (days) {
     const utcString = getDateUTCString(days);
