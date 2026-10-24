@@ -55,7 +55,7 @@ function encodeConsentData(data: ConsentOptions): string {
   return encodeURIComponent(JSON.stringify(data));
 }
 
-function decodeConsentData(encodedData: string): ConsentOptions {
+export function decodeConsentData(encodedData: string): ConsentOptions {
   try {
     // Try to parse the data as is.
     return normalizeConsentData(JSON.parse(decodeURIComponent(encodedData)));
