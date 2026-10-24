@@ -44,7 +44,7 @@ function decodeConsentData(encodedData: string): ConsentOptions {
       return JSON.parse(decodeURIComponent(atob(encodedData)));
     } catch (e) {
       // If both fail, return default consent. It might happened if CookieConsent is set by different provider.
-      return defaultConsent;
+      return { ...defaultConsent };
     }
   }
 }
