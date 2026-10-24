@@ -30,6 +30,27 @@ const defaultConsent: ConsentOptions = {
   type: '',
 };
 
+const consentTypes: ConsentType[] = ['full', 'advanced', 'rejected', ''];
+
+// Keep only known keys with expected types, anything else falls back to defaults.
+function normalizeConsentData(data: unknown): ConsentOptions {
+  if (!data || typeof data !== 'object' || Array.isArray(data)) {
+    return { ...defaultConsent };
+  }
+
+  const { necessary, preferences, statistics, marketing, updated, id, type } = data as Record<string, unknown>;
+
+  return {
+    necessary: typeof necessary === 'boolean' ? necessary : defaultConsent.necessary,
+    preferences: typeof preferences === 'boolean' ? preferences : defaultConsent.preferences,
+    statistics: typeof statistics === 'boolean' ? statistics : defaultConsent.statistics,
+    marketing: typeof marketing === 'boolean' ? marketing : defaultConsent.marketing,
+    updated: typeof updated === 'string' ? updated : defaultConsent.updated,
+    id: typeof id === 'string' ? id : defaultConsent.id,
+    type: consentTypes.includes(type as ConsentType) ? (type as ConsentType) : defaultConsent.type,
+  };
+}
+
 function encodeConsentData(data: ConsentOptions): string {
   return encodeURIComponent(JSON.stringify(data));
 }
@@ -37,11 +58,11 @@ function encodeConsentData(data: ConsentOptions): string {
 function decodeConsentData(encodedData: string): ConsentOptions {
   try {
     // Try to parse the data as is.
-    return JSON.parse(decodeURIComponent(encodedData));
+    return normalizeConsentData(JSON.parse(decodeURIComponent(encodedData)));
   } catch (e) {
     try {
       // Fallback for base64 encoded data.
-      return JSON.parse(decodeURIComponent(atob(encodedData)));
+      return normalizeConsentData(JSON.parse(decodeURIComponent(atob(encodedData))));
     } catch (e) {
       // If both fail, return default consent. It might happened if CookieConsent is set by different provider.
       return { ...defaultConsent };
