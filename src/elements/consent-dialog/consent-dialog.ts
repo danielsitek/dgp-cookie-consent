@@ -244,4 +244,6 @@ export class ConsentDialog extends HTMLElement {
   }
 }
 
-customElements.define(DIALOG_ELEMENT_NAME, ConsentDialog);
+if (!customElements.get(DIALOG_ELEMENT_NAME)) {
+  customElements.define(DIALOG_ELEMENT_NAME, ConsentDialog);
+}

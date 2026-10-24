@@ -65,4 +65,6 @@ export class ConsentBadge extends HTMLElement {
   }
 }
 
-customElements.define(BADGE_ELEMENT_NAME, ConsentBadge);
+if (!customElements.get(BADGE_ELEMENT_NAME)) {
+  customElements.define(BADGE_ELEMENT_NAME, ConsentBadge);
+}
