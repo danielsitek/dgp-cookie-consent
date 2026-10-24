@@ -1,5 +1,6 @@
 import { COOKIE_NAME } from '@/config';
 import type { ConsentRules } from './consent';
+import { decodeConsentData } from './consent';
 import { getCookieByName } from './cookies';
 
 // Simple CookieConsent reader with fallback to defaults.
@@ -26,15 +27,7 @@ export function readConsent(): ConsentRules {
   }
 }
 
+// Read-only: never creates the consent cookie, falls back to defaults on missing or invalid data.
 export function getDefaultConsent(): ConsentRules {
-  try {
-    return JSON.parse(getCookieByName(COOKIE_NAME) || '');
-  } catch (e) {
-    return {
-      necessary: true,
-      marketing: false,
-      preferences: false,
-      statistics: false,
-    };
-  }
+  return decodeConsentData(getCookieByName(COOKIE_NAME) || '');
 }
