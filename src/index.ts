@@ -29,8 +29,12 @@ const windowCookieConsent = (): WindowCookieConsent => {
   return consent;
 };
 
-window.CookieConsent = windowCookieConsent();
+// Skip re-initialization when the script is loaded twice. CookieConsentModalOpen is set last,
+// so it marks a completed init (window.CookieConsent may belong to another consent tool).
+if (typeof window.CookieConsentModalOpen !== 'function') {
+  window.CookieConsent = windowCookieConsent();
 
-window.CookieConsentModalOpen = () => {
-  initConsentModal();
-};
+  window.CookieConsentModalOpen = () => {
+    initConsentModal();
+  };
+}
