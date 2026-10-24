@@ -79,7 +79,7 @@ Awesome one-of-a-kind Cookie Consent panel.
    <script type="text/javascript" src="<path-to-your>cookies.min.js"></script>
    ```
 
-> Consent is stored in the `CookieConsent` cookie (`Secure` flag is set on `https` only). If the cookie cannot be written (e.g. cookies are blocked), consent is kept in memory for the current page only.
+> Consent is stored in the `CookieConsent` cookie (`Secure` flag is set on `https` only). If the cookie cannot be written (e.g. cookies are blocked), consent is kept in memory for the current page only. Invalid values fall back to defaults per field (optional categories denied); if no valid choice remains, the consent dialog is shown again. A foreign `CookieConsent` cookie (e.g. set by another consent tool) is overwritten.
 
 ## Translations
 
