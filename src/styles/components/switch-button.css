@@ -1,0 +1,90 @@
+/* Shared switch transition */
+.s-b__p,
+.s-b__b::before,
+.s-b__b {
+  transition: 0.2s linear;
+  transition-property: transform, background-color, opacity;
+}
+/* Shared switch border radius */
+.s-b__p::before,
+.s-b__p,
+.s-b__b::before,
+.s-b__b,
+.s-b__i {
+  border-radius: 1000px;
+}
+/* .switch-button */
+.s-b {
+  position: relative;
+  display: grid;
+  width: 60px;
+  height: 30px;
+  cursor: pointer;
+}
+/* .switch-button__input */
+.s-b__i {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1000;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0 none;
+  background: transparent;
+  appearance: none;
+}
+/* .switch-button__background */
+.s-b__b {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.s-b__b::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-grey, #d6d6d6);
+}
+/* .switch-button__point */
+.s-b__p {
+  position: relative;
+  display: block;
+  width: 50%;
+  height: 100%;
+  padding: 3px;
+  transform: translateX(0);
+}
+
+.s-b__p::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-white, #ffffff);
+}
+
+.s-b__i:checked ~ .s-b__b::before {
+  background-color: var(--color-primary, #f8c132);
+}
+
+.s-b__i:checked ~ .s-b__b .s-b__p {
+  transform: translateX(100%);
+}
+
+.s-b__i:disabled ~ .s-b__b {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.s-b__i:disabled ~ .s-b__b::before {
+  background-color: var(--color-grey, #d6d6d6);
+}
+
+.s-b__i:disabled:checked ~ .s-b__b::before {
+  background-color: var(--color-primary, #f8c132);
+}
