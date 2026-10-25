@@ -1,0 +1,34 @@
+.cb {
+  --_animate-in: translateY(20%);
+  --_animate-out: translateY(0);
+  position: fixed;
+  z-index: 2147483630;
+  transform: translateY(0);
+  transition: 0.2s linear;
+  transition-property: transform, opacity;
+  inset: var(--badge__position, auto auto 1rem 1rem);
+}
+
+.cb__b {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  margin: 0;
+  padding: 0;
+  border: var(--badge__border, 0 none);
+  border-radius: var(--badge__border-radius, 10rem);
+  background: var(--badge__bg-color, #ffffff);
+  color: var(--badge__color, #f8c132);
+  cursor: pointer;
+  /* stylelint-disable-next-line color-function-notation, alpha-value-notation -- keep the previously compiled output */
+  box-shadow: var(--badge__box-shadow, 0 1px 6px rgba(5, 27, 44, 0.06), 0 2px 32px rgba(5, 27, 44, 0.16));
+  appearance: none;
+}
+
+.cb__i {
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+}
