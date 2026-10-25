@@ -1,0 +1,28 @@
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+p {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+a {
+  color: var(--base-link__color, #242424);
+  text-decoration: var(--base-link__text-decoration, underline);
+  transition: color 0.2s linear;
+  cursor: pointer;
+}
+
+a:hover,
+a:focus,
+a:active {
+  color: var(--base-link--hover__color, #000000);
+  text-decoration: var(--base-link--hover__text-decoration, underline);
+}
