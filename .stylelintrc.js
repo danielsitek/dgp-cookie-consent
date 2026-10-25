@@ -430,5 +430,7 @@ module.exports = {
 			},
 		],
     'custom-property-pattern': null,
+    // Short BEM class names, e.g. .c-d__b-i, .c-b--p
+    'selector-class-pattern': '^[a-z][a-z0-9]*(-[a-z0-9]+)*(__[a-z0-9]+(-[a-z0-9]+)*)?(--[a-z0-9]+(-[a-z0-9]+)*)?$',
 	},
 };
