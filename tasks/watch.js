@@ -24,7 +24,7 @@ module.exports = function watch(done) {
   return series(function watching() {
     watchGulp(['./src/**/*.ts'], watchTypescript);
 
-    watchGulp(['./src/**/*.scss'], watchStyles);
+    watchGulp(['./src/**/*.{scss,css}'], watchStyles);
 
     watchGulp(['./dist/*.js']).on('change', browserSync.reload);
 
