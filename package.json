@@ -54,6 +54,7 @@
     "gulp-terser": "^2.1.0",
     "http-server": "^14.0.0",
     "postcss": "^8.4.5",
+    "postcss-import": "^15.1.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.61.1",
     "rollup-stream-gulp": "0.0.3",
