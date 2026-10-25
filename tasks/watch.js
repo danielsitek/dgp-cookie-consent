@@ -1,13 +1,13 @@
 const { series, watch: watchGulp } = require('gulp');
 const browserSync = require('./browserSync');
-const scss = require('./scss');
+const css = require('./css');
 const rollup = require('./rollup');
 const rollupGtm = require('./rollup-gtm');
 const lintJs = require('./lint-js');
 const lintScss = require('./lint-scss');
 
 const watchStyles = function watchStyles(done) {
-  return series(lintScss, scss, rollup)(done);
+  return series(lintScss, css, rollup)(done);
 };
 
 const watchTypescript = function watchTypescript(done) {
@@ -24,7 +24,7 @@ module.exports = function watch(done) {
   return series(function watching() {
     watchGulp(['./src/**/*.ts'], watchTypescript);
 
-    watchGulp(['./src/**/*.{scss,css}'], watchStyles);
+    watchGulp(['./src/**/*.css'], watchStyles);
 
     watchGulp(['./dist/*.js']).on('change', browserSync.reload);
 
