@@ -1,0 +1,14 @@
+/* .consent-tabs */
+.c-ts {
+  display: flex;
+  gap: 10px;
+  padding: 0 20px;
+  border-bottom: var(--base-line, 1px solid #d0d0d0);
+}
+
+@media (min-width: 600px) {
+  .c-ts {
+    gap: 30px;
+    padding: 0 50px;
+  }
+}

@@ -1,0 +1,7 @@
+/* .consent-tab-content */
+.c-t-c {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 110px);
+  max-height: calc(100dvh - 110px);
+}
