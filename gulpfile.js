@@ -5,13 +5,13 @@ const watch = require('./tasks/watch');
 const rollup = require('./tasks/rollup');
 const rollupGtm = require('./tasks/rollup-gtm');
 const lintJs = require('./tasks/lint-js');
-const lintScss = require('./tasks/lint-scss');
+const lintCss = require('./tasks/lint-css');
 
 process.env.NODE_ENV = ENV_DEVELOPMENT;
 
 const styles = function styles(done) {
   return series(
-    lintScss,
+    lintCss,
     css,
   )(done);
 };

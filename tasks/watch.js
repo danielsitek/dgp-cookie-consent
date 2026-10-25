@@ -4,10 +4,10 @@ const css = require('./css');
 const rollup = require('./rollup');
 const rollupGtm = require('./rollup-gtm');
 const lintJs = require('./lint-js');
-const lintScss = require('./lint-scss');
+const lintCss = require('./lint-css');
 
 const watchStyles = function watchStyles(done) {
-  return series(lintScss, css, rollup)(done);
+  return series(lintCss, css, rollup)(done);
 };
 
 const watchTypescript = function watchTypescript(done) {
