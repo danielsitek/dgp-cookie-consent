@@ -722,6 +722,8 @@ Then open the localhost url from terminal in browser and navigate to `http://loc
 
 > **TIP**: Sometimes it is useful to comment out `.pipe(stripDebug())` in `tasks/helpers/rollupPipe.js` to enable console logs and other debug functions.
 
+Styles are being migrated from SCSS to standard CSS. Style entries in `src/styles/` can be `.scss` or `.css`; local `@import` rules in `.css` entries are inlined at build time. SCSS files can import already converted `.css` partials without the file extension.
+
 ### Production build
 
 ```
