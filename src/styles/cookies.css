@@ -1,0 +1,10 @@
+@import './base/base.css';
+@import './base/animation.css';
+@import './components/consent-dialog.css';
+@import './components/consent-button.css';
+@import './components/consent-button-close.css';
+@import './components/consent-tabs.css';
+@import './components/consent-tab.css';
+@import './components/consent-tab-content.css';
+@import './components/consent-section.css';
+@import './components/switch-button.css';
