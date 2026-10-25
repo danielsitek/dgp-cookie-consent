@@ -1,18 +1,18 @@
 const { series } = require('gulp');
 const { ENV_DEVELOPMENT, ENV_PRODUCTION } = require('./tasks/helpers/config');
-const scss = require('./tasks/scss');
+const css = require('./tasks/css');
 const watch = require('./tasks/watch');
 const rollup = require('./tasks/rollup');
 const rollupGtm = require('./tasks/rollup-gtm');
 const lintJs = require('./tasks/lint-js');
-const lintScss = require('./tasks/lint-scss');
+const lintCss = require('./tasks/lint-css');
 
 process.env.NODE_ENV = ENV_DEVELOPMENT;
 
 const styles = function styles(done) {
   return series(
-    lintScss,
-    scss,
+    lintCss,
+    css,
   )(done);
 };
 

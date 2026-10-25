@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['stylelint-config-standard-scss', 'stylelint-config-prettier'],
+  extends: ['stylelint-config-standard', 'stylelint-config-prettier'],
   plugins: ['stylelint-order'],
   rules: {
 		'order/order': [
@@ -415,20 +415,6 @@ module.exports = {
 		'no-duplicate-at-import-rules': true,
 		'no-extra-semicolons': true,
 		'no-invalid-double-slash-comments': true,
-		'scss/double-slash-comment-empty-line-before': [
-			'always',
-			{
-				except: ["first-nested"],
-				ignore: ['between-comments']
-			}
-		],
-		'scss/no-duplicate-mixins': true,
-		'scss/no-duplicate-dollar-variables': [
-			true,
-			{
-				ignoreInside: ['at-rule', 'nested-at-rule']
-			},
-		],
     'custom-property-pattern': null,
     // Short BEM class names, e.g. .c-d__b-i, .c-b--p
     'selector-class-pattern': '^[a-z][a-z0-9]*(-[a-z0-9]+)*(__[a-z0-9]+(-[a-z0-9]+)*)?(--[a-z0-9]+(-[a-z0-9]+)*)?$',

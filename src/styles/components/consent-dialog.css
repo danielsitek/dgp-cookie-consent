@@ -1,6 +1,7 @@
 /* Inner shadow of .consent-dialog__header and .consent-dialog__footer */
 .c-d__f,
 .c-d__h {
+  /* prettier-ignore */
   box-shadow: 0 0 40px var(--color-white, #ffffff), 0 0 30px var(--color-white, #ffffff), 0 0 20px var(--color-white, #ffffff), 0 0 10px var(--color-white, #ffffff), 0 0 5px var(--color-white, #ffffff);
 }
 /* .consent-dialog */

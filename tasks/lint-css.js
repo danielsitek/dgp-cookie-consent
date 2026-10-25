@@ -1,10 +1,10 @@
 const { src, lastRun } = require('gulp');
 const gulpStylelint = require('@ronilaukkarinen/gulp-stylelint');
 
-module.exports = function lintScss(done) {
-  return src(['src/**/*.{scss,css}'], {
+module.exports = function lintCss(done) {
+  return src(['src/**/*.css'], {
     cwd: '.',
-    since: lastRun(lintScss), // Viz: <https://github.com/gulpjs/gulp#incremental-builds>
+    since: lastRun(lintCss), // Viz: <https://github.com/gulpjs/gulp#incremental-builds>
   })
     .pipe(
       gulpStylelint({
