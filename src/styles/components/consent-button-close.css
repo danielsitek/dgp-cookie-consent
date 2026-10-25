@@ -9,10 +9,10 @@
   color: var(--color-text, #242424);
   cursor: pointer;
   appearance: none;
+}
 
-  &__i {
-    display: flex;
-    width: 1.5rem;
-    height: 1.5rem;
-  }
+.c-b-c__i {
+  display: flex;
+  width: 1.5rem;
+  height: 1.5rem;
 }
