@@ -711,7 +711,7 @@ window.addEventListener('consent-badge-click', () => {
 
 ## Development
 
-You just need node >= 12 and run these commands:
+You need Node.js 24 or 26 and run these commands:
 
 ```
 npm i
