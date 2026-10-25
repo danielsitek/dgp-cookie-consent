@@ -11,6 +11,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\"",
     "build:tsc": "tsc --sourceMap=false --removeComments=true",
+    "typecheck": "tsc --noEmit",
     "build": "gulp build",
     "build:prod": "gulp prod",
     "dev": "gulp",
