@@ -16,7 +16,8 @@
     "build:prod": "gulp prod",
     "dev": "gulp",
     "clean": "rimraf dist",
-    "serve": "http-server . -p 10001 -g"
+    "serve": "http-server . -p 10001 -g",
+    "lint:css": "stylelint \"src/**/*.css\""
   },
   "keywords": [
     "cookie",
