@@ -27,6 +27,9 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
+      - name: Lint CSS
+        run: npm run lint:css
+
       - name: Run build
         run: |
           npm run build:prod
