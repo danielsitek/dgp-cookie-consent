@@ -12,7 +12,8 @@ const createRollupConfig = () => ({
     format: 'iife',
     sourcemap: isDevelopment(),
   },
-  plugins: [resolve(), typescript()],
+  // Explicit include, picomatch 2.3.2 no longer matches the plugin's default '*.ts+(|x)' pattern.
+  plugins: [resolve(), typescript({ include: ['**/*.ts'] })],
 });
 
 module.exports = async function rollupGtm() {
