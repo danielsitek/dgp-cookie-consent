@@ -722,7 +722,7 @@ Then open the localhost url from terminal in browser and navigate to `http://loc
 
 > **TIP**: Sometimes it is useful to comment out `.pipe(stripDebug())` in `tasks/helpers/rollupPipe.js` to enable console logs and other debug functions.
 
-Styles are written in standard CSS. Style entries live in `src/styles/` (`cookies.css`, `badge.css`); local `@import` rules are inlined at build time.
+Styles are written in standard CSS. Style entries live in `src/styles/` (`cookies.css`, `badge.css`); local `@import` rules are inlined at build time. Run `npm run lint:css` to check them with Stylelint; the build only reports lint problems, CI fails on them.
 
 ### Production build
 
