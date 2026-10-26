@@ -1,21 +1,13 @@
-const { src, lastRun } = require('gulp');
-const gulpStylelint = require('@ronilaukkarinen/gulp-stylelint');
+const stylelint = require('stylelint');
 
-module.exports = function lintCss(done) {
-  return src(['src/**/*.css'], {
-    cwd: '.',
-    since: lastRun(lintCss), // Viz: <https://github.com/gulpjs/gulp#incremental-builds>
-  })
-    .pipe(
-      gulpStylelint({
-        failAfterError: false,
-        reporters: [
-          {
-            formatter: 'string',
-            console: true,
-          },
-        ],
-      }),
-    )
-    .on('end', done);
+// Reports problems without failing the build, `npm run lint:css` is the strict check.
+module.exports = async function lintCss() {
+  const { report } = await stylelint.lint({
+    files: 'src/**/*.css',
+    formatter: 'string',
+  });
+
+  if (report) {
+    console.log(report);
+  }
 };

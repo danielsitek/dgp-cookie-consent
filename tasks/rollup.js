@@ -28,7 +28,8 @@ const createRollupConfig = () => ({
   },
   plugins: [
     resolve(),
-    typescript(),
+    // Explicit include, picomatch 2.3.2 no longer matches the plugin's default '*.ts+(|x)' pattern.
+    typescript({ include: ['**/*.ts'] }),
     replace({
       values: {
         __INLINE_STYLES__: readCookiesStyles(),

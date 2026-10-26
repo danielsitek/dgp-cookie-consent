@@ -17,6 +17,7 @@
   transition-property: background-color, color, border, box-shadow;
   cursor: pointer;
   user-select: none;
+  /* stylelint-disable-next-line declaration-property-value-keyword-no-deprecated -- keep the shipped output */
   appearance: button;
 }
 /* .consent-button__inner */
@@ -36,7 +37,7 @@
   border: var(--button-default--hover__border, 1px solid #d1d1d1);
   background-color: var(--button-default--hover__bg-color, #ffffff);
   color: var(--button-default--hover__color, #242424);
-  /* stylelint-disable-next-line color-function-notation, alpha-value-notation -- keep the previously compiled output */
+  /* stylelint-disable-next-line color-function-notation, color-function-alias-notation, alpha-value-notation -- keep the previously compiled output */
   box-shadow: var(--button-default--hover__box-shadow, 0 0 17px 0 rgba(0, 0, 0, 0.1));
 }
 /* .consent-button--primary */

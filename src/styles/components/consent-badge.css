@@ -22,7 +22,7 @@
   background: var(--badge__bg-color, #ffffff);
   color: var(--badge__color, #f8c132);
   cursor: pointer;
-  /* stylelint-disable-next-line color-function-notation, alpha-value-notation -- keep the previously compiled output */
+  /* stylelint-disable-next-line color-function-notation, color-function-alias-notation, alpha-value-notation -- keep the previously compiled output */
   box-shadow: var(--badge__box-shadow, 0 1px 6px rgba(5, 27, 44, 0.06), 0 2px 32px rgba(5, 27, 44, 0.16));
   appearance: none;
 }
