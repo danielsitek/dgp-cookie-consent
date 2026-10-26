@@ -1,10 +1,9 @@
 module.exports = {
-  extends: ['stylelint-config-standard', 'stylelint-config-prettier'],
+  extends: ['stylelint-config-standard'],
   plugins: ['stylelint-order'],
   rules: {
 		'order/order': [
 			'custom-properties',
-			'dollar-variables',
 			{
 				type: 'at-rule',
 				hasBlock: false,
@@ -369,7 +368,6 @@ module.exports = {
 			{ unspecified: 'bottom' },
 		],
 		// indentation: 2,
-		'at-rule-no-unknown': null,
 		'color-no-invalid-hex': true,
 		'color-hex-length': 'long',
 		'font-family-no-duplicate-names': true,
@@ -395,10 +393,6 @@ module.exports = {
 		//'function-calc-no-unspaced-operator': true,
 		'function-linear-gradient-no-nonstandard-direction': true,
 		'function-url-quotes': 'always',
-		'string-quotes': 'single',
-		'value-list-comma-newline-before': 'never-multi-line',
-		'value-list-comma-newline-after': 'never-multi-line',
-		'value-list-comma-space-after': 'always',
 		'selector-no-qualifying-type': [
 			true,
 			{
@@ -408,14 +402,15 @@ module.exports = {
 		'selector-pseudo-class-no-unknown': true,
 		'selector-pseudo-element-no-unknown': true,
 		'selector-attribute-quotes': 'always',
-		'no-empty-first-line': true,
 		'no-duplicate-selectors': true,
 		'no-empty-source': null,
 		'no-descending-specificity': true,
 		'no-duplicate-at-import-rules': true,
-		'no-extra-semicolons': true,
 		'no-invalid-double-slash-comments': true,
     'custom-property-pattern': null,
+    // Keep the notation of the shipped CSS
+    'import-notation': 'string',
+    'media-feature-range-notation': 'prefix',
     // Short BEM class names, e.g. .c-d__b-i, .c-b--p
     'selector-class-pattern': '^[a-z][a-z0-9]*(-[a-z0-9]+)*(__[a-z0-9]+(-[a-z0-9]+)*)?(--[a-z0-9]+(-[a-z0-9]+)*)?$',
 	},

@@ -18,6 +18,7 @@
   transition-property: background-color;
   cursor: pointer;
   user-select: none;
+  /* stylelint-disable-next-line declaration-property-value-keyword-no-deprecated -- keep the shipped output */
   appearance: button;
 }
 /* .consent-tab__inner */
