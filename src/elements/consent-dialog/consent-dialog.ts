@@ -21,6 +21,7 @@ import type { ConsentType } from '@/utils/consent';
 import { createVElement } from '@/utils/elements';
 import { dispatchEventConsentHide, dispatchEventConsentShow } from '@/utils/events';
 import { consentButton, consentButtonPrimary } from '@/components/consent-button/consent-button';
+import { addEscKeyListener, removeEscKeyListener } from '@/components/consent-button-close/consent-button-close';
 import { tabContentDefault } from '@/components/tab-content-default/tab-content-default';
 import { type TabContentDetailsProps, tabContentDetails } from '@/components/tab-content-details/tab-content-details';
 import { switchMarketing, switchNecessary, switchPreferences, switchStatistics } from '@/components/switch-button/switch-buttons';
@@ -212,6 +213,9 @@ export class ConsentDialog extends HTMLElement {
   }
 
   closeModal(): void {
+    // Closing has started (Escape, cross or a consent choice), so Escape must not close it again.
+    removeEscKeyListener();
+
     setTimeout(async () => {
       await fadeOut(consentDialogInstance, DIALOG_FADE_OUT_DURATION);
       const consentModal = document.querySelector(DIALOG_ELEMENT_NAME);
@@ -228,6 +232,7 @@ export class ConsentDialog extends HTMLElement {
     this.initHeaderTabs();
     this.appendCode();
     this.setTabContentAgree();
+    addEscKeyListener();
 
     dispatchEventConsentShow();
 
@@ -240,6 +245,7 @@ export class ConsentDialog extends HTMLElement {
    * @link <https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks>
    */
   disconnectedCallback(): void {
+    removeEscKeyListener();
     dispatchEventConsentHide();
   }
 }

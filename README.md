@@ -745,7 +745,7 @@ npm test
 npm run test:watch
 ```
 
-> **Info**: Test files are excluded from `npm run typecheck` until the TypeScript upgrade (#56); Vitest itself does not type-check.
+> **Info**: Test files (`*.spec.ts`) and shared test helpers (`*.spec-helpers.ts`) are excluded from `npm run typecheck` until the TypeScript upgrade (#56); Vitest itself does not type-check.
 
 ### Production build
 
