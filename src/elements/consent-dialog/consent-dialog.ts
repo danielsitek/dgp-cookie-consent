@@ -39,22 +39,33 @@ export class ConsentDialog extends HTMLElement {
     this.attachShadow({ mode: 'open' });
   }
 
+  // The tab buttons are shared singletons, so their listeners are added on connect and removed on disconnect.
+  private readonly handleTabAgreeClick = (): void => {
+    this.setTabContentAgree();
+  };
+
+  private readonly handleTabDetailsClick = (): void => {
+    this.setTabContentDetails();
+  };
+
+  private readonly handleTabAboutClick = (): void => {
+    this.setTabContentAbout();
+  };
+
   initHeaderTabs(): void {
     if (settings.disableHeader) {
       return;
     }
 
-    tabButtonAgreeEl.addEventListener(EVENT_CLICK, () => {
-      this.setTabContentAgree();
-    });
+    tabButtonAgreeEl.addEventListener(EVENT_CLICK, this.handleTabAgreeClick);
+    tabButtonDetailsEl.addEventListener(EVENT_CLICK, this.handleTabDetailsClick);
+    tabButtonAboutEl.addEventListener(EVENT_CLICK, this.handleTabAboutClick);
+  }
 
-    tabButtonDetailsEl.addEventListener(EVENT_CLICK, () => {
-      this.setTabContentDetails();
-    });
-
-    tabButtonAboutEl.addEventListener(EVENT_CLICK, () => {
-      this.setTabContentAbout();
-    });
+  removeHeaderTabs(): void {
+    tabButtonAgreeEl.removeEventListener(EVENT_CLICK, this.handleTabAgreeClick);
+    tabButtonDetailsEl.removeEventListener(EVENT_CLICK, this.handleTabDetailsClick);
+    tabButtonAboutEl.removeEventListener(EVENT_CLICK, this.handleTabAboutClick);
   }
 
   setTabContent(tabContent: HTMLDivElement): void {
@@ -245,6 +256,7 @@ export class ConsentDialog extends HTMLElement {
    * @link <https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks>
    */
   disconnectedCallback(): void {
+    this.removeHeaderTabs();
     removeEscKeyListener();
     dispatchEventConsentHide();
   }
