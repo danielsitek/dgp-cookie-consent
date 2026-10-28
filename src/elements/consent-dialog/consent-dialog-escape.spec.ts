@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import '@/elements/consent-dialog/consent-dialog';
-import { dialogCount, openDialog, pressKey, SETTLE_MS, setupEscapeSuite } from './escape.spec-helpers';
+import { dialogCount, openDialog, pressKey, SETTLE_MS, setupEscapeSuite } from './dialog.spec-helpers';
 import type { ConsentDialog } from '@/elements/consent-dialog/consent-dialog';
 
 describe('Escape with the close button enabled', () => {
