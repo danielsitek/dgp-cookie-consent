@@ -45,6 +45,12 @@ export interface CookieConsentTranslations {
   lastUpdated: string;
 }
 
+type DeepPartial<T> = {
+  [K in keyof T]?: T[K] extends string ? T[K] : DeepPartial<T[K]>;
+};
+
+export type CookieConsentTranslationsPartial = DeepPartial<CookieConsentTranslations>;
+
 export interface ConsentRules {
   necessary: boolean;
   preferences: boolean;
@@ -157,7 +163,7 @@ export declare class ConsentDialog extends HTMLElement {
 
 declare global {
   interface Window {
-    CookieConsentTranslations: Partial<CookieConsentTranslations>;
+    CookieConsentTranslations: CookieConsentTranslationsPartial;
     CookieConsentTheme: CookieConsentTheme;
     CookieConsentThemeDark: CookieConsentTheme;
     CookieConsentSettings: Partial<CookieConsentSettings>;

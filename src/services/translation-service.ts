@@ -47,68 +47,73 @@ export interface CookieConsentTranslations {
   lastUpdated: string;
 }
 
+type DeepPartial<T> = {
+  [K in keyof T]?: T[K] extends string ? T[K] : DeepPartial<T[K]>;
+};
+
+export type CookieConsentTranslationsPartial = DeepPartial<CookieConsentTranslations>;
+
 const defaultTranslations = cs;
 
+// Use a custom text only when it is a string (empty included); undefined, null and other types fall back.
+const text = (value: unknown, fallback: string): string => (typeof value === 'string' ? value : fallback);
+
 export const translationService = (): CookieConsentTranslations => {
-  const windowTranslations = window?.CookieConsentTranslations;
+  const custom = window?.CookieConsentTranslations;
+  const defaults = defaultTranslations;
+  const locale = custom?.locale;
 
   return {
-    locale: windowTranslations?.locale || defaultTranslations.locale,
+    // An empty locale would make Intl.DateTimeFormat throw.
+    locale: typeof locale === 'string' && locale.length ? locale : defaults.locale,
     tabAgree: {
-      ...defaultTranslations.tabAgree,
-      ...windowTranslations?.tabAgree,
+      title: text(custom?.tabAgree?.title, defaults.tabAgree.title),
+      body: text(custom?.tabAgree?.body, defaults.tabAgree.body),
     },
     tabAbout: {
-      ...defaultTranslations.tabAbout,
-      ...windowTranslations?.tabAbout,
+      title: text(custom?.tabAbout?.title, defaults.tabAbout.title),
+      body: text(custom?.tabAbout?.body, defaults.tabAbout.body),
     },
     tabDetail: {
-      title: windowTranslations?.tabDetail?.title || defaultTranslations.tabDetail.title,
+      title: text(custom?.tabDetail?.title, defaults.tabDetail.title),
       necessary: {
-        ...defaultTranslations.tabDetail.necessary,
-        ...windowTranslations?.tabDetail?.necessary,
+        title: text(custom?.tabDetail?.necessary?.title, defaults.tabDetail.necessary.title),
+        perex: text(custom?.tabDetail?.necessary?.perex, defaults.tabDetail.necessary.perex),
       },
       preferences: {
-        ...defaultTranslations.tabDetail.preferences,
-        ...windowTranslations?.tabDetail?.preferences,
+        title: text(custom?.tabDetail?.preferences?.title, defaults.tabDetail.preferences.title),
+        perex: text(custom?.tabDetail?.preferences?.perex, defaults.tabDetail.preferences.perex),
       },
       statistics: {
-        ...defaultTranslations.tabDetail.statistics,
-        ...windowTranslations?.tabDetail?.statistics,
+        title: text(custom?.tabDetail?.statistics?.title, defaults.tabDetail.statistics.title),
+        perex: text(custom?.tabDetail?.statistics?.perex, defaults.tabDetail.statistics.perex),
       },
       marketing: {
-        ...defaultTranslations.tabDetail.marketing,
-        ...windowTranslations?.tabDetail?.marketing,
+        title: text(custom?.tabDetail?.marketing?.title, defaults.tabDetail.marketing.title),
+        perex: text(custom?.tabDetail?.marketing?.perex, defaults.tabDetail.marketing.perex),
       },
     },
     buttonEdit: {
-      ...defaultTranslations.buttonEdit,
-      ...windowTranslations?.buttonEdit,
+      label: text(custom?.buttonEdit?.label, defaults.buttonEdit.label),
     },
     buttonAllowAll: {
-      ...defaultTranslations.buttonAllowAll,
-      ...windowTranslations?.buttonAllowAll,
+      label: text(custom?.buttonAllowAll?.label, defaults.buttonAllowAll.label),
     },
     buttonRejectAll: {
-      ...defaultTranslations.buttonRejectAll,
-      ...windowTranslations?.buttonRejectAll,
+      label: text(custom?.buttonRejectAll?.label, defaults.buttonRejectAll.label),
     },
     buttonConfirm: {
-      ...defaultTranslations.buttonConfirm,
-      ...windowTranslations?.buttonConfirm,
+      label: text(custom?.buttonConfirm?.label, defaults.buttonConfirm.label),
     },
     buttonClose: {
-      ...defaultTranslations.buttonClose,
-      ...windowTranslations?.buttonClose,
+      label: text(custom?.buttonClose?.label, defaults.buttonClose.label),
     },
     badge: {
-      ...defaultTranslations.badge,
-      ...windowTranslations?.badge,
+      label: text(custom?.badge?.label, defaults.badge.label),
     },
     dialog: {
-      ...defaultTranslations.dialog,
-      ...windowTranslations?.dialog,
+      label: text(custom?.dialog?.label, defaults.dialog.label),
     },
-    lastUpdated: windowTranslations?.lastUpdated || defaultTranslations.lastUpdated,
+    lastUpdated: text(custom?.lastUpdated, defaults.lastUpdated),
   };
 };

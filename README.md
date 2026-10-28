@@ -149,6 +149,18 @@ window.CookieConsentTranslations = {
 
 > **Info**: `perex` and `body` values are rendered as HTML content.
 
+> **Info**: Every key is optional, including keys in nested sections. A text is used only when it is a string (an empty string included, e.g. an empty `lastUpdated` hides the line); missing keys, `undefined`, `null` and other values fall back to the default (Czech) translation. An empty `locale` also falls back. In TypeScript, use the `CookieConsentTranslationsPartial` type:
+>
+> ```ts
+> import type { CookieConsentTranslationsPartial } from '@danielsitek/dgp-cookie-consent';
+>
+> window.CookieConsentTranslations = {
+>   tabAgree: {
+>     title: 'Hello',
+>   },
+> } satisfies CookieConsentTranslationsPartial;
+> ```
+
 > [**Since v1.6.2**](https://github.com/danielsitek/dgp-cookie-consent/releases/tag/v1.6.2)
 >
 > Since version 1.6.2 you can insert anchor links to other tabs in `perex` and `body`. The script will look for anchor elements and if they have `#tab-agree|#tab-details|#tab-about|#allow-all|#reject-all` in href attribute, click on such element will switch to selected tab.
