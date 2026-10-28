@@ -27,12 +27,12 @@ const handleEscKey = (e: KeyboardEvent): void => {
   }
 };
 
-// The close button lives in the header, so it is shown only when neither is disabled.
-const isCloseButtonEnabled = (): boolean => settings.disableCross !== true && settings.disableHeader !== true;
+// Set when the button is rendered (it is not with disableCross or disableHeader).
+let isCloseButtonRendered = false;
 
-// Escape mirrors the close button: the dialog listens while it is open and the button is shown.
+// Escape mirrors the close button: the dialog listens while it is open and the button is rendered.
 export const addEscKeyListener = (): void => {
-  if (isCloseButtonEnabled()) {
+  if (isCloseButtonRendered) {
     window.addEventListener(EVENT_KEYDOWN, handleEscKey);
   }
 };
@@ -59,6 +59,7 @@ export const consentButtonClose = (): HTMLButtonElement | null => {
   );
 
   el.addEventListener(EVENT_CLICK, closeConsentDialog);
+  isCloseButtonRendered = true;
 
   return el;
 };
