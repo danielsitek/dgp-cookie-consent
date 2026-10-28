@@ -245,7 +245,10 @@ export class ConsentDialog extends HTMLElement {
 
     this.closing = new Promise((resolve) => {
       setTimeout(async () => {
-        await fadeOut(consentDialogInstance, DIALOG_FADE_OUT_DURATION);
+        // Already removed by the page: the shared content may belong to a newly opened dialog now.
+        if (this.isConnected) {
+          await fadeOut(consentDialogInstance, DIALOG_FADE_OUT_DURATION);
+        }
         this.remove();
         // Closed, so the same element can be attached and closed again.
         this.closing = undefined;

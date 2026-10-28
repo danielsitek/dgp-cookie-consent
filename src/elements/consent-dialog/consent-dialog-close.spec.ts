@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import '@/elements/consent-dialog/consent-dialog';
 import type { ConsentDialog } from '@/elements/consent-dialog/consent-dialog';
+import { consentDialogInstance } from '@/components/consent-dialog/consent-dialog-instances';
 import { openDialog, SETTLE_MS, setupDialogSuite } from './dialog.spec-helpers';
 
 describe('closing state', () => {
@@ -54,5 +55,16 @@ describe('closing state', () => {
     await vi.advanceTimersByTimeAsync(SETTLE_MS);
 
     expect(dialog.isConnected).toBe(false);
+  });
+
+  it('does not hide a newly opened dialog when the closing one was removed by the page', async () => {
+    const closing = (await openDialog()) as ConsentDialog;
+    closing.closeModal();
+    await vi.advanceTimersByTimeAsync(100);
+
+    closing.remove();
+    await openDialog();
+
+    expect(consentDialogInstance.style.display).not.toBe('none');
   });
 });
