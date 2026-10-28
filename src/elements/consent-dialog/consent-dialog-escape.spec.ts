@@ -1,10 +1,10 @@
 import { describe, expect, it, vi } from 'vitest';
 import '@/elements/consent-dialog/consent-dialog';
-import { dialogCount, openDialog, pressKey, SETTLE_MS, setupEscapeSuite } from './escape.spec-helpers';
+import { dialogCount, openDialog, pressKey, SETTLE_MS, setupDialogSuite } from './dialog.spec-helpers';
 import type { ConsentDialog } from '@/elements/consent-dialog/consent-dialog';
 
 describe('Escape with the close button enabled', () => {
-  const { consentClose } = setupEscapeSuite();
+  const { consentClose } = setupDialogSuite();
 
   it('does nothing while the dialog is not open', async () => {
     await pressKey('Escape');
