@@ -1,23 +1,10 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { ConsentDialog } from '@/elements/consent-dialog/consent-dialog';
 import { tabButtonAboutEl, tabButtonAgreeEl, tabButtonDetailsEl } from '@/components/consent-tab/consent-tab-instances';
-import { openDialog, SETTLE_MS } from './dialog.spec-helpers';
-
-const closeDialog = async (dialog: HTMLElement): Promise<void> => {
-  (dialog as ConsentDialog).closeModal();
-  await vi.advanceTimersByTimeAsync(SETTLE_MS);
-};
+import { closeDialog, openDialog, SETTLE_MS, setupDialogSuite } from './dialog.spec-helpers';
 
 describe('header tabs', () => {
-  beforeEach(() => {
-    vi.useFakeTimers();
-  });
-
-  afterEach(() => {
-    vi.restoreAllMocks();
-    document.body.innerHTML = '';
-    vi.useRealTimers();
-  });
+  setupDialogSuite();
 
   it.each([
     ['agree', tabButtonAgreeEl, 'setTabContentAgree'],

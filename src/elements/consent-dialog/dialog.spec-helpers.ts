@@ -12,6 +12,11 @@ export const openDialog = async (): Promise<HTMLElement> => {
   return dialog;
 };
 
+export const closeDialog = async (dialog: HTMLElement): Promise<void> => {
+  (dialog as HTMLElement & { closeModal: () => void }).closeModal();
+  await vi.advanceTimersByTimeAsync(SETTLE_MS);
+};
+
 export const pressKey = async (key: string): Promise<void> => {
   window.dispatchEvent(new KeyboardEvent('keydown', { key }));
   await vi.advanceTimersByTimeAsync(SETTLE_MS);
@@ -29,8 +34,8 @@ const listenConsentClose = (): { listener: ReturnType<typeof vi.fn>; stop: () =>
 
 export const dialogCount = (): number => document.querySelectorAll(DIALOG_ELEMENT_NAME).length;
 
-// Fake timers, a consent-close spy and a clean <body> for each test of the calling suite.
-export const setupEscapeSuite = (): { consentClose: () => ReturnType<typeof vi.fn> } => {
+// Fake timers, a consent-close spy, restored mocks and a clean <body> for each test of the calling suite.
+export const setupDialogSuite = (): { consentClose: () => ReturnType<typeof vi.fn> } => {
   let consentClose: ReturnType<typeof listenConsentClose>;
 
   beforeEach(() => {
@@ -40,6 +45,7 @@ export const setupEscapeSuite = (): { consentClose: () => ReturnType<typeof vi.f
 
   afterEach(() => {
     consentClose.stop();
+    vi.restoreAllMocks();
     document.body.innerHTML = '';
     vi.useRealTimers();
   });

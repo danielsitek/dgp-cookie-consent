@@ -1,9 +1,9 @@
 import { beforeAll, describe, expect, it } from 'vitest';
-import { dialogCount, openDialog, pressKey, setupEscapeSuite } from './dialog.spec-helpers';
+import { dialogCount, openDialog, pressKey, setupDialogSuite } from './dialog.spec-helpers';
 
 // Settings are read when the modules load, so they are set before the dialog is imported.
 describe('Escape without the header (disableHeader)', () => {
-  const { consentClose } = setupEscapeSuite();
+  const { consentClose } = setupDialogSuite();
 
   beforeAll(async () => {
     window.CookieConsentSettings = { disableHeader: true } as Window['CookieConsentSettings'];
