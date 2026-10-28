@@ -736,6 +736,17 @@ Then open the localhost url from terminal in browser and navigate to `http://loc
 
 Styles are written in standard CSS. Style entries live in `src/styles/` (`cookies.css`, `badge.css`); local `@import` rules are inlined at build time. Run `npm run lint:css` to check them with Stylelint; the build only reports lint problems, CI fails on them.
 
+### Tests
+
+Unit tests use [Vitest](https://vitest.dev/) with [happy-dom](https://github.com/capricorn86/happy-dom) and live next to the source as `*.test.ts`.
+
+```
+npm test
+npm run test:watch
+```
+
+> **Info**: Test files are excluded from `npm run typecheck` until the TypeScript upgrade (#56); Vitest itself does not type-check.
+
 ### Production build
 
 ```
