@@ -40,9 +40,12 @@ describe('CookieConsentModalOpen during the close animation', () => {
     await startClosing(await openModal());
 
     initConsentModal();
-    await vi.advanceTimersByTimeAsync(SETTLE_MS);
 
-    expect(badgeCount()).toBe(0);
+    // Sampled during the whole reopen: a badge added and hidden again would pass a final check.
+    for (let elapsed = 0; elapsed < SETTLE_MS; elapsed += 50) {
+      await vi.advanceTimersByTimeAsync(50);
+      expect(badgeCount()).toBe(0);
+    }
   });
 
   it('shows the badge after the reopened dialog is closed', async () => {
