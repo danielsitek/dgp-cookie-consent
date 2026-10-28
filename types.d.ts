@@ -46,7 +46,7 @@ export interface CookieConsentTranslations {
 }
 
 type DeepPartial<T> = {
-  [K in keyof T]?: T[K] extends object ? DeepPartial<T[K]> : T[K];
+  [K in keyof T]?: T[K] extends string ? T[K] : DeepPartial<T[K]>;
 };
 
 export type CookieConsentTranslationsPartial = DeepPartial<CookieConsentTranslations>;
