@@ -2,6 +2,7 @@ import '@/elements/consent-dialog/consent-dialog';
 import '@/elements/consent-badge/consent-badge';
 import { BADGE_ELEMENT_NAME, DIALOG_ELEMENT_NAME, EVENT_BADGE_CLICK, EVENT_CONSENT_HIDE, EVENT_CONSENT_SHOW } from '@/config';
 import { createVElement } from '@/utils/elements';
+import { onBodyReady } from '@/utils/body-ready';
 import { settingsService } from '@/services/settings-service';
 
 interface BadgeElement extends HTMLElement {
@@ -31,15 +32,18 @@ const handleConsentShow = (): void => {
 };
 
 export const initConsentModal = (): void => {
-  if (document.querySelectorAll(DIALOG_ELEMENT_NAME).length) {
-    return;
-  }
+  onBodyReady(() => {
+    // Checked when inserting, so repeated calls before <body> exists add a single dialog.
+    if (document.querySelectorAll(DIALOG_ELEMENT_NAME).length) {
+      return;
+    }
 
-  document.body.append(createVElement(DIALOG_ELEMENT_NAME));
+    document.body.append(createVElement(DIALOG_ELEMENT_NAME));
 
-  window.addEventListener(EVENT_CONSENT_HIDE, handleConsentHide);
+    window.addEventListener(EVENT_CONSENT_HIDE, handleConsentHide);
 
-  window.addEventListener(EVENT_CONSENT_SHOW, handleConsentShow);
+    window.addEventListener(EVENT_CONSENT_SHOW, handleConsentShow);
+  });
 };
 
 export const initConsentBadge = (): void => {
@@ -47,11 +51,13 @@ export const initConsentBadge = (): void => {
     return;
   }
 
-  if (document.querySelectorAll(BADGE_ELEMENT_NAME).length) {
-    return;
-  }
+  onBodyReady(() => {
+    if (document.querySelectorAll(BADGE_ELEMENT_NAME).length) {
+      return;
+    }
 
-  window.addEventListener(EVENT_BADGE_CLICK, handleBadgeClick);
+    window.addEventListener(EVENT_BADGE_CLICK, handleBadgeClick);
 
-  document.body.append(createVElement(BADGE_ELEMENT_NAME));
+    document.body.append(createVElement(BADGE_ELEMENT_NAME));
+  });
 };

@@ -1,5 +1,6 @@
 import { DENIED, EVENT_BADGE_CLICK, EVENT_BADGE_HIDE, EVENT_BADGE_SHOW, EVENT_CONSENT_CLOSE, EVENT_CONSENT_HIDE, EVENT_CONSENT_READY, EVENT_CONSENT_SHOW, EVENT_CONSENT_UPDATED, GRANTED } from '@/config';
 import { dataLayerPush } from '@/utils/data-layer-push';
+import { onBodyReady } from '@/utils/body-ready';
 import { getDefaultConsent } from '@/utils/read-consent';
 
 declare global {
@@ -154,16 +155,19 @@ scriptEl.type = 'text/javascript';
 scriptEl.id = 'cookie-consent';
 scriptEl.defer = true;
 
-document.body.appendChild(scriptEl);
+// <head> and document exist even when this runs before <body> is parsed.
+(document.head || document.documentElement).appendChild(scriptEl);
 
 // Handle click on the button with class "js-consent-open" to open the consent modal.
-document.body.addEventListener('click', function (event) {
-  const target = event.target as HTMLElement;
+onBodyReady(() => {
+  document.body.addEventListener('click', function (event) {
+    const target = event.target as HTMLElement;
 
-  if (target && target.classList.contains('js-consent-open')) {
-    if (window.CookieConsentModalOpen) {
-      event.preventDefault();
-      window.CookieConsentModalOpen();
+    if (target && target.classList.contains('js-consent-open')) {
+      if (window.CookieConsentModalOpen) {
+        event.preventDefault();
+        window.CookieConsentModalOpen();
+      }
     }
-  }
+  });
 });
