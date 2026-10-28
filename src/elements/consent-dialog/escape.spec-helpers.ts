@@ -17,7 +17,7 @@ export const pressKey = async (key: string): Promise<void> => {
   await vi.advanceTimersByTimeAsync(SETTLE_MS);
 };
 
-export const listenConsentClose = () => {
+const listenConsentClose = (): { listener: ReturnType<typeof vi.fn>; stop: () => void } => {
   const listener = vi.fn();
   window.addEventListener(EVENT_CONSENT_CLOSE, listener);
 
