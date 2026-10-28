@@ -1,26 +1,15 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import '@/elements/consent-dialog/consent-dialog';
-import { dialogCount, listenConsentClose, openDialog, pressKey, SETTLE_MS } from './escape.spec-helpers';
+import { dialogCount, openDialog, pressKey, SETTLE_MS, setupEscapeSuite } from './escape.spec-helpers';
 import type { ConsentDialog } from '@/elements/consent-dialog/consent-dialog';
 
 describe('Escape with the close button enabled', () => {
-  let consentClose: ReturnType<typeof listenConsentClose>;
-
-  beforeEach(() => {
-    vi.useFakeTimers();
-    consentClose = listenConsentClose();
-  });
-
-  afterEach(() => {
-    consentClose.stop();
-    document.body.innerHTML = '';
-    vi.useRealTimers();
-  });
+  const { consentClose } = setupEscapeSuite();
 
   it('does nothing while the dialog is not open', async () => {
     await pressKey('Escape');
 
-    expect(consentClose.listener).not.toHaveBeenCalled();
+    expect(consentClose()).not.toHaveBeenCalled();
   });
 
   it('closes the open dialog and dispatches consent-close once', async () => {
@@ -28,7 +17,7 @@ describe('Escape with the close button enabled', () => {
 
     await pressKey('Escape');
 
-    expect(consentClose.listener).toHaveBeenCalledTimes(1);
+    expect(consentClose()).toHaveBeenCalledTimes(1);
     expect(dialogCount()).toBe(0);
   });
 
@@ -37,7 +26,7 @@ describe('Escape with the close button enabled', () => {
 
     await pressKey('Enter');
 
-    expect(consentClose.listener).not.toHaveBeenCalled();
+    expect(consentClose()).not.toHaveBeenCalled();
     expect(dialogCount()).toBe(1);
   });
 
@@ -49,7 +38,7 @@ describe('Escape with the close button enabled', () => {
     window.dispatchEvent(event);
     await vi.advanceTimersByTimeAsync(SETTLE_MS);
 
-    expect(consentClose.listener).not.toHaveBeenCalled();
+    expect(consentClose()).not.toHaveBeenCalled();
     expect(dialogCount()).toBe(1);
   });
 
@@ -59,7 +48,7 @@ describe('Escape with the close button enabled', () => {
     window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', isComposing: true }));
     await vi.advanceTimersByTimeAsync(SETTLE_MS);
 
-    expect(consentClose.listener).not.toHaveBeenCalled();
+    expect(consentClose()).not.toHaveBeenCalled();
     expect(dialogCount()).toBe(1);
   });
 
@@ -70,7 +59,7 @@ describe('Escape with the close button enabled', () => {
 
     await pressKey('Escape');
 
-    expect(consentClose.listener).toHaveBeenCalledTimes(2);
+    expect(consentClose()).toHaveBeenCalledTimes(2);
     expect(dialogCount()).toBe(0);
   });
 
@@ -82,7 +71,7 @@ describe('Escape with the close button enabled', () => {
     window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
     await vi.advanceTimersByTimeAsync(SETTLE_MS);
 
-    expect(consentClose.listener).toHaveBeenCalledTimes(1);
+    expect(consentClose()).toHaveBeenCalledTimes(1);
     expect(dialogCount()).toBe(0);
   });
 
@@ -92,7 +81,7 @@ describe('Escape with the close button enabled', () => {
     dialog.closeModal();
     await pressKey('Escape');
 
-    expect(consentClose.listener).not.toHaveBeenCalled();
+    expect(consentClose()).not.toHaveBeenCalled();
     expect(dialogCount()).toBe(0);
   });
 
@@ -102,6 +91,6 @@ describe('Escape with the close button enabled', () => {
 
     await pressKey('Escape');
 
-    expect(consentClose.listener).toHaveBeenCalledTimes(1);
+    expect(consentClose()).toHaveBeenCalledTimes(1);
   });
 });
