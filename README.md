@@ -149,7 +149,7 @@ window.CookieConsentTranslations = {
 
 > **Info**: `perex` and `body` values are rendered as HTML content.
 
-> **Info**: Every key is optional, including keys in nested sections. Missing keys fall back to the default (Czech) translation. In TypeScript, use the `CookieConsentTranslationsPartial` type:
+> **Info**: Every key is optional, including keys in nested sections. A text is used only when it is a string (an empty string included, e.g. an empty `lastUpdated` hides the line); missing keys, `undefined`, `null` and other values fall back to the default (Czech) translation. An empty `locale` also falls back. In TypeScript, use the `CookieConsentTranslationsPartial` type:
 >
 > ```ts
 > import type { CookieConsentTranslationsPartial } from '@danielsitek/dgp-cookie-consent';
