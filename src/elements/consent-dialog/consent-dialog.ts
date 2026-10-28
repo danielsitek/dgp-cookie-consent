@@ -33,10 +33,21 @@ const i18n = translationService();
 const settings = settingsService();
 
 export class ConsentDialog extends HTMLElement {
+  // Set by closeModal(), resolved once the dialog is removed.
+  private closing?: Promise<void>;
+
   constructor() {
     super();
 
     this.attachShadow({ mode: 'open' });
+  }
+
+  get isClosing(): boolean {
+    return this.closing !== undefined;
+  }
+
+  whenClosed(): Promise<void> {
+    return this.closing ?? Promise.resolve();
   }
 
   // The tab buttons are shared singletons, so their listeners are added on connect and removed on disconnect.
@@ -224,14 +235,21 @@ export class ConsentDialog extends HTMLElement {
   }
 
   closeModal(): void {
+    if (this.closing) {
+      return;
+    }
+
     // Closing has started (Escape, cross or a consent choice), so Escape and tabs must not act on it again.
     removeEscKeyListener();
     this.removeHeaderTabs();
 
-    setTimeout(async () => {
-      await fadeOut(consentDialogInstance, DIALOG_FADE_OUT_DURATION);
-      this.remove();
-    }, 300);
+    this.closing = new Promise((resolve) => {
+      setTimeout(async () => {
+        await fadeOut(consentDialogInstance, DIALOG_FADE_OUT_DURATION);
+        this.remove();
+        resolve();
+      }, 300);
+    });
   }
 
   /**
