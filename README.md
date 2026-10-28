@@ -738,7 +738,7 @@ Styles are written in standard CSS. Style entries live in `src/styles/` (`cookie
 
 ### Tests
 
-Unit tests use [Vitest](https://vitest.dev/) with [happy-dom](https://github.com/capricorn86/happy-dom) and live next to the source as `*.test.ts`.
+Unit tests use [Vitest](https://vitest.dev/) with [happy-dom](https://github.com/capricorn86/happy-dom) and live next to the source as `*.spec.ts`.
 
 ```
 npm test
