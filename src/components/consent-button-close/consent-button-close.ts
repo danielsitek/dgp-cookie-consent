@@ -13,16 +13,32 @@ const settings = settingsService();
 
 const svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M6 6 18 18M18 6 6 18"/></svg>`;
 
-const handleEscKey = (e: KeyboardEvent) => {
+const closeConsentDialog = (): void => {
+  dispatchEventConsentClose();
+
+  document.querySelectorAll<ConsentModalElement>(DIALOG_ELEMENT_NAME).forEach((el) => {
+    el?.closeModal();
+  });
+};
+
+const handleEscKey = (e: KeyboardEvent): void => {
   if (e.key === 'Escape') {
-    dispatchEventConsentClose();
-
-    document.querySelectorAll<ConsentModalElement>(DIALOG_ELEMENT_NAME).forEach((el) => {
-      el?.closeModal();
-    });
-
-    window.removeEventListener(EVENT_KEYDOWN, handleEscKey);
+    closeConsentDialog();
   }
+};
+
+// The close button lives in the header, so it is shown only when neither is disabled.
+const isCloseButtonEnabled = (): boolean => settings.disableCross !== true && settings.disableHeader !== true;
+
+// Escape mirrors the close button: the dialog listens while it is open and the button is shown.
+export const addEscKeyListener = (): void => {
+  if (isCloseButtonEnabled()) {
+    window.addEventListener(EVENT_KEYDOWN, handleEscKey);
+  }
+};
+
+export const removeEscKeyListener = (): void => {
+  window.removeEventListener(EVENT_KEYDOWN, handleEscKey);
 };
 
 export const consentButtonClose = (): HTMLButtonElement | null => {
@@ -42,15 +58,7 @@ export const consentButtonClose = (): HTMLButtonElement | null => {
     createVElement<HTMLElement>('span', { class: 'c-b-c__i' }, svgIcon),
   );
 
-  el.addEventListener(EVENT_CLICK, () => {
-    dispatchEventConsentClose();
-
-    document.querySelectorAll<ConsentModalElement>(DIALOG_ELEMENT_NAME).forEach((el) => {
-      el?.closeModal();
-    });
-  });
-
-  window.addEventListener(EVENT_KEYDOWN, handleEscKey);
+  el.addEventListener(EVENT_CLICK, closeConsentDialog);
 
   return el;
 };
