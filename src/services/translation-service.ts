@@ -47,6 +47,12 @@ export interface CookieConsentTranslations {
   lastUpdated: string;
 }
 
+type DeepPartial<T> = {
+  [K in keyof T]?: T[K] extends object ? DeepPartial<T[K]> : T[K];
+};
+
+export type CookieConsentTranslationsPartial = DeepPartial<CookieConsentTranslations>;
+
 const defaultTranslations = cs;
 
 export const translationService = (): CookieConsentTranslations => {

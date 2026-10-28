@@ -1,5 +1,5 @@
 import { ConsentService } from '@/services/consent-service';
-import type { CookieConsentTranslations } from '@/services/translation-service';
+import type { CookieConsentTranslationsPartial } from '@/services/translation-service';
 import type { CookieConsentTheme } from '@/services/theme-service';
 import type { CookieConsentSettings } from '@/services/settings-service';
 import { initConsentModal, initConsentBadge } from '@/init/init';
@@ -9,7 +9,7 @@ type WindowCookieConsent = ConsentService;
 declare global {
   interface Window {
     CookieConsent: WindowCookieConsent;
-    CookieConsentTranslations: CookieConsentTranslations;
+    CookieConsentTranslations: CookieConsentTranslationsPartial;
     CookieConsentTheme: CookieConsentTheme;
     CookieConsentThemeDark: CookieConsentTheme;
     CookieConsentSettings: CookieConsentSettings;
