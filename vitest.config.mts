@@ -9,6 +9,15 @@ export default defineConfig({
   },
   test: {
     environment: 'happy-dom',
+    environmentOptions: {
+      happyDOM: {
+        // Never fetch external scripts (e.g. the panel script injected by the GTM loader).
+        settings: {
+          disableJavaScriptFileLoading: true,
+          handleDisabledFileLoadingAsSuccess: true,
+        },
+      },
+    },
     include: ['src/**/*.spec.ts'],
   },
 });
