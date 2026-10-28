@@ -230,8 +230,7 @@ export class ConsentDialog extends HTMLElement {
 
     setTimeout(async () => {
       await fadeOut(consentDialogInstance, DIALOG_FADE_OUT_DURATION);
-      const consentModal = document.querySelector(DIALOG_ELEMENT_NAME);
-      consentModal?.remove();
+      this.remove();
     }, 300);
   }
 

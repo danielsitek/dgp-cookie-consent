@@ -53,4 +53,14 @@ describe('header tabs', () => {
 
     expect(render).not.toHaveBeenCalled();
   });
+
+  it('removes the dialog that is closing, not the first one in the document', async () => {
+    const first = await openDialog();
+    const second = await openDialog();
+
+    await closeDialog(second);
+
+    expect(second.isConnected).toBe(false);
+    expect(first.isConnected).toBe(true);
+  });
 });
