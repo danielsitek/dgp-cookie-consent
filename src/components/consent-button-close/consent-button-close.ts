@@ -22,7 +22,8 @@ const closeConsentDialog = (): void => {
 };
 
 const handleEscKey = (e: KeyboardEvent): void => {
-  if (e.key === 'Escape') {
+  // Skip Escape already handled by the page (e.g. its own modal) or used to cancel IME composition.
+  if (e.key === 'Escape' && !e.defaultPrevented && !e.isComposing) {
     closeConsentDialog();
   }
 };

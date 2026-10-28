@@ -41,6 +41,28 @@ describe('Escape with the close button enabled', () => {
     expect(dialogCount()).toBe(1);
   });
 
+  it('ignores Escape already handled by the page', async () => {
+    await openDialog();
+
+    const event = new KeyboardEvent('keydown', { key: 'Escape', cancelable: true });
+    event.preventDefault();
+    window.dispatchEvent(event);
+    await vi.advanceTimersByTimeAsync(SETTLE_MS);
+
+    expect(consentClose.listener).not.toHaveBeenCalled();
+    expect(dialogCount()).toBe(1);
+  });
+
+  it('ignores Escape that cancels IME composition', async () => {
+    await openDialog();
+
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', isComposing: true }));
+    await vi.advanceTimersByTimeAsync(SETTLE_MS);
+
+    expect(consentClose.listener).not.toHaveBeenCalled();
+    expect(dialogCount()).toBe(1);
+  });
+
   it('closes the dialog again after it is reopened', async () => {
     await openDialog();
     await pressKey('Escape');
