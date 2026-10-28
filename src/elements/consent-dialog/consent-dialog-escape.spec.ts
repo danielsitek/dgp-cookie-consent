@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import '@/elements/consent-dialog/consent-dialog';
-import { dialogCount, listenConsentClose, openDialog, pressKey } from './escape.spec-helpers';
+import { dialogCount, listenConsentClose, openDialog, pressKey, SETTLE_MS } from './escape.spec-helpers';
+import type { ConsentDialog } from '@/elements/consent-dialog/consent-dialog';
 
 describe('Escape with the close button enabled', () => {
   let consentClose: ReturnType<typeof listenConsentClose>;
@@ -48,6 +49,28 @@ describe('Escape with the close button enabled', () => {
     await pressKey('Escape');
 
     expect(consentClose.listener).toHaveBeenCalledTimes(2);
+    expect(dialogCount()).toBe(0);
+  });
+
+  it('dispatches consent-close once when Escape is pressed again during the close animation', async () => {
+    await openDialog();
+
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    await vi.advanceTimersByTimeAsync(100);
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    await vi.advanceTimersByTimeAsync(SETTLE_MS);
+
+    expect(consentClose.listener).toHaveBeenCalledTimes(1);
+    expect(dialogCount()).toBe(0);
+  });
+
+  it('ignores Escape after a consent choice started closing the dialog', async () => {
+    const dialog = (await openDialog()) as ConsentDialog;
+
+    dialog.closeModal();
+    await pressKey('Escape');
+
+    expect(consentClose.listener).not.toHaveBeenCalled();
     expect(dialogCount()).toBe(0);
   });
 

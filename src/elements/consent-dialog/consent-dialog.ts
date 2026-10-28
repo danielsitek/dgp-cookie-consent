@@ -213,6 +213,9 @@ export class ConsentDialog extends HTMLElement {
   }
 
   closeModal(): void {
+    // Closing has started (Escape, cross or a consent choice), so Escape must not close it again.
+    removeEscKeyListener();
+
     setTimeout(async () => {
       await fadeOut(consentDialogInstance, DIALOG_FADE_OUT_DURATION);
       const consentModal = document.querySelector(DIALOG_ELEMENT_NAME);
