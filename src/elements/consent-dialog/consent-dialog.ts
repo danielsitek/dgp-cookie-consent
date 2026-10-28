@@ -224,8 +224,9 @@ export class ConsentDialog extends HTMLElement {
   }
 
   closeModal(): void {
-    // Closing has started (Escape, cross or a consent choice), so Escape must not close it again.
+    // Closing has started (Escape, cross or a consent choice), so Escape and tabs must not act on it again.
     removeEscKeyListener();
+    this.removeHeaderTabs();
 
     setTimeout(async () => {
       await fadeOut(consentDialogInstance, DIALOG_FADE_OUT_DURATION);

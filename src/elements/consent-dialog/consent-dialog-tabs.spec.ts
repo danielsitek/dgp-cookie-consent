@@ -34,6 +34,17 @@ describe('header tabs', () => {
     expect(render).toHaveBeenCalledTimes(1);
   });
 
+  it('ignores tab clicks once the dialog starts closing', async () => {
+    const dialog = (await openDialog()) as ConsentDialog;
+    const render = vi.spyOn(ConsentDialog.prototype, 'setTabContentDetails');
+
+    dialog.closeModal();
+    tabButtonDetailsEl.click();
+
+    expect(render).not.toHaveBeenCalled();
+    await vi.advanceTimersByTimeAsync(SETTLE_MS);
+  });
+
   it('does not render tab content while the dialog is closed', async () => {
     await closeDialog(await openDialog());
     const render = vi.spyOn(ConsentDialog.prototype, 'setTabContentDetails');
