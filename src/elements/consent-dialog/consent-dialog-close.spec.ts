@@ -40,4 +40,19 @@ describe('closing state', () => {
 
     expect(remove).toHaveBeenCalledTimes(1);
   });
+
+  it('can be closed again after the same element is re-attached', async () => {
+    const dialog = (await openDialog()) as ConsentDialog;
+    dialog.closeModal();
+    await vi.advanceTimersByTimeAsync(SETTLE_MS);
+
+    document.body.append(dialog);
+    await vi.advanceTimersByTimeAsync(SETTLE_MS);
+    expect(dialog.isClosing).toBe(false);
+
+    dialog.closeModal();
+    await vi.advanceTimersByTimeAsync(SETTLE_MS);
+
+    expect(dialog.isConnected).toBe(false);
+  });
 });

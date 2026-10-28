@@ -247,6 +247,8 @@ export class ConsentDialog extends HTMLElement {
       setTimeout(async () => {
         await fadeOut(consentDialogInstance, DIALOG_FADE_OUT_DURATION);
         this.remove();
+        // Closed, so the same element can be attached and closed again.
+        this.closing = undefined;
         resolve();
       }, 300);
     });
