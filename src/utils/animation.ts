@@ -1,5 +1,5 @@
 export const fadeIn = (el: HTMLElement, duration: number): Promise<void> => {
-  let t: NodeJS.Timeout;
+  let t: ReturnType<typeof setTimeout>;
   return new Promise((resolve) => {
     clearTimeout(t);
 
@@ -19,7 +19,7 @@ export const fadeIn = (el: HTMLElement, duration: number): Promise<void> => {
 };
 
 export const fadeOut = (el: HTMLElement, duration: number): Promise<void> => {
-  let t: NodeJS.Timeout;
+  let t: ReturnType<typeof setTimeout>;
   return new Promise((resolve) => {
     clearTimeout(t);
 
