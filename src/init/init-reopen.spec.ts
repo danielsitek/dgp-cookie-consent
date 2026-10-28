@@ -1,19 +1,13 @@
 import { describe, expect, it, vi } from 'vitest';
 import { BADGE_ELEMENT_NAME, DIALOG_ELEMENT_NAME } from '@/config';
 import { initConsentModal } from '@/init/init';
-import { closeDialog, dialogCount, SETTLE_MS, setupDialogSuite } from '@/elements/consent-dialog/dialog.spec-helpers';
+import { closeDialog, dialogCount, SETTLE_MS, setupDialogSuite, startClosing } from '@/elements/consent-dialog/dialog.spec-helpers';
 
 const openModal = async (): Promise<HTMLElement> => {
   initConsentModal();
   await vi.advanceTimersByTimeAsync(SETTLE_MS);
 
   return document.querySelector(DIALOG_ELEMENT_NAME) as HTMLElement;
-};
-
-// Called shortly after a consent choice, while the dialog is still fading out.
-const startClosing = async (dialog: HTMLElement): Promise<void> => {
-  (dialog as HTMLElement & { closeModal: () => void }).closeModal();
-  await vi.advanceTimersByTimeAsync(100);
 };
 
 const badgeCount = (): number => document.querySelectorAll(BADGE_ELEMENT_NAME).length;

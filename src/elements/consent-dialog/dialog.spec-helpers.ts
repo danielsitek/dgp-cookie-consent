@@ -12,8 +12,14 @@ export const openDialog = async (): Promise<HTMLElement> => {
   return dialog;
 };
 
-export const closeDialog = async (dialog: HTMLElement): Promise<void> => {
+// Starts closing and returns while the dialog is still fading out (e.g. right after a consent choice).
+export const startClosing = async (dialog: HTMLElement): Promise<void> => {
   (dialog as HTMLElement & { closeModal: () => void }).closeModal();
+  await vi.advanceTimersByTimeAsync(100);
+};
+
+export const closeDialog = async (dialog: HTMLElement): Promise<void> => {
+  await startClosing(dialog);
   await vi.advanceTimersByTimeAsync(SETTLE_MS);
 };
 
