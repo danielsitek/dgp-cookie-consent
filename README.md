@@ -584,8 +584,9 @@ The loader:
 - Pushes `consent` `update` and the `cookie_consent_update` event on every consent change.
 - Maps the categories: `marketing` → `ad_storage`, `ad_user_data`, `ad_personalization`; `statistics` → `analytics_storage`; `preferences` → `personalization_storage`. `functionality_storage` and `security_storage` are always `granted`.
 - Loads the panel from `@latest`, so sites get new panel releases without editing the tag.
-- Opens the panel on click on an element with the `js-consent-open` class.
-- Uses its own base theme (your `window.CookieConsentTheme` keys win) and sets `disableCross: true`.
+- Opens the panel on click on an element with the `js-consent-open` class. The class must be on the clicked element itself, a click on a nested icon or `<span>` is ignored ([#43](https://github.com/danielsitek/dgp-cookie-consent/issues/43)).
+- Uses its own base theme (your `window.CookieConsentTheme` keys win).
+- Always sets `disableCross: true`, even when your settings say `false` ([#43](https://github.com/danielsitek/dgp-cookie-consent/issues/43)). The dialog has no cross and Escape does not close it.
 
 Other panel events are pushed to `dataLayer` as `cookie_consent_ready`, `cookie_consent_bar_show`, `cookie_consent_bar_hide`, `cookie_consent_bar_close`, `cookie_consent_badge_show`, `cookie_consent_badge_hide` and `cookie_consent_badge_click`. Use them as **Custom Event** triggers.
 
