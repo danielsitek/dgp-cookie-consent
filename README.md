@@ -39,11 +39,9 @@ Awesome one-of-a-kind Cookie Consent panel.
   - [Event `consent-badge-show`](#event-consent-badge-show)
   - [Event `consent-badge-hide`](#event-consent-badge-hide)
   - [Event `consent-badge-click`](#event-consent-badge-click)
-- [GTM Implementation with custom rules](#gtm-implementation-with-custom-rules)
-  - [1. Create Variables](#1-create-variables)
-  - [2. Create Rules](#2-create-rules)
-  - [3. Create tag](#3-create-tag)
+- [GTM loader](#gtm-loader)
 - [Development](#development)
+  - [Tests](#tests)
   - [Production build](#production-build)
 
 ## Key features
@@ -563,158 +561,33 @@ window.addEventListener('consent-badge-click', () => {
 });
 ```
 
-## GTM Implementation with custom rules
+## GTM loader
 
-### 1. Create Variables
+`dist/cookies-gtm.min.js` is a small loader for Google Tag Manager. It connects the consent to [Google Consent Mode](https://developers.google.com/tag-platform/security/guides/consent) and loads the panel itself.
 
-- **CookieConsent.marketing**
+Create a **Custom HTML** tag with the **Consent Initialization - All Pages** trigger:
 
-  **Type**: JavaScript Code
+```html
+<script>
+  // Optional, must be set before the loader runs.
+  // window.CookieConsentTranslations = {};
+  // window.CookieConsentTheme = {};
+  // window.CookieConsentThemeDark = {};
+  // window.CookieConsentSettings = {};
+</script>
+<script src="https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.9.0/dist/cookies-gtm.min.js"></script>
+```
 
-  **JavaScript Code**:
+The loader:
 
-  ```js
-  function () { return CookieConsent.marketing.toString(); }
-  ```
+- Pushes `consent` `default` with the stored consent, then the `cookie_consent_default` event.
+- Pushes `consent` `update` and the `cookie_consent_update` event on every consent change.
+- Maps the categories: `marketing` → `ad_storage`, `ad_user_data`, `ad_personalization`; `statistics` → `analytics_storage`; `preferences` → `personalization_storage`. `functionality_storage` and `security_storage` are always `granted`.
+- Loads the panel from `@latest`, so sites get new panel releases without editing the tag.
+- Opens the panel on click on an element with the `js-consent-open` class.
+- Uses its own base theme (your `window.CookieConsentTheme` keys win) and sets `disableCross: true`.
 
-- **CookieConsent.preferences**
-
-  **Type**: JavaScript Code
-
-  **JavaScript Code**:
-
-  ```js
-  function () { return CookieConsent.preferences.toString(); }
-  ```
-
-- **CookieConsent.statistics**
-
-  **Type**: JavaScript Code
-
-  **JavaScript Code**:
-
-  ```js
-  function () { return CookieConsent.statistics.toString(); }
-  ```
-
-- CookieConsent Version (optional)
-
-  This variable is only for simplified version changes.
-
-  **Type**: Constant
-
-  **Value**:
-
-  ```md
-  1.3.0
-  ```
-
-### 2. Create Rules
-
-- **CookieConsent - Marketing**
-
-  **Rule type**: Custom event
-
-  **Event name**:
-
-  ```md
-  cookieconsent_updated
-  ```
-
-  **This rule runs on**: Some custom events
-
-  **Run this rule when...**:
-
-  - `CookieConsent.marketing`
-  - contains
-  - `true`
-
-- **CookieConsent - Preference**
-
-  **Rule type**: Custom event
-
-  **Event name**:
-
-  ```md
-  cookieconsent_updated
-  ```
-
-  **This rule runs on**: Some custom events
-
-  **Run this rule when...**:
-
-  - `CookieConsent.preferences`
-  - contains
-  - `true`
-
-- **CookieConsent - Statistics**
-
-  **Rule type**: Custom event
-
-  **Event name**:
-
-  ```md
-  cookieconsent_updated
-  ```
-
-  **This rule runs on**: Some custom events
-
-  **Run this rule when...**:
-
-  - `CookieConsent.statistics`
-  - contains
-  - `true`
-
-### 3. Create tag
-
-- **CookieConsent**
-
-  **Tag type**: Custom HTML
-
-  **HTML**
-
-  ```html
-  <script type="text/javascript" id="cookie-consent-init">
-    // Optional: add own translations
-    // window.CookieConsentTranslations = {};
-
-    // Optional: add own theme
-    // window.CookieConsentTheme = {};
-
-    // Optional: add own theme for darkmode
-    // window.CookieConsentThemeDark = {};
-
-    // Optional: add own theme
-    // window.CookieConsentSettings = {};
-
-    window.addEventListener('consent-updated', function consentUpdatedListener() {
-      dataLayer.push({
-        event: 'cookieconsent_updated',
-      });
-    });
-
-    window.addEventListener('consent-ready', function () {
-      dataLayer.push({
-        event: 'cookieconsent_ready',
-      });
-    });
-
-    (function cookiesInit() {
-      var scriptEl = document.createElement('script');
-      scriptEl.src = 'https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.9.0/dist/cookies.min.js';
-      scriptEl.type = 'text/javascript';
-      scriptEl.id = 'cookie-consent';
-
-      document.body.appendChild(scriptEl);
-    })();
-  </script>
-  ```
-
-  > **Note**: You can replace version number with previously defined "CookieConsent Version" variable.
-
-  **Startup**:
-
-  **Startup rules**: All Pages
+Other panel events are pushed to `dataLayer` as `cookie_consent_ready`, `cookie_consent_bar_show`, `cookie_consent_bar_hide`, `cookie_consent_bar_close`, `cookie_consent_badge_show`, `cookie_consent_badge_hide` and `cookie_consent_badge_click`. Use them as **Custom Event** triggers.
 
 ---
 
