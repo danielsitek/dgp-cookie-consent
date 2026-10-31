@@ -63,7 +63,7 @@ Awesome one-of-a-kind Cookie Consent panel.
    https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.9.0/dist/cookies.min.js
    ```
 
-1. Insert this code on the bottom of the page, or [inject it via GTM](#gtm-implementation).
+1. Insert this code on the bottom of the page, or [use the GTM loader](#gtm-loader).
 
    ```html
    <script type="text/javascript" src="<path-to-your>cookies.min.js"></script>
@@ -135,6 +135,9 @@ window.CookieConsentTranslations = {
   buttonConfirm: {
     label: 'Potvrdit',
   },
+  buttonClose: {
+    label: 'Odložit rozhodnutí na později',
+  },
   badge: {
     label: 'Upravit nastavení cookies',
   },
@@ -147,7 +150,14 @@ window.CookieConsentTranslations = {
 
 > **Info**: Key `%date` in `window.CookieConsentTranslations.lastUpdated` will be replaced with locale date, based on `window.CookieConsentTranslations.locale`.
 
-> **Info**: `perex` and `body` values are rendered as HTML content.
+> **Info**: `perex` and `body` values are rendered as HTML content. Anchors in them with `#tab-agree`, `#tab-details` or `#tab-about` in `href` switch to that tab, `#allow-all` and `#reject-all` act like the matching buttons:
+>
+> ```html
+> <a href="#tab-details">Go to tab Details</a>
+> <a href="#reject-all">Reject all cookies</a>
+> ```
+
+> **Info**: `dialog.label` sets the accessible name (`aria-label`) of the `role="dialog"` element.
 
 > **Info**: Every key is optional, including keys in nested sections. A text is used only when it is a string (an empty string included, e.g. an empty `lastUpdated` hides the line); missing keys, `undefined`, `null` and other values fall back to the default (Czech) translation. An empty `locale` also falls back. In TypeScript, use the `CookieConsentTranslationsPartial` type:
 >
@@ -160,24 +170,6 @@ window.CookieConsentTranslations = {
 >   },
 > } satisfies CookieConsentTranslationsPartial;
 > ```
-
-> [**Since v1.6.2**](https://github.com/danielsitek/dgp-cookie-consent/releases/tag/v1.6.2)
->
-> Since version 1.6.2 you can insert anchor links to other tabs in `perex` and `body`. The script will look for anchor elements and if they have `#tab-agree|#tab-details|#tab-about|#allow-all|#reject-all` in href attribute, click on such element will switch to selected tab.
->
-> Examples:
->
-> ```
-> <a href="#tab-agree">Go to tab Agree</a>
-> <a href="#tab-details">Go to tab Details</a>
-> <a href="#tab-about">Go to tab About</a>
-> <a href="#allow-all">Allow all cookies</a>
-> <a href="#reject-all">Reject all cookies</a>
-> ```
-
-> [**Since v1.8.0**](https://github.com/danielsitek/dgp-cookie-consent/releases/tag/v1.8.0)
->
-> Since version 1.8.0 we added translation `dialog.label` for setting aria-label on `role="dialog"` element.
 
 ## Theme Customisation
 
@@ -231,7 +223,7 @@ window.CookieConsentTheme = {
 
   'base-link__color': '#242424',
   'base-link__text-decoration': 'underline',
-  'base-link--hover__color': '#efaf08',
+  'base-link--hover__color': '#000000',
   'base-link--hover__text-decoration': 'underline',
 };
 ```
@@ -343,7 +335,7 @@ window.CookieConsentTheme = {
 
 ## Darkmode Theme Customisation
 
-Same options like `window.CookieConsentTheme`. Darkmode theme is automatically applied by settings from the browser/OS.
+Same options like `window.CookieConsentTheme`. With `enableDarkMode: true` in [settings](#settings), the darkmode theme is applied automatically by the browser/OS color scheme.
 
 ```js
 window.CookieConsentThemeDark = {
@@ -360,6 +352,9 @@ window.CookieConsentSettings = {
   tabAgree: {
     showButtonRejectAll: true,
   },
+  tabDetails: {
+    showButtonAllowAll: false,
+  },
   tabAbout: {
     showButtonRejectAll: true,
   },
@@ -375,12 +370,14 @@ Here is the complete list of setting options:
 | Property                        | Value     | Description                                 | Default value |
 | ------------------------------- | --------- | ------------------------------------------- | ------------- |
 | `tabAgree.showButtonRejectAll`  | `boolean` | Enable reject all button in first tab.      | `true`        |
-| `tabDetails.showButtonAllowAll` | `boolean` | Enable allow all button in details tab.     | `true`        |
+| `tabDetails.showButtonAllowAll` | `boolean` | Enable allow all button in details tab.     | `false`       |
 | `tabAbout.showButtonRejectAll`  | `boolean` | Enable reject all button in last tab.       | `true`        |
 | `enableDarkMode`                | `boolean` | Enable automatic switch to dark mode theme. | `false`       |
 | `disableBadge`                  | `boolean` | Disable badge button.                       | `false`       |
 | `disableCross`                  | `boolean` | Disable cross button in header.             | `false`       |
 | `disableHeader`                 | `boolean` | Disable header.                             | `false`       |
+
+> **Info**: The Escape key closes the dialog only when the cross button is shown, so `disableCross` or `disableHeader` also disables it.
 
 ## API Methods
 
@@ -462,11 +459,11 @@ Returns an ISO-formatted date-time string, or an empty string if consent has not
 - Returns `<string>`.
 - Example: `"7249335781.1779742326"`
 
-Returns a unique ID of user given consent, or empty string if consent has not yet been given.
+Returns a unique consent ID. It is generated and stored on the first page view, before the user makes a choice.
 
 ### `window.CookieConsent.type`
 
-- Returns `"full" | "advanced" | "rejected"`.
+- Returns `"full" | "advanced" | "rejected" | ""`.
 
 Returns a consent type of user given consent, or empty string if consent has not yet been given.
 
@@ -520,7 +517,7 @@ window.addEventListener('consent-ready', () => {
 
 ### Event `consent-close`
 
-Fires every time the modal consent window is closed by ESC key or by clicking on cross.
+Fires every time the modal consent window is closed by the Escape key or by clicking on the cross, without a consent choice.
 
 **Example**:
 
