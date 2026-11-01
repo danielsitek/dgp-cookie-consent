@@ -605,6 +605,8 @@ npm run dev
 
 Then open `http://localhost:3000/public/`.
 
+> **TIP**: Sometimes it is useful to comment out `.pipe(stripDebug())` in `tasks/helpers/rollupPipe.js` to enable console logs and other debug functions.
+
 ### Tests
 
 Unit tests ([Vitest](https://vitest.dev/) with happy-dom) live next to the source as `*.spec.ts`.
