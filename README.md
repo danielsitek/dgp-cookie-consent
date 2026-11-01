@@ -607,18 +607,16 @@ Then open the localhost url from terminal in browser and navigate to `http://loc
 
 > **TIP**: Sometimes it is useful to comment out `.pipe(stripDebug())` in `tasks/helpers/rollupPipe.js` to enable console logs and other debug functions.
 
-Styles are written in standard CSS. Style entries live in `src/styles/` (`cookies.css`, `badge.css`); local `@import` rules are inlined at build time. Run `npm run lint:css` to check them with Stylelint; the build only reports lint problems, CI fails on them.
-
 ### Tests
 
-Unit tests use [Vitest](https://vitest.dev/) with [happy-dom](https://github.com/capricorn86/happy-dom) and live next to the source as `*.spec.ts`.
+Unit tests ([Vitest](https://vitest.dev/) with happy-dom) live next to the source as `*.spec.ts`.
 
 ```
 npm test
 npm run test:watch
+npm run typecheck
+npm run lint:css
 ```
-
-> **Info**: Test files (`*.spec.ts`) and shared test helpers (`*.spec-helpers.ts`) are excluded from `npm run typecheck` until the TypeScript upgrade (#56); Vitest itself does not type-check.
 
 ### Production build
 
