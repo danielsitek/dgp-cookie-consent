@@ -52,6 +52,8 @@ Awesome one-of-a-kind Cookie Consent panel.
 - GDPR Compliant
 - Custom themes
 - Custom translations
+- Customizable options
+- GTM loader support
 
 ## How to install
 
@@ -213,11 +215,11 @@ window.CookieConsentTheme = {
   'button-primary--hover__box-shadow': 'none',
 
   'badge__bg-color': '#ffffff',
-  badge__color: '#f8c132',
-  badge__border: '0 none',
+  'badge__color': '#f8c132',
+  'badge__border': '0 none',
   'badge__border-radius': '10rem',
   'badge__box-shadow': '0 1px 6px rgba(5,27,44,.06),0 2px 32px rgba(5,27,44,.16)',
-  badge__position: 'auto auto 1rem 1rem',
+  'badge__position': 'auto auto 1rem 1rem',
 
   'base-link__color': '#242424',
   'base-link__text-decoration': 'underline',
@@ -259,7 +261,7 @@ window.CookieConsentTheme = {
     'button-primary--hover__bg-color': '#007379',
     'button-primary--hover__color': '#fff',
 
-    badge__color: '#008c95',
+    'badge__color': '#008c95',
   };
   ```
 
@@ -292,7 +294,7 @@ window.CookieConsentTheme = {
     'button-primary--hover__bg-color': '#cfad69',
     'button-primary--hover__color': '#fff',
 
-    badge__color: '#cfad69',
+    'badge__color': '#cfad69',
   };
   ```
 
@@ -325,7 +327,7 @@ window.CookieConsentTheme = {
     'button-primary--hover__bg-color': '#f3f3f2',
     'button-primary--hover__color': '#000',
 
-    badge__color: '#000000',
+    'badge__color': '#000000',
   };
   ```
 
