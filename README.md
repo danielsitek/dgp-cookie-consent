@@ -39,11 +39,9 @@ Awesome one-of-a-kind Cookie Consent panel.
   - [Event `consent-badge-show`](#event-consent-badge-show)
   - [Event `consent-badge-hide`](#event-consent-badge-hide)
   - [Event `consent-badge-click`](#event-consent-badge-click)
-- [GTM Implementation with custom rules](#gtm-implementation-with-custom-rules)
-  - [1. Create Variables](#1-create-variables)
-  - [2. Create Rules](#2-create-rules)
-  - [3. Create tag](#3-create-tag)
+- [GTM loader](#gtm-loader)
 - [Development](#development)
+  - [Tests](#tests)
   - [Production build](#production-build)
 
 ## Key features
@@ -54,6 +52,8 @@ Awesome one-of-a-kind Cookie Consent panel.
 - GDPR Compliant
 - Custom themes
 - Custom translations
+- Customizable options
+- GTM loader support
 
 ## How to install
 
@@ -63,7 +63,7 @@ Awesome one-of-a-kind Cookie Consent panel.
    https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.9.0/dist/cookies.min.js
    ```
 
-1. Insert this code on the bottom of the page, or [inject it via GTM](#gtm-implementation).
+1. Insert this code on the bottom of the page, or [use the GTM loader](#gtm-loader).
 
    ```html
    <script type="text/javascript" src="<path-to-your>cookies.min.js"></script>
@@ -135,6 +135,9 @@ window.CookieConsentTranslations = {
   buttonConfirm: {
     label: 'Potvrdit',
   },
+  buttonClose: {
+    label: 'Odložit rozhodnutí na později',
+  },
   badge: {
     label: 'Upravit nastavení cookies',
   },
@@ -147,7 +150,14 @@ window.CookieConsentTranslations = {
 
 > **Info**: Key `%date` in `window.CookieConsentTranslations.lastUpdated` will be replaced with locale date, based on `window.CookieConsentTranslations.locale`.
 
-> **Info**: `perex` and `body` values are rendered as HTML content.
+> **Info**: `perex` and `body` values are rendered as HTML content. Anchors in them with `#tab-agree`, `#tab-details` or `#tab-about` in `href` switch to that tab, `#allow-all` and `#reject-all` act like the matching buttons:
+>
+> ```html
+> <a href="#tab-details">Go to tab Details</a>
+> <a href="#reject-all">Reject all cookies</a>
+> ```
+
+> **Info**: `dialog.label` sets the accessible name (`aria-label`) of the `role="dialog"` element.
 
 > **Info**: Every key is optional, including keys in nested sections. A text is used only when it is a string (an empty string included, e.g. an empty `lastUpdated` hides the line); missing keys, `undefined`, `null` and other values fall back to the default (Czech) translation. An empty `locale` also falls back. In TypeScript, use the `CookieConsentTranslationsPartial` type:
 >
@@ -161,24 +171,6 @@ window.CookieConsentTranslations = {
 > } satisfies CookieConsentTranslationsPartial;
 > ```
 
-> [**Since v1.6.2**](https://github.com/danielsitek/dgp-cookie-consent/releases/tag/v1.6.2)
->
-> Since version 1.6.2 you can insert anchor links to other tabs in `perex` and `body`. The script will look for anchor elements and if they have `#tab-agree|#tab-details|#tab-about|#allow-all|#reject-all` in href attribute, click on such element will switch to selected tab.
->
-> Examples:
->
-> ```
-> <a href="#tab-agree">Go to tab Agree</a>
-> <a href="#tab-details">Go to tab Details</a>
-> <a href="#tab-about">Go to tab About</a>
-> <a href="#allow-all">Allow all cookies</a>
-> <a href="#reject-all">Reject all cookies</a>
-> ```
-
-> [**Since v1.8.0**](https://github.com/danielsitek/dgp-cookie-consent/releases/tag/v1.8.0)
->
-> Since version 1.8.0 we added translation `dialog.label` for setting aria-label on `role="dialog"` element.
-
 ## Theme Customisation
 
 For theming purposes, here are all keys with their default values.
@@ -188,7 +180,7 @@ window.CookieConsentTheme = {
   'base-color': '#393939',
   'base-font-size': '15px',
   'base-line': '1px solid #d0d0d0',
-  'base-font-family': 'sans-serif',
+  'base-font-family': 'inherit',
   'base-shadow': '0 1px 6px rgba(5,27,44,.06),0 2px 32px rgba(5,27,44,.16)',
   'border-radius': '6px',
   'button-border-radius': '6px',
@@ -223,15 +215,15 @@ window.CookieConsentTheme = {
   'button-primary--hover__box-shadow': 'none',
 
   'badge__bg-color': '#ffffff',
-  badge__color: '#f8c132',
-  badge__border: '0 none',
+  'badge__color': '#f8c132',
+  'badge__border': '0 none',
   'badge__border-radius': '10rem',
   'badge__box-shadow': '0 1px 6px rgba(5,27,44,.06),0 2px 32px rgba(5,27,44,.16)',
-  badge__position: 'auto auto 1rem 1rem',
+  'badge__position': 'auto auto 1rem 1rem',
 
   'base-link__color': '#242424',
   'base-link__text-decoration': 'underline',
-  'base-link--hover__color': '#efaf08',
+  'base-link--hover__color': '#000000',
   'base-link--hover__text-decoration': 'underline',
 };
 ```
@@ -269,7 +261,7 @@ window.CookieConsentTheme = {
     'button-primary--hover__bg-color': '#007379',
     'button-primary--hover__color': '#fff',
 
-    badge__color: '#008c95',
+    'badge__color': '#008c95',
   };
   ```
 
@@ -302,7 +294,7 @@ window.CookieConsentTheme = {
     'button-primary--hover__bg-color': '#cfad69',
     'button-primary--hover__color': '#fff',
 
-    badge__color: '#cfad69',
+    'badge__color': '#cfad69',
   };
   ```
 
@@ -335,7 +327,7 @@ window.CookieConsentTheme = {
     'button-primary--hover__bg-color': '#f3f3f2',
     'button-primary--hover__color': '#000',
 
-    badge__color: '#000000',
+    'badge__color': '#000000',
   };
   ```
 
@@ -343,7 +335,7 @@ window.CookieConsentTheme = {
 
 ## Darkmode Theme Customisation
 
-Same options like `window.CookieConsentTheme`. Darkmode theme is automatically applied by settings from the browser/OS.
+Same options as `window.CookieConsentTheme`. There is no built-in dark theme: with `enableDarkMode: true` in [settings](#settings), these values are applied when the browser/OS prefers a dark color scheme.
 
 ```js
 window.CookieConsentThemeDark = {
@@ -360,6 +352,9 @@ window.CookieConsentSettings = {
   tabAgree: {
     showButtonRejectAll: true,
   },
+  tabDetails: {
+    showButtonAllowAll: false,
+  },
   tabAbout: {
     showButtonRejectAll: true,
   },
@@ -375,12 +370,14 @@ Here is the complete list of setting options:
 | Property                        | Value     | Description                                 | Default value |
 | ------------------------------- | --------- | ------------------------------------------- | ------------- |
 | `tabAgree.showButtonRejectAll`  | `boolean` | Enable reject all button in first tab.      | `true`        |
-| `tabDetails.showButtonAllowAll` | `boolean` | Enable allow all button in details tab.     | `true`        |
+| `tabDetails.showButtonAllowAll` | `boolean` | Enable allow all button in details tab.     | `false`       |
 | `tabAbout.showButtonRejectAll`  | `boolean` | Enable reject all button in last tab.       | `true`        |
 | `enableDarkMode`                | `boolean` | Enable automatic switch to dark mode theme. | `false`       |
 | `disableBadge`                  | `boolean` | Disable badge button.                       | `false`       |
 | `disableCross`                  | `boolean` | Disable cross button in header.             | `false`       |
 | `disableHeader`                 | `boolean` | Disable header.                             | `false`       |
+
+> **Info**: The Escape key closes the dialog only when the cross button is shown, so `disableCross` or `disableHeader` also disables it.
 
 ## API Methods
 
@@ -462,11 +459,11 @@ Returns an ISO-formatted date-time string, or an empty string if consent has not
 - Returns `<string>`.
 - Example: `"7249335781.1779742326"`
 
-Returns a unique ID of user given consent, or empty string if consent has not yet been given.
+Returns a unique consent ID. It is generated and stored on the first page view, before the user makes a choice.
 
 ### `window.CookieConsent.type`
 
-- Returns `"full" | "advanced" | "rejected"`.
+- Returns `"full" | "advanced" | "rejected" | ""`.
 
 Returns a consent type of user given consent, or empty string if consent has not yet been given.
 
@@ -520,7 +517,7 @@ window.addEventListener('consent-ready', () => {
 
 ### Event `consent-close`
 
-Fires every time the modal consent window is closed by ESC key or by clicking on cross.
+Fires every time the modal consent window is closed by the Escape key or by clicking on the cross, without a consent choice.
 
 **Example**:
 
@@ -566,158 +563,34 @@ window.addEventListener('consent-badge-click', () => {
 });
 ```
 
-## GTM Implementation with custom rules
+## GTM loader
 
-### 1. Create Variables
+`dist/cookies-gtm.min.js` is a small loader for Google Tag Manager. It connects the consent to [Google Consent Mode](https://developers.google.com/tag-platform/security/guides/consent) and loads the panel itself.
 
-- **CookieConsent.marketing**
+Create a **Custom HTML** tag with the **Consent Initialization - All Pages** trigger:
 
-  **Type**: JavaScript Code
+```html
+<script>
+  // Optional, must be set before the loader runs.
+  // window.CookieConsentTranslations = {};
+  // window.CookieConsentTheme = {};
+  // window.CookieConsentThemeDark = {};
+  // window.CookieConsentSettings = {};
+</script>
+<script src="https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.9.0/dist/cookies-gtm.min.js"></script>
+```
 
-  **JavaScript Code**:
+The loader:
 
-  ```js
-  function () { return CookieConsent.marketing.toString(); }
-  ```
+- Pushes `consent` `default` with the stored consent, then the `cookie_consent_default` event.
+- Pushes `consent` `update` and the `cookie_consent_update` event on every consent change.
+- Maps the categories: `marketing` → `ad_storage`, `ad_user_data`, `ad_personalization`; `statistics` → `analytics_storage`; `preferences` → `personalization_storage`. `functionality_storage` and `security_storage` are always `granted`.
+- Loads the panel from `@latest`, so sites get new panel releases without editing the tag.
+- Opens the panel on click on an element with the `js-consent-open` class. The class must be on the clicked element itself, a click on a nested icon or `<span>` is ignored ([#43](https://github.com/danielsitek/dgp-cookie-consent/issues/43)).
+- Uses its own base theme (your `window.CookieConsentTheme` keys win).
+- Always sets `disableCross: true`, even when your settings say `false` ([#43](https://github.com/danielsitek/dgp-cookie-consent/issues/43)). The dialog has no cross and Escape does not close it.
 
-- **CookieConsent.preferences**
-
-  **Type**: JavaScript Code
-
-  **JavaScript Code**:
-
-  ```js
-  function () { return CookieConsent.preferences.toString(); }
-  ```
-
-- **CookieConsent.statistics**
-
-  **Type**: JavaScript Code
-
-  **JavaScript Code**:
-
-  ```js
-  function () { return CookieConsent.statistics.toString(); }
-  ```
-
-- CookieConsent Version (optional)
-
-  This variable is only for simplified version changes.
-
-  **Type**: Constant
-
-  **Value**:
-
-  ```md
-  1.3.0
-  ```
-
-### 2. Create Rules
-
-- **CookieConsent - Marketing**
-
-  **Rule type**: Custom event
-
-  **Event name**:
-
-  ```md
-  cookieconsent_updated
-  ```
-
-  **This rule runs on**: Some custom events
-
-  **Run this rule when...**:
-
-  - `CookieConsent.marketing`
-  - contains
-  - `true`
-
-- **CookieConsent - Preference**
-
-  **Rule type**: Custom event
-
-  **Event name**:
-
-  ```md
-  cookieconsent_updated
-  ```
-
-  **This rule runs on**: Some custom events
-
-  **Run this rule when...**:
-
-  - `CookieConsent.preferences`
-  - contains
-  - `true`
-
-- **CookieConsent - Statistics**
-
-  **Rule type**: Custom event
-
-  **Event name**:
-
-  ```md
-  cookieconsent_updated
-  ```
-
-  **This rule runs on**: Some custom events
-
-  **Run this rule when...**:
-
-  - `CookieConsent.statistics`
-  - contains
-  - `true`
-
-### 3. Create tag
-
-- **CookieConsent**
-
-  **Tag type**: Custom HTML
-
-  **HTML**
-
-  ```html
-  <script type="text/javascript" id="cookie-consent-init">
-    // Optional: add own translations
-    // window.CookieConsentTranslations = {};
-
-    // Optional: add own theme
-    // window.CookieConsentTheme = {};
-
-    // Optional: add own theme for darkmode
-    // window.CookieConsentThemeDark = {};
-
-    // Optional: add own theme
-    // window.CookieConsentSettings = {};
-
-    window.addEventListener('consent-updated', function consentUpdatedListener() {
-      dataLayer.push({
-        event: 'cookieconsent_updated',
-      });
-    });
-
-    window.addEventListener('consent-ready', function () {
-      dataLayer.push({
-        event: 'cookieconsent_ready',
-      });
-    });
-
-    (function cookiesInit() {
-      var scriptEl = document.createElement('script');
-      scriptEl.src = 'https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@1.9.0/dist/cookies.min.js';
-      scriptEl.type = 'text/javascript';
-      scriptEl.id = 'cookie-consent';
-
-      document.body.appendChild(scriptEl);
-    })();
-  </script>
-  ```
-
-  > **Note**: You can replace version number with previously defined "CookieConsent Version" variable.
-
-  **Startup**:
-
-  **Startup rules**: All Pages
+Other panel events are pushed to `dataLayer` as `cookie_consent_ready`, `cookie_consent_bar_show`, `cookie_consent_bar_hide`, `cookie_consent_badge_show`, `cookie_consent_badge_hide` and `cookie_consent_badge_click`. Use them as **Custom Event** triggers.
 
 ---
 
@@ -730,22 +603,20 @@ npm i
 npm run dev
 ```
 
-Then open the localhost url from terminal in browser and navigate to `http://localhost:3000/public/`.
+Then open `http://localhost:3000/public/`.
 
 > **TIP**: Sometimes it is useful to comment out `.pipe(stripDebug())` in `tasks/helpers/rollupPipe.js` to enable console logs and other debug functions.
 
-Styles are written in standard CSS. Style entries live in `src/styles/` (`cookies.css`, `badge.css`); local `@import` rules are inlined at build time. Run `npm run lint:css` to check them with Stylelint; the build only reports lint problems, CI fails on them.
-
 ### Tests
 
-Unit tests use [Vitest](https://vitest.dev/) with [happy-dom](https://github.com/capricorn86/happy-dom) and live next to the source as `*.spec.ts`.
+Unit tests ([Vitest](https://vitest.dev/) with happy-dom) live next to the source as `*.spec.ts`.
 
 ```
 npm test
 npm run test:watch
+npm run typecheck
+npm run lint:css
 ```
-
-> **Info**: Test files (`*.spec.ts`) and shared test helpers (`*.spec-helpers.ts`) are excluded from `npm run typecheck` until the TypeScript upgrade (#56); Vitest itself does not type-check.
 
 ### Production build
 
