@@ -180,7 +180,7 @@ window.CookieConsentTheme = {
   'base-color': '#393939',
   'base-font-size': '15px',
   'base-line': '1px solid #d0d0d0',
-  'base-font-family': 'sans-serif',
+  'base-font-family': 'inherit',
   'base-shadow': '0 1px 6px rgba(5,27,44,.06),0 2px 32px rgba(5,27,44,.16)',
   'border-radius': '6px',
   'button-border-radius': '6px',
@@ -335,7 +335,7 @@ window.CookieConsentTheme = {
 
 ## Darkmode Theme Customisation
 
-Same options like `window.CookieConsentTheme`. With `enableDarkMode: true` in [settings](#settings), the darkmode theme is applied automatically by the browser/OS color scheme.
+Same options as `window.CookieConsentTheme`. There is no built-in dark theme: with `enableDarkMode: true` in [settings](#settings), these values are applied when the browser/OS prefers a dark color scheme.
 
 ```js
 window.CookieConsentThemeDark = {
@@ -590,7 +590,7 @@ The loader:
 - Uses its own base theme (your `window.CookieConsentTheme` keys win).
 - Always sets `disableCross: true`, even when your settings say `false` ([#43](https://github.com/danielsitek/dgp-cookie-consent/issues/43)). The dialog has no cross and Escape does not close it.
 
-Other panel events are pushed to `dataLayer` as `cookie_consent_ready`, `cookie_consent_bar_show`, `cookie_consent_bar_hide`, `cookie_consent_bar_close`, `cookie_consent_badge_show`, `cookie_consent_badge_hide` and `cookie_consent_badge_click`. Use them as **Custom Event** triggers.
+Other panel events are pushed to `dataLayer` as `cookie_consent_ready`, `cookie_consent_bar_show`, `cookie_consent_bar_hide`, `cookie_consent_badge_show`, `cookie_consent_badge_hide` and `cookie_consent_badge_click`. Use them as **Custom Event** triggers.
 
 ---
 
@@ -603,9 +603,7 @@ npm i
 npm run dev
 ```
 
-Then open the localhost url from terminal in browser and navigate to `http://localhost:3000/public/`.
-
-> **TIP**: Sometimes it is useful to comment out `.pipe(stripDebug())` in `tasks/helpers/rollupPipe.js` to enable console logs and other debug functions.
+Then open `http://localhost:3000/public/`.
 
 ### Tests
 
