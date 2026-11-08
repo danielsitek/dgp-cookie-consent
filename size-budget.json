@@ -1,0 +1,21 @@
+{
+  "canonicalNode": "26",
+  "baseline": {
+    "note": "Clean `npm run build:prod` of v1.10.0 (after the #28 fix). Output is byte-identical to the checked-in dist/*.min.js of that release.",
+    "revision": "17ce43c90dded4bc88d416525b93d4ac99b4b681",
+    "runtime": {
+      "node": "v26.3.0",
+      "zlib": "1.3.1-e00f703",
+      "brotli": "1.2.0"
+    },
+    "bundles": {
+      "dist/cookies.min.js": { "raw": 36459, "gzip": 9648, "brotli": 8391 },
+      "dist/cookies-gtm.min.js": { "raw": 4377, "gzip": 1342, "brotli": 1103 }
+    }
+  },
+  "limitsPolicy": "Baseline + 2 %, rounded up to the next 100 B. Raise only after review.",
+  "limits": {
+    "dist/cookies.min.js": { "raw": 37200, "gzip": 9900, "brotli": 8600 },
+    "dist/cookies-gtm.min.js": { "raw": 4500, "gzip": 1400, "brotli": 1200 }
+  }
+}
