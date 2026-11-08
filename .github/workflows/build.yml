@@ -38,6 +38,11 @@ jobs:
           npm run build:prod
           node -v > dist/node-version.txt
 
+      - name: Check bundle size budgets
+        # One canonical Node version avoids compressor-version noise.
+        if: matrix.node-version == 26
+        run: npm run size:check
+
       - name: Archive production artifacts
         uses: actions/upload-artifact@v7
         with:
