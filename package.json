@@ -18,7 +18,8 @@
     "dev": "gulp",
     "clean": "rimraf dist",
     "serve": "http-server . -p 10001 -g",
-    "lint:css": "stylelint \"src/**/*.css\""
+    "lint:css": "stylelint \"src/**/*.css\"",
+    "size:check": "node tasks/size-check.js"
   },
   "keywords": [
     "cookie",
