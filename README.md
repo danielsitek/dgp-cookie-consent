@@ -43,6 +43,7 @@ Awesome one-of-a-kind Cookie Consent panel.
 - [Development](#development)
   - [Tests](#tests)
   - [Production build](#production-build)
+  - [Size budgets](#size-budgets)
 
 ## Key features
 
@@ -624,3 +625,13 @@ npm run lint:css
 npm ci
 npm run build:prod
 ```
+
+### Size budgets
+
+After `npm run build:prod`, check the minified bundles against the reviewed limits in `size-budget.json`:
+
+```
+npm run size:check
+```
+
+It reports raw, gzip (level 9) and Brotli (quality 11) bytes per bundle, deltas against the baseline and the combined transfer size, and exits nonzero when a limit is exceeded. CI runs it on Node 26 only. The script never updates `size-budget.json`, raise a limit or the baseline only after review.
