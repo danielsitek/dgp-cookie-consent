@@ -77,8 +77,13 @@
     "node": "^24.0.0 || ^26.0.0"
   },
   "browserslist": [
-    "last 3 versions",
-    "ie >= 11"
+    "chrome >= 124",
+    "edge >= 124",
+    "firefox >= 125",
+    "safari >= 17.4",
+    "ios_saf >= 17.4",
+    "and_chr >= 124",
+    "and_ff >= 125"
   ],
   "private": true
 }

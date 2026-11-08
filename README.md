@@ -12,6 +12,7 @@ Awesome one-of-a-kind Cookie Consent panel.
 <h2>Table of Contents</h2>
 
 - [Key features](#key-features)
+- [Browser support](#browser-support)
 - [How to install](#how-to-install)
 - [Translations](#translations)
 - [Theme Customisation](#theme-customisation)
@@ -44,6 +45,7 @@ Awesome one-of-a-kind Cookie Consent panel.
   - [Tests](#tests)
   - [Production build](#production-build)
   - [Size budgets](#size-budgets)
+  - [Updating browser targets](#updating-browser-targets)
 
 ## Key features
 
@@ -55,6 +57,19 @@ Awesome one-of-a-kind Cookie Consent panel.
 - Custom translations
 - Customizable options
 - GTM loader support
+
+## Browser support
+
+Policy: [Baseline Widely available](https://web.dev/baseline), resolved on 2026-11-08.
+
+| Browser | Minimum version |
+| --- | --- |
+| Chrome, Edge | 124 |
+| Firefox | 125 |
+| Safari, Safari on iOS | 17.4 |
+| Chrome and Firefox for Android | current |
+
+Internet Explorer is not supported. Browser support does not depend on the Node.js version used for the build.
 
 ## How to install
 
@@ -635,3 +650,16 @@ npm run size:check
 ```
 
 It reports raw, gzip (level 9) and Brotli (quality 11) bytes per bundle, deltas against the baseline and the combined transfer size, and exits nonzero when a limit is exceeded. CI runs it on Node 26 only. The script never updates `size-budget.json`, raise a limit or the baseline only after review.
+
+### Updating browser targets
+
+The minimum versions in `package.json` → `browserslist` drive Autoprefixer and cssnano. They are pinned, so the build output only changes when someone updates them on purpose. They were resolved from `baseline widely available on 2026-11-08` with browserslist 4.29.5 and baseline-browser-mapping 2.11.35. The project's own browserslist (4.19.1) does not support Baseline queries yet.
+
+TypeScript compiles to ES2019 because `gulp-strip-debug` cannot parse newer syntax. `lib` is ES2021, so ES2021 runtime APIs such as `String.prototype.replaceAll` stay allowed. The minimum browsers support both.
+
+To move the policy to a new date:
+
+1. Resolve the new minimum versions outside the project, for example `npx browserslist@latest "baseline widely available on <date>"`.
+2. Update `browserslist` in `package.json` and the [Browser support](#browser-support) table in one commit.
+3. Run `npm run build:prod` and `npm run size:check`, and record the size change in the PR.
+4. Smoke-test the built panel in the oldest versions. Current browser engines alone do not prove minimum-version support. Chrome and Firefox can run headless from `npx @puppeteer/browsers install chrome-headless-shell@<version>` and `firefox@stable_<version>`. Safari cannot be installed in an old version on current macOS, so check it on a device or simulator with that iOS/Safari version, or on a cloud browser service.
