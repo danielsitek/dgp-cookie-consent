@@ -5,10 +5,11 @@ import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 describe('GTM loader before <body> exists', () => {
   let body: HTMLElement;
   let loader: Promise<unknown>;
+  const hostEntry = { event: 'host' };
 
   beforeAll(() => {
     vi.spyOn(document, 'readyState', 'get').mockReturnValue('loading');
-    window.dataLayer = [];
+    window.dataLayer = [hostEntry];
     body = document.body;
     body.remove();
     expect(document.body).toBeNull();
@@ -31,6 +32,16 @@ describe('GTM loader before <body> exists', () => {
     const script = document.getElementById('cookie-consent');
     expect(script?.tagName).toBe('SCRIPT');
     expect(script?.parentNode).toBe(document.head);
+  });
+
+  it('queues the default consent command before the default event, after host entries', async () => {
+    await loader;
+
+    const [host, command, event] = window.dataLayer;
+    expect(host).toBe(hostEntry);
+    expect(Object.prototype.toString.call(command)).toBe('[object Arguments]');
+    expect(Array.from(command as IArguments).slice(0, 2)).toEqual(['consent', 'default']);
+    expect(event).toEqual({ event: 'cookie_consent_default' });
   });
 
   it('opens the panel from a .js-consent-open click inside a later <body>', async () => {

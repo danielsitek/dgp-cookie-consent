@@ -600,6 +600,7 @@ The loader:
 
 - Pushes `consent` `default` with the stored consent, then the `cookie_consent_default` event.
 - Pushes `consent` `update` and the `cookie_consent_update` event on every consent change.
+- Queues the `consent` commands in the [documented gtag shape](https://developers.google.com/tag-platform/security/guides/consent) (`dataLayer.push(arguments)`) and the `cookie_consent_*` events as plain objects. It keeps an existing `dataLayer`, never defines or calls `window.gtag` and loads no Google script.
 - Maps the categories: `marketing` → `ad_storage`, `ad_user_data`, `ad_personalization`; `statistics` → `analytics_storage`; `preferences` → `personalization_storage`. `functionality_storage` and `security_storage` are always `granted`.
 - Loads the panel from `@latest`, so sites get new panel releases without editing the tag.
 - Opens the panel on click on an element with the `js-consent-open` class. The class must be on the clicked element itself, a click on a nested icon or `<span>` is ignored ([#43](https://github.com/danielsitek/dgp-cookie-consent/issues/43)).

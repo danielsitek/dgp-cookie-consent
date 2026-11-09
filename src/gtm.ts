@@ -1,5 +1,5 @@
 import { DENIED, EVENT_BADGE_CLICK, EVENT_BADGE_HIDE, EVENT_BADGE_SHOW, EVENT_CONSENT_CLOSE, EVENT_CONSENT_HIDE, EVENT_CONSENT_READY, EVENT_CONSENT_SHOW, EVENT_CONSENT_UPDATED, GRANTED } from '@/config';
-import { dataLayerPush } from '@/utils/data-layer-push';
+import { dataLayerPush, gtagCommand } from '@/utils/data-layer-push';
 import { onBodyReady } from '@/utils/body-ready';
 import { getDefaultConsent } from '@/utils/read-consent';
 
@@ -13,7 +13,7 @@ declare global {
 // ===
 const defaultConsent = getDefaultConsent();
 
-dataLayerPush('consent', 'default', {
+gtagCommand('consent', 'default', {
   ad_storage: defaultConsent.marketing ? GRANTED : DENIED,
   ad_user_data: defaultConsent.marketing ? GRANTED : DENIED,
   ad_personalization: defaultConsent.marketing ? GRANTED : DENIED,
@@ -39,7 +39,7 @@ window.addEventListener(EVENT_CONSENT_READY, function () {
 // Send updated consent with actual consent options.
 window.addEventListener(EVENT_CONSENT_UPDATED, function () {
   // GTM consent
-  dataLayerPush('consent', 'update', {
+  gtagCommand('consent', 'update', {
     ad_storage: window.CookieConsent.marketing ? GRANTED : DENIED,
     ad_user_data: window.CookieConsent.marketing ? GRANTED : DENIED,
     ad_personalization: window.CookieConsent.marketing ? GRANTED : DENIED,
