@@ -41,6 +41,7 @@ Awesome one-of-a-kind Cookie Consent panel.
   - [Event `consent-badge-hide`](#event-consent-badge-hide)
   - [Event `consent-badge-click`](#event-consent-badge-click)
 - [GTM loader](#gtm-loader)
+  - [Configuration and ordering](#configuration-and-ordering)
 - [Development](#development)
   - [Tests](#tests)
   - [Production build](#production-build)
@@ -608,6 +609,12 @@ The loader:
 - Always sets `disableCross: true`, even when your settings say `false` ([#43](https://github.com/danielsitek/dgp-cookie-consent/issues/43)). The dialog has no cross and Escape does not close it.
 
 Other panel events are pushed to `dataLayer` as `cookie_consent_ready`, `cookie_consent_bar_show`, `cookie_consent_bar_hide`, `cookie_consent_badge_show`, `cookie_consent_badge_hide` and `cookie_consent_badge_click`. Use them as **Custom Event** triggers.
+
+### Configuration and ordering
+
+- Set `window.CookieConsentSettings`, `window.CookieConsentTheme`, `window.CookieConsentThemeDark` and `window.CookieConsentTranslations` in the same tag, **before** the loader `<script>`. The loader merges its base theme and `disableCross` into these objects when it runs, and the panel reads them when it initializes. Values assigned after the loader replace the merged defaults, values assigned after the panel initialized are ignored.
+- Supported order: the loader tag on **Consent Initialization - All Pages**, Google tags on later triggers. GTM fires Consent Initialization first, and the loader pushes `consent` `default` synchronously as soon as its script runs. The loader is an external script, so GTM may start tags on later triggers before it has downloaded; the default only applies to tags that fire after it.
+- Tags that fired before the loader ran, for example a hard-coded Google tag above the GTM snippet or another tag on Consent Initialization that GTM ran first, were already sent with the consent state of that moment. A later default or update does not undo them.
 
 ---
 
