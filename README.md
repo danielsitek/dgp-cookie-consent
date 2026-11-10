@@ -42,6 +42,7 @@ Awesome one-of-a-kind Cookie Consent panel.
   - [Event `consent-badge-click`](#event-consent-badge-click)
 - [GTM loader](#gtm-loader)
   - [Configuration and ordering](#configuration-and-ordering)
+  - [Automatic panel updates](#automatic-panel-updates)
 - [Development](#development)
   - [Tests](#tests)
   - [Production build](#production-build)
@@ -615,6 +616,20 @@ Other panel events are pushed to `dataLayer` as `cookie_consent_ready`, `cookie_
 - Set `window.CookieConsentSettings`, `window.CookieConsentTheme`, `window.CookieConsentThemeDark` and `window.CookieConsentTranslations` in the same tag, **before** the loader `<script>`. The loader merges its base theme and `disableCross` into these objects when it runs, and the panel reads them when it initializes. Values assigned after the loader replace the merged defaults, values assigned after the panel initialized are ignored.
 - Supported order: the loader tag on **Consent Initialization - All Pages**, Google tags on later triggers. GTM fires Consent Initialization first, and the loader pushes `consent` `default` synchronously as soon as its script runs. The loader is an external script, so GTM may start tags on later triggers before it has downloaded; the default only applies to tags that fire after it.
 - Tags that fired before the loader ran, for example a hard-coded Google tag above the GTM snippet or another tag on Consent Initialization that GTM ran first, were already sent with the consent state of that moment. A later default or update does not undo them.
+
+### Automatic panel updates
+
+The loader always requests the panel from `https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@latest/dist/cookies.min.js`. This is intentional: sites get new panel releases without editing the GTM tag. The loader itself stays on the version in your tag's URL.
+
+- **Updates are not instant.** jsDelivr serves `@latest` with `Cache-Control: public, max-age=604800, s-maxage=43200` (checked 2026-11-10). A new release can take up to about 12 hours to reach the CDN, and a returning visitor's browser can keep the previous panel for up to 7 days. Different visitors may run different panel versions at the same time.
+- **No SRI for the panel.** A Subresource Integrity hash is fixed to one exact file. `@latest` changes with every release, so a fixed `integrity` digest would block the panel after the next release. The loader therefore injects the panel without `integrity`.
+- **Compatibility contract.** Every panel release published as `@latest` must keep working with already deployed loaders. The panel must keep:
+  - the `CookieConsent` cookie name and format, which the loader reads for the default consent,
+  - `window.CookieConsent` with `type`, `preferences`, `statistics` and `marketing`, and `window.CookieConsentModalOpen()`,
+  - reading `window.CookieConsentSettings`, `window.CookieConsentTheme`, `window.CookieConsentThemeDark` and `window.CookieConsentTranslations`,
+  - the events `consent-ready`, `consent-updated`, `consent-show`, `consent-hide`, `consent-close`, `consent-badge-show`, `consent-badge-hide` and `consent-badge-click`.
+
+A smoke test of a previous loader against a candidate panel release is tracked in [#67](https://github.com/danielsitek/dgp-cookie-consent/issues/67).
 
 ---
 
