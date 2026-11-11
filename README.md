@@ -41,6 +41,8 @@ Awesome one-of-a-kind Cookie Consent panel.
   - [Event `consent-badge-hide`](#event-consent-badge-hide)
   - [Event `consent-badge-click`](#event-consent-badge-click)
 - [GTM loader](#gtm-loader)
+  - [Configuration and ordering](#configuration-and-ordering)
+  - [Automatic panel updates](#automatic-panel-updates)
 - [Development](#development)
   - [Tests](#tests)
   - [Production build](#production-build)
@@ -608,6 +610,19 @@ The loader:
 - Always sets `disableCross: true`, even when your settings say `false` ([#43](https://github.com/danielsitek/dgp-cookie-consent/issues/43)). The dialog has no cross and Escape does not close it.
 
 Other panel events are pushed to `dataLayer` as `cookie_consent_ready`, `cookie_consent_bar_show`, `cookie_consent_bar_hide`, `cookie_consent_badge_show`, `cookie_consent_badge_hide` and `cookie_consent_badge_click`. Use them as **Custom Event** triggers.
+
+### Configuration and ordering
+
+- Set the `window.CookieConsent*` globals in the same tag, **before** the loader `<script>`. The loader merges its defaults into them and the panel reads them once at startup.
+- Put the loader on **Consent Initialization - All Pages** and Google tags on later triggers. The loader is an external script, so GTM may fire later tags before it has run. The `consent` `default` only applies to tags fired after it and does not undo tags already fired.
+
+### Automatic panel updates
+
+The loader always loads the panel from `@latest`, so sites get new releases without editing the tag. The loader itself stays on the version in the tag's URL.
+
+- **Delays:** jsDelivr serves `@latest` with `max-age=604800, s-maxage=43200` (checked 2026-11-10). The CDN can serve the old panel for up to 12 hours, a browser for up to 7 days. Visitors may run different versions at the same time.
+- **No SRI:** a fixed `integrity` hash would block the panel after the next release, so the loader loads it without one.
+- **Compatibility:** each release must keep working with deployed loaders. Keep the `CookieConsent` cookie format, `window.CookieConsent` (`type`, `preferences`, `statistics`, `marketing`), `window.CookieConsentModalOpen()`, the `window.CookieConsent*` config globals, `disableCross`, the theme keys used in `src/gtm.ts` and the `consent-*` events. Compatibility check: [#67](https://github.com/danielsitek/dgp-cookie-consent/issues/67).
 
 ---
 
