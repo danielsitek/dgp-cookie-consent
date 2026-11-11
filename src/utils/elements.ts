@@ -6,7 +6,7 @@ export function htmlContent(htmlString: string): DocumentFragment {
   return template.content;
 }
 
-// Create Virtual DOM Elements.
+// Create Virtual DOM Elements. String children are rendered as text; wrap trusted HTML in htmlContent().
 export function createVElement<T extends HTMLElement>(tagName: string, attributes?: { [key: string]: string | boolean | undefined }, ...children: Array<string | Node | undefined | boolean | null>): T {
   const element = document.createElement(tagName);
 
@@ -25,9 +25,7 @@ export function createVElement<T extends HTMLElement>(tagName: string, attribute
 
   // Add children
   children.forEach((child) => {
-    if (typeof child === 'string') {
-      element.append(htmlContent(child));
-    } else if (child === undefined || child === null || typeof child === 'boolean') {
+    if (child === undefined || child === null || typeof child === 'boolean') {
       // Just ignore.
     } else {
       element.append(child);
