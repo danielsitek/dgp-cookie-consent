@@ -613,24 +613,16 @@ Other panel events are pushed to `dataLayer` as `cookie_consent_ready`, `cookie_
 
 ### Configuration and ordering
 
-- Set `window.CookieConsentSettings`, `window.CookieConsentTheme`, `window.CookieConsentThemeDark` and `window.CookieConsentTranslations` in the same tag, **before** the loader `<script>`. The loader merges its base theme and `disableCross` into these objects when it runs, and the panel reads them when it initializes. Values assigned after the loader replace the merged defaults, values assigned after the panel initialized are ignored.
-- Supported order: the loader tag on **Consent Initialization - All Pages**, Google tags on later triggers. GTM fires Consent Initialization first, and the loader pushes `consent` `default` synchronously as soon as its script runs. The loader is an external script, so GTM may start tags on later triggers before it has downloaded; the default only applies to tags that fire after it.
-- Tags that fired before the loader ran, for example a hard-coded Google tag above the GTM snippet or another tag on Consent Initialization that GTM ran first, were already sent with the consent state of that moment. A later default or update does not undo them.
+- Set the `window.CookieConsent*` globals in the same tag, **before** the loader `<script>`. The loader merges its defaults into them and the panel reads them once at startup.
+- Put the loader on **Consent Initialization - All Pages** and Google tags on later triggers. The loader is an external script, so GTM may fire later tags before it has run. The `consent` `default` only applies to tags fired after it and does not undo tags already fired.
 
 ### Automatic panel updates
 
-The loader always requests the panel from `https://cdn.jsdelivr.net/gh/danielsitek/dgp-cookie-consent@latest/dist/cookies.min.js`. This is intentional: sites get new panel releases without editing the GTM tag. The loader itself stays on the version in your tag's URL.
+The loader always loads the panel from `@latest`, so sites get new releases without editing the tag. The loader itself stays on the version in the tag's URL.
 
-- **Updates are not instant.** jsDelivr serves `@latest` with `Cache-Control: public, max-age=604800, s-maxage=43200` (checked 2026-11-10). The CDN can keep serving the previous panel until its cached response expires (12 hours at the time of checking), and a returning visitor's browser can keep it for up to 7 days from its last download. Different visitors may run different panel versions at the same time.
-- **No SRI for the panel.** A Subresource Integrity hash is fixed to one exact file. `@latest` changes with every release, so a fixed `integrity` digest would block the panel after the next release. The loader therefore injects the panel without `integrity`.
-- **Compatibility contract.** Every panel release published as `@latest` must keep working with already deployed loaders. The panel must keep:
-  - the `CookieConsent` cookie name and format, which the loader reads for the default consent,
-  - `window.CookieConsent` with `type`, `preferences`, `statistics` and `marketing`, and `window.CookieConsentModalOpen()`,
-  - reading `window.CookieConsentSettings`, `window.CookieConsentTheme`, `window.CookieConsentThemeDark` and `window.CookieConsentTranslations`,
-  - honouring the `disableCross` setting and the theme keys of the loader's base theme in `src/gtm.ts`,
-  - the events `consent-ready`, `consent-updated`, `consent-show`, `consent-hide`, `consent-close`, `consent-badge-show`, `consent-badge-hide` and `consent-badge-click`.
-
-A smoke test of a previous loader against a candidate panel release is tracked in [#67](https://github.com/danielsitek/dgp-cookie-consent/issues/67).
+- **Delays:** jsDelivr serves `@latest` with `max-age=604800, s-maxage=43200` (checked 2026-11-10). The CDN can serve the old panel for up to 12 hours, a browser for up to 7 days. Visitors may run different versions at the same time.
+- **No SRI:** a fixed `integrity` hash would block the panel after the next release, so the loader loads it without one.
+- **Compatibility:** each release must keep working with deployed loaders. Keep the `CookieConsent` cookie format, `window.CookieConsent` (`type`, `preferences`, `statistics`, `marketing`), `window.CookieConsentModalOpen()`, the `window.CookieConsent*` config globals, `disableCross`, the theme keys used in `src/gtm.ts` and the `consent-*` events. Compatibility check: [#67](https://github.com/danielsitek/dgp-cookie-consent/issues/67).
 
 ---
 
