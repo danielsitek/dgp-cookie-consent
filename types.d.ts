@@ -1,5 +1,6 @@
 export interface CookieConsentTranslationsDetailSection {
   title: string;
+  /** Trusted HTML, inserted without sanitization. */
   perex: string;
 }
 
@@ -16,10 +17,12 @@ export interface CookieConsentTranslationsTab {
 }
 
 export interface CookieConsentTranslationsTabAgree extends CookieConsentTranslationsTab {
+  /** Trusted HTML, inserted without sanitization. */
   body: string;
 }
 
 export interface CookieConsentTranslationsTabAbout extends CookieConsentTranslationsTab {
+  /** Trusted HTML, inserted without sanitization. */
   body: string;
 }
 

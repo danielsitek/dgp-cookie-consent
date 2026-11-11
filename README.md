@@ -168,7 +168,9 @@ window.CookieConsentTranslations = {
 
 > **Info**: Key `%date` in `window.CookieConsentTranslations.lastUpdated` will be replaced with locale date, based on `window.CookieConsentTranslations.locale`.
 
-> **Info**: `perex` and `body` values are rendered as HTML content. Anchors in them with `#tab-agree`, `#tab-details` or `#tab-about` in `href` switch to that tab, `#allow-all` and `#reject-all` act like the matching buttons:
+> **Warning**: Only `tabAgree.body`, `tabAbout.body` and the `perex` of `tabDetail` sections are rendered as HTML. They are inserted without sanitization, so they must come from a trusted source; sanitize them first if translations come from a CMS or an API. All other texts (titles, labels, `lastUpdated`) are rendered as plain text, so HTML tags and entities in them show literally.
+
+> **Info**: Anchors in `perex` and `body` values with `#tab-agree`, `#tab-details` or `#tab-about` in `href` switch to that tab, `#allow-all` and `#reject-all` act like the matching buttons:
 >
 > ```html
 > <a href="#tab-details">Go to tab Details</a>
