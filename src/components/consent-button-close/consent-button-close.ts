@@ -1,7 +1,7 @@
 import { DIALOG_ELEMENT_NAME, EVENT_CLICK, EVENT_KEYDOWN } from '@/config';
 import { settingsService } from '@/services/settings-service';
 import { translationService } from '@/services/translation-service';
-import { createVElement } from '@/utils/elements';
+import { createVElement, htmlContent } from '@/utils/elements';
 import { dispatchEventConsentClose } from '@/utils/events';
 
 interface ConsentModalElement extends HTMLElement {
@@ -56,7 +56,7 @@ export const consentButtonClose = (): HTMLButtonElement | null => {
       role: 'tab',
       class: 'c-b-c',
     },
-    createVElement<HTMLElement>('span', { class: 'c-b-c__i' }, svgIcon),
+    createVElement<HTMLElement>('span', { class: 'c-b-c__i' }, htmlContent(svgIcon)),
   );
 
   el.addEventListener(EVENT_CLICK, closeConsentDialog);

@@ -1,11 +1,13 @@
-function parseStringToHtmlElements(htmlString: string): NodeListOf<ChildNode> {
+// Parses trusted HTML (e.g. `tabAgree.body`, section `perex`, inline SVG icons) into a fragment.
+// Never pass untrusted input: scripts in event handler attributes would run.
+export function htmlContent(htmlString: string): DocumentFragment {
   const template = document.createElement('template');
   template.innerHTML = htmlString.trim();
-  return template.content.childNodes;
+  return template.content;
 }
 
 // Create Virtual DOM Elements.
-export function createVElement<T extends HTMLElement>(tagName: string, attributes?: { [key: string]: string | boolean | undefined }, ...children: Array<string | HTMLElement | undefined | boolean | null>): T {
+export function createVElement<T extends HTMLElement>(tagName: string, attributes?: { [key: string]: string | boolean | undefined }, ...children: Array<string | Node | undefined | boolean | null>): T {
   const element = document.createElement(tagName);
 
   // Set attributes
@@ -24,8 +26,7 @@ export function createVElement<T extends HTMLElement>(tagName: string, attribute
   // Add children
   children.forEach((child) => {
     if (typeof child === 'string') {
-      const childNodes = parseStringToHtmlElements(child);
-      Array.from(childNodes).forEach((node) => element.append(node));
+      element.append(htmlContent(child));
     } else if (child === undefined || child === null || typeof child === 'boolean') {
       // Just ignore.
     } else {

@@ -1,4 +1,4 @@
-import { createVElement } from '@/utils/elements';
+import { createVElement, htmlContent } from '@/utils/elements';
 import { handleAnchorClicks } from '@/utils/handleBodyAnchorClicks';
 import { consentDialogFooter } from '@/components/consent-dialog-footer/consent-dialog-footer';
 
@@ -17,7 +17,7 @@ const innerEl = (props: TabContentDefaultProps): HTMLDivElement => {
       {
         class: 'c-d__b-i',
       },
-      props.body || 'props.body',
+      htmlContent(props.body || 'props.body'),
     ),
     props,
   );

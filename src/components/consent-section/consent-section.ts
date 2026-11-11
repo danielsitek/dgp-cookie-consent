@@ -1,4 +1,4 @@
-import { createVElement } from '@/utils/elements';
+import { createVElement, htmlContent } from '@/utils/elements';
 import { handleAnchorClicks } from '@/utils/handleBodyAnchorClicks';
 
 export interface ConsentSectionProps {
@@ -27,7 +27,7 @@ const perexEl = (props: ConsentSectionProps): HTMLDivElement => {
       {
         class: 'c-s__a-p',
       },
-      props.perex,
+      htmlContent(props.perex),
     ),
     props,
   );

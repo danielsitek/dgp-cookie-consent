@@ -1,5 +1,5 @@
 import { translationService } from '@/services/translation-service';
-import { createVElement } from '@/utils/elements';
+import { createVElement, htmlContent } from '@/utils/elements';
 
 const i18n = translationService();
 
@@ -21,7 +21,7 @@ export const consentBadge = (): HTMLDivElement => {
         'aria-label': i18n.badge.label,
         title: i18n.badge.label,
       },
-      createVElement<HTMLElement>('span', { class: 'cb__i' }, svgIcon),
+      createVElement<HTMLElement>('span', { class: 'cb__i' }, htmlContent(svgIcon)),
     ),
   );
 };
